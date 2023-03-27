@@ -6,6 +6,9 @@ Each year, several thousand students enrol in Deakin University. Unfortunately, 
 
 What electives do you do, have you met prerequisites or other course rules? What exactly will you learn and benefit from a unit? Universities also have problems with putting out course-relevant information that is easily digestible. Most information in course maps doesn't apply to students that have transferred from other degrees or have an altered path to the original map.
 
+## Tech Stack
+To be determined... 
+
 ## In Scope 
 Front-end
 Back-end
