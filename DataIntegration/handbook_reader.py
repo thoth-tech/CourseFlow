@@ -24,6 +24,7 @@ class Unit:
         self.corequisites = []
         self.incompatible_with = []
         self.constraints = {}
+        self.is_discontinued = False
         Unit.id += 1
 
     def __repr__(self):
@@ -77,6 +78,7 @@ def extract_unit_enrolment_constraints(units: Dict[str, Unit]) -> Dict[str, Unit
                     if code not in units.keys():
                         new_unit = Unit()
                         units[code] = new_unit
+                        new_unit.is_discontinued = True
                         new_unit.code = code
                     constraint.append(units[code])
 
