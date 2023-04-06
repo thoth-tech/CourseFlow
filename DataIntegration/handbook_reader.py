@@ -60,26 +60,25 @@ def extract_unit_codes_and_titles(text: str) -> Dict[str, Unit]:
 def extract_unit_enrolment_constraints(units: Dict[str, Unit]) -> Dict[str, Unit]:
     unit_pattern = re.compile(r"[A-Z]{3}\d{3}")
 
-    for unit in units.values():
-        # Extract prerequisite units
-        prereqs = re.search(r"Prerequisite: (.+) (?=Corequisite:)", unit.raw_information)
-        if prereqs is not None:
-            prereqs = prereqs.group(1)
-            # fixme: need to deal with unique cases such as "x credit points from {A, B, C, D}", "{A, B} OR C",
-            #  "A OR B", incompatible courses
-            unit.prerequisites = [units[code] if code in units.keys() else code for code in unit_pattern.findall(prereqs)]
+    for unit in list(units.values()):
+        constraints_to_fill = [
+            (r"Prerequisite: (.+) (?=Corequisite:)", unit.prerequisites),
+            (r"Corequisite: (.+)(?=Incompatible with:)", unit.corequisites),
+            (r"Incompatible with: (.+)(?=Scheduled learning activities)", unit.incompatible_with)
+        ]
+        for constraint_search_pattern, constraint in constraints_to_fill:
+            # Find all unit codes that are part of the constraint
+            constraint_search_result = re.search(constraint_search_pattern, unit.raw_information)
+            if constraint_search_result is not None:
+                constraint_search_result = unit_pattern.findall(constraint_search_result.group(1))
 
-        # Extract co-requisite units
-        coreqs = re.search(r"Corequisite: (.+)(?=Incompatible with:)", unit.raw_information)
-        if coreqs is not None:
-            coreqs = coreqs.group(1)
-            unit.corequisites = [units[code] if code in units.keys() else code for code in unit_pattern.findall(coreqs)]
-
-        # Extract incompatible units/courses
-        incompatiables = re.search(r"Incompatible with: (.+)(?=Scheduled learning activities)", unit.raw_information)
-        if incompatiables is not None:
-            incompatiables = incompatiables.group(1)
-            unit.incompatible_with = [units[code] if code in units.keys() else code for code in unit_pattern.findall(incompatiables)]
+                # Note every unit listed as part of the constraint by the handbook
+                for code in constraint_search_result:
+                    if code not in units.keys():
+                        new_unit = Unit()
+                        units[code] = new_unit
+                        new_unit.code = code
+                    constraint.append(units[code])
 
     return units
 
