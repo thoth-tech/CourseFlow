@@ -39,7 +39,7 @@ def extract_unit_codes_and_titles(text: str) -> List[Unit]:
     # Matches three uppercase letters followed by three digits as the unit code,
     # any text between a hyphen or em dash and the text " Enrolment modes:" or " Year:" as the title,
     # and any text before the next unit code using a positive lookahead assertion.
-    pattern = re.compile(r"([A-Z]{3}\d{3}) [–-] (.+?)(?=\b Enrolment modes:|\b Year:)(.+?)(?=\b[A-Z]{3}\d{3} [–-]|\Z)")
+    pattern = re.compile(r"([A-Z]{3}\d{3}) [–-] (.+?)(?= Enrolment modes:| Year:)(.+?)(?=[A-Z]{3}\d{3} [–-])")
 
     units = []
     # Create a new Unit object for each unit extracted from the handbook
