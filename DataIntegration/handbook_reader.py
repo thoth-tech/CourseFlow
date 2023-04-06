@@ -67,19 +67,19 @@ def extract_unit_constraints(units: Dict[str, Unit]) -> Dict[str, Unit]:
             prereqs = prereqs.group(1)
             # fixme: need to deal with unique cases such as "x credit points from {A, B, C, D}", "{A, B} OR C",
             #  "A OR B", incompatible courses
-            unit.prerequisites = unit_pattern.findall(prereqs)
+            unit.prerequisites = [units[code] if code in units.keys() else code for code in unit_pattern.findall(prereqs)]
 
         # Extract co-requisite units
         coreqs = re.search(r"Corequisite: (.+)(?=Incompatible with:)", unit.raw_information)
         if coreqs is not None:
             coreqs = coreqs.group(1)
-            unit.corequisites = unit_pattern.findall(coreqs)
+            unit.corequisites = [units[code] if code in units.keys() else code for code in unit_pattern.findall(coreqs)]
 
         # Extract incompatible units/courses
         incompatiables = re.search(r"Incompatible with: (.+)(?=Scheduled learning activities)", unit.raw_information)
         if incompatiables is not None:
             incompatiables = incompatiables.group(1)
-            unit.incompatible_with = unit_pattern.findall(incompatiables)
+            unit.incompatible_with = [units[code] if code in units.keys() else code for code in unit_pattern.findall(incompatiables)]
 
     return units
 
