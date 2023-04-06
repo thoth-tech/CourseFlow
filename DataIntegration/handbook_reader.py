@@ -34,7 +34,7 @@ def read_unit_details(text: str, units: list):
     # Replace newline characters with spaces
     text = text.replace("\n", " ")
     # Convert any double spaces to single spaces
-    text = text.replace("  ", " ")
+    text = re.sub(r" {2,}", " ", text)
 
     # Split the text by unit information
     units = extract_unit_codes_and_titles(text)
