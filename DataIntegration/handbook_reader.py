@@ -13,8 +13,6 @@ unit_details_last_page = 1210
 units = []
 
 
-
-
 class Unit:
     id = 1
 
@@ -59,6 +57,34 @@ def extract_unit_codes_and_titles(text: str) -> List[Unit]:
 
     return units
 
+
+def extract_unit_constraints(units: List[Unit]) -> List[Unit]:
+    unit_pattern = re.compile(r"[A-Z]{3}\d{3}")
+
+    for unit in units:
+        # Extract prerequisite units
+        prereqs = re.search(r"Prerequisite: (.+) (?=Corequisite:)", unit.raw_information)
+        if prereqs is not None:
+            prereqs = prereqs.group(1)
+            # fixme: need to deal with unique cases such as "x credit points from {A, B, C, D}", "{A, B} OR C",
+            #  "A OR B", incompatible courses
+            unit.prerequisites = unit_pattern.findall(prereqs)
+
+        # Extract co-requisite units
+        coreqs = re.search(r"Corequisite: (.+)(?=Incompatible with:)", unit.raw_information)
+        if coreqs is not None:
+            coreqs = coreqs.group(1)
+            unit.corequisites = unit_pattern.findall(coreqs)
+
+        # Extract incompatible units/courses
+        incompatiables = re.search(r"Incompatible with: (.+)(?=Scheduled learning activities)", unit.raw_information)
+        if incompatiables is not None:
+            incompatiables = incompatiables.group(1)
+            unit.incompatible_with = unit_pattern.findall(incompatiables)
+
+    return units
+
+
 def read_unit_details(text: str) -> List[Unit]:
     # Replace newline characters with spaces
     text = text.replace("\n", " ")
@@ -67,6 +93,7 @@ def read_unit_details(text: str) -> List[Unit]:
 
     # Split the text by unit information
     units = extract_unit_codes_and_titles(text)
+    extract_unit_constraints(units)
 
     return units
 
