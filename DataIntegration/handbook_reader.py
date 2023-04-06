@@ -2,8 +2,11 @@ from typing import Tuple, List
 
 from PyPDF2 import PdfReader, PageObject
 import re
+import os
+
 
 unit_listings = "handbooks/DeakinUniversity2019_Units-v4-accessible.pdf"
+unit_listings_text_cache = "handbooks/unit_listings_text_cache.txt"
 course_listings = "handbooks/DeakinUniversity2019_Courses-v4-accessible.pdf"
 unit_details_first_page = 27
 unit_details_last_page = 1210
@@ -17,7 +20,7 @@ def extract_unit_codes_and_titles(text: str) -> List[Tuple[str, str, str]]:
     # any text between a hyphen or em dash and the text "Enrolment modes:" as the title,
     # and any text before the next unit code using a positive lookahead assertion.
     pattern = re.compile(r"([A-Z]{3}\d{3}) [–-] (.+?)(?=\b Enrolment modes:)(.+?)(?=\b[A-Z]{3}\d{3} [–-]|\Z)")
-    
+
     # Find all matches in the text
     matches = pattern.finditer(text)
 
@@ -27,9 +30,7 @@ def extract_unit_codes_and_titles(text: str) -> List[Tuple[str, str, str]]:
     return result
 
 
-def read_unit_details(page: PageObject, units: list):
-    text = page.extract_text(orientations=(0,))
-
+def read_unit_details(text: str, units: list):
     # Replace newline characters with spaces
     text = text.replace("\n", " ")
     # Convert any double spaces to single spaces
@@ -42,7 +43,20 @@ def read_unit_details(page: PageObject, units: list):
 
 
 if __name__ == "__main__":
-    reader = PdfReader(unit_listings)
-    for page in reader.pages[unit_details_first_page - 1:unit_details_first_page]:
-        read_unit_details(page, units)
+    # Read the handbook text from the cache file if it exists, otherwise create the cache file
+    if os.path.exists(unit_listings_text_cache):
+        with open(unit_listings_text_cache, "r", encoding="utf-8") as file:
+            text = " ".join(file.readlines())
+    else:
+        # Read all unit information text from the handbook PDF
+        reader = PdfReader(unit_listings)
+        text = []
+        for page in reader.pages[unit_details_first_page - 1:]:
+            text.append(page.extract_text(orientations=(0,)))
+        text = " ".join(text)
+
+        # Write the text to a cache which will be used in the future
+        with open(unit_listings_text_cache, "w", encoding="utf-8") as file:
+            file.write(text)
+    read_unit_details(text, units)
     print()
