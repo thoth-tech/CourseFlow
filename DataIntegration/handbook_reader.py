@@ -57,7 +57,7 @@ def extract_unit_codes_and_titles(text: str) -> Dict[str, Unit]:
     return units
 
 
-def extract_unit_constraints(units: Dict[str, Unit]) -> Dict[str, Unit]:
+def extract_unit_enrolment_constraints(units: Dict[str, Unit]) -> Dict[str, Unit]:
     unit_pattern = re.compile(r"[A-Z]{3}\d{3}")
 
     for unit in units.values():
@@ -92,7 +92,7 @@ def read_unit_details(text: str) -> Dict[str, Unit]:
 
     # Split the text by unit information
     units = extract_unit_codes_and_titles(text)
-    extract_unit_constraints(units)
+    extract_unit_enrolment_constraints(units)
 
     return units
 
