@@ -2,13 +2,16 @@ import os
 import re
 from typing import Dict
 
+import matplotlib.pyplot as plt
 from PyPDF2 import PdfReader
+import networkx as nx
 
 unit_listings = "handbooks/DeakinUniversity2019_Units-v4-accessible.pdf"
 unit_listings_text_cache = "handbooks/unit_listings_text_cache.txt"
 course_listings = "handbooks/DeakinUniversity2019_Courses-v4-accessible.pdf"
 unit_details_first_page = 27
 unit_details_last_page = 1210
+# A dictionary of all units from the handbook
 units = {}
 
 
@@ -98,6 +101,31 @@ def read_unit_details(text: str) -> Dict[str, Unit]:
     return units
 
 
+def draw_unit_network(network: nx.DiGraph):
+    # Compute the layout using the force-directed algorithm
+    pos = nx.spring_layout(network)
+    # Draw the graph
+    nx.draw(network, pos, node_color=[network.degree(v) for v in network.nodes()], with_labels=True, font_weight='bold')
+
+    plt.show()
+
+
+def create_unit_network(units: Dict[str, Unit]) -> nx.DiGraph:
+    G = nx.DiGraph()
+
+    # Add units to graph
+    for code in units.keys():
+        G.add_node(code)
+
+    # Add prerequisites to graph
+    for code, unit in units.items():
+        if unit.prerequisites:
+            for prereq_unit in unit.prerequisites:
+                G.add_edge(prereq_unit.code, code)
+
+    return G
+
+
 if __name__ == "__main__":
     # Read the handbook text from the cache file if it exists, otherwise create the cache file
     if os.path.exists(unit_listings_text_cache):
@@ -115,4 +143,8 @@ if __name__ == "__main__":
         with open(unit_listings_text_cache, "w", encoding="utf-8") as file:
             file.write(text)
     units = read_unit_details(text)
+    # todo: Remove debug filtering
+    unit_network = create_unit_network({code: unit for code, unit in units.items() if code.startswith("S")})
+    draw_unit_network(unit_network)
+    # graph_units(units)
     print()
