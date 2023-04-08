@@ -1,3 +1,4 @@
+import math
 import os
 import re
 from typing import Dict, Tuple, List
@@ -101,23 +102,29 @@ def read_unit_details(text: str) -> Dict[str, Unit]:
     return units
 
 
-def unit_distance_metric(unit_1_code: str, unit_2_code: str):
+def unit_distance_metric(unit_1_code: str, unit_2_code: str) -> float:
     if unit_1_code == unit_2_code:
         return 0
 
-    distance = 1
     unit_1 = units[unit_1_code]
     unit_2 = units[unit_2_code]
 
-    if unit_1_code[0] == unit_2_code[0]:
-        distance -= 0.1
-        if unit_1_code[1:3] == unit_2_code[1:3]:
-            distance -= 0.1
-            if unit_1_code[3] == unit_2_code[3]:
-                distance -= 0.1
+    similarity = 0
+    scale = 5
 
-    if unit_1 in unit_2.prerequisites or unit_2 in unit_1.prerequisites:
-        distance -= 0.5
+    # Calculate similarity score
+    if unit_1_code[0] == unit_2_code[0]:
+        similarity += 0.1 * scale
+    if unit_1_code[:3] == unit_2_code[:3]:
+        similarity += 0.1 * scale
+    if unit_1_code[:4] == unit_2_code[:4]:
+        similarity += 0.1 * scale
+    if unit_1 in unit_2.prerequisites or unit_2 in unit_1.prerequisites \
+            or unit_1 in unit_2.corequisites or unit_2 in unit_1.corequisites:
+        similarity += 0.6 * scale
+
+    # Calculate distance using similarity score
+    distance = math.exp(-similarity)
 
     return distance
 
