@@ -1,6 +1,6 @@
 import os
 import re
-from typing import Dict
+from typing import Dict, Tuple, List
 
 import matplotlib.pyplot as plt
 from PyPDF2 import PdfReader
@@ -122,29 +122,51 @@ def unit_distance_metric(unit_1_code: str, unit_2_code: str):
     return distance
 
 
-def draw_unit_network(network: nx.DiGraph):
-    # Compute the layout using the force-directed algorithm
-    pos = nx.spring_layout(network)
+def draw_unit_network(network: nx.DiGraph, visible_edges: List[Tuple[str, str]]):
+    # Determine the layout of the graph using the Kamada-Kawai algorithm
+    pos = nx.kamada_kawai_layout(network, scale=1)
+
     # Draw the graph
-    nx.draw(network, pos, node_color=[network.degree(v) for v in network.nodes()], with_labels=True, font_weight='bold')
+    nx.draw_networkx_nodes(network, pos)
+    nx.draw_networkx_labels(network, pos)
+    nx.draw_networkx_edges(network, pos, edgelist=visible_edges)
 
     plt.show()
 
 
-def create_unit_network(units: Dict[str, Unit]) -> nx.DiGraph:
+def create_unit_network(units: Dict[str, Unit]) -> Tuple[nx.DiGraph, List[Tuple[str, str]]]:
     G = nx.DiGraph()
 
     # Add units to graph
     for code in units.keys():
         G.add_node(code)
 
-    # Add prerequisites to graph
+    # Calculate each unit's "distance" to each other
+    for code_a, unit_a in units.items():
+        for code_b, unit_b in units.items():
+            if code_a == code_b:
+                continue
+            distance = unit_distance_metric(code_a, code_b)
+            if distance < 1:
+                G.add_edge(code_a, code_b, weight=distance)
+
+    # Find all edges that need to be shown
+    visible_edges = set()
     for code, unit in units.items():
         if unit.prerequisites:
             for prereq_unit in unit.prerequisites:
-                G.add_edge(prereq_unit.code, code)
+                edge = (prereq_unit.code, code)
+                if prereq_unit.code not in units.keys():
+                    continue
+                visible_edges.add(edge)
+        if unit.corequisites:
+            for coreq_unit in unit.corequisites:
+                edge = (coreq_unit.code, code)
+                if coreq_unit.code not in units.keys() or edge in visible_edges:
+                    continue
+                visible_edges.add(edge)
 
-    return G
+    return G, list(visible_edges)
 
 
 if __name__ == "__main__":
@@ -165,7 +187,9 @@ if __name__ == "__main__":
             file.write(text)
     units = read_unit_details(text)
     # todo: Remove debug filtering
-    unit_network = create_unit_network({code: unit for code, unit in units.items() if code.startswith("S")})
-    draw_unit_network(unit_network)
+    # todo: Remove debug filter. The filter is here to speed up the graph creation progress while in development.
+    units = {code: unit for code, unit in units.items() if code.startswith("SIT")}
+    unit_network, visible_edges = create_unit_network(units)
+    draw_unit_network(unit_network, visible_edges)
     # graph_units(units)
     print()
