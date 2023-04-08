@@ -101,6 +101,27 @@ def read_unit_details(text: str) -> Dict[str, Unit]:
     return units
 
 
+def unit_distance_metric(unit_1_code: str, unit_2_code: str):
+    if unit_1_code == unit_2_code:
+        return 0
+
+    distance = 1
+    unit_1 = units[unit_1_code]
+    unit_2 = units[unit_2_code]
+
+    if unit_1_code[0] == unit_2_code[0]:
+        distance -= 0.1
+        if unit_1_code[1:3] == unit_2_code[1:3]:
+            distance -= 0.1
+            if unit_1_code[3] == unit_2_code[3]:
+                distance -= 0.1
+
+    if unit_1 in unit_2.prerequisites or unit_2 in unit_1.prerequisites:
+        distance -= 0.5
+
+    return distance
+
+
 def draw_unit_network(network: nx.DiGraph):
     # Compute the layout using the force-directed algorithm
     pos = nx.spring_layout(network)
