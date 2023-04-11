@@ -136,6 +136,8 @@ def draw_unit_network(network: nx.DiGraph, visible_edges: List[Tuple[str, str]])
     # Draw the graph
     nx.draw_networkx_nodes(network, pos)
     nx.draw_networkx_labels(network, pos)
+    # todo: Display co-requisite unit edges differently from prerequisites.
+    # todo: Display incompatible unit relations somehow
     nx.draw_networkx_edges(network, pos, edgelist=visible_edges)
 
     plt.show()
@@ -148,6 +150,7 @@ def create_unit_network(units: Dict[str, Unit]) -> Tuple[nx.DiGraph, List[Tuple[
     for code in units.keys():
         G.add_node(code)
 
+    # todo: Optimize for larger graphs if necessary. Consider using multithreading.
     # Calculate each unit's "distance" to each other
     for code_a, unit_a in units.items():
         for code_b, unit_b in units.items():
@@ -160,23 +163,27 @@ def create_unit_network(units: Dict[str, Unit]) -> Tuple[nx.DiGraph, List[Tuple[
     # Find all edges that need to be shown
     visible_edges = set()
     for code, unit in units.items():
+        # Add prerequisite units
         if unit.prerequisites:
             for prereq_unit in unit.prerequisites:
                 edge = (prereq_unit.code, code)
                 if prereq_unit.code not in units.keys():
                     continue
                 visible_edges.add(edge)
+        # Add co-requisite units
         if unit.corequisites:
             for coreq_unit in unit.corequisites:
                 edge = (coreq_unit.code, code)
                 if coreq_unit.code not in units.keys() or edge in visible_edges:
                     continue
                 visible_edges.add(edge)
+        # todo: Think of a way to display incompatible units
 
     return G, list(visible_edges)
 
 
 if __name__ == "__main__":
+    # todo: Download handbook if it doesn't exist
     # Read the handbook text from the cache file if it exists, otherwise create the cache file
     if os.path.exists(unit_listings_text_cache):
         with open(unit_listings_text_cache, "r", encoding="utf-8") as file:
@@ -192,11 +199,10 @@ if __name__ == "__main__":
         # Write the text to a cache which will be used in the future
         with open(unit_listings_text_cache, "w", encoding="utf-8") as file:
             file.write(text)
+
     units = read_unit_details(text)
-    # todo: Remove debug filtering
+
     # todo: Remove debug filter. The filter is here to speed up the graph creation progress while in development.
     units = {code: unit for code, unit in units.items() if code.startswith("SIT")}
     unit_network, visible_edges = create_unit_network(units)
     draw_unit_network(unit_network, visible_edges)
-    # graph_units(units)
-    print()
