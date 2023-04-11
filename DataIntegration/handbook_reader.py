@@ -102,22 +102,19 @@ def read_unit_details(text: str) -> Dict[str, Unit]:
     return units
 
 
-def unit_distance_metric(unit_1_code: str, unit_2_code: str) -> float:
-    if unit_1_code == unit_2_code:
+def unit_distance_metric(unit_1: Unit, unit_2: Unit) -> float:
+    if unit_1.code == unit_2.code:
         return 0
-
-    unit_1 = units[unit_1_code]
-    unit_2 = units[unit_2_code]
 
     similarity = 0
     scale = 5
 
     # Calculate similarity score
-    if unit_1_code[0] == unit_2_code[0]:
+    if unit_1.code[0] == unit_2.code[0]:
         similarity += 0.1 * scale
-    if unit_1_code[:3] == unit_2_code[:3]:
+    if unit_1.code[:3] == unit_2.code[:3]:
         similarity += 0.1 * scale
-    if unit_1_code[:4] == unit_2_code[:4]:
+    if unit_1.code[:4] == unit_2.code[:4]:
         similarity += 0.1 * scale
     if unit_1 in unit_2.prerequisites or unit_2 in unit_1.prerequisites \
             or unit_1 in unit_2.corequisites or unit_2 in unit_1.corequisites:
@@ -156,7 +153,7 @@ def create_unit_network(units: Dict[str, Unit]) -> Tuple[nx.DiGraph, List[Tuple[
         for code_b, unit_b in units.items():
             if code_a == code_b:
                 continue
-            distance = unit_distance_metric(code_a, code_b)
+            distance = unit_distance_metric(unit_a, unit_b)
             if distance < 1:
                 G.add_edge(code_a, code_b, weight=distance)
 
