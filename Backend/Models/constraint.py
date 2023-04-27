@@ -5,15 +5,15 @@ from Backend.Models.unit import Unit
 from typing import Iterable
 
 
-# todo: write tests for all of these conditions
-class Condition:
-    """Base class for modeling constraint conditions"""
+# todo: write tests for all of these constraints
+class Constraint:
+    """Base class for modeling constraints"""
 
-    # todo: consider using kwargs, fixed args may not be flexible enough. for example, some conditions may need to know
+    # todo: consider using kwargs, fixed args may not be flexible enough. for example, some constraints may need to know
     #  the completed units, some might need to know the course being taken, etc.
     def check(self, **kwargs) -> bool:
         """
-        Checks if the condition has been fulfilled
+        Checks if the constraint has been fulfilled
 
         :key units_completed:
         :key units_enrolled:
@@ -21,12 +21,12 @@ class Condition:
         :key enrolled_sequence:
         :key current_wam:
 
-        :return: True if the condition is met, otherwise False
+        :return: True if the constraint is met, otherwise False
         """
         raise NotImplementedError("Subclasses should implement this")
 
 
-class MinimumNumberOfUnitsCondition(Condition):
+class MinimumNumberOfUnitsConstraint(Constraint):
     """Fulfilled when a minimum number of units is completed from a pre-defined set of units"""
 
     def __init__(self, unit_set: Iterable[Unit], minimum_count: int):
@@ -38,8 +38,9 @@ class MinimumNumberOfUnitsCondition(Condition):
         return len(self.set.intersection(units_completed)) >= self.min
 
 
-class MaximumNumberOfUnitsCondition(Condition):
+class MaximumNumberOfUnitsConstraint(Constraint):
     """Fulfilled if the number of units completed from a pre-defined set of units does not exceed the maximum allowed"""
+
     def __init__(self, unit_set: Iterable[Unit], maximum_count: int):
         self.set = set(unit_set)
         self.max = maximum_count
@@ -49,7 +50,7 @@ class MaximumNumberOfUnitsCondition(Condition):
         return len(self.set.intersection(units_completed)) <= self.max
 
 
-class PrerequisitesFulfilledCondition(Condition):
+class PrerequisitesFulfilledConstraint(Constraint):
     """Fulfilled when all the units from a pre-defined set of units has been completed"""
 
     def __init__(self, prerequisite_units: Iterable[Unit]):
@@ -61,8 +62,8 @@ class PrerequisitesFulfilledCondition(Condition):
         return self.prerequisites.issubset(units_completed)
 
 
-# todo: having prerequisites and corequisites condition may be redundant
-class CorequisitesFulfilledCondition(Condition):
+# todo: having prerequisites and corequisites constraint may be redundant
+class CorequisitesFulfilledConstraint(Constraint):
     """Fulfilled when all the units from a pre-defined set of units has been completed or is being completed"""
 
     def __init__(self, corequisite_units: Iterable[Unit]):
@@ -73,8 +74,8 @@ class CorequisitesFulfilledCondition(Condition):
         return self.corequisites.issubset(units_completed_or_enrolled)
 
 
-# todo: may be redundant with coreqs condition
-class MutualExclusiveUnitsCondition(Condition):
+# todo: may be redundant with coreqs constraint
+class MutualExclusiveUnitsConstraint(Constraint):
     """Fulfilled if none of the units from a pre-defined set of units has been completed or is being completed"""
 
     def __init__(self, incompatible_units: Iterable[Unit]):
@@ -85,7 +86,7 @@ class MutualExclusiveUnitsCondition(Condition):
         return bool(self.incompatible_units.intersection(units_completed_or_enrolled))
 
 
-class EnrolledInSequenceCondition(Condition):
+class EnrolledInSequenceConstraint(Constraint):
     """Fulfilled if the student is enrolled in the specified major/minor sequence"""
 
     def __init__(self, sequence: Sequence):
@@ -95,7 +96,7 @@ class EnrolledInSequenceCondition(Condition):
         return self.sequence == enrolled_sequence
 
 
-class EnrolledInCourseCondition(Condition):
+class EnrolledInCourseConstraint(Constraint):
     """Fulfilled if the student is enrolled in the specified course"""
 
     def __init__(self, course: Course):
@@ -105,7 +106,7 @@ class EnrolledInCourseCondition(Condition):
         return self.course == enrolled_course
 
 
-class MinimumWamCondition(Condition):
+class MinimumWamConstraint(Constraint):
     """Fulfilled if the student has the minimum amount of WAM"""
 
     def __init__(self, minimum_wam: float):
@@ -115,36 +116,18 @@ class MinimumWamCondition(Condition):
         return current_wam >= self.minimum_wam
 
 
-class AllCondition(Condition):
-    """Fulfilled if all component conditions are met"""
+class AllConstraint(Constraint):
+    """Fulfilled if all component constraints are met"""
 
-    def __init__(self, conditions: Iterable[Condition]):
-        self.conditions = conditions
+    def __init__(self, constraints: Iterable[Constraint]):
+        self.constraints = constraints
 
-    def check(self, **enrollment_info) -> bool:
-        return all(condition.check(**enrollment_info) for condition in self.conditions)
-
-
-class AnyCondition(Condition):
-    """Fulfilled if any component conditions are met"""
-
-    def __init__(self, conditions: Iterable[Condition]):
-        self.conditions = conditions
-
-    def check(self, **enrollment_info) -> bool:
-        return any(condition.check(**enrollment_info) for condition in self.conditions)
-
-
-class Constraint:
-    def __init__(self):
-        self.conditions: list[Condition] = []
-
-    def is_fulfilled(self,
-                     units_completed: Iterable[Unit],
-                     units_enrolled: Iterable[Unit],
-                     enrolled_course: Course,
-                     enrolled_sequence: Sequence,
-                     current_wam: float) -> bool:
+    def check(self,
+              units_completed: Iterable[Unit],
+              units_enrolled: Iterable[Unit],
+              enrolled_course: Course,
+              enrolled_sequence: Sequence,
+              current_wam: float) -> bool:
 
         enrollment_info = {
             "units_completed": units_completed,
@@ -154,4 +137,28 @@ class Constraint:
             "current_wam": current_wam
         }
 
-        return all(condition.check(**enrollment_info) for condition in self.conditions)
+        return all(constraint.check(**enrollment_info) for constraint in self.constraints)
+
+
+class AnyConstraint(Constraint):
+    """Fulfilled if any component constraints are met"""
+
+    def __init__(self, constraints: Iterable[Constraint]):
+        self.constraints = constraints
+
+    def check(self,
+              units_completed: Iterable[Unit],
+              units_enrolled: Iterable[Unit],
+              enrolled_course: Course,
+              enrolled_sequence: Sequence,
+              current_wam: float) -> bool:
+
+        enrollment_info = {
+            "units_completed": units_completed,
+            "units_enrolled": units_enrolled,
+            "enrolled_course": enrolled_course,
+            "enrolled_sequence": enrolled_sequence,
+            "current_wam": current_wam
+        }
+
+        return any(constraint.check(**enrollment_info) for constraint in self.constraints)
