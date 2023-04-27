@@ -115,6 +115,26 @@ class MinimumWamCondition(Condition):
         return current_wam >= self.minimum_wam
 
 
+class AllCondition(Condition):
+    """Fulfilled if all component conditions are met"""
+
+    def __init__(self, conditions: Iterable[Condition]):
+        self.conditions = conditions
+
+    def check(self, **enrollment_info) -> bool:
+        return all(condition.check(**enrollment_info) for condition in self.conditions)
+
+
+class AnyCondition(Condition):
+    """Fulfilled if any component conditions are met"""
+
+    def __init__(self, conditions: Iterable[Condition]):
+        self.conditions = conditions
+
+    def check(self, **enrollment_info) -> bool:
+        return any(condition.check(**enrollment_info) for condition in self.conditions)
+
+
 class Constraint:
     def __init__(self):
         self.conditions: list[Condition] = []
