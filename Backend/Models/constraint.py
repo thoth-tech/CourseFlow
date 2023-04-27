@@ -38,6 +38,17 @@ class MinimumNumberOfUnitsCondition(Condition):
         return len(self.set.intersection(units_completed)) >= self.min
 
 
+class MaximumNumberOfUnitsCondition(Condition):
+    """Fulfilled if the number of units completed from a pre-defined set of units does not exceed the maximum allowed"""
+    def __init__(self, unit_set: Iterable[Unit], maximum_count: int):
+        self.set = set(unit_set)
+        self.max = maximum_count
+
+    def check(self, units_completed: Iterable[Unit], **kwargs):
+        units_completed = set(units_completed)
+        return len(self.set.intersection(units_completed)) <= self.max
+
+
 class PrerequisitesFulfilledCondition(Condition):
     """Fulfilled when all the units from a pre-defined set of units has been completed"""
 
