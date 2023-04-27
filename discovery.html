@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CourseFlow</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="discovery.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="logo">
+          <img src="logo.png" alt="CourseFlow logo" />
+        </div>
+        <nav>
+          <ul>
+            <li><a href="#">Timetable view</a></li>
+            <li><a href="#">Discovery view</a></li>
+            <li><a href="#">Analytics view</a></li>
+          </ul>
+        </nav>
+        <div class="login">
+          <a href="#">Log In</a>
+        </div>
+      </header>
+      <div class="sidebar">
+        <ul>
+          <li><a href="#">Arts & Education</a></li>
+          <li><a href="#">Business & Law</a></li>
+          <li><a href="#">Health</a></li>
+          <li><a href="#">Science & Engineering</a></li>
+        </ul>
+      </div>
+      <div class="category active" id="category">
+        <span class="title">Deakin Faculties</span>
+        <div class="arrow"></div>
+      </div>
+      <div class="subcategory" id="subcategory1">
+        <span class="title">Computer Science</span>
+        <div class="arrow"></div>
+      </div>
+      <div class="degree" id="degree1">
+        <span class="title">Bachelor of Computer Science</span>
+        <div class="arrow"></div>
+        <div class="content">
+          <ul>
+            <li>SIT102</li>
+            <li>SIT221</li>
+            <li>SIT307</li>
+            <li>SIT320</li>
+            <li>SIT374</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascript for click and hide content -->
+    <script>
+      const category = document.getElementById("category");
+      const subcategory1 = document.getElementById("subcategory1");
+      const degree1 = document.getElementById("degree1");
+
+      category.addEventListener("click", () => {
+        category.classList.toggle("active");
+        subcategory1.classList.toggle("active");
+        degree1.classList.remove("active");
+      });
+
+      subcategory1.addEventListener("click", () => {
+        degree1.classList.toggle("active");
+      });
+    </script>
+  </body>
+</html>
