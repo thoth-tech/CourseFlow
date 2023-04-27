@@ -65,6 +65,15 @@ class EnrolledInSequenceCondition(Condition):
         return self.sequence == sequence
 
 
+class MinimumWamCondition(Condition):
+    """Fulfilled if the student has the minimum amount of WAM"""
+    def __init__(self, minimum_wam: float):
+        self.minimum_wam = minimum_wam
+
+    def check(self, current_wam: float) -> bool:
+        return current_wam >= self.minimum_wam
+
+
 class Constraint:
     def __init__(self):
         self.conditions: list[Condition] = []
