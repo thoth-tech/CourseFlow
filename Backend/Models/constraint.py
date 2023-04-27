@@ -84,6 +84,16 @@ class EnrolledInSequenceCondition(Condition):
         return self.sequence == enrolled_sequence
 
 
+class EnrolledInCourseCondition(Condition):
+    """Fulfilled if the student is enrolled in the specified course"""
+
+    def __init__(self, course: Course):
+        self.course = course
+
+    def check(self, enrolled_course: Course, **kwargs) -> bool:
+        return self.course == enrolled_course
+
+
 class MinimumWamCondition(Condition):
     """Fulfilled if the student has the minimum amount of WAM"""
 
