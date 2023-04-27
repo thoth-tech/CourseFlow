@@ -154,4 +154,4 @@ class Constraint:
             "current_wam": current_wam
         }
 
-        return all([condition.check(**enrollment_info) for condition in self.conditions])
+        return all(condition.check(**enrollment_info) for condition in self.conditions)
