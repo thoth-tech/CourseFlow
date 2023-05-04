@@ -2,7 +2,7 @@ from numpy._typing import ArrayLike
 
 from Backend.Models.course import Course, Sequence
 from Backend.Models.unit import Unit
-from typing import Iterable
+from typing import Iterable, Callable
 
 
 # todo: write tests for all of these constraints
@@ -24,6 +24,16 @@ class Constraint:
         :return: True if the constraint is met, otherwise False
         """
         raise NotImplementedError("Subclasses should implement this")
+
+
+class UniqueConstraint(Constraint):
+    """Used to make constraints that have a very limited use case"""
+
+    def __init__(self, constraint_checker: Callable):
+        self.constraint_checker = constraint_checker
+
+    def check(self, **kwargs) -> bool:
+        return self.constraint_checker(**kwargs)
 
 
 class MinimumNumberOfUnitsConstraint(Constraint):
