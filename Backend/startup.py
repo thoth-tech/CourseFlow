@@ -1,5 +1,5 @@
-import handbook_reader
-import visualizer
+from DataIntegration import handbook_reader
+from DataIntegration import visualizer
 
 
 def handbook_reader_and_unit_map_visualizer_demo():
