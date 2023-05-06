@@ -6,9 +6,10 @@ from PyPDF2 import PdfReader
 
 from Backend.Models.unit import Unit
 
-unit_listings = "handbooks/DeakinUniversity2019_Units-v4-accessible.pdf"
-unit_listings_text_cache = "handbooks/unit_listings_text_cache.txt"
-course_listings = "handbooks/DeakinUniversity2019_Courses-v4-accessible.pdf"
+module_path = os.path.dirname(__file__)
+unit_listings = os.path.join(module_path, "./handbooks/DeakinUniversity2019_Units-v4-accessible.pdf")
+unit_listings_text_cache = os.path.join(module_path, "./handbooks/unit_listings_text_cache.txt")
+course_listings = os.path.join(module_path, "./handbooks/DeakinUniversity2019_Courses-v4-accessible.pdf")
 unit_details_first_page = 27
 unit_details_last_page = 1210
 
