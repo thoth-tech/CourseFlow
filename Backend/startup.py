@@ -33,10 +33,22 @@ def mongodb_test():
     # Send a ping to confirm a successful connection
     try:
         client.admin.command('ping')
-        print("Pinged your deployment. You successfully connected to MongoDB!")
     except OperationFailure as e:
         # todo: handle authentication errors
         raise
+
+    # todo: All interactions with the database such as this belongs in a persistence layer module
+    db = client["development"]
+    unit_collection = db["unit"]
+    # todo: debug only: clear collection before continuing
+    print("Clearing Unit collection")
+    unit_collection.delete_many({})
+
+    # Load Units into unit database collection
+    text = handbook_reader.create_or_read_handbook_text_cache()
+    units = handbook_reader.read_unit_details(text)
+    print("Writing units to database")
+    unit_collection.insert_many(u.to_dict() for u in units.values())
 
 
 if __name__ == "__main__":
