@@ -1,6 +1,6 @@
 # CourseFlow Database Schema
 
-### Student
+## Student
 ```js
 {
     ID: Integer,
@@ -16,7 +16,7 @@
 | enrolled_stream_id|String|Stream ID that the student is enrolled in||
 | enrolled_units|[String]|Array of [unit](#unit) codes that the student is enrolled in||
 
-### Course
+## Stream
 Used to describe a course/major/minor/specialization etc.
 ```js
 {
@@ -33,7 +33,7 @@ Used to describe a course/major/minor/specialization etc.
 | handbook_url|String|URL to the official handbook webpage for this stream||
 | constraints|[Constraint object]|Array of [Constraint](#constraints) objects that describe the rules for completing this stream||
 
-### Unit
+## Unit
 ```js
 {
     ID: Integer,
@@ -57,8 +57,8 @@ Used to describe a course/major/minor/specialization etc.
 | timetable     | [String]            |The study periods that this unit is available in. Format: year-period e.g.: 2023-T2||
 | constraints   | [Constraint Object] |Array of [Constraint](#constraints) objects that describe the enrollment rules for enroling in this unit||
 
-### Constraints
-#### Base constraint
+## Constraints
+### Base constraint
 All constraint documents will have this in common
 ```js
 {
@@ -71,7 +71,7 @@ All constraint documents will have this in common
 | ID      | Integer |               |           |
 | type    | String  |Discriminator, used to tell what kind of constraint the constraint is|pass_any, pass_all, minimum_wam, stream_enrollment, mutually_exclusive_units, corequisites, prerequisites, max_units, min_units|
 
-#### Pass any constraint
+### Pass any constraint
 ```js
 {
     ID: Integer,
@@ -86,7 +86,7 @@ All constraint documents will have this in common
 | type        | String              |Always "pass_any" for this constraint|pass_any|
 | constraints | [Constraint Object] |Array of [Constraint](#constraints) objects that all need to be passed for this constraint to pass|           |
 
-#### Pass All Constraint
+### Pass All Constraint
 
 ```js
 {
@@ -101,7 +101,7 @@ All constraint documents will have this in common
 | type        | String              |Always "pass_all" for this constraint|pass_all|
 | constraints | [Constraint Object] |Array of [Constraint](#constraints) objects where any constraint needs to be passed for this constraint to pass||
 
-#### Minimum WAM Constraint
+### Minimum WAM Constraint
 
 ```js
 {
@@ -116,7 +116,7 @@ All constraint documents will have this in common
 | type        | String        |Always "minimum_wam" for this constraint|minimum_wam|
 | minimum_wam | Integer       |The minimum WAM needed for this constraint to pass|           |
 
-#### Sequence Enrollment Constraint
+### Stream Enrollment Constraint
 
 ```js
 {
@@ -131,7 +131,7 @@ All constraint documents will have this in common
 | type      | String              |Always "stream_enrollment" for this constraint|stream_enrollment|
 | stream_id | Integer             |The stream ID the student must be enrolled in|           |
 
-#### Mutually Exclusive Units Constraint
+### Mutually Exclusive Units Constraint
 
 ```js
 {
@@ -147,7 +147,7 @@ All constraint documents will have this in common
 | units     | [String]   |Array of [unit](#unit) codes. If the student has completed any of these units, this constraint will fail.|           |
 
 
-#### Corequisites Constraint
+### Corequisites Constraint
 
 ```js
 {
@@ -163,7 +163,7 @@ All constraint documents will have this in common
 | units   | [String]       |Array of [unit](#unit) codes. The student must have completed or be enroled in all of these units|           |
 
 
-#### Prerequisites Constraint
+### Prerequisites Constraint
 
 ```js
 {
@@ -179,7 +179,7 @@ All constraint documents will have this in common
 | units   | [String]        |Array of [unit](#unit) codes. The student must have completed all these units.|           |
 
 
-#### Maximum Number of Units Constraint
+### Maximum Number of Units Constraint
 
 ```js
 {
@@ -196,7 +196,7 @@ All constraint documents will have this in common
 | units     | [String]    |Array of [unit](#unit) codes.|           |
 | max_units | Integer     |               |           |
 
-#### Minimum Number of Units Constraint
+### Minimum Number of Units Constraint
 ```js
 {
     ID: Integer,
