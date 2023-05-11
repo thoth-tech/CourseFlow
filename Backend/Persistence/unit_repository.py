@@ -5,7 +5,7 @@ from Backend.Models.unit import Unit
 from Backend.Persistence.connect import mongodb_connect
 
 
-class UnitController(ABC):
+class UnitRepository(ABC):
     @abstractmethod
     def add_unit(self, unit: Unit):
         pass
@@ -28,7 +28,7 @@ class UnitController(ABC):
 
 
 # todo: validation
-class MongodbUnitController(UnitController):
+class MongodbUnitRepository(UnitRepository):
     def __init__(self):
         db = mongodb_connect()
         self.unit_collection = db["unit"]
