@@ -1,5 +1,5 @@
 from Backend.Persistence.connect import mongodb_connect
-from Backend.Persistence.unit_controller import MongodbUnitController
+from Backend.Persistence.unit_repository import MongodbUnitRepository
 from DataIntegration import handbook_reader
 from DataIntegration import visualizer
 
@@ -15,12 +15,12 @@ def handbook_reader_and_unit_map_visualizer_demo():
 
 
 def mongodb_test():
-    class DebugMongodbUnitController(MongodbUnitController):
+    class DebugMongodbUnitRepository(MongodbUnitRepository):
         def clear_all_units(self):
             self.unit_collection.delete_many({})
 
     print("Accessing database")
-    controller = DebugMongodbUnitController()
+    controller = DebugMongodbUnitRepository()
 
     print("Clearing Unit collection")
     controller.clear_all_units()
