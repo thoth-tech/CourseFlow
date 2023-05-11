@@ -9,8 +9,6 @@ from typing import Iterable, Callable
 class Constraint:
     """Base class for modeling constraints"""
 
-    # todo: consider using kwargs, fixed args may not be flexible enough. for example, some constraints may need to know
-    #  the completed units, some might need to know the course being taken, etc.
     def check(self, **kwargs) -> bool:
         """
         Checks if the constraint has been fulfilled
@@ -25,6 +23,9 @@ class Constraint:
         """
         raise NotImplementedError("Subclasses should implement this")
 
+    def to_dict(self) -> dict:
+        raise NotImplementedError("Subclasses should implement this")
+
 
 class UniqueConstraint(Constraint):
     """Used to make constraints that have a very limited use case"""
@@ -34,6 +35,9 @@ class UniqueConstraint(Constraint):
 
     def check(self, **kwargs) -> bool:
         return self.constraint_checker(**kwargs)
+
+    def to_dict(self) -> dict:
+        return {"type": "unique_constraint"}
 
 
 class MinimumNumberOfUnitsConstraint(Constraint):
@@ -47,6 +51,13 @@ class MinimumNumberOfUnitsConstraint(Constraint):
         units_completed = set(units_completed)
         return len(self.set.intersection(units_completed)) >= self.min
 
+    def to_dict(self) -> dict:
+        return {
+            "type": "min_units",
+            "units": [unit.code for unit in self.set],
+            "min_units": self.min
+        }
+
 
 class MaximumNumberOfUnitsConstraint(Constraint):
     """Fulfilled if the number of units completed from a pre-defined set of units does not exceed the maximum allowed"""
@@ -58,6 +69,13 @@ class MaximumNumberOfUnitsConstraint(Constraint):
     def check(self, units_completed: Iterable[Unit], **kwargs):
         units_completed = set(units_completed)
         return len(self.set.intersection(units_completed)) <= self.max
+
+    def to_dict(self) -> dict:
+        return {
+            "type": "max_units",
+            "units": [unit.code for unit in self.set],
+            "min_units": self.max
+        }
 
 
 class PrerequisitesFulfilledConstraint(Constraint):
@@ -71,6 +89,12 @@ class PrerequisitesFulfilledConstraint(Constraint):
         units_completed = set(units_completed)
         return self.prerequisites.issubset(units_completed)
 
+    def to_dict(self) -> dict:
+        return {
+            "type": "prerequisites",
+            "units": [unit.code for unit in self.prerequisites]
+        }
+
 
 # todo: having prerequisites and corequisites constraint may be redundant
 class CorequisitesFulfilledConstraint(Constraint):
@@ -82,6 +106,12 @@ class CorequisitesFulfilledConstraint(Constraint):
     def check(self, units_completed: Iterable[Unit], units_enrolled: Iterable[Unit], **kwargs) -> bool:
         units_completed_or_enrolled = set(units_completed).union(units_enrolled)
         return self.corequisites.issubset(units_completed_or_enrolled)
+
+    def to_dict(self) -> dict:
+        return {
+            "type": "corequisites",
+            "units": [unit.code for unit in self.corequisites]
+        }
 
 
 # todo: may be redundant with coreqs constraint
@@ -95,6 +125,12 @@ class MutualExclusiveUnitsConstraint(Constraint):
         units_completed_or_enrolled = set(units_completed).union(units_enrolled)
         return bool(self.incompatible_units.intersection(units_completed_or_enrolled))
 
+    def to_dict(self) -> dict:
+        return {
+            "type": "mutually_exclusive_units",
+            "units": [unit.code for unit in self.incompatible_units]
+        }
+
 
 class EnrolledInSequenceConstraint(Constraint):
     """Fulfilled if the student is enrolled in the specified major/minor sequence"""
@@ -104,6 +140,12 @@ class EnrolledInSequenceConstraint(Constraint):
 
     def check(self, enrolled_sequence: Sequence, **kwargs) -> bool:
         return self.sequence == enrolled_sequence
+
+    def to_dict(self) -> dict:
+        return {
+            "type": "sequence_enrollment",
+            "sequence_id": self.sequence.ID
+        }
 
 
 class EnrolledInCourseConstraint(Constraint):
@@ -115,6 +157,12 @@ class EnrolledInCourseConstraint(Constraint):
     def check(self, enrolled_course: Course, **kwargs) -> bool:
         return self.course == enrolled_course
 
+    def to_dict(self) -> dict:
+        return {
+            "type": "course_enrollment",
+            "course_id": self.course.ID
+        }
+
 
 class MinimumWamConstraint(Constraint):
     """Fulfilled if the student has the minimum amount of WAM"""
@@ -124,6 +172,12 @@ class MinimumWamConstraint(Constraint):
 
     def check(self, current_wam: float, **kwargs) -> bool:
         return current_wam >= self.minimum_wam
+
+    def to_dict(self) -> dict:
+        return {
+            "type": "minimum_wam",
+            "minimum_wam": self.minimum_wam
+        }
 
 
 class AllConstraint(Constraint):
@@ -149,6 +203,12 @@ class AllConstraint(Constraint):
 
         return all(constraint.check(**enrollment_info) for constraint in self.constraints)
 
+    def to_dict(self) -> dict:
+        return {
+            "type": "pass_all",
+            "constraints": [constraint.to_dict() for constraint in self.constraints]
+        }
+
 
 class AnyConstraint(Constraint):
     """Fulfilled if any component constraints are met"""
@@ -172,3 +232,9 @@ class AnyConstraint(Constraint):
         }
 
         return any(constraint.check(**enrollment_info) for constraint in self.constraints)
+
+    def to_dict(self) -> dict:
+        return {
+            "type": "pass_any",
+            "constraints": [constraint.to_dict() for constraint in self.constraints]
+        }
