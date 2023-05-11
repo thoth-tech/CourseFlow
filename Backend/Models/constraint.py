@@ -1,6 +1,6 @@
 from numpy._typing import ArrayLike
 
-from Backend.Models.course import Course, Sequence
+from Backend.Models.stream import Stream
 from Backend.Models.unit import Unit
 from typing import Iterable, Callable
 
@@ -15,8 +15,7 @@ class Constraint:
 
         :key units_completed:
         :key units_enrolled:
-        :key enrolled_course:
-        :key enrolled_sequence:
+        :key enrolled_stream:
         :key current_wam:
 
         :return: True if the constraint is met, otherwise False
@@ -132,35 +131,19 @@ class MutualExclusiveUnitsConstraint(Constraint):
         }
 
 
-class EnrolledInSequenceConstraint(Constraint):
-    """Fulfilled if the student is enrolled in the specified major/minor sequence"""
+class EnrolledInStreamConstraint(Constraint):
+    """Fulfilled if the student is enrolled in the specified stream"""
 
-    def __init__(self, sequence: Sequence):
-        self.sequence = sequence
+    def __init__(self, stream: Stream):
+        self.stream = stream
 
-    def check(self, enrolled_sequence: Sequence, **kwargs) -> bool:
-        return self.sequence == enrolled_sequence
-
-    def to_dict(self) -> dict:
-        return {
-            "type": "sequence_enrollment",
-            "sequence_id": self.sequence.ID
-        }
-
-
-class EnrolledInCourseConstraint(Constraint):
-    """Fulfilled if the student is enrolled in the specified course"""
-
-    def __init__(self, course: Course):
-        self.course = course
-
-    def check(self, enrolled_course: Course, **kwargs) -> bool:
-        return self.course == enrolled_course
+    def check(self, enrolled_stream: Stream, **kwargs) -> bool:
+        return self.stream == enrolled_stream
 
     def to_dict(self) -> dict:
         return {
-            "type": "course_enrollment",
-            "course_id": self.course.ID
+            "type": "stream_enrollment",
+            "stream_id": self.stream.ID
         }
 
 
@@ -189,15 +172,13 @@ class AllConstraint(Constraint):
     def check(self,
               units_completed: Iterable[Unit],
               units_enrolled: Iterable[Unit],
-              enrolled_course: Course,
-              enrolled_sequence: Sequence,
+              enrolled_stream: Stream,
               current_wam: float) -> bool:
 
         enrollment_info = {
             "units_completed": units_completed,
             "units_enrolled": units_enrolled,
-            "enrolled_course": enrolled_course,
-            "enrolled_sequence": enrolled_sequence,
+            "enrolled_stream": enrolled_stream,
             "current_wam": current_wam
         }
 
@@ -219,15 +200,13 @@ class AnyConstraint(Constraint):
     def check(self,
               units_completed: Iterable[Unit],
               units_enrolled: Iterable[Unit],
-              enrolled_course: Course,
-              enrolled_sequence: Sequence,
+              enrolled_stream: Stream,
               current_wam: float) -> bool:
 
         enrollment_info = {
             "units_completed": units_completed,
             "units_enrolled": units_enrolled,
-            "enrolled_course": enrolled_course,
-            "enrolled_sequence": enrolled_sequence,
+            "enrolled_stream": enrolled_stream,
             "current_wam": current_wam
         }
 
