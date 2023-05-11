@@ -9,10 +9,7 @@ class Unit:
         self.title = f"DEFAULT_TITLE_{Unit.id}"
         self.raw_information = ""
         self.description = ""
-        self.prerequisites = []
-        self.corequisites = []
-        self.incompatible_with = []
-        self.constraints = {}
+        self.constraints = []
         self.is_discontinued = False
         Unit.id += 1
 
@@ -21,9 +18,7 @@ class Unit:
             "code": self.code,
             "title": self.title,
             "description": self.description,
-            "prerequisites": [unit.code for unit in self.prerequisites],
-            "corequisites": [unit.code for unit in self.corequisites],
-            "incompatible_with": [unit.code for unit in self.incompatible_with],
+            "constraints": [constraint.to_dict() for constraint in self.constraints],
             "is_discontinued": self.is_discontinued
         }
 
