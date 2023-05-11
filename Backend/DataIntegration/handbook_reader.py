@@ -4,6 +4,8 @@ from typing import Dict
 
 from PyPDF2 import PdfReader
 
+from Backend.Models.constraint import PrerequisitesFulfilledConstraint, CorequisitesFulfilledConstraint, \
+    MutualExclusiveUnitsConstraint
 from Backend.Models.unit import Unit
 
 module_path = os.path.dirname(__file__)
@@ -66,9 +68,9 @@ def extract_unit_enrolment_constraints(units: Dict[str, Unit]) -> Dict[str, Unit
 
     for unit in list(units.values()):
         constraints_to_fill = [
-            (r"Prerequisite: (.+) (?=Corequisite:)", unit.prerequisites),
-            (r"Corequisite: (.+)(?=Incompatible with:)", unit.corequisites),
-            (r"Incompatible with: (.+)(?=Scheduled learning activities)", unit.incompatible_with)
+            (r"Prerequisite: (.+)(?=Corequisite:)", PrerequisitesFulfilledConstraint),
+            (r"Corequisite: (.+)(?=Incompatible with:)", CorequisitesFulfilledConstraint),
+            (r"Incompatible with: (.+)(?=Scheduled learning activities)", MutualExclusiveUnitsConstraint)
         ]
         for constraint_search_pattern, constraint in constraints_to_fill:
             # Find all unit codes that are part of the constraint
@@ -77,6 +79,7 @@ def extract_unit_enrolment_constraints(units: Dict[str, Unit]) -> Dict[str, Unit
                 constraint_search_result = unit_pattern.findall(constraint_search_result.group(1))
 
                 # Note every unit listed as part of the constraint by the handbook
+                units_in_constraint = []
                 for code in constraint_search_result:
                     if code not in units.keys():
                         new_unit = Unit()
@@ -84,7 +87,12 @@ def extract_unit_enrolment_constraints(units: Dict[str, Unit]) -> Dict[str, Unit
                         new_unit.is_discontinued = True
                         new_unit.code = code
                         new_unit.title = code
-                    constraint.append(units[code])
+
+                    units_in_constraint.append(units[code])
+
+                # Only add the constraint to the unit if there are units that belong to the constraint
+                if units_in_constraint:
+                    unit.constraints.append(constraint(units_in_constraint))
 
     return units
 
