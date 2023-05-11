@@ -1,14 +1,15 @@
-from numpy._typing import ArrayLike
+from abc import ABC, abstractmethod
+from typing import Iterable, Callable
 
 from Backend.Models.stream import Stream
 from Backend.Models.unit import Unit
-from typing import Iterable, Callable
 
 
 # todo: write tests for all of these constraints
-class Constraint:
+class Constraint(ABC):
     """Base class for modeling constraints"""
 
+    @abstractmethod
     def check(self, **kwargs) -> bool:
         """
         Checks if the constraint has been fulfilled
@@ -20,10 +21,11 @@ class Constraint:
 
         :return: True if the constraint is met, otherwise False
         """
-        raise NotImplementedError("Subclasses should implement this")
+        pass
 
+    @abstractmethod
     def to_dict(self) -> dict:
-        raise NotImplementedError("Subclasses should implement this")
+        pass
 
 
 class UniqueConstraint(Constraint):
