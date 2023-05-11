@@ -5,7 +5,7 @@
 {
     ID: Integer,
     name: String,
-    enrolled_course_id: Integer,
+    enrolled_stream_id: Integer,
     enrolled_units: [String]
 }
 ```
@@ -13,10 +13,11 @@
 |----------|--------|---------------------|---------|
 | ID       | Integer|                     |         |
 | name     | String |                     |         |
-| enrolled_course_id|String|Course ID that the student is enrolled in||
+| enrolled_stream_id|String|Stream ID that the student is enrolled in||
 | enrolled_units|[String]|Array of [unit](#unit) codes that the student is enrolled in||
 
 ### Course
+Used to describe a course/major/minor/specialization etc.
 ```js
 {
     ID: Integer,
@@ -29,8 +30,8 @@
 |----------|--------|---------------------|---------|
 | ID       | Integer|                     |         |
 | code     | String |                     |         |
-| handbook_url|String|URL to the official handbook webpage for this course||
-| constraints|[Constraint object]|Array of [Constraint](#constraints) objects that describe the course rules for graduating this course||
+| handbook_url|String|URL to the official handbook webpage for this stream||
+| constraints|[Constraint object]|Array of [Constraint](#constraints) objects that describe the rules for completing this stream||
 
 ### Unit
 ```js
@@ -68,7 +69,7 @@ All constraint documents will have this in common
 | Field   | Type    | Description   | Options   |
 |:--------|:--------|:--------------|:----------|
 | ID      | Integer |               |           |
-| type    | String  |Discriminator, used to tell what kind of constraint the constraint is|pass_any, pass_all, minimum_wam, sequence_enrollment, course_enrollment, mutually_exclusive_units, corequisites, prerequisites, max_units, min_units|
+| type    | String  |Discriminator, used to tell what kind of constraint the constraint is|pass_any, pass_all, minimum_wam, stream_enrollment, mutually_exclusive_units, corequisites, prerequisites, max_units, min_units|
 
 #### Pass any constraint
 ```js
@@ -120,30 +121,15 @@ All constraint documents will have this in common
 ```js
 {
     ID: Integer,
-    type: "sequence_enrollment",
-    sequence_id: Integer
-}
-```
-| Field       | Type                  | Description   | Options   |
-|:------------|:----------------------|:--------------|:----------|
-| ID          | Integer               |               |           |
-| type        | String                |Always "sequence_enrollment" for this constraint|sequence_enrollment|
-| sequence_id | Integer               |The sequence ID the student must be enrolled in|           |
-
-#### Course Enrollment Constraint
-
-```js
-{
-    ID: Integer,
-    type: "course_enrollment",
-    course_id: Integer
+    type: "stream_enrollment",
+    stream_id: Integer
 }
 ```
 | Field     | Type                | Description   | Options   |
 |:----------|:--------------------|:--------------|:----------|
 | ID        | Integer             |               |           |
-| type      | String              |Always "course_enrollment" for this constraint|course_enrollment|
-| course_id | Integer             |The course ID the student must be enrolled in|           |
+| type      | String              |Always "stream_enrollment" for this constraint|stream_enrollment|
+| stream_id | Integer             |The stream ID the student must be enrolled in|           |
 
 #### Mutually Exclusive Units Constraint
 
