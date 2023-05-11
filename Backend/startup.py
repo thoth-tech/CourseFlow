@@ -1,4 +1,5 @@
 from Backend.Persistence.connect import mongodb_connect
+from Backend.Persistence.unit_controller import MongodbUnitController
 from DataIntegration import handbook_reader
 from DataIntegration import visualizer
 
@@ -14,17 +15,22 @@ def handbook_reader_and_unit_map_visualizer_demo():
 
 
 def mongodb_test():
-    db = mongodb_connect()
-    unit_collection = db["unit"]
-    # todo: debug only: clear collection before continuing
-    print("Clearing Unit collection")
-    unit_collection.delete_many({})
+    class DebugMongodbUnitController(MongodbUnitController):
+        def clear_all_units(self):
+            self.unit_collection.delete_many({})
 
-    # Load Units into unit database collection
+    print("Accessing database")
+    controller = DebugMongodbUnitController()
+
+    print("Clearing Unit collection")
+    controller.clear_all_units()
+
+    print("Reading unit information from handbook")
     text = handbook_reader.create_or_read_handbook_text_cache()
     units = handbook_reader.read_unit_details(text)
+
     print("Writing units to database")
-    unit_collection.insert_many(u.to_dict() for u in units.values())
+    controller.add_multiple_units(units.values())
 
 
 if __name__ == "__main__":
