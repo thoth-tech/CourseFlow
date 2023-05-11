@@ -6,7 +6,7 @@
     ID: Integer,
     name: String,
     enrolled_course_id: Integer,
-    enrolled_units: [Integer]
+    enrolled_units: [String]
 }
 ```
 | Field    | Type   | Description         | Options |
@@ -14,7 +14,7 @@
 | ID       | Integer|                     |         |
 | name     | String |                     |         |
 | enrolled_course_id|String|Course ID that the student is enrolled in||
-| enrolled_units|[Integer]|Array of [unit](#unit) IDs that the student is enrolled in||
+| enrolled_units|[String]|Array of [unit](#unit) codes that the student is enrolled in||
 
 ### Course
 ```js
@@ -151,14 +151,15 @@ All constraint documents will have this in common
 {
     ID: Integer,
     type: "mutually_exclusive_units",
-    units: [Integer]
+    units: [String]
 }
 ```
 | Field   | Type                       | Description   | Options   |
 |:--------|:---------------------------|:--------------|:----------|
 | ID      | Integer                    |               |           |
 | type    | String                     |Always "mutually_exclusive_units" for this constraint|mutually_exclusive_units|
-| units   | [Integer]                  |Array of [unit](#unit) IDs. If the student has completed any of these units, this constraint will fail.|           |
+| units     | [String]   |Array of [unit](#unit) codes. If the student has completed any of these units, this constraint will fail.|           |
+
 
 #### Corequisites Constraint
 
@@ -166,14 +167,15 @@ All constraint documents will have this in common
 {
     ID: Integer,
     type: "corequisites",
-    units: [Integer]
+    units: [String]
 }
 ```
 | Field   | Type           | Description   | Options   |
 |:--------|:---------------|:--------------|:----------|
 | ID      | Integer        |               |           |
 | type    | String         |Always "corequisites" for this constraint|corequisites|
-| units   | [Integer]      |Array of [unit](#unit) IDs. The student must have completed or be enroled in all of these units|           |
+| units   | [String]       |Array of [unit](#unit) codes. The student must have completed or be enroled in all of these units|           |
+
 
 #### Prerequisites Constraint
 
@@ -181,14 +183,15 @@ All constraint documents will have this in common
 {
     ID: Integer,
     type: "prerequisites",
-    units: [Integer]
+    units: [String]
 }
 ```
 | Field   | Type            | Description   | Options   |
 |:--------|:----------------|:--------------|:----------|
 | ID      | Integer         |               |           |
 | type    | String          |Always "prerequisites" for this constraint|prerequisites|
-| units   | [Integer]       |Array of [unit](#unit) IDs. The student must have completed all these units.|           |
+| units   | [String]        |Array of [unit](#unit) codes. The student must have completed all these units.|           |
+
 
 #### Maximum Number of Units Constraint
 
@@ -196,7 +199,7 @@ All constraint documents will have this in common
 {
     ID: Integer,
     type: "max_units",
-    units: [Integer],
+    units: [String],
     max_units: Integer
 }
 ```
@@ -204,7 +207,7 @@ All constraint documents will have this in common
 |:----------|:------------|:--------------|:----------|
 | ID        | Integer     |               |           |
 | type      | String      |Always "max_units" for this constraint|max_units|
-| units   | [Integer]     |Array of [unit](#unit) IDs.|           |
+| units     | [String]    |Array of [unit](#unit) codes.|           |
 | max_units | Integer     |               |           |
 
 #### Minimum Number of Units Constraint
@@ -212,7 +215,7 @@ All constraint documents will have this in common
 {
     ID: Integer,
     type: "min_units",
-    units: [Integer],
+    units: [String],
     min_units: Integer
 }
 ```
@@ -220,5 +223,5 @@ All constraint documents will have this in common
 |:----------|:------------|:--------------|:----------|
 | ID        | Integer     |               |           |
 | type      | String      |Always "min_units" for this constraint|min_units|
-| units     | [Integer]   |Array of [unit](#unit) IDs.|           |
+| units     | [String]   |Array of [unit](#unit) codes.|           |
 | min_units | Integer     |               |           |
