@@ -1,5 +1,8 @@
 ﻿namespace CourseFlow.Backend.Models.Constraints
 {
+    /// <summary>
+    /// Fulfilled if the student is enrolled in the specified stream
+    /// </summary>
     public class EnrolledInStreamConstraint : IConstraint
     {
         private IStream stream;
