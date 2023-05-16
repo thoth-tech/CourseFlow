@@ -1,5 +1,8 @@
-﻿namespace CourseFlow.Backend.Models
+﻿using CourseFlow.Backend.Models.Constraints;
+
+namespace CourseFlow.Backend.Models
 {
+    // todo: override default equality comparer so the constraints checkers work
     public class Unit : IUnit
     {
         private static int id = 0;
