@@ -1,6 +1,6 @@
 ﻿namespace CourseFlow.Backend.Models
 {
-    public interface IConstraint
+    public interface IStream
     {
     }
 }
