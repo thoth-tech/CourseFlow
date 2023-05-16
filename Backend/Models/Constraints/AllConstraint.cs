@@ -1,5 +1,8 @@
 ﻿namespace CourseFlow.Backend.Models.Constraints
 {
+    /// <summary>
+    /// Fulfilled if all component constraints are met
+    /// </summary>
     public class AllConstraint : IConstraint
     {
         IEnumerable<IConstraint> constraints;

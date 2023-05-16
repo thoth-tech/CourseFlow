@@ -1,5 +1,8 @@
 ﻿namespace CourseFlow.Backend.Models.Constraints
 {
+    /// <summary>
+    /// Fulfilled if the student has the minimum amount of WAM
+    /// </summary>
     public class MinimumWamConstraint : IConstraint
     {
         private float minimumWam;

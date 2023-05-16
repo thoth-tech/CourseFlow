@@ -1,5 +1,8 @@
 ﻿namespace CourseFlow.Backend.Models.Constraints
 {
+    /// <summary>
+    /// Fulfilled when all the units from a pre-defined set of units has been completed or is being completed
+    /// </summary>
     public class CorequisitesFulfilledConstraint : IConstraint
     {
         private HashSet<IUnit> corequisites;

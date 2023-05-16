@@ -1,5 +1,8 @@
 ﻿namespace CourseFlow.Backend.Models.Constraints
 {
+    /// <summary>
+    /// Fulfilled when a minimum number of units is completed from a pre-defined set of units
+    /// </summary>
     public class MinimumNumberOfUnitsConstraint : IConstraint
     {
         private HashSet<IUnit> unitSet;

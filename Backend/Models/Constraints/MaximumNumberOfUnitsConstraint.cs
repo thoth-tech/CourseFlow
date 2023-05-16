@@ -1,5 +1,8 @@
 ﻿namespace CourseFlow.Backend.Models.Constraints
 {
+    /// <summary>
+    /// Fulfilled if the number of units completed from a pre-defined set of units does not exceed the maximum allowed
+    /// </summary>
     public class MaximumNumberOfUnitsConstraint : IConstraint
     {
         private HashSet<IUnit> unitSet;
