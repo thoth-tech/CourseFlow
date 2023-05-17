@@ -11,7 +11,7 @@ public class ClassMapTests
     [TestMethod]
     public void serialize_unit_to_bson_test()
     {
-        CourseFlowStartup.RegisterBsonClassMaps();
+        Utils.RegisterBsonClassMaps();
 
         Unit unit = new Unit();
         unit.Code = "TST123";

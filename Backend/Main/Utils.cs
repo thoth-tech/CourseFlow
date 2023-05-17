@@ -1,5 +1,7 @@
 ﻿using Amazon.Runtime.Internal.Endpoints.StandardLibrary;
+using CourseFlow.Backend.Models;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using SharpCompress.Common;
 using System;
@@ -8,6 +10,14 @@ namespace CourseFlow.Backend
 {
     public static class Utils
     {
+        public static void RegisterBsonClassMaps()
+        {
+            BsonClassMap.RegisterClassMap<Unit>(cm =>
+            {
+
+            });
+        }
+
         private static void ReloadEnvironmentVariables()
         {
             // Load secrets into environment variables
