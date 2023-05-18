@@ -14,6 +14,12 @@ namespace CourseFlow.Backend
     {
         public static void RegisterBsonClassMaps()
         {
+            // Fixes issue outlined at https://medium.com/it-dead-inside/net-mongodb-driver-2-19-breaking-serialization-errors-b456134a1a2d
+            var objectSerializer = new ObjectSerializer(type => 
+            ObjectSerializer.DefaultAllowedTypes(type)
+            || type.FullName.StartsWith("CourseFlow.Backend"));
+            BsonSerializer.RegisterSerializer(objectSerializer);
+
             BsonClassMap.RegisterClassMap<Unit>(cm =>
             {
                 cm.MapProperty(c => c.Code).SetElementName("code");
