@@ -1,7 +1,6 @@
-﻿using CourseFlow.Backend.Models;
-using CourseFlow.Backend.Models.Constraints;
+﻿using CourseFlow.Backend.Models.Constraints;
 
-namespace CourseFlow.Models
+namespace CourseFlow.Backend.Models
 {
     public class Stream : IStream
     {
