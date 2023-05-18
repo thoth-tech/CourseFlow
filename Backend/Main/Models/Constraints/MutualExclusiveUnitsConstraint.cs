@@ -7,9 +7,9 @@
     {
         private HashSet<IUnit> incompatibleUnits;
 
-        public MutualExclusiveUnitsConstraint(HashSet<IUnit> incompatibleUnits)
+        public MutualExclusiveUnitsConstraint(IEnumerable<IUnit> incompatibleUnits)
         {
-            this.incompatibleUnits = incompatibleUnits;
+            this.incompatibleUnits = new HashSet<IUnit>(incompatibleUnits);
         }
 
         private bool Check(IEnumerable<IUnit>? unitsCompleted, IEnumerable<IUnit>? unitsEnrolled)
