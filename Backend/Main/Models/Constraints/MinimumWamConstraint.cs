@@ -5,16 +5,15 @@
     /// </summary>
     public class MinimumWamConstraint : IConstraint
     {
-        private float minimumWam;
-
+        public float MinimumWam { get; set; }
         public MinimumWamConstraint(float minimumWam)
         {
-            this.minimumWam = minimumWam;
+            MinimumWam = minimumWam;
         }
 
         private bool Check(float currentWam)
         { 
-            return currentWam >= minimumWam;
+            return currentWam >= MinimumWam;
         }
 
         public bool Check(IEnumerable<IUnit>? unitsCompleted = null, IEnumerable<IUnit>? unitsEnrolled = null, IStream? enrolledStream = null, float currentWam = -1)

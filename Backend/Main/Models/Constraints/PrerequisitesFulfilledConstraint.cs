@@ -6,6 +6,12 @@
     public class PrerequisitesFulfilledConstraint : IConstraint
     {
         private HashSet<IUnit> prerequisites;
+        public IEnumerable<IUnit> Prerequisites 
+        {
+            get => prerequisites;
+            set => prerequisites = new HashSet<IUnit>(value);
+        }
+
         public PrerequisitesFulfilledConstraint(IEnumerable<IUnit> prerequisites)
         {
             this.prerequisites = new HashSet<IUnit>(prerequisites);

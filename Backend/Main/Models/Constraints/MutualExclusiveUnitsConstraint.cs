@@ -6,6 +6,11 @@
     public class MutualExclusiveUnitsConstraint : IConstraint
     {
         private HashSet<IUnit> incompatibleUnits;
+        public IEnumerable<IUnit> IncompatibleUnits
+        {
+            get => incompatibleUnits;
+            set => incompatibleUnits = new HashSet<IUnit>(value);
+        }
 
         public MutualExclusiveUnitsConstraint(IEnumerable<IUnit> incompatibleUnits)
         {

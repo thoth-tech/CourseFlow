@@ -6,6 +6,12 @@
     public class CorequisitesFulfilledConstraint : IConstraint
     {
         private HashSet<IUnit> corequisites;
+        public IEnumerable<IUnit> Corequisites
+        {
+            get => corequisites;
+            set => corequisites = new HashSet<IUnit>(value);
+        }
+
         public CorequisitesFulfilledConstraint(IEnumerable<IUnit> corequisites)
         {
             this.corequisites = new HashSet<IUnit>(corequisites);

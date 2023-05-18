@@ -6,11 +6,17 @@
     public class MinimumNumberOfUnitsConstraint : IConstraint
     {
         private HashSet<IUnit> unitSet;
-        private int minimumCount;
+        public IEnumerable<IUnit> UnitSet
+        {
+            get => unitSet;
+            set => unitSet = new HashSet<IUnit>(value);
+        }
+        public int MinimumCount { get; set; }
+
         public MinimumNumberOfUnitsConstraint(IEnumerable<IUnit> unitSet, int minimumCount)
         {
             this.unitSet = new HashSet<IUnit>(unitSet);
-            this.minimumCount = minimumCount;
+            this.MinimumCount = minimumCount;
         }
 
         // toco: recheck if unitsEnrolled is needed
@@ -22,7 +28,7 @@
                 count = unitsCompleted.Intersect(unitSet).Count();
             }
 
-            return count >= minimumCount;
+            return count >= MinimumCount;
         }
 
         public bool Check(IEnumerable<IUnit>? unitsCompleted = null, IEnumerable<IUnit>? unitsEnrolled = null, IStream? enrolledStream = null, float currentWam = -1)
