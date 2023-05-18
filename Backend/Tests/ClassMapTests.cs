@@ -9,7 +9,7 @@ namespace CourseFlow_Tests;
 public class ClassMapTests
 {
     [TestMethod]
-    public void serialize_unit_to_bson_test()
+    public void serialize_unit_to_bson()
     {
         Utils.RegisterBsonClassMaps();
 
@@ -18,8 +18,9 @@ public class ClassMapTests
         unit.Title = "TEST_UNIT";
         unit.Description = "description ...";
 
-        string document = unit.ToBsonDocument().ToString();
+        BsonDocument document = unit.ToBsonDocument();
 
-        Assert.Equals(document, "");
+        string expectedContents = "{ \"code\" : \"TST123\", \"title\" : \"TEST_UNIT\", \"description\" : \"description ...\", \"constraints\" : [], \"name\" : false }";
+        Assert.AreEqual(document.ToString(), expectedContents);
     }
 }
