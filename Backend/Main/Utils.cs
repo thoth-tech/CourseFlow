@@ -1,7 +1,9 @@
 ﻿using Amazon.Runtime.Internal.Endpoints.StandardLibrary;
 using CourseFlow.Backend.Models;
+using CourseFlow.Backend.Models.Constraints;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
+using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
 using SharpCompress.Common;
 using System;
@@ -19,6 +21,54 @@ namespace CourseFlow.Backend
                 cm.MapProperty(c => c.Description).SetElementName("description");
                 cm.MapProperty(c => c.Constraints).SetElementName("constraints");
                 cm.MapProperty(c => c.IsDiscontinued).SetElementName("name");
+            });
+
+            // todo: Add discriminators to classmap definitions so that we can serialize documents to correct format and deserialize documents to correct object type
+            BsonClassMap.RegisterClassMap<AllConstraint>(cm =>
+            {
+                cm.MapProperty(c => c.Constraints).SetElementName("constraints");
+            });
+
+            BsonClassMap.RegisterClassMap<AnyConstraint>(cm =>
+            {
+                cm.MapProperty(c => c.Constraints).SetElementName("constraints");
+            });
+
+            BsonClassMap.RegisterClassMap<CorequisitesFulfilledConstraint>(cm =>
+            {
+                cm.MapProperty(c => c.Corequisites).SetElementName("units");
+            });
+
+            BsonClassMap.RegisterClassMap<EnrolledInStreamConstraint>(cm =>
+            {
+                cm.MapProperty(c => c.StreamCode).SetElementName("stream_code");
+            });
+
+            BsonClassMap.RegisterClassMap<MaximumNumberOfUnitsConstraint>(cm =>
+            {
+                cm.MapProperty(c => c.UnitSet).SetElementName("units");
+                cm.MapProperty(c => c.MaximumCount).SetElementName("max_units");
+            });
+
+            BsonClassMap.RegisterClassMap<MinimumNumberOfUnitsConstraint>(cm =>
+            {
+                cm.MapProperty(c => c.UnitSet).SetElementName("units");
+                cm.MapProperty(c => c.MinimumCount).SetElementName("min_units");
+            });
+
+            BsonClassMap.RegisterClassMap<MinimumWamConstraint>(cm =>
+            {
+                cm.MapProperty(c => c.MinimumWam).SetElementName("minimum_wam");
+            });
+
+            BsonClassMap.RegisterClassMap<MutualExclusiveUnitsConstraint>(cm =>
+            {
+                cm.MapProperty(c => c.IncompatibleUnits).SetElementName("units");
+            });
+
+            BsonClassMap.RegisterClassMap<PrerequisitesFulfilledConstraint>(cm =>
+            {
+                cm.MapProperty(c => c.Prerequisites).SetElementName("units");
             });
         }
 
