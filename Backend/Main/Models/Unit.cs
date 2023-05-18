@@ -2,7 +2,6 @@
 
 namespace CourseFlow.Backend.Models
 {
-    // todo: override default equality comparer so the constraints checkers work
     public class Unit : IUnit
     {
         private static int id = 0;
@@ -22,6 +21,16 @@ namespace CourseFlow.Backend.Models
             Constraints = constraints;
             IsDiscontinued = isDiscontinued;
             id++;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj is not Unit other)
+            {
+                return false;
+            }
+
+            return Code == other.Code;
         }
     }
 }
