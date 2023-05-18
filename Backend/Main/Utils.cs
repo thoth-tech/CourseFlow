@@ -14,7 +14,11 @@ namespace CourseFlow.Backend
         {
             BsonClassMap.RegisterClassMap<Unit>(cm =>
             {
-
+                cm.MapProperty(c => c.Code).SetElementName("code");
+                cm.MapProperty(c => c.Title).SetElementName("title");
+                cm.MapProperty(c => c.Description).SetElementName("description");
+                cm.MapProperty(c => c.Constraints).SetElementName("constraints");
+                cm.MapProperty(c => c.IsDiscontinued).SetElementName("name");
             });
         }
 
