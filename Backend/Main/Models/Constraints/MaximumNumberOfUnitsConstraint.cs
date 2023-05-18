@@ -6,11 +6,17 @@
     public class MaximumNumberOfUnitsConstraint : IConstraint
     {
         private HashSet<IUnit> unitSet;
-        private int maximumCount;
+        public IEnumerable<IUnit> UnitSet
+        {
+            get => unitSet;
+            set => unitSet = new HashSet<IUnit>(value);
+        }
+        public int MaximumCount { get; set; }
+
         public MaximumNumberOfUnitsConstraint(IEnumerable<IUnit> unitSet, int maximumCount)
         {
             this.unitSet = new HashSet<IUnit>(unitSet);
-            this.maximumCount = maximumCount;
+            this.MaximumCount = maximumCount;
         }
 
         private bool Check(IEnumerable<IUnit>? unitsCompleted)
@@ -21,7 +27,7 @@
                 count = unitsCompleted.Intersect(unitSet).Count();
             }
 
-            return count <= maximumCount;
+            return count <= MaximumCount;
         }
 
         public bool Check(IEnumerable<IUnit>? unitsCompleted = null, IEnumerable<IUnit>? unitsEnrolled = null, IStream? enrolledStream = null, float currentWam = -1)

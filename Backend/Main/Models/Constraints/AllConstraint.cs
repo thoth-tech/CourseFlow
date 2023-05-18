@@ -5,16 +5,16 @@
     /// </summary>
     public class AllConstraint : IConstraint
     {
-        IEnumerable<IConstraint> constraints;
+        public IEnumerable<IConstraint> Constraints { get; set; }
 
         public AllConstraint(IEnumerable<IConstraint> constraints)
         {
-            this.constraints = constraints;
+            Constraints = constraints;
         }
 
         public bool Check(IEnumerable<IUnit>? unitsCompleted = null, IEnumerable<IUnit>? unitsEnrolled = null, IStream? enrolledStream = null, float currentWam = -1)
         {
-            foreach (IConstraint constraint in constraints)
+            foreach (IConstraint constraint in Constraints)
             {
                 if (!constraint.Check(unitsCompleted, unitsEnrolled, enrolledStream, currentWam))
                 { 
