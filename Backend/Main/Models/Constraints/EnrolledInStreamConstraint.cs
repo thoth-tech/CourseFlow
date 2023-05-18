@@ -5,16 +5,16 @@
     /// </summary>
     public class EnrolledInStreamConstraint : IConstraint
     {
-        public IStream Stream { get; set; }
+        public string StreamCode { get; set; }
 
-        public EnrolledInStreamConstraint(IStream stream)
+        public EnrolledInStreamConstraint(string streamCode)
         {
-            Stream = stream;
+            StreamCode = streamCode;
         }
 
         private bool Check(IStream? enrolledStream)
         {
-            return enrolledStream == Stream;
+            return enrolledStream != null && enrolledStream.Code == StreamCode;
         }
 
         public bool Check(IEnumerable<IUnit>? unitsCompleted = null, IEnumerable<IUnit>? unitsEnrolled = null, IStream? enrolledStream = null, float currentWam = -1)
