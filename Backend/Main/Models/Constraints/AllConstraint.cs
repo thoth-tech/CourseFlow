@@ -24,5 +24,13 @@
 
             return true;
         }
+
+        public override bool Equals(object? obj)
+        {
+            var other = obj as AllConstraint;
+            if (other == null) return false;
+
+            return Enumerable.SequenceEqual(Constraints.OrderBy(e => e.GetType().Name), other.Constraints.OrderBy(e => e.GetType().Name));
+        }
     }
 }

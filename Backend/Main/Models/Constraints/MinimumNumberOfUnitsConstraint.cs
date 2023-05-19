@@ -35,5 +35,13 @@
         {
             return Check(unitsCompleted);
         }
+
+        public override bool Equals(object? obj)
+        {
+            var other = obj as MinimumNumberOfUnitsConstraint;
+            if (other == null) return false;
+
+            return MinimumCount == other.MinimumCount && Enumerable.SequenceEqual(unitSet.OrderBy(e => e.GetType().Name), unitSet.OrderBy(e => e.GetType().Name));
+        }
     }
 }

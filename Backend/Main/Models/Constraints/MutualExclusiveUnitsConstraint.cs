@@ -37,5 +37,13 @@
         {
             return Check(unitsCompleted, unitsEnrolled);
         }
+
+        public override bool Equals(object? obj)
+        {
+            var other = obj as MutualExclusiveUnitsConstraint;
+            if (other == null) return false;
+
+            return Enumerable.SequenceEqual(incompatibleUnits.OrderBy(e => e.GetType().Name), incompatibleUnits.OrderBy(e => e.GetType().Name));
+        }
     }
 }

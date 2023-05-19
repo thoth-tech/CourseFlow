@@ -20,5 +20,12 @@
         {
             return Check(currentWam);
         }
+
+        public override bool Equals(object? obj)
+        {
+            MinimumWamConstraint? other = obj as MinimumWamConstraint;
+            if (other == null) return false;
+            return other.MinimumWam == MinimumWam;
+        }
     }
 }

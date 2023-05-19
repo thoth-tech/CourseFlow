@@ -26,5 +26,13 @@
         {
             return Check(unitsCompleted);
         }
+
+        public override bool Equals(object? obj)
+        {
+            var other = obj as PrerequisitesFulfilledConstraint;
+            if (other == null) return false;
+
+            return Enumerable.SequenceEqual(prerequisites.OrderBy(e => e.GetType().Name), prerequisites.OrderBy(e => e.GetType().Name));
+        }
     }
 }

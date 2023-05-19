@@ -34,5 +34,13 @@
         {
             return Check(unitsCompleted);
         }
+
+        public override bool Equals(object? obj)
+        {
+            var other = obj as MaximumNumberOfUnitsConstraint;
+            if (other == null) return false;
+
+            return MaximumCount == other.MaximumCount && Enumerable.SequenceEqual(unitSet.OrderBy(e => e.GetType().Name), unitSet.OrderBy(e => e.GetType().Name));
+        }
     }
 }
