@@ -21,5 +21,12 @@
         {
             return Check(enrolledStream);
         }
+
+        public override bool Equals(object? obj)
+        {
+            EnrolledInStreamConstraint? other = obj as EnrolledInStreamConstraint;
+            if (other == null) return false;
+            return other.StreamCode == StreamCode;
+        }
     }
 }

@@ -37,5 +37,13 @@
         {
             return Check(unitsCompleted, unitsEnrolled);
         }
+
+        public override bool Equals(object? obj)
+        {
+            var other = obj as CorequisitesFulfilledConstraint;
+            if (other == null) return false;
+
+            return Enumerable.SequenceEqual(corequisites.OrderBy(e => e.GetType().Name), corequisites.OrderBy(e => e.GetType().Name));
+        }
     }
 }
