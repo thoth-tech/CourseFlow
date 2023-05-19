@@ -2,6 +2,7 @@
 using CourseFlow.Backend.Models;
 using CourseFlow.Backend.Models.Constraints;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,12 +15,24 @@ namespace CourseFlow.Tests;
 public class ConstraintClassMapTests
 {
     [TestMethod]
+    public void deserialize_minimum_wam_constraint_document()
+    { 
+        BsonDocument document = new BsonDocument { new BsonElement("type", "minimum_wam"), new BsonElement("minimum_wam", 65.0) };
+
+        var expectedContents = new MinimumWamConstraint(65);
+        var actualContents = BsonSerializer.Deserialize<AbstractConstraint>(document);
+
+        Assert.IsInstanceOfType<MinimumWamConstraint>(actualContents);
+        Assert.AreEqual(expectedContents, actualContents);
+    }
+
+    [TestMethod]
     public void serialize_minimum_wam_constraint_to_bson()
     {
         MinimumWamConstraint constraint = new MinimumWamConstraint(65);
         BsonDocument document = constraint.ToBsonDocument();
 
-        string expectedContents = "{ \"minimum_wam\" : 65.0 }";
+        string expectedContents = "{ \"type\" : \"minimum_wam\", \"minimum_wam\" : 65.0 }";
         string actualContents = document.ToString();
         Assert.AreEqual(expectedContents, actualContents);
     }
