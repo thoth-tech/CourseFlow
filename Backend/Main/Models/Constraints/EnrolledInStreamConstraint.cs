@@ -3,7 +3,7 @@
     /// <summary>
     /// Fulfilled if the student is enrolled in the specified stream
     /// </summary>
-    public class EnrolledInStreamConstraint : IConstraint
+    public class EnrolledInStreamConstraint : AbstractConstraint
     {
         public string StreamCode { get; set; }
 
@@ -17,7 +17,7 @@
             return enrolledStream != null && enrolledStream.Code == StreamCode;
         }
 
-        public bool Check(IEnumerable<IUnit>? unitsCompleted = null, IEnumerable<IUnit>? unitsEnrolled = null, IStream? enrolledStream = null, float currentWam = -1)
+        public override bool Check(IEnumerable<IUnit>? unitsCompleted = null, IEnumerable<IUnit>? unitsEnrolled = null, IStream? enrolledStream = null, float currentWam = -1)
         {
             return Check(enrolledStream);
         }

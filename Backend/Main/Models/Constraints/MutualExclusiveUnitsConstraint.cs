@@ -3,7 +3,7 @@
     /// <summary>
     /// Fulfilled if none of the units from a pre-defined set of units has been completed or is being completed
     /// </summary>
-    public class MutualExclusiveUnitsConstraint : IConstraint
+    public class MutualExclusiveUnitsConstraint : AbstractConstraint
     {
         private HashSet<IUnit> incompatibleUnits;
         public IEnumerable<IUnit> IncompatibleUnits
@@ -33,7 +33,7 @@
             return incompatibleUnits.Intersect(unitsCompletedOrEnrolled).Count() == 0;
         }
 
-        public bool Check(IEnumerable<IUnit>? unitsCompleted = null, IEnumerable<IUnit>? unitsEnrolled = null, IStream? enrolledStream = null, float currentWam = -1)
+        public override bool Check(IEnumerable<IUnit>? unitsCompleted = null, IEnumerable<IUnit>? unitsEnrolled = null, IStream? enrolledStream = null, float currentWam = -1)
         {
             return Check(unitsCompleted, unitsEnrolled);
         }

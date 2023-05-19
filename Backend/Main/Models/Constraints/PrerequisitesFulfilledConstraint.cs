@@ -3,7 +3,7 @@
     /// <summary>
     /// Fulfilled when all the units from a pre-defined set of units has been completed
     /// </summary>
-    public class PrerequisitesFulfilledConstraint : IConstraint
+    public class PrerequisitesFulfilledConstraint : AbstractConstraint
     {
         private HashSet<IUnit> prerequisites;
         public IEnumerable<IUnit> Prerequisites 
@@ -22,7 +22,7 @@
             return unitsCompleted != null && prerequisites.IsSubsetOf(unitsCompleted);
         }
 
-        public bool Check(IEnumerable<IUnit>? unitsCompleted = null, IEnumerable<IUnit>? unitsEnrolled = null, IStream? enrolledStream = null, float currentWam = -1)
+        public override bool Check(IEnumerable<IUnit>? unitsCompleted = null, IEnumerable<IUnit>? unitsEnrolled = null, IStream? enrolledStream = null, float currentWam = -1)
         {
             return Check(unitsCompleted);
         }

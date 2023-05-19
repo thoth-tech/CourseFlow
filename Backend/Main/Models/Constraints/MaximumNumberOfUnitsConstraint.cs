@@ -3,7 +3,7 @@
     /// <summary>
     /// Fulfilled if the number of units completed from a pre-defined set of units does not exceed the maximum allowed
     /// </summary>
-    public class MaximumNumberOfUnitsConstraint : IConstraint
+    public class MaximumNumberOfUnitsConstraint : AbstractConstraint
     {
         private HashSet<IUnit> unitSet;
         public IEnumerable<IUnit> UnitSet
@@ -30,7 +30,7 @@
             return count <= MaximumCount;
         }
 
-        public bool Check(IEnumerable<IUnit>? unitsCompleted = null, IEnumerable<IUnit>? unitsEnrolled = null, IStream? enrolledStream = null, float currentWam = -1)
+        public override bool Check(IEnumerable<IUnit>? unitsCompleted = null, IEnumerable<IUnit>? unitsEnrolled = null, IStream? enrolledStream = null, float currentWam = -1)
         {
             return Check(unitsCompleted);
         }

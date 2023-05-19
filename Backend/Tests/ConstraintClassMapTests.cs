@@ -27,7 +27,7 @@ public class ConstraintClassMapTests
     [TestMethod]
     public void serialize_all_constraint_to_bson()
     {
-        AllConstraint constraint = new AllConstraint(new List<IConstraint> 
+        AllConstraint constraint = new AllConstraint(new List<AbstractConstraint> 
         {
             new PrerequisitesFulfilledConstraint(MockupUnitSets.SetA),
             new CorequisitesFulfilledConstraint(MockupUnitSets.SetD),
@@ -43,7 +43,7 @@ public class ConstraintClassMapTests
     [TestMethod]
     public void serialize_any_constraint_to_bson()
     {
-        AnyConstraint constraint = new AnyConstraint(new List<IConstraint> 
+        AnyConstraint constraint = new AnyConstraint(new List<AbstractConstraint> 
         {
             new PrerequisitesFulfilledConstraint(MockupUnitSets.SetA),
             new CorequisitesFulfilledConstraint(MockupUnitSets.SetD),

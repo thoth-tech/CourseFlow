@@ -3,7 +3,7 @@
     /// <summary>
     /// Fulfilled when a minimum number of units is completed from a pre-defined set of units
     /// </summary>
-    public class MinimumNumberOfUnitsConstraint : IConstraint
+    public class MinimumNumberOfUnitsConstraint : AbstractConstraint
     {
         private HashSet<IUnit> unitSet;
         public IEnumerable<IUnit> UnitSet
@@ -31,7 +31,7 @@
             return count >= MinimumCount;
         }
 
-        public bool Check(IEnumerable<IUnit>? unitsCompleted = null, IEnumerable<IUnit>? unitsEnrolled = null, IStream? enrolledStream = null, float currentWam = -1)
+        public override bool Check(IEnumerable<IUnit>? unitsCompleted = null, IEnumerable<IUnit>? unitsEnrolled = null, IStream? enrolledStream = null, float currentWam = -1)
         {
             return Check(unitsCompleted);
         }

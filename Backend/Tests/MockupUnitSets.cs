@@ -18,11 +18,11 @@ public static class MockupUnitSets
         get
         { 
             return new List<Unit> {
-                new Unit("TST1", "EXAMPLE_UNIT_1", "...", new List<IConstraint>(), false),
-                new Unit("TST2", "EXAMPLE_UNIT_2", "...", new List<IConstraint>(), false),
-                new Unit("TST3", "EXAMPLE_UNIT_3", "...", new List<IConstraint>(), false),
-                new Unit("TST4", "EXAMPLE_UNIT_4", "...", new List<IConstraint>(), false),
-                new Unit("TST5", "EXAMPLE_UNIT_5", "...", new List<IConstraint>(), false)
+                new Unit("TST1", "EXAMPLE_UNIT_1", "...", new List<AbstractConstraint>(), false),
+                new Unit("TST2", "EXAMPLE_UNIT_2", "...", new List<AbstractConstraint>(), false),
+                new Unit("TST3", "EXAMPLE_UNIT_3", "...", new List<AbstractConstraint>(), false),
+                new Unit("TST4", "EXAMPLE_UNIT_4", "...", new List<AbstractConstraint>(), false),
+                new Unit("TST5", "EXAMPLE_UNIT_5", "...", new List<AbstractConstraint>(), false)
             };
         }
     }
@@ -35,10 +35,10 @@ public static class MockupUnitSets
         get
         {
             return new List<Unit> {
-                new Unit("TST4", "EXAMPLE_UNIT_4", "...", new List<IConstraint>(), false),
-                new Unit("TST5", "EXAMPLE_UNIT_5", "...", new List<IConstraint>(), false),
-                new Unit("TST6", "EXAMPLE_UNIT_6", "...", new List<IConstraint>(), false),
-                new Unit("TST7", "EXAMPLE_UNIT_7", "...", new List<IConstraint>(), false)
+                new Unit("TST4", "EXAMPLE_UNIT_4", "...", new List<AbstractConstraint>(), false),
+                new Unit("TST5", "EXAMPLE_UNIT_5", "...", new List<AbstractConstraint>(), false),
+                new Unit("TST6", "EXAMPLE_UNIT_6", "...", new List<AbstractConstraint>(), false),
+                new Unit("TST7", "EXAMPLE_UNIT_7", "...", new List<AbstractConstraint>(), false)
             };
         }
     }
@@ -51,16 +51,16 @@ public static class MockupUnitSets
         get
         {
             return new List<Unit> {
-                new Unit("TST1", "EXAMPLE_UNIT_1", "...", new List<IConstraint>(), false),
-                new Unit("TST2", "EXAMPLE_UNIT_2", "...", new List<IConstraint>(), false),
-                new Unit("TST3", "EXAMPLE_UNIT_3", "...", new List<IConstraint>(), false),
-                new Unit("TST4", "EXAMPLE_UNIT_4", "...", new List<IConstraint>(), false),
-                new Unit("TST5", "EXAMPLE_UNIT_5", "...", new List<IConstraint>(), false),
-                new Unit("TST6", "EXAMPLE_UNIT_6", "...", new List<IConstraint>(), false),
-                new Unit("TST7", "EXAMPLE_UNIT_7", "...", new List<IConstraint>(), false),
-                new Unit("TST8", "EXAMPLE_UNIT_8", "...", new List<IConstraint>(), false),
-                new Unit("TST9", "EXAMPLE_UNIT_9", "...", new List<IConstraint>(), false),
-                new Unit("TST10", "EXAMPLE_UNIT_10", "...", new List<IConstraint>(), false),
+                new Unit("TST1", "EXAMPLE_UNIT_1", "...", new List<AbstractConstraint>(), false),
+                new Unit("TST2", "EXAMPLE_UNIT_2", "...", new List<AbstractConstraint>(), false),
+                new Unit("TST3", "EXAMPLE_UNIT_3", "...", new List<AbstractConstraint>(), false),
+                new Unit("TST4", "EXAMPLE_UNIT_4", "...", new List<AbstractConstraint>(), false),
+                new Unit("TST5", "EXAMPLE_UNIT_5", "...", new List<AbstractConstraint>(), false),
+                new Unit("TST6", "EXAMPLE_UNIT_6", "...", new List<AbstractConstraint>(), false),
+                new Unit("TST7", "EXAMPLE_UNIT_7", "...", new List<AbstractConstraint>(), false),
+                new Unit("TST8", "EXAMPLE_UNIT_8", "...", new List<AbstractConstraint>(), false),
+                new Unit("TST9", "EXAMPLE_UNIT_9", "...", new List<AbstractConstraint>(), false),
+                new Unit("TST10", "EXAMPLE_UNIT_10", "...", new List<AbstractConstraint>(), false),
             };
         }
     }
@@ -73,11 +73,11 @@ public static class MockupUnitSets
         get
         {
             return new List<Unit> {
-                new Unit("TST6", "EXAMPLE_UNIT_6", "...", new List<IConstraint>(), false),
-                new Unit("TST7", "EXAMPLE_UNIT_7", "...", new List<IConstraint>(), false),
-                new Unit("TST8", "EXAMPLE_UNIT_8", "...", new List<IConstraint>(), false),
-                new Unit("TST9", "EXAMPLE_UNIT_9", "...", new List<IConstraint>(), false),
-                new Unit("TST10", "EXAMPLE_UNIT_10", "...", new List<IConstraint>(), false),
+                new Unit("TST6", "EXAMPLE_UNIT_6", "...", new List<AbstractConstraint>(), false),
+                new Unit("TST7", "EXAMPLE_UNIT_7", "...", new List<AbstractConstraint>(), false),
+                new Unit("TST8", "EXAMPLE_UNIT_8", "...", new List<AbstractConstraint>(), false),
+                new Unit("TST9", "EXAMPLE_UNIT_9", "...", new List<AbstractConstraint>(), false),
+                new Unit("TST10", "EXAMPLE_UNIT_10", "...", new List<AbstractConstraint>(), false),
             };
         }
     }

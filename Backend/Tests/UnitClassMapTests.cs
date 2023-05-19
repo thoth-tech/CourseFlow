@@ -30,7 +30,7 @@ public class UnitClassMapTests
         unit.Code = "TST123";
         unit.Title = "TEST_UNIT";
         unit.Description = "description ...";
-        unit.Constraints = new List<IConstraint> { };
+        unit.Constraints = new List<AbstractConstraint> { };
 
         BsonDocument document = unit.ToBsonDocument();
 
