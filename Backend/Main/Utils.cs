@@ -83,6 +83,18 @@ namespace CourseFlow.Backend
     {
         public static void RegisterBsonClassMaps()
         {
+            IDiscriminatorConvention convention = new ConstraintDiscriminatorConvention()
+                .RegisterDiscriminator<AllConstraint>("pass_all")
+                .RegisterDiscriminator<AnyConstraint>("pass_any")
+                .RegisterDiscriminator<CorequisitesFulfilledConstraint>("corequisites")
+                .RegisterDiscriminator<EnrolledInStreamConstraint>("stream_enrollment")
+                .RegisterDiscriminator<MaximumNumberOfUnitsConstraint>("max_units")
+                .RegisterDiscriminator<MinimumNumberOfUnitsConstraint>("min_units")
+                .RegisterDiscriminator<MinimumWamConstraint>("minimum_wam")
+                .RegisterDiscriminator<MutualExclusiveUnitsConstraint>("mutually_exclusive_units")
+                .RegisterDiscriminator<PrerequisitesFulfilledConstraint>("prerequisites");
+            BsonSerializer.RegisterDiscriminatorConvention(typeof(AbstractConstraint), convention);
+
             // Fixes issue outlined at https://medium.com/it-dead-inside/net-mongodb-driver-2-19-breaking-serialization-errors-b456134a1a2d
             var objectSerializer = new ObjectSerializer(type => 
             ObjectSerializer.DefaultAllowedTypes(type)
@@ -98,52 +110,63 @@ namespace CourseFlow.Backend
                 cm.MapProperty(c => c.IsDiscontinued).SetElementName("name");
             });
 
+            BsonClassMap.RegisterClassMap<AbstractConstraint>();
+
             // todo: Add discriminators to classmap definitions so that we can serialize documents to correct format and deserialize documents to correct object type
             BsonClassMap.RegisterClassMap<AllConstraint>(cm =>
             {
                 cm.MapProperty(c => c.Constraints).SetElementName("constraints");
+                cm.SetDiscriminatorIsRequired(true);
             });
 
             BsonClassMap.RegisterClassMap<AnyConstraint>(cm =>
             {
                 cm.MapProperty(c => c.Constraints).SetElementName("constraints");
+                cm.SetDiscriminatorIsRequired(true);
             });
 
             BsonClassMap.RegisterClassMap<CorequisitesFulfilledConstraint>(cm =>
             {
                 cm.MapProperty(c => c.Corequisites).SetElementName("units");
+                cm.SetDiscriminatorIsRequired(true);
             });
 
             BsonClassMap.RegisterClassMap<EnrolledInStreamConstraint>(cm =>
             {
                 cm.MapProperty(c => c.StreamCode).SetElementName("stream_code");
+                cm.SetDiscriminatorIsRequired(true);
             });
 
             BsonClassMap.RegisterClassMap<MaximumNumberOfUnitsConstraint>(cm =>
             {
                 cm.MapProperty(c => c.UnitSet).SetElementName("units");
                 cm.MapProperty(c => c.MaximumCount).SetElementName("max_units");
+                cm.SetDiscriminatorIsRequired(true);
             });
 
             BsonClassMap.RegisterClassMap<MinimumNumberOfUnitsConstraint>(cm =>
             {
                 cm.MapProperty(c => c.UnitSet).SetElementName("units");
                 cm.MapProperty(c => c.MinimumCount).SetElementName("min_units");
+                cm.SetDiscriminatorIsRequired(true);
             });
 
             BsonClassMap.RegisterClassMap<MinimumWamConstraint>(cm =>
             {
                 cm.MapProperty(c => c.MinimumWam).SetElementName("minimum_wam");
+                cm.SetDiscriminatorIsRequired(true);
             });
 
             BsonClassMap.RegisterClassMap<MutualExclusiveUnitsConstraint>(cm =>
             {
                 cm.MapProperty(c => c.IncompatibleUnits).SetElementName("units");
+                cm.SetDiscriminatorIsRequired(true);
             });
 
             BsonClassMap.RegisterClassMap<PrerequisitesFulfilledConstraint>(cm =>
             {
                 cm.MapProperty(c => c.Prerequisites).SetElementName("units");
+                cm.SetDiscriminatorIsRequired(true);
             });
         }
 
