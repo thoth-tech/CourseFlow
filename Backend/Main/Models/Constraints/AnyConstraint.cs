@@ -3,18 +3,18 @@
     /// <summary>
     /// Fulfilled if any component constraints are met
     /// </summary>
-    public class AnyConstraint : IConstraint
+    public class AnyConstraint : AbstractConstraint
     {
-        public IEnumerable<IConstraint> Constraints { get; set; }
+        public IEnumerable<AbstractConstraint> Constraints { get; set; }
 
-        public AnyConstraint(IEnumerable<IConstraint> constraints)
+        public AnyConstraint(IEnumerable<AbstractConstraint> constraints)
         {
             Constraints = constraints;
         }
 
-        public bool Check(IEnumerable<IUnit>? unitsCompleted = null, IEnumerable<IUnit>? unitsEnrolled = null, IStream? enrolledStream = null, float currentWam = -1)
+        public override bool Check(IEnumerable<IUnit>? unitsCompleted = null, IEnumerable<IUnit>? unitsEnrolled = null, IStream? enrolledStream = null, float currentWam = -1)
         {
-            foreach (IConstraint constraint in Constraints)
+            foreach (AbstractConstraint constraint in Constraints)
             {
                 if (constraint.Check(unitsCompleted, unitsEnrolled, enrolledStream, currentWam))
                 {

@@ -6,6 +6,6 @@ namespace CourseFlow.Backend.Models
     {
         public string Code { get; set; }
         public string HandbookUrl { get; set; }
-        public IEnumerable<IConstraint> Constraints { get; set; }
+        public IEnumerable<AbstractConstraint> Constraints { get; set; }
     }
 }

@@ -8,12 +8,12 @@ namespace CourseFlow.Backend.Models
         public string Code { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public IEnumerable<IConstraint> Constraints { get; set; }
+        public IEnumerable<AbstractConstraint> Constraints { get; set; }
         public bool IsDiscontinued { get; set; }
 
-        public Unit() : this($"DEFAULT_CODE_{id}", $"DEFAULT_TITLE_{id}", "", new List<IConstraint>(), false) { }
+        public Unit() : this($"DEFAULT_CODE_{id}", $"DEFAULT_TITLE_{id}", "", new List<AbstractConstraint>(), false) { }
 
-        public Unit(string code, string title, string description, IEnumerable<IConstraint> constraints, bool isDiscontinued)
+        public Unit(string code, string title, string description, IEnumerable<AbstractConstraint> constraints, bool isDiscontinued)
         {
             Code = code;
             Title = title;

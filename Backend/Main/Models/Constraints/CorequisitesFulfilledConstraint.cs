@@ -3,7 +3,7 @@
     /// <summary>
     /// Fulfilled when all the units from a pre-defined set of units has been completed or is being completed
     /// </summary>
-    public class CorequisitesFulfilledConstraint : IConstraint
+    public class CorequisitesFulfilledConstraint : AbstractConstraint
     {
         private HashSet<IUnit> corequisites;
         public IEnumerable<IUnit> Corequisites
@@ -33,7 +33,7 @@
             return corequisites.IsSubsetOf(unitsCompletedOrEnrolled);
         }
 
-        public bool Check(IEnumerable<IUnit>? unitsCompleted = null, IEnumerable<IUnit>? unitsEnrolled = null, IStream? enrolledStream = null, float currentWam = -1)
+        public override bool Check(IEnumerable<IUnit>? unitsCompleted = null, IEnumerable<IUnit>? unitsEnrolled = null, IStream? enrolledStream = null, float currentWam = -1)
         {
             return Check(unitsCompleted, unitsEnrolled);
         }

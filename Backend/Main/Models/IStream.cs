@@ -14,6 +14,6 @@ namespace CourseFlow.Backend.Models
         /// <summary>
         /// Array of constraint objects that describe the rules for completing this stream
         /// </summary>
-        IEnumerable<IConstraint> Constraints { get; set; }
+        IEnumerable<AbstractConstraint> Constraints { get; set; }
     }
 }

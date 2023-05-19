@@ -7,7 +7,7 @@ namespace CourseFlow.Backend.Models
         string Code { get; set; }
         string Title { get; set; }
         string Description { get; set; }
-        IEnumerable<IConstraint> Constraints { get; set; }
+        IEnumerable<AbstractConstraint> Constraints { get; set; }
         bool IsDiscontinued { get; set; }
     }
 }

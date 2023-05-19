@@ -3,7 +3,7 @@
     /// <summary>
     /// Fulfilled if the student has the minimum amount of WAM
     /// </summary>
-    public class MinimumWamConstraint : IConstraint
+    public class MinimumWamConstraint : AbstractConstraint
     {
         public float MinimumWam { get; set; }
         public MinimumWamConstraint(float minimumWam)
@@ -16,7 +16,7 @@
             return currentWam >= MinimumWam;
         }
 
-        public bool Check(IEnumerable<IUnit>? unitsCompleted = null, IEnumerable<IUnit>? unitsEnrolled = null, IStream? enrolledStream = null, float currentWam = -1)
+        public override bool Check(IEnumerable<IUnit>? unitsCompleted = null, IEnumerable<IUnit>? unitsEnrolled = null, IStream? enrolledStream = null, float currentWam = -1)
         {
             return Check(currentWam);
         }
