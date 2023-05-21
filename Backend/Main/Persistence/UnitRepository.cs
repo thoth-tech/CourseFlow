@@ -23,17 +23,17 @@ namespace CourseFlow.Backend.Persistence
             throw new NotImplementedException();
         }
 
-        public void DeleteUnit(string unit_code)
+        public void DeleteUnit(string unitCode)
         {
             throw new NotImplementedException();
         }
 
-        public IUnit GetUnitByCode(string unit_code)
+        public IUnit GetUnitByCode(string unitCode)
         {
             throw new NotImplementedException();
         }
 
-        public void UpdateUnit(string unit_code, IUnit unit)
+        public void UpdateUnit(string unitCode, IUnit updatedUnit)
         {
             throw new NotImplementedException();
         }
