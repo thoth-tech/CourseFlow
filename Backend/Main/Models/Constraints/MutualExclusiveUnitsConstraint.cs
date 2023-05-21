@@ -1,49 +1,48 @@
-﻿namespace CourseFlow.Backend.Models.Constraints
+﻿namespace CourseFlow.Backend.Models.Constraints;
+
+/// <summary>
+/// Fulfilled if none of the units from a pre-defined set of units has been completed or is being completed
+/// </summary>
+public class MutualExclusiveUnitsConstraint : AbstractConstraint
 {
-    /// <summary>
-    /// Fulfilled if none of the units from a pre-defined set of units has been completed or is being completed
-    /// </summary>
-    public class MutualExclusiveUnitsConstraint : AbstractConstraint
+    private HashSet<IUnit> incompatibleUnits;
+    public IEnumerable<IUnit> IncompatibleUnits
     {
-        private HashSet<IUnit> incompatibleUnits;
-        public IEnumerable<IUnit> IncompatibleUnits
+        get => incompatibleUnits;
+        set => incompatibleUnits = new HashSet<IUnit>(value);
+    }
+
+    public MutualExclusiveUnitsConstraint(IEnumerable<IUnit> incompatibleUnits)
+    {
+        this.incompatibleUnits = new HashSet<IUnit>(incompatibleUnits);
+    }
+
+    private bool Check(IEnumerable<IUnit>? unitsCompleted, IEnumerable<IUnit>? unitsEnrolled)
+    {
+        HashSet<IUnit> unitsCompletedOrEnrolled = new HashSet<IUnit>();
+
+        if (unitsCompleted != null)
         {
-            get => incompatibleUnits;
-            set => incompatibleUnits = new HashSet<IUnit>(value);
+            unitsCompletedOrEnrolled.UnionWith(unitsCompleted);
+        }
+        if (unitsEnrolled != null)
+        {
+            unitsCompletedOrEnrolled.UnionWith(unitsEnrolled);
         }
 
-        public MutualExclusiveUnitsConstraint(IEnumerable<IUnit> incompatibleUnits)
-        {
-            this.incompatibleUnits = new HashSet<IUnit>(incompatibleUnits);
-        }
+        return incompatibleUnits.Intersect(unitsCompletedOrEnrolled).Count() == 0;
+    }
 
-        private bool Check(IEnumerable<IUnit>? unitsCompleted, IEnumerable<IUnit>? unitsEnrolled)
-        {
-            HashSet<IUnit> unitsCompletedOrEnrolled = new HashSet<IUnit>();
+    public override bool Check(IEnumerable<IUnit>? unitsCompleted = null, IEnumerable<IUnit>? unitsEnrolled = null, IStream? enrolledStream = null, float currentWam = -1)
+    {
+        return Check(unitsCompleted, unitsEnrolled);
+    }
 
-            if (unitsCompleted != null)
-            {
-                unitsCompletedOrEnrolled.UnionWith(unitsCompleted);
-            }
-            if (unitsEnrolled != null)
-            {
-                unitsCompletedOrEnrolled.UnionWith(unitsEnrolled);
-            }
+    public override bool Equals(object? obj)
+    {
+        var other = obj as MutualExclusiveUnitsConstraint;
+        if (other == null) return false;
 
-            return incompatibleUnits.Intersect(unitsCompletedOrEnrolled).Count() == 0;
-        }
-
-        public override bool Check(IEnumerable<IUnit>? unitsCompleted = null, IEnumerable<IUnit>? unitsEnrolled = null, IStream? enrolledStream = null, float currentWam = -1)
-        {
-            return Check(unitsCompleted, unitsEnrolled);
-        }
-
-        public override bool Equals(object? obj)
-        {
-            var other = obj as MutualExclusiveUnitsConstraint;
-            if (other == null) return false;
-
-            return Enumerable.SequenceEqual(incompatibleUnits.OrderBy(e => e.GetType().Name), incompatibleUnits.OrderBy(e => e.GetType().Name));
-        }
+        return Enumerable.SequenceEqual(incompatibleUnits.OrderBy(e => e.GetType().Name), incompatibleUnits.OrderBy(e => e.GetType().Name));
     }
 }
