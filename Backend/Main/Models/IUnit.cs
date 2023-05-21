@@ -1,13 +1,12 @@
 ﻿using CourseFlow.Backend.Models.Constraints;
 
-namespace CourseFlow.Backend.Models
+namespace CourseFlow.Backend.Models;
+
+public interface IUnit
 {
-    public interface IUnit
-    {
-        string Code { get; set; }
-        string Title { get; set; }
-        string Description { get; set; }
-        IEnumerable<AbstractConstraint> Constraints { get; set; }
-        bool IsDiscontinued { get; set; }
-    }
+    string Code { get; set; }
+    string Title { get; set; }
+    string Description { get; set; }
+    IEnumerable<AbstractConstraint> Constraints { get; set; }
+    bool IsDiscontinued { get; set; }
 }
