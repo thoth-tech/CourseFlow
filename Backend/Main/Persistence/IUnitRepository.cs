@@ -6,8 +6,8 @@ namespace CourseFlow.Backend.Persistence
     {
         void AddUnit(IUnit unit);
         void AddMultipleUnits(IEnumerable<IUnit> units);
-        IUnit GetUnitByCode(string unit_code);
-        void UpdateUnit(string unit_code, IUnit unit);
-        void DeleteUnit(string unit_code);
+        IUnit GetUnitByCode(string unitCode);
+        void UpdateUnit(string unitCode, IUnit updatedUnit);
+        void DeleteUnit(string unitCode);
     }
 }
