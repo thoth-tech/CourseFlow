@@ -14,6 +14,19 @@ namespace CourseFlow.Tests;
 [TestClass]
 public class ConstraintClassMapTests
 {
+    // todo: Write deserializer tests for every other constraint type
+    [TestMethod]
+    public void deserialize_enrolled_in_stream_constraint()
+    {
+        BsonDocument document = new BsonDocument { new BsonElement("type", "stream_enrollment"), new BsonElement("stream_code", "TEST_STREAM_1") };
+
+        var expectedContents = new EnrolledInStreamConstraint("TEST_STREAM_1");
+        var actualContents = BsonSerializer.Deserialize<AbstractConstraint>(document);
+
+        Assert.IsInstanceOfType<EnrolledInStreamConstraint>(actualContents);
+        Assert.AreEqual(expectedContents, actualContents);
+    }
+
     [TestMethod]
     public void deserialize_minimum_wam_constraint_document()
     { 
