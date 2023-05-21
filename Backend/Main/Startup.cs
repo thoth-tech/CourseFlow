@@ -1,5 +1,12 @@
+using CourseFlow.Backend;
 using CourseFlow.Backend.Models;
 using MongoDB.Bson.Serialization;
+
+//
+// Configure MongoDB drivers
+//
+
+Utils.RegisterBsonClassMaps();
 
 //
 // Configure ASP.NET
