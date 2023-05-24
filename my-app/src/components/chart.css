@@ -1,9 +1,10 @@
 .Chart {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   text-align: center;
+  flex-wrap: wrap;
 }
 
 .graph-container {
@@ -19,5 +20,5 @@
 
 .graph2 {
   flex: 1;
-  margin-left: 20px;
+  width: auto;
 }

@@ -2,6 +2,7 @@
     background-color: #333;
     color: #fff;
     padding: 15px 0;
+    max-width: 100%;
   }
   
   .container {
@@ -14,8 +15,19 @@
   }
   
   .logo {
-    font-size: 24px;
-    margin: 0;
+    background-image: url("../img/logo.png");
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: cover; /* Adjust the size as needed */
+    width: 30px;
+    height: 30px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+
+  .navbar {
+    margin-right: auto;
   }
   
   .navbar-menu {
@@ -34,5 +46,20 @@
   
   .navbar-menu a:hover {
     text-decoration: underline;
+  }
+  
+  .profile-button {
+    background-image: url("../img/signup-icon.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover; /* Adjust the size as needed */
+    width: 30px;
+    height: 30px;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    color: #ffffff;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
   }
   
