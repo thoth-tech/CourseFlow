@@ -1,0 +1,20 @@
+.discovery-page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.discovery-page-container h2 {
+    font-size: 60pt;
+}
+
+.discovery-page-container h3 {
+    font-size: 20pt;
+}
+
+.discovery-page-navigation {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+}
