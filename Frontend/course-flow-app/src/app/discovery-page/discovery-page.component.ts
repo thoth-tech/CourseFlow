@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./discovery-page.component.css']
 })
 export class DiscoveryPageComponent {
-
+  
+  // The map type to display
+  mapType = "force-directed";
 }

@@ -1,8 +1,13 @@
 <div>
-    <h1>Discovery Page</h1>
-    
+    <h2>Discovery Page</h2>
+
     <div>
-        <app-discovery-force-directed-map/>
+        <button  (click)="mapType = 'force-directed'">Force Directed Map</button>
+        <button  (click)="mapType = 'cluster'">Cluster Map</button>
+    </div>
+
+    <div [ngSwitch]="mapType">
+        <app-discovery-force-directed-map *ngSwitchCase="'force-directed'"/>
     </div>
 </div>
 
