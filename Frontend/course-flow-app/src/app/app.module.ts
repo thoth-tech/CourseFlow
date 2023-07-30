@@ -4,11 +4,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DiscoveryPageComponent } from './discovery-page/discovery-page.component';
+import { DiscoveryForceDirectedMapComponent } from './discovery-force-directed-map/discovery-force-directed-map.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DiscoveryPageComponent
+    DiscoveryPageComponent,
+    DiscoveryForceDirectedMapComponent
   ],
   imports: [
     BrowserModule,
