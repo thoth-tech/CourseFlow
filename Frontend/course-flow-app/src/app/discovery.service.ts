@@ -67,7 +67,7 @@ export class DiscoveryService {
     {source: "SLE214", target: "Chemistry", lineLabelType: "Unit"},
   ]
 
-  colorMapping : DiscoveryColorData = {
+  discoveryColorMapping : DiscoveryColorData = {
     0: "#1d192b",
     1: "#484458",
     2: "#e8def8",
@@ -81,5 +81,9 @@ export class DiscoveryService {
   
   getAllDiscoveryLinkData(): DiscoveryLinkData[] {
     return this.discoveryLinksData;
+  }
+
+  getDiscoveryColorMapping(): DiscoveryColorData {
+    return this.discoveryColorMapping;
   }
 }

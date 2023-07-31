@@ -1,4 +1,6 @@
 import { Component, HostListener } from '@angular/core';
+import { DiscoveryService } from '../discovery.service';
+import { DiscoveryNodeData, DiscoveryLinkData, DiscoveryColorData} from '../discoveryInterfaces';
 import * as d3 from "d3";
 
 @Component({
@@ -38,12 +40,30 @@ export class DiscoveryForceDirectedMapComponent {
   private minZoom = 0;
   private maxZoom = 10;
 
+  // Discovery data
+  discoveryNodesData: DiscoveryNodeData[] = [];
+  discoveryLinksData: DiscoveryLinkData[] = [];
+  discoveryColorData: DiscoveryColorData = Object();
+
+  /**
+   * Constructor for the component.
+   * @param discoveryService Injected discovery service
+   */
+  constructor(private discoveryService: DiscoveryService) {}
 
   /**
    * Called after component is created.
    */
   ngOnInit(): void {
 
+    // Retrieve the data
+    this.discoveryNodesData = this.discoveryService.getAllDiscoveryNodeData();
+    this.discoveryLinksData = this.discoveryService.getAllDiscoveryLinkData();
+    this.discoveryColorData = this.discoveryService.getDiscoveryColorMapping();
+
+    console.log(this.discoveryColorData);
+
+    // Once we get the data, we can start creating the force directed map.
     this.preCreateDiscoveryForceDirectedMap();
   }
 
@@ -86,7 +106,7 @@ export class DiscoveryForceDirectedMapComponent {
    * Core logic to create the force directed discovery map.
    */
   createDiscoveryForceDirectedMap(): void {
-    
+
     // In case we already have a svg element (can happen on window resize events)
     d3.select("svg").remove();
 
