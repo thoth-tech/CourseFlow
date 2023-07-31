@@ -86,7 +86,7 @@ export class DiscoveryForceDirectedMapComponent {
    * Core logic to create the force directed discovery map.
    */
   createDiscoveryForceDirectedMap(): void {
-
+    
     // In case we already have a svg element (can happen on window resize events)
     d3.select("svg").remove();
 
