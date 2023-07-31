@@ -56,12 +56,10 @@ export class DiscoveryForceDirectedMapComponent {
    */
   ngOnInit(): void {
 
-    // Retrieve the data
+    // Retrieve the data - TODO This data retrieval in NOT async, this will need to be changed once proper data format is fully sorted.
     this.discoveryNodesData = this.discoveryService.getAllDiscoveryNodeData();
     this.discoveryLinksData = this.discoveryService.getAllDiscoveryLinkData();
     this.discoveryColorData = this.discoveryService.getDiscoveryColorMapping();
-
-    console.log(this.discoveryColorData);
 
     // Once we get the data, we can start creating the force directed map.
     this.preCreateDiscoveryForceDirectedMap();
