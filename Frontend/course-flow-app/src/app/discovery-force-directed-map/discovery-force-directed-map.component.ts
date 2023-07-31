@@ -77,6 +77,7 @@ export class DiscoveryForceDirectedMapComponent {
 
   /**
    * Handles pre-configurations prior to calling createDiscoveryForceDirectedMap().
+   * TODO Need to optimize this, this is essentially going to re-create the svg everytime the browser's size changes.
    */
   preCreateDiscoveryForceDirectedMap() : void {
     
