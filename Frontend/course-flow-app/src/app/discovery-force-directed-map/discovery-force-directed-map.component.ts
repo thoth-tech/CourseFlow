@@ -39,8 +39,8 @@ export class DiscoveryForceDirectedMapComponent {
     "large": {
       "width": 1200,
       "height": 1200,
-      "nodeDistance": 120,
-      "clusterForce": -120,
+      "nodeDistance": 140,
+      "clusterForce": -250,
       "fieldNodeRadius": 50,
       "specializationNodeRadius": 25,
       "unitNodeRadius": 12.5,
@@ -54,17 +54,17 @@ export class DiscoveryForceDirectedMapComponent {
   private canvasBorderRadius = "20px";
   private lineOpacity = 0.2;
   private unitLabelProperties: LabelProperties = {
-    x: 10,
+    x: 15,
     y: 0,
     fontSize: "3pt"
   }
   private specializationLabelProperties: LabelProperties = {
-    x: 20,
+    x: 30,
     y: 0,
-    fontSize: "8pt"
+    fontSize: "6pt"
   }
   private fieldLabelProperties: LabelProperties = {
-    x: 40,
+    x: 60,
     y: 0,
     fontSize: "15pt"
   }
@@ -97,8 +97,8 @@ export class DiscoveryForceDirectedMapComponent {
   ngOnInit(): void {
 
     // Retrieve the data - TODO This data retrieval in NOT async, this will need to be changed once proper data format is fully sorted.
-    this.discoveryNodesData = this.discoveryService.getAllDiscoveryNodeData();
-    this.discoveryLinksData = this.discoveryService.getAllDiscoveryLinkData();
+    this.discoveryNodesData = this.discoveryService.getAllDiscoveryForceDirectedNodeData();
+    this.discoveryLinksData = this.discoveryService.getAllDiscoveryForceDirectedLinkData();
     this.discoveryColorData = this.discoveryService.getDiscoveryColorMapping();
 
     // Once we get the data, we can start creating the force directed map.
@@ -117,7 +117,6 @@ export class DiscoveryForceDirectedMapComponent {
 
   /**
    * Handles pre-configurations prior to calling createDiscoveryForceDirectedMap().
-   * TODO Need to optimize this, this is essentially going to re-create the svg everytime the browser's size changes.
    */
   preCreateDiscoveryForceDirectedMap() : void {
     
@@ -201,13 +200,13 @@ export class DiscoveryForceDirectedMapComponent {
       .scaleExtent([this.minZoom, this.maxZoom])
       .on("zoom", (event) => {
         
-        if (event.transform.k < 1.5) {
+        if (event.transform.k < 1.2) {
           this.modifyElementsOnZoomLayerOne();
         }
-        else if (event.transform.k >= 1.5 && event.transform.k < 3) {
+        else if (event.transform.k >= 1.2 && event.transform.k < 2) {
           this.modifyElementsOnZoomLayerTwo();
         }
-        else if (event.transform.k >= 3) {
+        else if (event.transform.k >= 2) {
           this.modifyElementsOnZoomLayerThree();
         }
 
@@ -218,227 +217,237 @@ export class DiscoveryForceDirectedMapComponent {
     return zoomBehaviour;
   }
 
-    /**
+  /**
    * Starts a force directed simulation.
    */
-    startForceDirectedSimulation(parentNode:d3.Selection<SVGGElement, unknown, HTMLElement, any>): void {
+  startForceDirectedSimulation(parentNode:d3.Selection<SVGGElement, unknown, HTMLElement, any>): void {
 
-      if (this.currentForceDirectedSimulation) {
+    if (this.currentForceDirectedSimulation) {
+      this.currentForceDirectedSimulation.stop();
+    }
+
+    this.discoveryNodesData.forEach((node) => {
+      node.x = undefined;
+      node.y = undefined;
+    })
+
+    // Create the simulation behaviour
+    this.currentForceDirectedSimulation = d3.forceSimulation(this.discoveryNodesData)
+      .force("link", d3.forceLink(this.discoveryLinksData).id(this.getNodeId).distance(this.widthZoomBasedGraphData.nodeDistance))
+      .force("charge", d3.forceManyBody().strength(this.widthZoomBasedGraphData.clusterForce))
+      .force("center", d3.forceCenter(this.widthZoomBasedGraphData.width / 2, this.widthZoomBasedGraphData.height / 2))
+
+    // Create links based on the link data.
+    this.currentConnectionLines = parentNode.append("g")
+      .attr("stroke", "white")
+      .attr("stroke-opacity", this.lineOpacity)
+      .selectAll("line")
+      .data(this.discoveryLinksData)
+      .join("line");
+  
+    // Create the nodes group based on the node data.
+    // This is considered a group because of the fact that we are later appending a circle and label to this group.
+    this.currentNodes = parentNode.selectAll("node")
+      .data(this.discoveryNodesData)
+      .join("g")
+
+    // Create the circle element and attach it to the node.
+    this.currentNodes.append('circle')
+      .attr("fill", (d : DiscoveryNodeData) => this.discoveryColorData[d.group])
+      .attr("r", (d: DiscoveryNodeData) => {
+        let radius = 0;
+        
+        if (d.nodeLabelType === "Field") {
+
+          radius = this.widthZoomBasedGraphData.fieldNodeRadius;
+        }
+        else if (d.nodeLabelType === "Specialization") {
+
+          radius = this.widthZoomBasedGraphData.specializationNodeRadius;
+        }
+        else if (d.nodeLabelType === "Unit") {
+
+          radius = this.widthZoomBasedGraphData.unitNodeRadius;
+        }
+
+        return radius;
+      });
+
+    // Create the text element and attach it to the group.
+    this.currentNodes.append("text")
+    .text((d: DiscoveryNodeData) => d.id)          
+    .style('font-size', (d: DiscoveryNodeData) => {
+          
+      let fontSize = "";
+        
+      if (d.nodeLabelType === "Field") {
+
+        fontSize = this.fieldLabelProperties.fontSize;
+      }
+      else if (d.nodeLabelType === "Specialization") {
+
+        fontSize = this.specializationLabelProperties.fontSize;
+      }
+      else if (d.nodeLabelType === "Unit") {
+
+        fontSize = this.unitLabelProperties.fontSize;
+      }
+
+      return fontSize;
+    })
+    .attr('x', (d: DiscoveryNodeData) => {
+
+      let x = 0;
+        
+      if (d.nodeLabelType === "Field") {
+
+        x = this.fieldLabelProperties.x;
+      }
+      else if (d.nodeLabelType === "Specialization") {
+
+        x = this.specializationLabelProperties.x;
+      }
+      else if (d.nodeLabelType === "Unit") {
+
+        x = this.unitLabelProperties.x;
+      }
+
+      return x;
+    })
+    .attr('y', (d: DiscoveryNodeData) => {
+
+      let y = 0;
+        
+      if (d.nodeLabelType === "Field") {
+
+        y = this.fieldLabelProperties.y;
+      }
+      else if (d.nodeLabelType === "Specialization") {
+
+        y = this.specializationLabelProperties.y;
+      }
+      else if (d.nodeLabelType === "Unit") {
+
+        y = this.unitLabelProperties.y;
+      }
+
+      return y;
+    })
+    .style('font-weight', '900')
+    .style('fill', 'rgba(255, 255, 255, 0.8');
+
+
+    // By default, lets set the nodes and links to the zoom out state
+    this.modifyElementsOnZoomLayerOne();
+
+    this.currentForceDirectedSimulation.on("tick", () => {
+
+      if (this.currentConnectionLines) {
+        this.currentConnectionLines
+        .attr("x1", (d: DiscoveryLinkData) => (d.source as DiscoveryNodeData).x || 0)
+        .attr("y1", (d: DiscoveryLinkData) => (d.source as DiscoveryNodeData).y || 0)
+        .attr("x2", (d: DiscoveryLinkData) => (d.target as DiscoveryNodeData).x || 0)
+        .attr("y2", (d: DiscoveryLinkData) => (d.target as DiscoveryNodeData).y || 0)
+      }
+
+      if (this.currentNodes) {
+        this.currentNodes
+        .attr("transform", (d: DiscoveryNodeData) => `translate(${d.x || 0}, ${d.y || 0})`);
+
+      // At this point in time, we don't need the sim to keep running once the layout is done.
+      if (this.currentForceDirectedSimulation && this.currentForceDirectedSimulation.alpha() < 0.001) {
         this.currentForceDirectedSimulation.stop();
       }
+      }
+    });
+  }
+  
+  /**
+   * 
+   * @param newNode 
+   * @returns 
+   */
+  getNodeId(newNode: d3.SimulationNodeDatum): string | number {
 
-      this.discoveryNodesData.forEach((node) => {
-        node.x = undefined;
-        node.y = undefined;
-      })
-
-      // Create the simulation behaviour
-      this.currentForceDirectedSimulation = d3.forceSimulation(this.discoveryNodesData)
-        .force("link", d3.forceLink(this.discoveryLinksData).id(this.getNodeId).distance(this.widthZoomBasedGraphData.nodeDistance))
-        .force("charge", d3.forceManyBody().strength(this.widthZoomBasedGraphData.clusterForce))
-        .force("center", d3.forceCenter(this.widthZoomBasedGraphData.width / 2, this.widthZoomBasedGraphData.height / 2))
-
-
-      // Create links based on the link data.
-      this.currentConnectionLines = parentNode.append("g")
-        .attr("stroke", "white")
-        .attr("stroke-opacity", this.lineOpacity)
-        .selectAll("line")
-        .data(this.discoveryLinksData)
-        .join("line");
+    let node: DiscoveryNodeData = newNode as DiscoveryNodeData;
+    return node.id;
+  }
+  
+  /**
+   * Modifies element properties when zoomed to level one.
+   */
+  modifyElementsOnZoomLayerOne(): void {
     
-      // Create the nodes group based on the node data.
-      // This is considered a group because of the fact that we are later appending a circle and label to this group.
-      this.currentNodes = parentNode.selectAll("node")
-        .data(this.discoveryNodesData)
-        .join("g")
-  
-      // Create the circle element and attach it to the node.
-      this.currentNodes.append('circle')
-        .attr("fill", (d : DiscoveryNodeData) => this.discoveryColorData[d.group])
-        .attr("r", (d: DiscoveryNodeData) => {
-          let radius = 0;
-          
-          if (d.nodeLabelType === "Field") {
+    // Modify node properties
+    if (this.currentNodes) {
 
-            radius = this.widthZoomBasedGraphData.fieldNodeRadius;
-          }
-          else if (d.nodeLabelType === "Specialization") {
+      this.currentNodes.select('circle')
+        .attr("visibility", (d: DiscoveryNodeData) => d.nodeLabelType === "Field" ? "visible" : "hidden")
 
-            radius = this.widthZoomBasedGraphData.specializationNodeRadius;
-          }
-          else if (d.nodeLabelType === "Unit") {
-
-            radius = this.widthZoomBasedGraphData.unitNodeRadius;
-          }
-
-          return radius;
-        });
-  
-      // Create the text element and attach it to the group.
-      this.currentNodes.append("text")
-      .text((d: DiscoveryNodeData) => d.id)          
-      .style('font-size', (d: DiscoveryNodeData) => {
-            
-        let fontSize = "";
-          
-        if (d.nodeLabelType === "Field") {
-
-          fontSize = this.fieldLabelProperties.fontSize;
-        }
-        else if (d.nodeLabelType === "Specialization") {
-
-          fontSize = this.specializationLabelProperties.fontSize;
-        }
-        else if (d.nodeLabelType === "Unit") {
-
-          fontSize = this.unitLabelProperties.fontSize;
-        }
-
-        return fontSize;
-      })
-      .attr('x', (d: DiscoveryNodeData) => {
-
-        let x = 0;
-          
-        if (d.nodeLabelType === "Field") {
-
-          x = this.fieldLabelProperties.x;
-        }
-        else if (d.nodeLabelType === "Specialization") {
-
-          x = this.specializationLabelProperties.x;
-        }
-        else if (d.nodeLabelType === "Unit") {
-
-          x = this.unitLabelProperties.x;
-        }
-
-        return x;
-      })
-      .attr('y', (d: DiscoveryNodeData) => {
-
-        let y = 0;
-          
-        if (d.nodeLabelType === "Field") {
-
-          y = this.fieldLabelProperties.y;
-        }
-        else if (d.nodeLabelType === "Specialization") {
-
-          y = this.specializationLabelProperties.y;
-        }
-        else if (d.nodeLabelType === "Unit") {
-
-          y = this.unitLabelProperties.y;
-        }
-
-        return y;
-      })
-      .style('font-weight', '900')
-      .style('fill', 'rgba(255, 255, 255, 0.8');
-  
-  
-      // By default, lets set the nodes and links to the zoom out state
-      this.modifyElementsOnZoomLayerOne();
-  
-      this.currentForceDirectedSimulation.on("tick", () => {
-  
-        if (this.currentConnectionLines) {
-          this.currentConnectionLines
-          .attr("x1", (d: DiscoveryLinkData) => (d.source as DiscoveryNodeData).x || 0)
-          .attr("y1", (d: DiscoveryLinkData) => (d.source as DiscoveryNodeData).y || 0)
-          .attr("x2", (d: DiscoveryLinkData) => (d.target as DiscoveryNodeData).x || 0)
-          .attr("y2", (d: DiscoveryLinkData) => (d.target as DiscoveryNodeData).y || 0)
-        }
-  
-        if (this.currentNodes) {
-          this.currentNodes
-          .attr("transform", (d: DiscoveryNodeData) => `translate(${d.x || 0}, ${d.y || 0})`);
-  
-        // At this point in time, we don't need the sim to keep running once the layout is done.
-        if (this.currentForceDirectedSimulation && this.currentForceDirectedSimulation.alpha() < 0.001) {
-          this.currentForceDirectedSimulation.stop();
-        }
-        }
-      });
+      this.currentNodes.select("text")
+        .attr("visibility", (d: DiscoveryNodeData) => d.nodeLabelType === "Field" ? "visible" : "hidden")
     }
-  
-    /**
-     * 
-     * @param newNode 
-     * @returns 
-     */
-    getNodeId(newNode: d3.SimulationNodeDatum): string | number {
-  
-      let node: DiscoveryNodeData = newNode as DiscoveryNodeData;
-      return node.id;
-    }
-  
-    /**
-     * Modifies element properties when zoomed out.
-     */
-    modifyElementsOnZoomLayerOne(): void {
+
+    // Modify line properties
+    if (this.currentConnectionLines) {
       
-      // Modify node properties
-      if (this.currentNodes) {
-  
-        this.currentNodes.select('circle')
-          .attr("visibility", (d: DiscoveryNodeData) => d.nodeLabelType === "Field" ? "visible" : "hidden")
- 
-        this.currentNodes.select("text")
-          .attr("visibility", (d: DiscoveryNodeData) => d.nodeLabelType === "Field" ? "visible" : "hidden")
-      }
-
-      // Modify line properties
-      if (this.currentConnectionLines) {
-        
-        this.currentConnectionLines
-          .attr("visibility", "hidden")
-      }
+      this.currentConnectionLines
+        .attr("visibility", "hidden")
     }
+  }
   
-    /**
-     * Modify element properties when zoomed in.
-     */
-    modifyElementsOnZoomLayerTwo(): void {
+  /**
+   * Modifies element properties when zoomed to level two.
+   */
+  modifyElementsOnZoomLayerTwo(): void {
+    
+    // Modify node properties
+    if (this.currentNodes) {
       
-      // Modify node properties
-      if (this.currentNodes) {
-        
-        this.currentNodes.select('circle')
-          .attr("visibility", (d: DiscoveryNodeData) => d.nodeLabelType === "Field" || d.nodeLabelType === "Specialization" ? 'visible' : 'hidden')
+      this.currentNodes.select('circle')
+        .attr("visibility", (d: DiscoveryNodeData) => d.nodeLabelType === "Field" || d.nodeLabelType === "Specialization" ? 'visible' : 'hidden')
 
-        this.currentNodes.select("text")
-          .attr("visibility", (d: DiscoveryNodeData) => d.nodeLabelType === "Specialization" ? 'visible' : 'hidden')
+      this.currentNodes.select("text")
+        .attr("visibility", (d: DiscoveryNodeData) => d.nodeLabelType === "Specialization" ? 'visible' : 'hidden')
 
-      }
-
-      // Modify line properties
-      if (this.currentConnectionLines) {
-        
-        this.currentConnectionLines
-          .attr("visibility", (d : DiscoveryLinkData) => d.lineLabelType === "Field" ? 'visible' : 'hidden')
-      }
     }
 
-    modifyElementsOnZoomLayerThree(): void {
-            
-      // Modify node properties
-      if (this.currentNodes) {
-  
-        this.currentNodes.select('circle')
-          .attr("visibility", 'visible');
-  
-        this.currentNodes.select("text")
-        .attr("visibility", (d: DiscoveryNodeData) => d.nodeLabelType === "Unit" ? 'visible' : 'hidden')
-      }
-  
-      // Modify line properties
-      if (this.currentConnectionLines) {
-        
-        this.currentConnectionLines
-          .attr("visibility", "Visible")
-      }
+    // Modify line properties
+    if (this.currentConnectionLines) {
+      
+      this.currentConnectionLines
+        .attr("visibility", (d : DiscoveryLinkData) => d.lineLabelType === "Field" ? 'visible' : 'hidden')
     }
+  }
+
+  /**
+   * Modifies element properties when zoomed to level three.
+   */
+  modifyElementsOnZoomLayerThree(): void {
+          
+    // Modify node properties
+    if (this.currentNodes) {
+
+      this.currentNodes.select('circle')
+        .attr("visibility", 'visible');
+
+      this.currentNodes.select("text")
+      .attr("visibility", (d: DiscoveryNodeData) => d.nodeLabelType === "Unit" ? 'visible' : 'hidden')
+    }
+
+    // Modify line properties
+    if (this.currentConnectionLines) {
+      
+      this.currentConnectionLines
+        .attr("visibility", "Visible")
+    }
+  }
+
+  /**
+   * Resets the simulation.
+   */
+  onResetViewPressed(): void {
+
+    this.createDiscoveryForceDirectedMap();
+  }
 }
