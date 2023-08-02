@@ -232,6 +232,9 @@ export class DiscoveryForceDirectedMapComponent {
     })
 
     // Create the simulation behaviour
+    // To my understanding, force many body will apply an equal force to all nodes. Without the link property, nodes will spread out from each other.
+    // With the link property, we can attach nodes with each other and form a graph. Unlinked nodes will spread out by itself, and links nodes I assume will have forces applied in a different manner.
+    //
     this.currentForceDirectedSimulation = d3.forceSimulation(this.discoveryNodesData)
       .force("link", d3.forceLink(this.discoveryLinksData).id(this.getNodeId).distance((l: DiscoveryLinkData) => l.distance))
       .force("charge", d3.forceManyBody().strength(this.widthZoomBasedGraphData.clusterForce))
@@ -405,7 +408,7 @@ export class DiscoveryForceDirectedMapComponent {
     if (this.currentNodes) {
       
       this.currentNodes.select('circle')
-        .attr("visibility", (d: DiscoveryNodeData) => d.nodeLabelType === "Field" || d.nodeLabelType === "Specialization" ? 'visible' : 'hidden')
+        .attr("visibility", (d: DiscoveryNodeData) => d.nodeLabelType === "Specialization" ? 'visible' : 'hidden')
 
       this.currentNodes.select("text")
         .attr("visibility", (d: DiscoveryNodeData) => d.nodeLabelType === "Specialization" ? 'visible' : 'hidden')
@@ -429,7 +432,7 @@ export class DiscoveryForceDirectedMapComponent {
     if (this.currentNodes) {
 
       this.currentNodes.select('circle')
-        .attr("visibility", 'visible');
+        .attr("visibility", (d: DiscoveryNodeData) => d.nodeLabelType === "Unit" ? 'visible' : 'hidden')
 
       this.currentNodes.select("text")
       .attr("visibility", (d: DiscoveryNodeData) => d.nodeLabelType === "Unit" ? 'visible' : 'hidden')
