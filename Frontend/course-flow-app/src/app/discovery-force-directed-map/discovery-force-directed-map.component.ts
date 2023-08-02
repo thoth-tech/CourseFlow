@@ -233,7 +233,7 @@ export class DiscoveryForceDirectedMapComponent {
 
     // Create the simulation behaviour
     this.currentForceDirectedSimulation = d3.forceSimulation(this.discoveryNodesData)
-      .force("link", d3.forceLink(this.discoveryLinksData).id(this.getNodeId).distance(this.widthZoomBasedGraphData.nodeDistance))
+      .force("link", d3.forceLink(this.discoveryLinksData).id(this.getNodeId).distance((l: DiscoveryLinkData) => l.distance))
       .force("charge", d3.forceManyBody().strength(this.widthZoomBasedGraphData.clusterForce))
       .force("center", d3.forceCenter(this.widthZoomBasedGraphData.width / 2, this.widthZoomBasedGraphData.height / 2))
 

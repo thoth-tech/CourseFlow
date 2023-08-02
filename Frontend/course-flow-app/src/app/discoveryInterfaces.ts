@@ -9,6 +9,7 @@ export interface DiscoveryLinkData extends d3.SimulationLinkDatum<d3.SimulationN
     source: string | number | DiscoveryNodeData;
     target: string | number | DiscoveryNodeData;
     lineLabelType: string;
+    distance: number;
 }
 
 export interface DiscoveryColorData {
