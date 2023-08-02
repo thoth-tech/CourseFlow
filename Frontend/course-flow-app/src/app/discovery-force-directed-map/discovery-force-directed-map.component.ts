@@ -18,14 +18,23 @@ export class DiscoveryForceDirectedMapComponent {
   
   // Width based graph data.
   private widthBasedGraphData = {
+    "start": {
+      "width": 400,
+      "height": 400,
+      "nodeDistance": 60,
+      "clusterForce": -50,
+      "fieldNodeRadius": 6,
+      "specializationNodeRadius": 2,
+      "unitNodeRadius": 1,
+    },
     "small": {
       "width": 400,
       "height": 400,
       "nodeDistance": 60,
       "clusterForce": -50,
-      "fieldNodeRadius": 10,
-      "specializationNodeRadius": 5,
-      "unitNodeRadius": 2.5,
+      "fieldNodeRadius": 15,
+      "specializationNodeRadius": 7.3,
+      "unitNodeRadius": 3,
     },
     "medium": {
       "width": 800,
@@ -47,7 +56,7 @@ export class DiscoveryForceDirectedMapComponent {
     }
   }
 
-  private widthZoomBasedGraphData = this.widthBasedGraphData.small;
+  private widthZoomBasedGraphData = this.widthBasedGraphData.start;
 
   // Individual graph properties
   private canvasColor = "#232224";
