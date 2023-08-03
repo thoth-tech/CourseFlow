@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
 export class DiscoveryPageComponent {
   
   // The map type to display
-  mapType = "cluster";
+  mapType = "force-directed";
 }

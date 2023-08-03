@@ -1,13 +1,10 @@
 import { Component, HostListener } from '@angular/core';
-import { DiscoveryService } from '../discovery.service';
-import { DiscoveryNodeData, DiscoveryLinkData, DiscoveryColorData} from '../discoveryInterfaces';
+import { DiscoveryService } from '../../discovery.service';
+import { IDiscoveryNodeData, IDiscoveryLinkData, IDiscoveryColorData, 
+         IMapProperties, IWindowSizeProperties } from '../../interfaces/discoveryInterfaces';
 import * as d3 from "d3";
 
-interface LabelProperties {
-  x: number;
-  y: number;
-  fontSize: string;
-}
+
 
 @Component({
   selector: 'app-discovery-force-directed-map',
@@ -16,89 +13,31 @@ interface LabelProperties {
 })
 export class DiscoveryForceDirectedMapComponent {
   
-  // Width based graph data.
-  private widthBasedGraphData = {
-    "start": {
-      "width": 400,
-      "height": 400,
-      "nodeDistance": 60,
-      "clusterForce": -50,
-      "fieldNodeRadius": 6,
-      "specializationNodeRadius": 2,
-      "unitNodeRadius": 1,
-    },
-    "small": {
-      "width": 400,
-      "height": 400,
-      "nodeDistance": 60,
-      "clusterForce": -50,
-      "fieldNodeRadius": 15,
-      "specializationNodeRadius": 7.3,
-      "unitNodeRadius": 3,
-    },
-    "medium": {
-      "width": 800,
-      "height": 800,
-      "nodeDistance": 90,
-      "clusterForce": -80,
-      "fieldNodeRadius": 30,
-      "specializationNodeRadius": 15,
-      "unitNodeRadius": 7.5,
-    },
-    "large": {
-      "width": 1200,
-      "height": 1200,
-      "nodeDistance": 140,
-      "clusterForce": -250,
-      "fieldNodeRadius": 50,
-      "specializationNodeRadius": 25,
-      "unitNodeRadius": 12.5,
-    }
-  }
+  // Map properties
+  private mapProperties: IMapProperties;
+  private currentWindowSizeProperties: IWindowSizeProperties;
 
-  private widthZoomBasedGraphData = this.widthBasedGraphData.start;
-
-  // Individual graph properties
-  private canvasColor = "#232224";
-  private canvasBorderRadius = "20px";
-  private lineOpacity = 0.2;
-  private unitLabelProperties: LabelProperties = {
-    x: 15,
-    y: 0,
-    fontSize: "3pt"
-  }
-  private specializationLabelProperties: LabelProperties = {
-    x: 30,
-    y: 0,
-    fontSize: "6pt"
-  }
-  private fieldLabelProperties: LabelProperties = {
-    x: 60,
-    y: 0,
-    fontSize: "15pt"
-  }
-
-  // Zoom extents.
-  private minZoom = 0;
-  private maxZoom = 10;
-  
   // Current cached simulation.
-  private currentForceDirectedSimulation: d3.Simulation<DiscoveryNodeData, undefined>|null = null;
+  private currentForceDirectedSimulation: d3.Simulation<IDiscoveryNodeData, undefined>|null = null;
 
   // Current cached nodes and connection lines.
-  private currentNodes: d3.Selection<SVGGElement | d3.BaseType, DiscoveryNodeData, SVGGElement, unknown> | null = null;
-  private currentConnectionLines: d3.Selection<SVGGElement | d3.BaseType, DiscoveryLinkData, SVGGElement, unknown> | null = null;
+  private currentNodes: d3.Selection<SVGGElement | d3.BaseType, IDiscoveryNodeData, SVGGElement, unknown> | null = null;
+  private currentConnectionLines: d3.Selection<SVGGElement | d3.BaseType, IDiscoveryLinkData, SVGGElement, unknown> | null = null;
 
   // Discovery data
-  discoveryNodesData: DiscoveryNodeData[] = [];
-  discoveryLinksData: DiscoveryLinkData[] = [];
-  discoveryColorData: DiscoveryColorData = Object();
+  discoveryNodesData: IDiscoveryNodeData[] = [];
+  discoveryLinksData: IDiscoveryLinkData[] = [];
+  discoveryColorData: IDiscoveryColorData = Object();
 
   /**
    * Constructor for the component.
    * @param discoveryService Injected discovery service
    */
-  constructor(private discoveryService: DiscoveryService) {}
+  constructor(private discoveryService: DiscoveryService) {
+    
+    this.mapProperties = discoveryService.getForceDirectedMapProperties();
+    this.currentWindowSizeProperties = this.mapProperties.windowSizePropertiesSizes["start"];
+  }
 
   /**
    * Called after component is created.
@@ -108,7 +47,7 @@ export class DiscoveryForceDirectedMapComponent {
     // Retrieve the data - TODO This data retrieval in NOT async, this will need to be changed once proper data format is fully sorted.
     this.discoveryNodesData = this.discoveryService.getAllDiscoveryForceDirectedNodeData();
     this.discoveryLinksData = this.discoveryService.getAllDiscoveryForceDirectedLinkData();
-    this.discoveryColorData = this.discoveryService.getDiscoveryColorMapping();
+    this.discoveryColorData = this.discoveryService.getDiscoveryForceDirectedColorMapping();
 
     // Once we get the data, we can start creating the force directed map.
     this.preCreateDiscoveryForceDirectedMap();
@@ -136,25 +75,25 @@ export class DiscoveryForceDirectedMapComponent {
     // This also has an optimization to ensure we are not performing a reset on the map every resize tick and only once, when we have gone above or below a threshold.
     if (width > 1300) {
 
-      if (this.widthZoomBasedGraphData != this.widthBasedGraphData.large) {
+      if (this.currentWindowSizeProperties != this.mapProperties.windowSizePropertiesSizes["large"]) {
         
-        this.widthZoomBasedGraphData = this.widthBasedGraphData.large;
+        this.currentWindowSizeProperties = this.mapProperties.windowSizePropertiesSizes["large"];
         this.createDiscoveryForceDirectedMap();
       }
     }
     else if (width <= 1300 && width > 800) {
 
-      if (this.widthZoomBasedGraphData != this.widthBasedGraphData.medium) {
+      if (this.currentWindowSizeProperties != this.mapProperties.windowSizePropertiesSizes["medium"]) {
         
-        this.widthZoomBasedGraphData = this.widthBasedGraphData.medium;
+        this.currentWindowSizeProperties = this.mapProperties.windowSizePropertiesSizes["medium"];
         this.createDiscoveryForceDirectedMap();
       }
     }
     else if (width <= 800) {
 
-      if (this.widthZoomBasedGraphData != this.widthBasedGraphData.small) {
+      if (this.currentWindowSizeProperties != this.mapProperties.windowSizePropertiesSizes["small"]) {
         
-        this.widthZoomBasedGraphData = this.widthBasedGraphData.small;
+        this.currentWindowSizeProperties = this.mapProperties.windowSizePropertiesSizes["small"];
         this.createDiscoveryForceDirectedMap();
       }
     }
@@ -169,7 +108,13 @@ export class DiscoveryForceDirectedMapComponent {
     d3.select("svg").remove();
 
     // Create the svg canvas
-    let baseSvgCanvas = this.createBaseSvgCanvas();
+   
+    let baseSvgCanvas =  d3.select("div#discoveryForceDirectedMap")
+                           .append("svg")
+                           .attr("width", this.currentWindowSizeProperties.canvasWidth)
+                           .attr("height", this.currentWindowSizeProperties.canvasHeight)
+                           .style("background", this.mapProperties.canvasColor)
+                           .style("border-radius", this.mapProperties.canvasBorderRadius);
 
     // To be able to zoom inside it, we need to attach a group element to the canvas
     let zoomableGroup = baseSvgCanvas.append("g");
@@ -183,22 +128,6 @@ export class DiscoveryForceDirectedMapComponent {
   }
 
   /**
-   * Create and return a base svg canvas.
-   * @returns Returns a newly created svg element/canvas.
-   */
-  createBaseSvgCanvas(): d3.Selection<SVGSVGElement, unknown, HTMLElement, any> {
-    
-    let svg = d3.select("div#discoveryForceDirectedMap")
-    .append("svg")
-    .attr("width", this.widthZoomBasedGraphData.width)
-    .attr("height", this.widthZoomBasedGraphData.height)
-    .style("background", this.canvasColor)
-    .style("border-radius", this.canvasBorderRadius);
-
-    return svg;
-  }
-
-  /**
    * Create and return a zoom behaviour.
    * @param zoomableElement Element that we to apply zooming functionality to.
    * @returns Returns a zoomable behaviour.
@@ -206,7 +135,7 @@ export class DiscoveryForceDirectedMapComponent {
   createZoomBehaviour(zoomableElement:d3.Selection<SVGGElement, unknown, HTMLElement, any>) : d3.ZoomBehavior<SVGSVGElement, unknown> {
     
     let zoomBehaviour = d3.zoom<SVGSVGElement, unknown>()
-      .scaleExtent([this.minZoom, this.maxZoom])
+      .scaleExtent([this.mapProperties.maxZoomOutAmount, this.mapProperties.maxZoomInAmount])
       .on("zoom", (event) => {
         
         if (event.transform.k < 1.2) {
@@ -245,14 +174,14 @@ export class DiscoveryForceDirectedMapComponent {
     // With the link property, we can attach nodes with each other and form a graph. Unlinked nodes will spread out by itself, and links nodes I assume will have forces applied in a different manner.
     //
     this.currentForceDirectedSimulation = d3.forceSimulation(this.discoveryNodesData)
-      .force("link", d3.forceLink(this.discoveryLinksData).id(this.getNodeId).distance((l: DiscoveryLinkData) => l.distance))
-      .force("charge", d3.forceManyBody().strength(this.widthZoomBasedGraphData.clusterForce))
-      .force("center", d3.forceCenter(this.widthZoomBasedGraphData.width / 2, this.widthZoomBasedGraphData.height / 2))
+      .force("link", d3.forceLink(this.discoveryLinksData).id(this.getNodeId).distance((l: IDiscoveryLinkData) => l.distance))
+      .force("charge", d3.forceManyBody().strength(this.currentWindowSizeProperties.clusterForce))
+      .force("center", d3.forceCenter(this.currentWindowSizeProperties.canvasWidth / 2, this.currentWindowSizeProperties.canvasHeight / 2))
 
     // Create links based on the link data.
     this.currentConnectionLines = parentNode.append("g")
       .attr("stroke", "white")
-      .attr("stroke-opacity", this.lineOpacity)
+      .attr("stroke-opacity", this.mapProperties.lineOpacity)
       .selectAll("line")
       .data(this.discoveryLinksData)
       .join("line");
@@ -265,21 +194,21 @@ export class DiscoveryForceDirectedMapComponent {
 
     // Create the circle element and attach it to the node.
     this.currentNodes.append('circle')
-      .attr("fill", (d : DiscoveryNodeData) => this.discoveryColorData[d.group])
-      .attr("r", (d: DiscoveryNodeData) => {
+      .attr("fill", (d : IDiscoveryNodeData) => this.discoveryColorData[d.group])
+      .attr("r", (d: IDiscoveryNodeData) => {
         let radius = 0;
         
         if (d.nodeLabelType === "Field") {
 
-          radius = this.widthZoomBasedGraphData.fieldNodeRadius;
+          radius = this.currentWindowSizeProperties.fieldNodeRadius;
         }
         else if (d.nodeLabelType === "Specialization") {
 
-          radius = this.widthZoomBasedGraphData.specializationNodeRadius;
+          radius = this.currentWindowSizeProperties.specializationNodeRadius;
         }
         else if (d.nodeLabelType === "Unit") {
 
-          radius = this.widthZoomBasedGraphData.unitNodeRadius;
+          radius = this.currentWindowSizeProperties.unitNodeRadius;
         }
 
         return radius;
@@ -287,60 +216,60 @@ export class DiscoveryForceDirectedMapComponent {
 
     // Create the text element and attach it to the group.
     this.currentNodes.append("text")
-    .text((d: DiscoveryNodeData) => d.id)          
-    .style('font-size', (d: DiscoveryNodeData) => {
+    .text((d: IDiscoveryNodeData) => d.id)          
+    .style('font-size', (d: IDiscoveryNodeData) => {
           
       let fontSize = "";
         
       if (d.nodeLabelType === "Field") {
 
-        fontSize = this.fieldLabelProperties.fontSize;
+        fontSize = this.currentWindowSizeProperties.fieldLabelProperties.fontSize;
       }
       else if (d.nodeLabelType === "Specialization") {
 
-        fontSize = this.specializationLabelProperties.fontSize;
+        fontSize = this.currentWindowSizeProperties.specializationLabelProperties.fontSize;
       }
       else if (d.nodeLabelType === "Unit") {
 
-        fontSize = this.unitLabelProperties.fontSize;
+        fontSize = this.currentWindowSizeProperties.unitLabelProperties.fontSize;
       }
 
       return fontSize;
     })
-    .attr('x', (d: DiscoveryNodeData) => {
+    .attr('x', (d: IDiscoveryNodeData) => {
 
       let x = 0;
         
       if (d.nodeLabelType === "Field") {
 
-        x = this.fieldLabelProperties.x;
+        x = this.currentWindowSizeProperties.fieldLabelProperties.x;
       }
       else if (d.nodeLabelType === "Specialization") {
 
-        x = this.specializationLabelProperties.x;
+        x = this.currentWindowSizeProperties.specializationLabelProperties.x;
       }
       else if (d.nodeLabelType === "Unit") {
 
-        x = this.unitLabelProperties.x;
+        x = this.currentWindowSizeProperties.unitLabelProperties.x;
       }
 
       return x;
     })
-    .attr('y', (d: DiscoveryNodeData) => {
+    .attr('y', (d: IDiscoveryNodeData) => {
 
       let y = 0;
         
       if (d.nodeLabelType === "Field") {
 
-        y = this.fieldLabelProperties.y;
+        y = this.currentWindowSizeProperties.fieldLabelProperties.y;
       }
       else if (d.nodeLabelType === "Specialization") {
 
-        y = this.specializationLabelProperties.y;
+        y = this.currentWindowSizeProperties.specializationLabelProperties.y;
       }
       else if (d.nodeLabelType === "Unit") {
 
-        y = this.unitLabelProperties.y;
+        y = this.currentWindowSizeProperties.unitLabelProperties.y;
       }
 
       return y;
@@ -356,15 +285,15 @@ export class DiscoveryForceDirectedMapComponent {
 
       if (this.currentConnectionLines) {
         this.currentConnectionLines
-        .attr("x1", (d: DiscoveryLinkData) => (d.source as DiscoveryNodeData).x || 0)
-        .attr("y1", (d: DiscoveryLinkData) => (d.source as DiscoveryNodeData).y || 0)
-        .attr("x2", (d: DiscoveryLinkData) => (d.target as DiscoveryNodeData).x || 0)
-        .attr("y2", (d: DiscoveryLinkData) => (d.target as DiscoveryNodeData).y || 0)
+        .attr("x1", (d: IDiscoveryLinkData) => (d.source as IDiscoveryNodeData).x || 0)
+        .attr("y1", (d: IDiscoveryLinkData) => (d.source as IDiscoveryNodeData).y || 0)
+        .attr("x2", (d: IDiscoveryLinkData) => (d.target as IDiscoveryNodeData).x || 0)
+        .attr("y2", (d: IDiscoveryLinkData) => (d.target as IDiscoveryNodeData).y || 0)
       }
 
       if (this.currentNodes) {
         this.currentNodes
-        .attr("transform", (d: DiscoveryNodeData) => `translate(${d.x || 0}, ${d.y || 0})`);
+        .attr("transform", (d: IDiscoveryNodeData) => `translate(${d.x || 0}, ${d.y || 0})`);
 
       // At this point in time, we don't need the sim to keep running once the layout is done.
       if (this.currentForceDirectedSimulation && this.currentForceDirectedSimulation.alpha() < 0.001) {
@@ -381,7 +310,7 @@ export class DiscoveryForceDirectedMapComponent {
    */
   getNodeId(newNode: d3.SimulationNodeDatum): string | number {
 
-    let node: DiscoveryNodeData = newNode as DiscoveryNodeData;
+    let node: IDiscoveryNodeData = newNode as IDiscoveryNodeData;
     return node.id;
   }
   
@@ -394,10 +323,10 @@ export class DiscoveryForceDirectedMapComponent {
     if (this.currentNodes) {
 
       this.currentNodes.select('circle')
-        .attr("visibility", (d: DiscoveryNodeData) => d.nodeLabelType === "Field" ? "visible" : "hidden")
+        .attr("visibility", (d: IDiscoveryNodeData) => d.nodeLabelType === "Field" ? "visible" : "hidden")
 
       this.currentNodes.select("text")
-        .attr("visibility", (d: DiscoveryNodeData) => d.nodeLabelType === "Field" ? "visible" : "hidden")
+        .attr("visibility", (d: IDiscoveryNodeData) => d.nodeLabelType === "Field" ? "visible" : "hidden")
     }
 
     // Modify line properties
@@ -417,10 +346,10 @@ export class DiscoveryForceDirectedMapComponent {
     if (this.currentNodes) {
       
       this.currentNodes.select('circle')
-        .attr("visibility", (d: DiscoveryNodeData) => d.nodeLabelType === "Specialization" ? 'visible' : 'hidden')
+        .attr("visibility", (d: IDiscoveryNodeData) => d.nodeLabelType === "Specialization" ? 'visible' : 'hidden')
 
       this.currentNodes.select("text")
-        .attr("visibility", (d: DiscoveryNodeData) => d.nodeLabelType === "Specialization" ? 'visible' : 'hidden')
+        .attr("visibility", (d: IDiscoveryNodeData) => d.nodeLabelType === "Specialization" ? 'visible' : 'hidden')
 
     }
 
@@ -428,7 +357,7 @@ export class DiscoveryForceDirectedMapComponent {
     if (this.currentConnectionLines) {
       
       this.currentConnectionLines
-        .attr("visibility", (d : DiscoveryLinkData) => d.lineLabelType === "Field" ? 'visible' : 'hidden')
+        .attr("visibility", (d : IDiscoveryLinkData) => d.lineLabelType === "Field" ? 'visible' : 'hidden')
     }
   }
 
@@ -441,10 +370,10 @@ export class DiscoveryForceDirectedMapComponent {
     if (this.currentNodes) {
 
       this.currentNodes.select('circle')
-        .attr("visibility", (d: DiscoveryNodeData) => d.nodeLabelType === "Unit" ? 'visible' : 'hidden')
+        .attr("visibility", (d: IDiscoveryNodeData) => d.nodeLabelType === "Unit" ? 'visible' : 'hidden')
 
       this.currentNodes.select("text")
-      .attr("visibility", (d: DiscoveryNodeData) => d.nodeLabelType === "Unit" ? 'visible' : 'hidden')
+      .attr("visibility", (d: IDiscoveryNodeData) => d.nodeLabelType === "Unit" ? 'visible' : 'hidden')
     }
 
     // Modify line properties

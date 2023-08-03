@@ -1,6 +1,6 @@
-import { DiscoveryNodeData } from './discoveryInterfaces';
+import { IDiscoveryNodeData } from '../interfaces/discoveryInterfaces';
 
-export const discoveryNodesClusterData : DiscoveryNodeData[] = [
+export const discoveryNodesClusterData : IDiscoveryNodeData[] = [
 
     {id: "SIT232", name: "Object-Oriented Development", group: 2, nodeLabelType: "Unit", x: 200, y: 100},
     {id: "SIT305", name: "Mobile Application Development", group: 2, nodeLabelType: "Unit", x: 210, y: 110},

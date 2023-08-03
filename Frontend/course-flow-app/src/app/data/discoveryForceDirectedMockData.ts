@@ -1,6 +1,6 @@
-import { DiscoveryNodeData, DiscoveryLinkData } from './discoveryInterfaces';
+import { IDiscoveryNodeData, IDiscoveryLinkData, IDiscoveryColorData } from '../interfaces/discoveryInterfaces';
 
-export const discoveryNodesForceDirectedData : DiscoveryNodeData[] = [
+export const discoveryNodesForceDirectedData : IDiscoveryNodeData[] = [
     {id: "IT", name: "IT", group: 0, nodeLabelType: "Field"},
     {id: "Application Development", name: "Application Development", group: 1, nodeLabelType: "Specialization"},
     {id: "SIT232", name: "Object-Oriented Development", group: 2, nodeLabelType: "Unit"},
@@ -31,7 +31,7 @@ export const discoveryNodesForceDirectedData : DiscoveryNodeData[] = [
     {id: "SLE214", name: "Organic Chemistry", group: 2, nodeLabelType: "Unit"},
 ]
 
-export const discoveryLinksForceDirectedData : DiscoveryLinkData[] = [
+export const discoveryLinksForceDirectedData : IDiscoveryLinkData[] = [
     {source: "IT", target: "Game Development", lineLabelType: "Field", distance: 100},
     {source: "IT", target: "Application Development", lineLabelType: "Field", distance: 100},
     {source: "IT", target: "Cyber Security", lineLabelType: "Field", distance: 100},
@@ -58,4 +58,10 @@ export const discoveryLinksForceDirectedData : DiscoveryLinkData[] = [
     {source: "SLE340", target: "Cell Biology and Genomics", lineLabelType: "Unit", distance: 100},
     {source: "SLE210", target: "Chemistry", lineLabelType: "Unit", distance: 100},
     {source: "SLE214", target: "Chemistry", lineLabelType: "Unit", distance: 100},
-  ]
+]
+
+export const discoveryForceDirectedColorMapping : IDiscoveryColorData = {
+    0: "#1d192b",
+    1: "#484458",
+    2: "#e8def8",
+  }

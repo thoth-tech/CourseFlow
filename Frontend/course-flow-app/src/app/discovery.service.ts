@@ -1,7 +1,13 @@
+// Angular Imports
 import { Injectable } from '@angular/core';
-import { DiscoveryNodeData, DiscoveryLinkData, DiscoveryColorData} from './discoveryInterfaces';
-import { discoveryNodesForceDirectedData, discoveryLinksForceDirectedData } from './discoveryForceDirectedData';
-import { discoveryNodesClusterData } from './discoveryClusterData';
+
+// Interfaces
+import { IDiscoveryNodeData, IDiscoveryLinkData, IDiscoveryColorData, IMapProperties} from './interfaces/discoveryInterfaces';
+
+// Data Handling
+import { forceDirectedMapProperties } from './data/discoveryMapProperties';
+import { discoveryNodesForceDirectedData, discoveryLinksForceDirectedData, discoveryForceDirectedColorMapping } from './data/discoveryForceDirectedMockData';
+import { discoveryNodesClusterData } from './data/discoveryClusterMockData';
 
 
 @Injectable({
@@ -9,27 +15,45 @@ import { discoveryNodesClusterData } from './discoveryClusterData';
 })
 export class DiscoveryService {
 
-  discoveryColorMapping : DiscoveryColorData = {
-    0: "#1d192b",
-    1: "#484458",
-    2: "#e8def8",
-  }
-
   constructor() { }
 
-  getAllDiscoveryForceDirectedNodeData(): DiscoveryNodeData[] {
+  /**
+   * Get all force directed properties as a single object.
+   * @returns Force directed map properties.
+   */
+  getForceDirectedMapProperties(): IMapProperties {
+    return forceDirectedMapProperties;
+  }
+
+  /**
+   * Get all force directed node data.
+   * @returns Force directed node data.
+   */
+  getAllDiscoveryForceDirectedNodeData(): IDiscoveryNodeData[] {
     return discoveryNodesForceDirectedData;
   }
   
-  getAllDiscoveryForceDirectedLinkData(): DiscoveryLinkData[] {
+  /**
+   * Get all force directed link data.
+   * @returns Force directed link data.
+   */
+  getAllDiscoveryForceDirectedLinkData(): IDiscoveryLinkData[] {
     return discoveryLinksForceDirectedData;
   }
 
-  getDiscoveryColorMapping(): DiscoveryColorData {
-    return this.discoveryColorMapping;
+  /**
+   * Get force directed color mapping data.
+   * @returns Force directed color mapping data.
+   */
+  getDiscoveryForceDirectedColorMapping(): IDiscoveryColorData {
+    return discoveryForceDirectedColorMapping;
   }
 
-  getAllDiscoveryClusterNodeData(): DiscoveryNodeData[] {
+  /**
+   * Get all cluster node data.
+   * @returns Get cluster node data.
+   */
+  getAllDiscoveryClusterNodeData(): IDiscoveryNodeData[] {
     return discoveryNodesClusterData;
   }
 }
