@@ -3,7 +3,8 @@ import { DiscoveryService } from '../../discovery.service';
 import { IDiscoveryNodeData, IDiscoveryLinkData, IDiscoveryColorData, 
          IMapProperties, IWindowSizeProperties } from '../../interfaces/discoveryInterfaces';
 import * as d3 from "d3";
-
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { DiscoveryDetailDialogComponent } from '../discovery-detail-dialog/discovery-detail-dialog.component';
 
 
 @Component({
@@ -33,7 +34,7 @@ export class DiscoveryForceDirectedMapComponent {
    * Constructor for the component.
    * @param discoveryService Injected discovery service
    */
-  constructor(private discoveryService: DiscoveryService) {
+  constructor(private discoveryService: DiscoveryService, public dialog: MatDialog) {
     
     this.mapProperties = discoveryService.getForceDirectedMapProperties();
     this.currentWindowSizeProperties = this.mapProperties.windowSizePropertiesSizes["start"];
@@ -212,7 +213,8 @@ export class DiscoveryForceDirectedMapComponent {
         }
 
         return radius;
-      });
+      })
+      .on("click", () => this.dialog.open(DiscoveryDetailDialogComponent));
 
     // Create the text element and attach it to the group.
     this.currentNodes.append("text")

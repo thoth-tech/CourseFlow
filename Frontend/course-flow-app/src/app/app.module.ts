@@ -7,18 +7,23 @@ import { DiscoveryPageComponent } from './discovery/discovery-page/discovery-pag
 import { DiscoveryForceDirectedMapComponent } from './discovery/discovery-force-directed-map/discovery-force-directed-map.component';
 import { DiscoveryClusterMapComponent } from './discovery/discovery-cluster-map/discovery-cluster-map.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DiscoveryDetailDialogComponent } from './discovery/discovery-detail-dialog/discovery-detail-dialog.component';
+
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
     AppComponent,
     DiscoveryPageComponent,
     DiscoveryForceDirectedMapComponent,
-    DiscoveryClusterMapComponent
+    DiscoveryClusterMapComponent,
+    DiscoveryDetailDialogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
