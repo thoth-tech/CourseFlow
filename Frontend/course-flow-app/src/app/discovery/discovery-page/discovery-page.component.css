@@ -1,8 +1,10 @@
 .discovery-page-container {
+    margin: 4em;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 2em;
     text-align: center;
 }
 
