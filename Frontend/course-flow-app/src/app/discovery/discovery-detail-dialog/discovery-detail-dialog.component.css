@@ -1,0 +1,6 @@
+.discovery-detail-dialog-contaienr {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

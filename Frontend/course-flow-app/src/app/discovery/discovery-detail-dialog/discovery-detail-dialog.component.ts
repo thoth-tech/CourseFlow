@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-
+import { Component, Inject } from '@angular/core';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { IDiscoveryNodeData } from 'src/app/interfaces/discoveryInterfaces';
 
 @Component({
   selector: 'app-discovery-detail-dialog',
@@ -8,4 +9,5 @@ import { Component } from '@angular/core';
 })
 export class DiscoveryDetailDialogComponent {
 
+  constructor(@Inject(MAT_DIALOG_DATA) public data: {discoveryNodeData: IDiscoveryNodeData}) {}
 }

@@ -214,7 +214,12 @@ export class DiscoveryForceDirectedMapComponent {
 
         return radius;
       })
-      .on("click", () => this.dialog.open(DiscoveryDetailDialogComponent));
+      .on("click", (event, d: IDiscoveryNodeData) => { 
+
+        this.dialog.open(DiscoveryDetailDialogComponent, {
+          data: {discoveryNodeData: d},
+          height: '400px', width: '400px'})
+      });
 
     // Create the text element and attach it to the group.
     this.currentNodes.append("text")
