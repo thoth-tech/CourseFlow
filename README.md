@@ -38,7 +38,7 @@ Follow step 1 and step 2 from "Set Up With GitHub Desktop" above.
 ### Step 2
 
 Now, use open up Command Prompt if your a Window user and Terminal If you are a MAC OS user.
-Use "cd name\name, for example cd Admin/Downloads" to change directory to the place where you want to save CourseFlow Repsoitory on your device.
+Use "cd name\name, for example cd Admin\Downloads" to change directory to the place where you want to save CourseFlow Repsoitory on your device.
 
 ### Step 3
 
