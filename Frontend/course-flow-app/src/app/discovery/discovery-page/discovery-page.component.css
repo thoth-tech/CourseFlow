@@ -1,23 +1,30 @@
 .discovery-page-container {
-    margin: 4em;
+    padding-top: 5em;
+    padding-bottom: 5em;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
     gap: 2em;
-    text-align: center;
 }
 
-.discovery-page-container h2 {
-    font-size: 60pt;
+.discovery-page-content {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
 }
 
 .discovery-page-container h3 {
     font-size: 20pt;
 }
 
+.discovery-page-navigation-sidenav{
+    padding: 2em;
+    text-align: center;
+}
+
 .discovery-page-navigation {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    justify-content: center;
     gap: 1em;
 }

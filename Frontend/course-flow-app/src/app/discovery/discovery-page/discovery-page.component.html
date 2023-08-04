@@ -1,20 +1,30 @@
 <div class="discovery-page-container">
-    <h2>Discovery Page</h2>
+    
+    <mat-sidenav-container>
 
-    <div class="discovery-page-navigation">
-        <button  (click)="mapType = 'force-directed'">Force Directed Map</button>
-        <button  (click)="mapType = 'cluster'">Cluster Map</button>
-    </div>
+        <mat-sidenav mode="side" opened class="discovery-page-navigation-sidenav">
 
-    <div [ngSwitch]="mapType">
-        <div *ngSwitchCase="'force-directed'">
-            <h3>Discovery Force Directed Map</h3>
-            <app-discovery-force-directed-map/>
-        </div>
-        <div *ngSwitchCase="'cluster'">
-            <h3>Discovery Cluster Map</h3>
-            <app-discovery-cluster-map/>
-        </div>
-    </div>
+            <div class="discovery-page-navigation">
+                <h3>Menu</h3>
+                <button mat-raised-button color="primary" (click)="mapType = 'force-directed'">Force Directed Map</button>
+                <button mat-raised-button color="primary" (click)="mapType = 'cluster'">Cluster Map</button>
+            </div>
+
+        </mat-sidenav>
+
+        <mat-sidenav-content class="discovery-page-content">
+            <div [ngSwitch]="mapType">
+                <div *ngSwitchCase="'force-directed'">
+                    <h3>Discovery Force Directed Map</h3>
+                    <app-discovery-force-directed-map/>
+                </div>
+                <div *ngSwitchCase="'cluster'">
+                    <h3>Discovery Cluster Map</h3>
+                    <app-discovery-cluster-map/>
+                </div>
+            </div>
+        </mat-sidenav-content>
+
+    </mat-sidenav-container>
 </div>
 
