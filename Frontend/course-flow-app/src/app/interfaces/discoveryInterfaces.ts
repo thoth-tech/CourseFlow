@@ -3,6 +3,7 @@ export interface IDiscoveryNodeData extends d3.SimulationNodeDatum {
     name: string;
     group: number;
     nodeLabelType: string;
+    description: string;
 }
 
 export interface IDiscoveryLinkData extends d3.SimulationLinkDatum<d3.SimulationNodeDatum>{

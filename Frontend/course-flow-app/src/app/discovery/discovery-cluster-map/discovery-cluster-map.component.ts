@@ -2,7 +2,8 @@ import { Component, HostListener } from '@angular/core';
 import * as d3 from "d3";
 import { DiscoveryService } from '../../discovery.service';
 import { IDiscoveryNodeData, IMapProperties, IWindowSizeProperties} from '../../interfaces/discoveryInterfaces';
-
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { DiscoveryDetailDialogComponent } from '../discovery-detail-dialog/discovery-detail-dialog.component';
 
 
 @Component({
@@ -26,7 +27,7 @@ export class DiscoveryClusterMapComponent {
    * Constructor for the component.
    * @param discoveryService Injected discovery service
    */
-  constructor(private discoveryService: DiscoveryService) {
+  constructor(private discoveryService: DiscoveryService, public dialog: MatDialog) {
     
     this.mapProperties = discoveryService.getForceDirectedMapProperties();
     this.currentWindowSizeProperties = this.mapProperties.windowSizePropertiesSizes["start"];
@@ -127,6 +128,12 @@ export class DiscoveryClusterMapComponent {
     this.currentNodes.append('circle')
       .attr("fill", "white")
       .attr("r", 5)
+      .on("click", (event, d: IDiscoveryNodeData) => { 
+
+        this.dialog.open(DiscoveryDetailDialogComponent, {
+          data: {discoveryNodeData: d},
+          height: '400px', width: '400px'})
+      });
   }
 
   /**
