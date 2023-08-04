@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { IDiscoveryNodeData } from 'src/app/interfaces/discoveryInterfaces';
+import { MatIcon } from '@angular/material/icon'
 
 @Component({
   selector: 'app-discovery-detail-dialog',

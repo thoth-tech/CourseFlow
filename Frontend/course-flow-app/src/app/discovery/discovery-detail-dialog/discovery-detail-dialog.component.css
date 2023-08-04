@@ -4,3 +4,10 @@
     justify-content: center;
     align-items: center;
 }
+
+.close-button{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 1;
+}

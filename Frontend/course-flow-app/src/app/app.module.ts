@@ -9,7 +9,9 @@ import { DiscoveryClusterMapComponent } from './discovery/discovery-cluster-map/
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DiscoveryDetailDialogComponent } from './discovery/discovery-detail-dialog/discovery-detail-dialog.component';
 
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatDialogModule,
+    MatDialogModule, MatButtonModule, MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

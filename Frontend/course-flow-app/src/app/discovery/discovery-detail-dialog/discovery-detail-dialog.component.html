@@ -1,4 +1,8 @@
 <div class="discovery-detail-dialog-contaienr">
-    <h3>{{data.discoveryNodeData.name}}</h3>
-    <p>{{data.discoveryNodeData.description}}</p>
+    <h3 mat-dialog-title>{{data.discoveryNodeData.name}}</h3>
+    <mat-dialog-content>{{data.discoveryNodeData.description}}</mat-dialog-content>
+    <button mat-raised-button color="primary" tabindex="-1">View More</button>
+    <button mat-fab color="warn" tabindex="-1" mat-dialog-close class="close-button">
+        <mat-icon>close</mat-icon>
+    </button>
 </div>
