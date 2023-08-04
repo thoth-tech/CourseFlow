@@ -127,7 +127,7 @@ export class DiscoveryClusterMapComponent {
     // Create the circle element and attach it to the node.
     this.currentNodes.append('circle')
       .attr("fill", "white")
-      .attr("r", 5)
+      .attr("r", this.currentWindowSizeProperties.unitNodeRadius)
       .on("click", (event, d: IDiscoveryNodeData) => { 
 
         this.dialog.open(DiscoveryDetailDialogComponent, {
