@@ -1,0 +1,109 @@
+[
+    {
+        "_id": {
+            "$oid": "645c71b70b1ee3b26c51ac65"
+        },
+        "code": "SIT102",
+        "title": "Introduction to Programming",
+        "description": "",
+        "constraints": [],
+        "is_discontinued": false
+    },
+    {
+        "_id": {
+            "$oid": "645c71b70b1ee3b26c51ac8f"
+        },
+        "code": "SIT232",
+        "title": "Object-Oriented Development",
+        "description": "",
+        "constraints": [
+            {
+                "type": "prerequisites",
+                "units": [
+                    "SIT102",
+                    "SIT153",
+                    "SIT172"
+                ]
+            },
+            {
+                "type": "mutually_exclusive_units",
+                "units": [
+                    "SIT131"
+                ]
+            }
+        ],
+        "is_discontinued": false
+    },
+    {
+        "_id": {
+            "$oid": "645c71b70b1ee3b26c51ac8c"
+        },
+        "code": "SIT221",
+        "title": "Data Structures and Algorithms",
+        "description": "",
+        "constraints": [
+            {
+                "type": "prerequisites",
+                "units": [
+                    "SIT232",
+                    "SIT131"
+                ]
+            }
+        ],
+        "is_discontinued": false
+    },
+    {
+        "_id": {
+            "$oid": "645c71b70b1ee3b26c51aca7"
+        },
+        "code": "SIT315",
+        "title": "Programming Paradigms",
+        "description": "",
+        "constraints": [
+            {
+                "type": "prerequisites",
+                "units": [
+                    "SIT210",
+                    "SIT232"
+                ]
+            }
+        ],
+        "is_discontinued": false
+    },
+    {
+        "_id": {
+            "$oid": "645c71b70b1ee3b26c51ac8a"
+        },
+        "code": "SIT215",
+        "title": "Artificial and Computational Intelligence",
+        "description": "",
+        "constraints": [
+            {
+                "type": "prerequisites",
+                "units": [
+                    "SIT102"
+                ]
+            }
+        ],
+        "is_discontinued": false
+    },
+    {
+        "_id": {
+            "$oid": "645c71b70b1ee3b26c51ac9f"
+        },
+        "code": "SIT307",
+        "title": "Data Mining and Machine Learning",
+        "description": "",
+        "constraints": [
+            {
+                "type": "prerequisites",
+                "units": [
+                    "SIT199",
+                    "SIT191",
+                    "SIT112"
+                ]
+            }
+        ],
+        "is_discontinued": false
+    }
+]

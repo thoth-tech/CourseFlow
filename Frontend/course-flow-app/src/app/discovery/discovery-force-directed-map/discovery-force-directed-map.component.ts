@@ -36,19 +36,25 @@ export class DiscoveryForceDirectedMapComponent {
    */
   constructor(private discoveryService: DiscoveryService, public dialog: MatDialog) {
     
+    // Retrieve the data - TODO This data retrieval in NOT async, this will need to be changed once proper data format is fully sorted.
+    // Map properties
     this.mapProperties = discoveryService.getForceDirectedMapProperties();
     this.currentWindowSizeProperties = this.mapProperties.windowSizePropertiesSizes["start"];
+
+    //  Node and link data
+    this.discoveryNodesData = this.discoveryService.getAllDiscoveryForceDirectedNodeData();
+    this.discoveryLinksData = this.discoveryService.getAllDiscoveryForceDirectedLinkData();
+    //this.discoveryNodesData = this.discoveryService.getAllDiscoveryForceDirectedNodeJsonData();
+    //this.discoveryLinksData = this.discoveryService.getAllDiscoveryForceDirectedLinkJsonData();
+
+    // Color
+    this.discoveryColorData = this.discoveryService.getDiscoveryForceDirectedColorMapping();
   }
 
   /**
    * Called after component is created.
    */
   ngOnInit(): void {
-
-    // Retrieve the data - TODO This data retrieval in NOT async, this will need to be changed once proper data format is fully sorted.
-    this.discoveryNodesData = this.discoveryService.getAllDiscoveryForceDirectedNodeData();
-    this.discoveryLinksData = this.discoveryService.getAllDiscoveryForceDirectedLinkData();
-    this.discoveryColorData = this.discoveryService.getDiscoveryForceDirectedColorMapping();
 
     // Once we get the data, we can start creating the force directed map.
     this.preCreateDiscoveryForceDirectedMap();

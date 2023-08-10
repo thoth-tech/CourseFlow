@@ -11,8 +11,8 @@ import { DiscoveryDetailDialogComponent } from './discovery/discovery-detail-dia
 
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
-import {MatSidenavModule} from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     DiscoveryPageComponent,
     DiscoveryForceDirectedMapComponent,
     DiscoveryClusterMapComponent,
-    DiscoveryDetailDialogComponent
+    DiscoveryDetailDialogComponent,
   ],
   imports: [
     BrowserModule,

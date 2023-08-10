@@ -5,9 +5,10 @@ import { Injectable } from '@angular/core';
 import { IDiscoveryNodeData, IDiscoveryLinkData, IDiscoveryColorData, IMapProperties} from './interfaces/discoveryInterfaces';
 
 // Data Handling
-import { forceDirectedMapProperties } from './data/discoveryMapProperties';
-import { discoveryNodesForceDirectedData, discoveryLinksForceDirectedData, discoveryForceDirectedColorMapping } from './data/discoveryForceDirectedMockData';
-import { discoveryNodesClusterData } from './data/discoveryClusterMockData';
+import { forceDirectedMapProperties } from './dataHandling/discoveryMapProperties';
+import { discoveryNodesForceDirectedData, discoveryLinksForceDirectedData, discoveryForceDirectedColorMapping } from './dataHandling/discoveryForceDirectedMockData';
+import { discoveryNodesClusterData } from './dataHandling/discoveryClusterMockData';
+import { discoveryNodesForceDirectedJsonData, discoveryLinksForceDirectedJsonData } from './dataHandling/discoveryForceDirectedJsonData'
 
 
 @Injectable({
@@ -56,4 +57,22 @@ export class DiscoveryService {
   getAllDiscoveryClusterNodeData(): IDiscoveryNodeData[] {
     return discoveryNodesClusterData;
   }
+
+  /**
+   * Get all unit data from the json.
+   * @returns 
+   */
+  getAllDiscoveryForceDirectedNodeJsonData(): IDiscoveryNodeData[] {
+
+    return discoveryNodesForceDirectedJsonData();
+  }
+
+    /**
+   * Get all unit data from the json.
+   * @returns 
+   */
+    getAllDiscoveryForceDirectedLinkJsonData(): IDiscoveryLinkData[] {
+
+      return discoveryLinksForceDirectedJsonData();
+    }
 }
