@@ -82,7 +82,7 @@ const largeWindowSizeBasedProperties : IWindowSizeProperties = {
     clusterForce: -250,
     fieldNodeRadius: 50,
     specializationNodeRadius: 25,
-    unitNodeRadius: 12.5,
+    unitNodeRadius: 3,
     unitLabelProperties: {
         x: 15,
         y: 0,

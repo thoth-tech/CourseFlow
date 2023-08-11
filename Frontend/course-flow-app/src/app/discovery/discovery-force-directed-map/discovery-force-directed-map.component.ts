@@ -42,10 +42,10 @@ export class DiscoveryForceDirectedMapComponent {
     this.currentWindowSizeProperties = this.mapProperties.windowSizePropertiesSizes["start"];
 
     //  Node and link data
-    this.discoveryNodesData = this.discoveryService.getAllDiscoveryForceDirectedNodeData();
-    this.discoveryLinksData = this.discoveryService.getAllDiscoveryForceDirectedLinkData();
-    //this.discoveryNodesData = this.discoveryService.getAllDiscoveryForceDirectedNodeJsonData();
-    //this.discoveryLinksData = this.discoveryService.getAllDiscoveryForceDirectedLinkJsonData();
+    //this.discoveryNodesData = this.discoveryService.getAllDiscoveryForceDirectedNodeData();
+    //this.discoveryLinksData = this.discoveryService.getAllDiscoveryForceDirectedLinkData();
+    this.discoveryNodesData = this.discoveryService.getAllDiscoveryForceDirectedNodeJsonData();
+    this.discoveryLinksData = this.discoveryService.getAllDiscoveryForceDirectedLinkJsonData();
 
     // Color
     this.discoveryColorData = this.discoveryService.getDiscoveryForceDirectedColorMapping();
@@ -309,7 +309,7 @@ export class DiscoveryForceDirectedMapComponent {
         .attr("transform", (d: IDiscoveryNodeData) => `translate(${d.x || 0}, ${d.y || 0})`);
 
       // At this point in time, we don't need the sim to keep running once the layout is done.
-      if (this.currentForceDirectedSimulation && this.currentForceDirectedSimulation.alpha() < 0.001) {
+      if (this.currentForceDirectedSimulation && this.currentForceDirectedSimulation.alpha() < 0.2) {
         this.currentForceDirectedSimulation.stop();
       }
       }

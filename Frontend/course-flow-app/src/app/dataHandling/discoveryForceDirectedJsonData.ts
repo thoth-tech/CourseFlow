@@ -20,6 +20,9 @@ export function discoveryNodesForceDirectedJsonData() : IDiscoveryNodeData[]  {
     // Faculty tracker
     let facultyData: any[] = [];
 
+    // Discipline tracker
+    let disciplineData: any[] = [];
+
     for (let index = 0; index < unitDataArray.length; index++) {
         
         // The unit object containing data of a unit.
@@ -37,6 +40,14 @@ export function discoveryNodesForceDirectedJsonData() : IDiscoveryNodeData[]  {
             facultyData.push(facultyCode)
         }
 
+        // Get the 3 letter code which will be the discipline
+        let disciplineCode = unitCode.substring(0, 3);
+
+        // Check if it exists, if not, add it in
+        if (!disciplineData.includes(disciplineCode)){
+            disciplineData.push(disciplineCode);
+        }
+
         // Add the required data into the node data array
         nodeData.push({
             id: unitObject["code"],
@@ -46,6 +57,18 @@ export function discoveryNodesForceDirectedJsonData() : IDiscoveryNodeData[]  {
             description: "",
         })
     }
+
+    // Add in the discipline code
+    disciplineData.forEach(data => {
+        
+        nodeData.unshift({
+            id: data,
+            name: data,
+            group: 0,
+            nodeLabelType: "Specialization",
+            description: "",
+        })
+    })
 
     // Add in the faculty nodes
     facultyData.forEach(data => {
@@ -59,7 +82,6 @@ export function discoveryNodesForceDirectedJsonData() : IDiscoveryNodeData[]  {
         })
     });
 
-
     return nodeData;
 }
 
@@ -67,12 +89,30 @@ export function discoveryLinksForceDirectedJsonData() : IDiscoveryLinkData[]  {
 
     nodeData.forEach(data => {
         
-        linkData.push({
-            source: data.id,
-            target: data.id[0],
-            lineLabelType: "",
-            distance: 100
-        })
+        if (data.nodeLabelType === "Field") {
+            return
+        }
+
+        if (data.nodeLabelType === "Unit") {
+            
+            linkData.push({
+                source: data.id,
+                target: data.id.substring(0, 3),
+                lineLabelType: "Unit",
+                distance: 0
+            })
+        }
+
+        if (data.nodeLabelType === "Specialization" && data.id[0] !== "A") {
+            linkData.push({
+                source: data.id,
+                target: data.id[0],
+                lineLabelType: "Field",
+                distance: 0
+            })
+        }
+
+
     });
 
     return linkData;
