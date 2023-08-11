@@ -12,7 +12,10 @@ let nodeData: IDiscoveryNodeData[] = [];
 // Link data
 let linkData: IDiscoveryLinkData[] = [];
 
-export function discoveryNodesForceDirectedJsonData() : IDiscoveryNodeData[]  {
+export const discoveryNodesForceDirectedData : IDiscoveryNodeData[] = discoveryNodesForceDirectedJsonData();
+export const discoveryLinksForceDirectedData : IDiscoveryLinkData[] = discoveryLinksForceDirectedJsonData();
+
+function discoveryNodesForceDirectedJsonData() : IDiscoveryNodeData[]  {
 
     // Better to not use any as a type but for now, should be fine as the backend will send back data in the required type once testing is done.
     let unitDataArray: any[] = unitData as any;
@@ -85,7 +88,7 @@ export function discoveryNodesForceDirectedJsonData() : IDiscoveryNodeData[]  {
     return nodeData;
 }
 
-export function discoveryLinksForceDirectedJsonData() : IDiscoveryLinkData[]  {
+function discoveryLinksForceDirectedJsonData() : IDiscoveryLinkData[]  {
 
     nodeData.forEach(data => {
         

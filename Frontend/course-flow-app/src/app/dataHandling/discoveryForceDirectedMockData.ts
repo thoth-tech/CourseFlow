@@ -1,4 +1,4 @@
-import { IDiscoveryNodeData, IDiscoveryLinkData, IDiscoveryColorData } from '../interfaces/discoveryInterfaces';
+import { IDiscoveryNodeData, IDiscoveryLinkData } from '../interfaces/discoveryInterfaces';
 
 export const discoveryNodesForceDirectedData : IDiscoveryNodeData[] = [
     {id: "IT", name: "IT", group: 0, nodeLabelType: "Field", description: "Field of IT"},
@@ -59,9 +59,3 @@ export const discoveryLinksForceDirectedData : IDiscoveryLinkData[] = [
     {source: "SLE210", target: "Chemistry", lineLabelType: "Unit", distance: 100},
     {source: "SLE214", target: "Chemistry", lineLabelType: "Unit", distance: 100},
 ]
-
-export const discoveryForceDirectedColorMapping : IDiscoveryColorData = {
-    0: "#1d192b",
-    1: "#484458",
-    2: "#e8def8",
-  }

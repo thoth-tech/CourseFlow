@@ -1,9 +1,9 @@
 import { Component, HostListener } from '@angular/core';
-import { DiscoveryService } from '../../discovery.service';
+import { DiscoveryForceDirectedService } from '../../discovery-force-directed.service';
 import { IDiscoveryNodeData, IDiscoveryLinkData, IDiscoveryColorData, 
          IMapProperties, IWindowSizeProperties } from '../../interfaces/discoveryInterfaces';
 import * as d3 from "d3";
-import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import {MatDialog} from '@angular/material/dialog';
 import { DiscoveryDetailDialogComponent } from '../discovery-detail-dialog/discovery-detail-dialog.component';
 
 
@@ -34,21 +34,19 @@ export class DiscoveryForceDirectedMapComponent {
    * Constructor for the component.
    * @param discoveryService Injected discovery service
    */
-  constructor(private discoveryService: DiscoveryService, public dialog: MatDialog) {
+  constructor(private discoveryForceDirectedService: DiscoveryForceDirectedService, public dialog: MatDialog) {
     
     // Retrieve the data - TODO This data retrieval in NOT async, this will need to be changed once proper data format is fully sorted.
     // Map properties
-    this.mapProperties = discoveryService.getForceDirectedMapProperties();
+    this.mapProperties = discoveryForceDirectedService.getDiscoveryMapProperties();
     this.currentWindowSizeProperties = this.mapProperties.windowSizePropertiesSizes["start"];
 
     //  Node and link data
-    //this.discoveryNodesData = this.discoveryService.getAllDiscoveryForceDirectedNodeData();
-    //this.discoveryLinksData = this.discoveryService.getAllDiscoveryForceDirectedLinkData();
-    this.discoveryNodesData = this.discoveryService.getAllDiscoveryForceDirectedNodeJsonData();
-    this.discoveryLinksData = this.discoveryService.getAllDiscoveryForceDirectedLinkJsonData();
+    this.discoveryNodesData = this.discoveryForceDirectedService.getAllDiscoveryNodeData();
+    this.discoveryLinksData = this.discoveryForceDirectedService.getAllDiscoveryLinkData();
 
     // Color
-    this.discoveryColorData = this.discoveryService.getDiscoveryForceDirectedColorMapping();
+    this.discoveryColorData = this.discoveryForceDirectedService.getDiscoveryColorMapping();
   }
 
   /**

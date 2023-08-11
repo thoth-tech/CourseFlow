@@ -1,8 +1,8 @@
 import { Component, HostListener } from '@angular/core';
 import * as d3 from "d3";
-import { DiscoveryService } from '../../discovery.service';
+import { DiscoveryClusterService } from '../../discovery-cluster.service';
 import { IDiscoveryNodeData, IMapProperties, IWindowSizeProperties} from '../../interfaces/discoveryInterfaces';
-import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import {MatDialog} from '@angular/material/dialog';
 import { DiscoveryDetailDialogComponent } from '../discovery-detail-dialog/discovery-detail-dialog.component';
 
 
@@ -27,9 +27,9 @@ export class DiscoveryClusterMapComponent {
    * Constructor for the component.
    * @param discoveryService Injected discovery service
    */
-  constructor(private discoveryService: DiscoveryService, public dialog: MatDialog) {
+  constructor(private discoveryClusterService: DiscoveryClusterService, public dialog: MatDialog) {
     
-    this.mapProperties = discoveryService.getForceDirectedMapProperties();
+    this.mapProperties = discoveryClusterService.getDiscoveryMapProperties();
     this.currentWindowSizeProperties = this.mapProperties.windowSizePropertiesSizes["start"];
   }
 
@@ -38,7 +38,7 @@ export class DiscoveryClusterMapComponent {
    */
   ngOnInit(): void {
 
-    this.discoveryNodesData = this.discoveryService.getAllDiscoveryClusterNodeData();
+    this.discoveryNodesData = this.discoveryClusterService.getAllDiscoveryNodeData();
 
     // Once we get the data, we can start creating the cluster map.
     this.preCreateDiscoveryForceDirectedMap();

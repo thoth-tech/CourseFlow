@@ -1,4 +1,4 @@
-import { ILabelProperties, IMapProperties, IWindowSizePropertiesSizes, IWindowSizeProperties } from "../interfaces/discoveryInterfaces"
+import { ILabelProperties, IMapProperties, IWindowSizePropertiesSizes, IWindowSizeProperties, IDiscoveryColorData } from "../interfaces/discoveryInterfaces"
 
 const startWindowSizeBasedProperties : IWindowSizeProperties = {
     canvasWidth: 400,
@@ -108,7 +108,7 @@ const windowSizePropertiesSizes: IWindowSizePropertiesSizes = {
     "large": largeWindowSizeBasedProperties
 }
 
-export const forceDirectedMapProperties: IMapProperties = {
+export const discoveryMapProperties: IMapProperties = {
     
     windowSizePropertiesSizes: windowSizePropertiesSizes,
     maxZoomOutAmount: 0,
@@ -117,4 +117,10 @@ export const forceDirectedMapProperties: IMapProperties = {
     canvasBorderRadius: "20px",
     lineOpacity: 0.2
 
+}
+
+export const discoveryForceDirectedColorMapping : IDiscoveryColorData = {
+    0: "#1d192b",
+    1: "#484458",
+    2: "#e8def8",
 }
