@@ -1,7 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { DiscoveryForceDirectedService } from '../../discovery-force-directed.service';
 import { IDiscoveryNodeData, IDiscoveryLinkData, IDiscoveryColorData, 
-         IMapProperties, IWindowSizeProperties, IDiscoveryTreeData } from '../../interfaces/discoveryInterfaces';
+         IMapProperties, IWindowSizeProperties, IDiscoveryData } from '../../interfaces/discoveryInterfaces';
 import * as d3 from "d3";
 import {MatDialog} from '@angular/material/dialog';
 import { DiscoveryDetailDialogComponent } from '../discovery-detail-dialog/discovery-detail-dialog.component';
@@ -125,54 +125,55 @@ export class DiscoveryForceDirectedMapComponent {
 
     // Create the zoom behaviour and call it.
     let zoomBehaviour = this.createZoomBehaviour(zoomableGroup);
-    baseSvgCanvas.call(zoomBehaviour)
+    baseSvgCanvas.call(zoomBehaviour);
 
+    // Start simulation
+    this.startForceDirectedSimulation(zoomableGroup);
 
+    //console.log(this.discoveryForceDirectedService.getDiscoveryTreeData())
+    // const root = d3.hierarchy(this.discoveryForceDirectedService.getDiscoveryTreeData())
+    // const links:any = root.links();
+    // const nodes:any = root.descendants();
 
-    console.log(this.discoveryForceDirectedService.getDiscoveryTreeData())
-    const root = d3.hierarchy(this.discoveryForceDirectedService.getDiscoveryTreeData())
-    const links:any = root.links();
-    const nodes:any = root.descendants();
+    // const sim = d3.forceSimulation(nodes)
+    //   .force("link", d3.forceLink(links).id((d:any) => d.id).distance(10).strength(1))
+    //   .force("charge", d3.forceManyBody().strength(-100))
+    //   .force("x", d3.forceX())
+    //   .force("y", d3.forceY())
+    //   .force("center", d3.forceCenter(this.currentWindowSizeProperties.canvasWidth / 2, this.currentWindowSizeProperties.canvasHeight / 2))
 
-    const sim = d3.forceSimulation(nodes)
-      .force("link", d3.forceLink(links).id((d:any) => d.id).distance(10).strength(1))
-      .force("charge", d3.forceManyBody().strength(-100))
-      .force("x", d3.forceX())
-      .force("y", d3.forceY())
-      .force("center", d3.forceCenter(this.currentWindowSizeProperties.canvasWidth / 2, this.currentWindowSizeProperties.canvasHeight / 2))
+    // const link = zoomableGroup.append("g")
+    // .attr("stroke", "red")
+    // .attr("stroke-width", 0.2)
+    // .attr("stroke-opacity", 0.6)
+    // .selectAll("line")
+    // .data(links)
+    // .join("line")
 
-    const link = zoomableGroup.append("g")
-    .attr("stroke", "red")
-    .attr("stroke-width", 0.2)
-    .attr("stroke-opacity", 0.6)
-    .selectAll("line")
-    .data(links)
-    .join("line")
+    // const node = zoomableGroup.append("g")
+    // .selectAll("circle")
+    // .data(nodes)
+    // .join("circle")
+    // .attr("fill", "white")
+    // .attr("r", 1.5)
+    // .on("click", (event, d: any) => { 
 
-    const node = zoomableGroup.append("g")
-    .selectAll("circle")
-    .data(nodes)
-    .join("circle")
-    .attr("fill", "white")
-    .attr("r", 1.5)
-    .on("click", (event, d: any) => { 
+    //   this.dialog.open(DiscoveryDetailDialogComponent, {
+    //     data: {name: d.data.name},
+    //     height: '400px', width: '400px'})
+    // });
 
-      this.dialog.open(DiscoveryDetailDialogComponent, {
-        data: {name: d.data.name},
-        height: '400px', width: '400px'})
-    });
+    // sim.on("tick", () => {
+    //   link
+    //     .attr("x1", (d: any) => d.source.x)
+    //     .attr("y1", (d: any) => d.source.y)
+    //     .attr("x2", (d: any) => d.target.x)
+    //     .attr("y2", (d: any) => d.target.y)
+    //   node
+    //     .attr("cx", (d: any) => d.x)
+    //     .attr("cy", (d: any) => d.y)
 
-    sim.on("tick", () => {
-      link
-        .attr("x1", (d: any) => d.source.x)
-        .attr("y1", (d: any) => d.source.y)
-        .attr("x2", (d: any) => d.target.x)
-        .attr("y2", (d: any) => d.target.y)
-      node
-        .attr("cx", (d: any) => d.x)
-        .attr("cy", (d: any) => d.y)
-
-    })
+    // })
   }
 
   /**

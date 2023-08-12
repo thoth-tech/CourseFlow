@@ -1,20 +1,9 @@
-export interface IDiscoveryTreeData {
-    name: string,
-    children: IDiscoveryTreeData[]
-}
-
 export interface IDiscoveryData {
-    facultyNodes: IDiscoveryNodeData[],
-    disciplineNodes: IDiscoveryDisciplineData,
-    unitNodes: IDiscoveryUnitData
-}
-
-export interface IDiscoveryDisciplineData {
-    [key: string]: IDiscoveryNodeData[]
-}
-
-export interface IDiscoveryUnitData {
-    [key: string]: IDiscoveryNodeData[]
+    id: string,
+    name: string,
+    description: string,
+    nodeGroupLayer: string,
+    children: IDiscoveryData[]
 }
 
 export interface IDiscoveryNodeData extends d3.SimulationNodeDatum {

@@ -7,13 +7,12 @@
             <div class="discovery-page-navigation">
                 <h3>Menu</h3>
                 <button mat-raised-button color="primary" (click)="mapType = 'force-directed'">Force Directed Map</button>
-                <button mat-raised-button color="primary" (click)="mapType = 'force-directed-v2'">Force Directed Map v2</button>
-                <button mat-raised-button color="primary" (click)="mapType = 'cluster'">Cluster Map</button>
             </div>
 
         </mat-sidenav>
 
         <mat-sidenav-content class="discovery-page-content">
+
             <div [ngSwitch]="mapType">
 
                 <div *ngSwitchCase="'force-directed'">
@@ -21,16 +20,8 @@
                     <app-discovery-force-directed-map/>
                 </div>
 
-                <div *ngSwitchCase="'force-directed-v2'">
-                    <h3>Discovery Force Directed Map v2</h3>
-                    <app-discovery-force-directed-map-v2/>
-                </div>
-
-                <div *ngSwitchCase="'cluster'">
-                    <h3>Discovery Cluster Map</h3>
-                    <app-discovery-cluster-map/>
-                </div>
             </div>
+
         </mat-sidenav-content>
 
     </mat-sidenav-container>
