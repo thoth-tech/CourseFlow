@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
 export class DiscoveryPageComponent {
   
   // The map type to display
-  mapType = "force-directed";
+  mapType = "force-directed-v2";
 }

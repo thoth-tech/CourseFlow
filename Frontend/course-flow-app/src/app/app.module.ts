@@ -13,6 +13,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { DiscoveryForceDirectedMapV2Component } from './discovery/discovery-force-directed-map-v2/discovery-force-directed-map-v2.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     DiscoveryForceDirectedMapComponent,
     DiscoveryClusterMapComponent,
     DiscoveryDetailDialogComponent,
+    DiscoveryForceDirectedMapV2Component,
   ],
   imports: [
     BrowserModule,

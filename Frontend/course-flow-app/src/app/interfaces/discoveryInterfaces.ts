@@ -1,3 +1,9 @@
+export interface IDiscoveryData {
+    facultyNodes: IDiscoveryNodeData[],
+    disciplineNodes: IDiscoveryNodeData[],
+    unitNodes: IDiscoveryNodeData[]
+}
+
 export interface IDiscoveryNodeData extends d3.SimulationNodeDatum {
     id: string;
     name: string;
