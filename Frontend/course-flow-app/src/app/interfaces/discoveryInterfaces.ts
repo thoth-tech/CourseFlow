@@ -1,7 +1,15 @@
 export interface IDiscoveryData {
     facultyNodes: IDiscoveryNodeData[],
-    disciplineNodes: IDiscoveryNodeData[],
-    unitNodes: IDiscoveryNodeData[]
+    disciplineNodes: IDiscoveryDisciplineData,
+    unitNodes: IDiscoveryUnitData
+}
+
+export interface IDiscoveryDisciplineData {
+    [key: string]: IDiscoveryNodeData[]
+}
+
+export interface IDiscoveryUnitData {
+    [key: string]: IDiscoveryNodeData[]
 }
 
 export interface IDiscoveryNodeData extends d3.SimulationNodeDatum {

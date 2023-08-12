@@ -1,5 +1,13 @@
 <div class="force-directed-map-container">
-    <p>Zoom to exapand/collapse nodes</p>
-    <div id="discoveryForceDirectedMap"></div>
-    <button  mat-raised-button color="primary">Reset View</button>
+
+    <div class="force-directed-map-content">
+        <div id="discoveryForceDirectedMap"></div>
+        <button  mat-raised-button color="primary" (click)="onResetViewPressed()">Reset View</button>
+    </div>
+
+    <div class="more-details-container">
+        <h3>{{moreDetailsPanelTitle}}</h3>
+        <p>{{moreDetailsPanelDescription}}</p>
+    </div>
+
 </div>

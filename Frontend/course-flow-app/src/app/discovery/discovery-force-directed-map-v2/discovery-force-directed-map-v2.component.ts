@@ -28,6 +28,10 @@ export class DiscoveryForceDirectedMapV2Component {
   discoveryData: IDiscoveryData = Object();
   discoveryColorData: IDiscoveryColorData = Object();
 
+  // More details panel
+  moreDetailsPanelTitle: string = "Faculty Area"
+  moreDetailsPanelDescription: string = "Faculties corresponding to specific fields within Deakin University."
+
   /**
    * Constructor for the component.
    * @param discoveryService Injected discovery service
@@ -96,11 +100,13 @@ export class DiscoveryForceDirectedMapV2Component {
    */
   createDiscoveryForceDirectedMap(): void {
 
+    this.moreDetailsPanelTitle = "Faculty Area"
+    this.moreDetailsPanelDescription = "Faculties corresponding to specific fields within Deakin University."
+
     // In case we already have a svg element (can happen on window resize events)
     d3.select("svg").remove();
 
     // Create the svg canvas
-    
     let baseSvgCanvas =  d3.select("div#discoveryForceDirectedMap")
                             .append("svg")
                             .attr("width", this.currentWindowSizeProperties.canvasWidth)
@@ -142,13 +148,42 @@ export class DiscoveryForceDirectedMapV2Component {
    */
   startForceDirectedSimulation(parentNode:d3.Selection<SVGGElement, unknown, HTMLElement, any>, 
                                nodeData: IDiscoveryNodeData[]): void {
-  
+
+    if (this.currentForceDirectedSimulation) {
+      this.currentForceDirectedSimulation.stop();
+    }
+
+    nodeData.forEach((node) => {
+      node.x = undefined;
+      node.y = undefined;
+    })
+
+    parentNode.selectAll("g").remove();
+
     // Create the simulation behaviour
     // To my understanding, force many body will apply an equal force to all nodes. Without the link property, nodes will spread out from each other.
     // With the link property, we can attach nodes with each other and form a graph. Unlinked nodes will spread out by itself, and links nodes I assume will have forces applied in a different manner.
     this.currentForceDirectedSimulation = d3.forceSimulation(nodeData)
         //.force("link", d3.forceLink(this.discoveryLinksData).id(this.getNodeId))
-      .force("charge", d3.forceManyBody().strength(-300))
+      .force("charge", d3.forceManyBody().strength((data : d3.SimulationNodeDatum) => {
+        
+        let d: IDiscoveryNodeData = data as IDiscoveryNodeData
+
+        let force: number = 0;
+
+        if (d.nodeLabelType === "Faculty") {
+          force = -2000 / nodeData.length
+        }
+          
+        else if (d.nodeLabelType === "Discipline") {
+          force = -2000 / nodeData.length
+        }
+        else{
+          force = -2000 / nodeData.length
+        }
+
+        return force;
+      }))
       .force("center", d3.forceCenter(this.currentWindowSizeProperties.canvasWidth / 2, this.currentWindowSizeProperties.canvasHeight / 2))
 
 
@@ -161,36 +196,103 @@ export class DiscoveryForceDirectedMapV2Component {
     // Create the circle element and attach it to the node.
     this.currentNodes.append('circle')
       .attr("fill", (d : IDiscoveryNodeData) => this.discoveryColorData[d.group])
-      .attr("r", 40)
+      .attr("r", (d : IDiscoveryNodeData) => {
+        let radius = 0;
+        
+        if (d.nodeLabelType === "Faculty") {
+
+          radius = this.currentWindowSizeProperties.fieldNodeRadius;
+        }
+        else if (d.nodeLabelType === "Discipline") {
+
+          radius = this.currentWindowSizeProperties.specializationNodeRadius;
+        }
+        else if (d.nodeLabelType === "Unit") {
+
+          radius = this.currentWindowSizeProperties.unitNodeRadius;
+        }
+
+        return radius;
+      })
       .on("click", (event, d: IDiscoveryNodeData) => { 
 
-        if (this.currentForceDirectedSimulation) {
-          this.currentForceDirectedSimulation.stop();
-        }
-    
-        nodeData.forEach((node) => {
-          node.x = undefined;
-          node.y = undefined;
-        })
-
-        parentNode.selectAll("g").remove();
-
         if (d.nodeLabelType == "Faculty") {
-          this.startForceDirectedSimulation(parentNode, this.discoveryData.disciplineNodes);
+
+          this.moreDetailsPanelTitle = d.id;
+          this.moreDetailsPanelDescription = d.description;
+          this.startForceDirectedSimulation(parentNode, this.discoveryData.disciplineNodes[d.id]);
         }
         else if (d.nodeLabelType == "Discipline") {
-          this.startForceDirectedSimulation(parentNode, this.discoveryData.unitNodes);
+          
+          this.moreDetailsPanelTitle = d.id;
+          this.moreDetailsPanelDescription = d.description;
+          this.startForceDirectedSimulation(parentNode, this.discoveryData.unitNodes[d.id]);
         }
-
-
+        else if (d.nodeLabelType == "Unit") {
+          this.moreDetailsPanelTitle = d.name;
+          this.moreDetailsPanelDescription = d.description;
+        }
       });
 
     // Create the text element and attach it to the group.
     this.currentNodes.append("text")
     .text((d: IDiscoveryNodeData) => d.id)          
-    .style('font-size', "20px")
-    .attr('x', 50)
-    .attr('y', 5)
+    .style('font-size', (d: IDiscoveryNodeData) => {
+      let radius = 0;
+      
+      if (d.nodeLabelType === "Faculty") {
+
+        radius = this.currentWindowSizeProperties.fieldNodeRadius;
+      }
+      else if (d.nodeLabelType === "Discipline") {
+
+        radius = this.currentWindowSizeProperties.specializationNodeRadius;
+      }
+      else if (d.nodeLabelType === "Unit") {
+
+        radius = this.currentWindowSizeProperties.unitNodeRadius;
+      }
+
+      return radius;
+    })
+    .attr('x', (d: IDiscoveryNodeData) => {
+
+      let x = 0;
+        
+      if (d.nodeLabelType === "Faculty") {
+
+        x = this.currentWindowSizeProperties.fieldLabelProperties.x;
+      }
+      else if (d.nodeLabelType === "Discipline") {
+
+        x = this.currentWindowSizeProperties.specializationLabelProperties.x;
+      }
+      else if (d.nodeLabelType === "Unit") {
+
+        x = this.currentWindowSizeProperties.unitLabelProperties.x;
+      }
+
+      return x;
+    })
+    .attr('y', (d: IDiscoveryNodeData) => {
+
+      let y = 0;
+        
+      if (d.nodeLabelType === "Faculty") {
+
+        y = this.currentWindowSizeProperties.fieldLabelProperties.y;
+      }
+      else if (d.nodeLabelType === "Discipline") {
+
+        y = this.currentWindowSizeProperties.specializationLabelProperties.y;
+      }
+      else if (d.nodeLabelType === "Unit") {
+
+        y = this.currentWindowSizeProperties.unitLabelProperties.y;
+      }
+
+      return y;
+    })
     .style('font-weight', '900')
     .style('fill', 'rgba(255, 255, 255, 0.8');
 
@@ -216,4 +318,12 @@ export class DiscoveryForceDirectedMapV2Component {
       }
     });
   }
+
+    /**
+   * Resets the simulation.
+   */
+    onResetViewPressed(): void {
+
+      this.createDiscoveryForceDirectedMap();
+    }
 }
