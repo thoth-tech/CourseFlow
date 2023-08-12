@@ -2,11 +2,12 @@
 import { Injectable } from '@angular/core';
 
 // Interfaces
-import { IDiscoveryNodeData, IDiscoveryLinkData, IDiscoveryColorData, IMapProperties} from './interfaces/discoveryInterfaces';
+import { IDiscoveryNodeData, IDiscoveryLinkData, IDiscoveryColorData, IMapProperties, IDiscoveryTreeData} from './interfaces/discoveryInterfaces';
 
 // Data Handling
 import { discoveryMapProperties, discoveryForceDirectedColorMapping } from './dataHandling/discoveryMapProperties';
 import { discoveryNodesForceDirectedData, discoveryLinksForceDirectedData } from './dataHandling/discoveryForceDirectedJsonData';
+import { getDiscoveryTreeData } from './dataHandling/discoveryForceDirectedJsonData_v3';
 
 @Injectable({
   providedIn: 'root'
@@ -45,5 +46,9 @@ export class DiscoveryForceDirectedService {
    */
   getAllDiscoveryLinkData(): IDiscoveryLinkData[] {
     return discoveryLinksForceDirectedData;
+  }
+
+  getDiscoveryTreeData(): IDiscoveryTreeData {
+    return getDiscoveryTreeData;
   }
 }

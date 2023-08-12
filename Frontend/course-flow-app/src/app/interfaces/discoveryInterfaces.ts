@@ -1,3 +1,8 @@
+export interface IDiscoveryTreeData {
+    name: string,
+    children: IDiscoveryTreeData[]
+}
+
 export interface IDiscoveryData {
     facultyNodes: IDiscoveryNodeData[],
     disciplineNodes: IDiscoveryDisciplineData,

@@ -10,5 +10,5 @@ import { MatIcon } from '@angular/material/icon'
 })
 export class DiscoveryDetailDialogComponent {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: {discoveryNodeData: IDiscoveryNodeData}) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: {name: string}) {}
 }
