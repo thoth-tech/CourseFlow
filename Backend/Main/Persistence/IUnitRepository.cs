@@ -8,6 +8,7 @@ public interface IUnitRepository
     void AddMultipleUnits(IEnumerable<IUnit> units);
     IUnit? GetUnitByCode(string unitCode);
     List<IUnit> GetAllUnits();
+    List<IUnit> SearchUnitsByCode(string unitCode);
     void UpdateUnit(string unitCode, IUnit updatedUnit);
     void DeleteUnit(string unitCode);
 }

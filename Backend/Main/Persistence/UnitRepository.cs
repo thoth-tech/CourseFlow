@@ -58,6 +58,20 @@ public class UnitRepository : IUnitRepository
         return BsonSerializer.Deserialize<Unit>(unitDocument);
     }
 
+    public List<IUnit> SearchUnitsByCode(string unitCode)
+    {
+        // todo: Security: Fix possible query injection exploit. Need to validate unitCode before use.
+        FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("code", unitCode);
+
+        List<IUnit> units = new List<IUnit>();
+        foreach (BsonDocument unitDocument in unitsCollection.Find(filter).ToEnumerable())
+        {
+            units.Add(BsonSerializer.Deserialize<Unit>(unitDocument));
+        }
+
+        return units;
+    }
+
     public void UpdateUnit(string unitCode, IUnit updatedUnit)
     {
         // todo: Security: Fix possible query injection exploit. Need to validate unitCode before use.
