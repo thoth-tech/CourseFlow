@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+
 @Component({
   selector: 'app-discovery-page',
   templateUrl: './discovery-page.component.html',
@@ -7,6 +8,6 @@ import { Component } from '@angular/core';
 })
 export class DiscoveryPageComponent {
   
-  // The map type to display
-  mapType = "force-directed";
+  groupBySelection: string = "faculty";
+
 }

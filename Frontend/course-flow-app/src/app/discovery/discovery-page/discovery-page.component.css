@@ -1,30 +1,21 @@
-.discovery-page-container {
-    padding-top: 5em;
-    padding-bottom: 5em;
+.discovery-container {
+    height: 100%;
+}
+
+.discovery-sidenav-title {
+    margin: 2em;
+    font-size: xx-large;
+}
+
+.discovery-sidenav-section {
+    margin: 1em;
+}
+
+.discovery-selection-radio-group {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    gap: 2em;
 }
 
-.discovery-page-content {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-}
-
-.discovery-page-container h3 {
-    font-size: 20pt;
-}
-
-.discovery-page-navigation-sidenav{
-    padding: 2em;
-    text-align: center;
-}
-
-.discovery-page-navigation {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 1em;
+.discovery-section-title {
+    font-size: large;
 }
