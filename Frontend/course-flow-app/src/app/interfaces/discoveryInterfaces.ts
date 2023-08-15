@@ -1,11 +1,32 @@
 import * as d3 from "d3";
 
-export interface IDiscoveryData {
+/*******************************************************************************************************************************
+ * Discovery JSON Data Types.
+ *******************************************************************************************************************************/
+
+export interface IDiscoveryJsonUnitData {
+    id: object,
+    code: string,
+    title: string,
+    description: string,
+    constraints: Array<IDiscoveryJsonUnitContraintData>
+}
+
+export interface IDiscoveryJsonUnitContraintData {
+    type: string,
+    units: Array<string>
+}
+
+/*******************************************************************************************************************************
+ * Discovery Hierarchical Unit Data Types.
+ *******************************************************************************************************************************/
+
+export interface IDiscoveryHierarchicalData {
     id: string,
     name: string,
     description: string,
-    nodeGroupLayer: string,
-    children: IDiscoveryData[]
+    group: string,
+    children: IDiscoveryHierarchicalData[]
 }
 
 export interface IDiscoveryNodeData extends d3.SimulationNodeDatum {
@@ -21,6 +42,17 @@ export interface IDiscoveryLinkData extends d3.SimulationLinkDatum<d3.Simulation
     target: string | number | IDiscoveryNodeData;
     lineLabelType: string;
     distance: number;
+}
+
+
+/*******************************************************************************************************************************
+ * Graph Properties Data Types
+ *******************************************************************************************************************************/
+
+export interface IDiscoveryGraphProperties {
+    forceManyBodyStrength: Record<string, number>
+    linkDistance: Record<string, number>
+    nodeRadius: Record<string, number>
 }
 
 export interface IDiscoveryColorData {
