@@ -38,4 +38,10 @@ public class UnitsController : ControllerBase
     {
         return Ok(_unitsRepo.SearchUnitsByCode(code));
     }
+
+    [HttpPost()]
+    public IActionResult SearchUnits(UnitSearchQuery query)
+    {
+        return Ok(_unitsRepo.SearchUnits(query));
+    }
 }

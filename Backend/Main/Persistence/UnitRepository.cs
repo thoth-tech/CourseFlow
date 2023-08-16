@@ -3,6 +3,7 @@ using CourseFlow.Backend.Models.Constraints;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
+using System.Linq;
 
 namespace CourseFlow.Backend.Persistence;
 
@@ -56,6 +57,25 @@ public class UnitRepository : IUnitRepository
         }
 
         return BsonSerializer.Deserialize<Unit>(unitDocument);
+    }
+
+    public IEnumerable<IUnit> SearchUnits(UnitSearchQuery query)
+    {
+        // todo: Security: Fix possible query injection exploit. Need to validate query parameters before use.
+        FilterDefinitionBuilder<BsonDocument> builder = Builders<BsonDocument>.Filter;
+        FilterDefinition<BsonDocument> filter = builder.And(
+            builder.Regex("code", query.Code),
+            builder.Regex("title", query.Title),
+            builder.Regex("description", string.Join("|", query.Keywords)),
+            builder.Eq("level", query.Level));
+
+        List<IUnit> units = new List<IUnit>();
+        foreach (BsonDocument unitDocument in unitsCollection.Find(filter).ToEnumerable())
+        {
+            units.Add(BsonSerializer.Deserialize<Unit>(unitDocument));
+        }
+
+        return units;
     }
 
     public IEnumerable<IUnit> SearchUnitsByCode(string unitCode)

@@ -9,6 +9,7 @@ public interface IUnitRepository
     IUnit? GetUnitByCode(string unitCode);
     IEnumerable<IUnit> GetAllUnits();
     IEnumerable<IUnit> SearchUnitsByCode(string unitCode);
+    IEnumerable<IUnit> SearchUnits(UnitSearchQuery query);
     void UpdateUnit(string unitCode, IUnit updatedUnit);
     void DeleteUnit(string unitCode);
 }
