@@ -1,0 +1,46 @@
+<!-- <div class="unit-card">
+    <div class="unit-header">
+      <span class="unit-code">{{ unitCode }}</span>
+      <span class="status-symbol" [ngClass]="statusClass"></span>
+    </div>
+
+
+    <div class="unit-body">
+      <span class="unit-name">{{ unitName }}</span>
+      <span class="unit-type">{{ unitType }}</span>
+    </div>
+
+
+    <div class="info-icon">
+      <i class="fa fa-info-circle" (click)="showInfo()"></i>
+    </div>
+
+  </div> -->
+
+<div class="unit-card">
+    <div class="left-side">
+        <div class="unit-code-and-name">
+            <div class="unit-code">{{ unitCode }}</div>
+            <div class="unit-name">{{ unitName }}</div>
+        </div>
+        <div class="unit-type">{{ unitType }}</div>
+    </div>
+
+
+    <div class="right-side">
+        <div class="unit-status">
+          <div class="unit-status-background">
+            <div class="unit-status-icon">
+              <img src="../../assets/icons/complete-icon.svg">
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="unit-info-popup"> i
+        </div> -->
+        <div class="info-icon">
+            <img src="../../assets/icons/unit-card-info-icon.svg">
+          </div>
+    </div>
+</div>
+  
