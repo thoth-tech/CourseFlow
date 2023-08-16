@@ -33,7 +33,7 @@ public class UnitRepository : IUnitRepository
         unitsCollection.DeleteOne(filter);
     }
 
-    public List<IUnit> GetAllUnits()
+    public IEnumerable<IUnit> GetAllUnits()
     {
         List<IUnit> units = new List<IUnit>();
         foreach (BsonDocument unitDocument in unitsCollection.Find(_ => true).ToEnumerable()) 
@@ -58,7 +58,7 @@ public class UnitRepository : IUnitRepository
         return BsonSerializer.Deserialize<Unit>(unitDocument);
     }
 
-    public List<IUnit> SearchUnitsByCode(string unitCode)
+    public IEnumerable<IUnit> SearchUnitsByCode(string unitCode)
     {
         // todo: Security: Fix possible query injection exploit. Need to validate unitCode before use.
         FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("code", unitCode);
