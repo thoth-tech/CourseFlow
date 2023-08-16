@@ -1,14 +1,10 @@
 <app-header></app-header>
 
-<div class="side-menu">
-
-</div>
-
-<div class="main-content">
-  <app-unit-card 
-    [unitCode]="'SIT111'" 
-    [unitName]="'Computer Systems'" 
-    [unitType]="'core'" 
-    >
-  </app-unit-card>
+<div class="body-container">
+  <div class="side-menu">
+    <app-main-side-nav></app-main-side-nav>
+  </div>
+  <div class="main-content">
+    <app-trimester-container></app-trimester-container>
+  </div>
 </div>

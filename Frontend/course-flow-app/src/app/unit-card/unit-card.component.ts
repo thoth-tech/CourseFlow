@@ -8,7 +8,7 @@ import { Component, Input, EventEmitter, Output } from '@angular/core';
 export class UnitCardComponent {
   @Input() unitCode!: string;
   @Input() unitName!: string;
-  @Input() unitType!: 'core' | 'elective';
+  @Input() unitType!: string;
   // @Input() unitStatus!: string;
 
 

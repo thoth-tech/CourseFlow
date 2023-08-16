@@ -1,0 +1,23 @@
+[
+    {
+      "unitCode": "SIT102",
+      "unitName": "Introduction to Programming",
+      "unitType": "Core"
+    },
+    {
+      "unitCode": "SIT103",
+      "unitName": "Database Fundamentals",
+      "unitType": "Core"
+    },
+    {
+      "unitCode": "SIT192",
+      "unitName": "Discrete Mathematics",
+      "unitType": "Core"
+    },
+    {
+      "unitCode": "MAF101",
+      "unitName": "Fundamentals of Finance",
+      "unitType": "Elective"
+    }
+  ]
+  
