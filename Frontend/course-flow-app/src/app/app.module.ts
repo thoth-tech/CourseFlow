@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DiscoveryPageComponent } from './discovery/discovery-page/discovery-page.component';
-import { DiscoveryFacultyBasedMapComponent } from './discovery/discovery-faculty-based-map/discovery-faculty-based-map.component';
+import { DiscoveryGraphBasedMapComponent } from './discovery/discovery-graph-based-map/discovery-graph-based-map.component';
 import { DiscoveryDetailDialogComponent } from './discovery/discovery-detail-dialog/discovery-detail-dialog.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -23,7 +23,7 @@ import { MatRadioModule } from '@angular/material/radio';
     AppComponent,
     DiscoveryPageComponent,
     DiscoveryDetailDialogComponent,
-    DiscoveryFacultyBasedMapComponent,
+    DiscoveryGraphBasedMapComponent,
   ],
   imports: [
     BrowserModule,

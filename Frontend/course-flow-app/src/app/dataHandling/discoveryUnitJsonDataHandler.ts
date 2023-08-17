@@ -28,13 +28,12 @@ export const getDiscoveryUnitData : IDiscoveryHierarchicalData = processJsonData
 // Function for Data Handling
 function processJsonData() : IDiscoveryHierarchicalData  {
 
-    // Better to not use any as a type but for now, should be fine as the backend will send back data in the required type once testing is done.
     let unitDataArray: object[] = unitDataJson;
     
     // Define the root node.
     let unitData: IDiscoveryHierarchicalData = {
         id: "root",
-        name: 'Unit Discovery Map',
+        name: 'Faculty Based Unit Discovery Map',
         description: "Find your ideal unit based on your interests.",
         group: "0",
         children: []
@@ -61,8 +60,6 @@ function processJsonData() : IDiscoveryHierarchicalData  {
             (facultyObject: IDiscoveryHierarchicalData) => facultyObject.id === facultyName);
         
         if (currentFacultyObject == null) {
-
-
 
             // Create a new faculty object.
             currentFacultyObject = {
@@ -99,7 +96,7 @@ function processJsonData() : IDiscoveryHierarchicalData  {
         // Add the unit - I won't bother checking if units exist as they should be unique.
         let currentUnitObject: IDiscoveryHierarchicalData = {
             id: unitCode,
-            name: unitObject.title,
+            name: `${unitObject.code}: ${unitObject.title}`,
             description: unitObject.description,
             group: "3",
             children: []

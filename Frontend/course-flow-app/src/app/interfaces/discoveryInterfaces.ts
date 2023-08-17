@@ -5,16 +5,16 @@ import * as d3 from "d3";
  *******************************************************************************************************************************/
 
 export interface IDiscoveryJsonUnitData {
-    id: object,
-    code: string,
-    title: string,
-    description: string,
-    constraints: Array<IDiscoveryJsonUnitContraintData>
+    id: object;
+    code: string;
+    title: string;
+    description: string;
+    constraints: Array<IDiscoveryJsonUnitContraintData>;
 }
 
 export interface IDiscoveryJsonUnitContraintData {
-    type: string,
-    units: Array<string>
+    type: string;
+    units: Array<string>;
 }
 
 /*******************************************************************************************************************************
@@ -22,11 +22,11 @@ export interface IDiscoveryJsonUnitContraintData {
  *******************************************************************************************************************************/
 
 export interface IDiscoveryHierarchicalData {
-    id: string,
-    name: string,
-    description: string,
-    group: string,
-    children: IDiscoveryHierarchicalData[]
+    id: string;
+    name: string;
+    description: string;
+    group: string;
+    children: IDiscoveryHierarchicalData[];
 }
 
 export interface IDiscoveryNodeData extends d3.SimulationNodeDatum {
@@ -50,9 +50,27 @@ export interface IDiscoveryLinkData extends d3.SimulationLinkDatum<d3.Simulation
  *******************************************************************************************************************************/
 
 export interface IDiscoveryGraphProperties {
-    forceManyBodyStrength: Record<string, number>
-    linkDistance: Record<string, number>
-    nodeRadius: Record<string, number>
+    width: number;
+    height: number;
+    iniitialCanvasTranslationOffsetX: number;
+    iniitialCanvasTranslationOffsetY: number;
+    initialZoomScale: number;
+    forceManyBodyStrength: Record<string, number>;
+    linkStrength: Record<string, number>;
+    linkDistance: Record<string, number>;
+    zoomLevelProperties: Record<string, IDiscoveryGraphZoomLevelProperties>;
+}
+
+export interface IDiscoveryGraphZoomLevelProperties {
+    linkWidth: Record<string, number>;
+    linkOpacity: Record<string, number>;
+    nodeRadius: Record<string, number>;
+    nodeColor: Record<string, string>;
+    textColor: Record<string, string>;
+    textFontSize: Record<string, number>;
+    textFontWieight: Record<string, number>;
+    textXOffset: Record<string, number>;
+    textYOffset: Record<string, number>;
 }
 
 export interface IDiscoveryColorData {
