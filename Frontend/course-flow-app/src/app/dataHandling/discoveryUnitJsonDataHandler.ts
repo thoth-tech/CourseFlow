@@ -33,7 +33,7 @@ function processJsonData() : IDiscoveryHierarchicalData  {
     // Define the root node.
     let unitData: IDiscoveryHierarchicalData = {
         id: "root",
-        name: 'Faculty Based Unit Discovery Map',
+        name: 'Faculty',
         description: "Find your ideal unit based on your interests.",
         group: "0",
         children: []

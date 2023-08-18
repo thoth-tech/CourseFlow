@@ -8,6 +8,7 @@ import { DiscoveryPageComponent } from './discovery/discovery-page/discovery-pag
 import { DiscoveryGraphBasedMapComponent } from './discovery/discovery-graph-based-map/discovery-graph-based-map.component';
 import { DiscoveryDetailDialogComponent } from './discovery/discovery-detail-dialog/discovery-detail-dialog.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DiscoveryTextBasedListsComponent } from './discovery/discovery-text-based-lists/discovery-text-based-lists.component';
 
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
@@ -16,6 +17,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatRadioModule } from '@angular/material/radio';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatCardModule} from '@angular/material/card';
+
 
 
 @NgModule({
@@ -24,13 +28,14 @@ import { MatRadioModule } from '@angular/material/radio';
     DiscoveryPageComponent,
     DiscoveryDetailDialogComponent,
     DiscoveryGraphBasedMapComponent,
+    DiscoveryTextBasedListsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
-    MatDialogModule, MatButtonModule, MatIconModule, MatSidenavModule, MatExpansionModule, MatChipsModule, MatRadioModule
+    MatDialogModule, MatButtonModule, MatIconModule, MatSidenavModule, MatExpansionModule, MatChipsModule, MatRadioModule, MatGridListModule, MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

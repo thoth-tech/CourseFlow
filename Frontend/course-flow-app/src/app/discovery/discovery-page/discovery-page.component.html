@@ -22,8 +22,9 @@
                     <!-- Radio buttons for selecting type of unit clustering/groups -->
                     <mat-radio-group class="discovery-selection-radio-group" [(ngModel)]="groupBySelection">
 
-                        <mat-radio-button value="faculty">Faculty</mat-radio-button>
-                        <mat-radio-button value="related-units">Related Units</mat-radio-button>
+                        <mat-radio-button [value]="discoveryGroupUnitsBy.faculty">Faculty</mat-radio-button>
+                        <mat-radio-button [value]="discoveryGroupUnitsBy.degree">Degree</mat-radio-button>
+                        <mat-radio-button [value]="discoveryGroupUnitsBy.related_units">Related Units</mat-radio-button>
 
                     </mat-radio-group>
 
@@ -39,10 +40,10 @@
                     </mat-expansion-panel-header>
                     
                     <!-- Radio buttons for selecting display type -->
-                    <mat-radio-group class="discovery-selection-radio-group" [(ngModel)]="groupBySelection">
+                    <mat-radio-group class="discovery-selection-radio-group" [(ngModel)]="displayTypeSelection">
 
-                        <mat-radio-button value="faculty">Node Based Graph</mat-radio-button>
-                        <mat-radio-button value="related-units">Text Based Lists</mat-radio-button>
+                        <mat-radio-button [value]="discoveryDisplayTypes.node_based_graph">Node Based Graph</mat-radio-button>
+                        <mat-radio-button [value]="discoveryDisplayTypes.text_based_lists">Text Based Lists</mat-radio-button>
 
                     </mat-radio-group>
 
@@ -56,9 +57,14 @@
     </mat-sidenav>
 
     <!-- Discovery content -->
-    <mat-sidenav-content class="discovery-page-content">
+    <mat-sidenav-content class="discovery-page-content" [ngSwitch]="displayTypeSelection">
 
-        <app-discovery-graph-based-map/>
+        <div>
+            <app-discovery-graph-based-map *ngSwitchCase="discoveryDisplayTypes.node_based_graph"/>
+            <app-discovery-text-based-lists *ngSwitchCase="discoveryDisplayTypes.text_based_lists"/>
+        </div>
+
+
 
     </mat-sidenav-content>
 
