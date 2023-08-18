@@ -139,8 +139,8 @@ export class DiscoveryGraphBasedMapComponent {
 
     // To get the zoom behaviour to work, we need to get the base canvas to call the behaviour.
     baseSvgCanvasElement.call(zoomBehaviour.transform, d3.zoomIdentity.translate(
-                              this.graphProperties.iniitialCanvasTranslationOffsetX, 
-                              this.graphProperties.iniitialCanvasTranslationOffsetY)
+                              this.graphProperties.width / 2 + this.graphProperties.iniitialCanvasTranslationOffsetX, 
+                              this.graphProperties.height / 2 + this.graphProperties.iniitialCanvasTranslationOffsetY)
                               .scale(this.graphProperties.initialZoomScale))
                         .call(zoomBehaviour);
   }
@@ -155,14 +155,14 @@ export class DiscoveryGraphBasedMapComponent {
     this.sim = d3.forceSimulation(this.nodes as d3.SimulationNodeDatum[])
                   .force("link", d3.forceLink(this.links as d3.SimulationLinkDatum<d3.SimulationNodeDatum>[])
                                    .id((nodeData: d3.SimulationNodeDatum) => this.getNodeAsDiscoveryHierarchicalData(nodeData).id)
-                                   .distance((linkData: d3.SimulationLinkDatum<d3.SimulationNodeDatum>) => this.graphProperties.linkDistance[this.getNodeAsDiscoveryHierarchicalData(linkData.source).group])
-                                   .strength((linkData: d3.SimulationLinkDatum<d3.SimulationNodeDatum>) => this.graphProperties.linkStrength[this.getNodeAsDiscoveryHierarchicalData(linkData.source).group]))
+                                   // TODO From some playing with values, it seems the link distance doesn't do much.
+                                   //.distance((linkData: d3.SimulationLinkDatum<d3.SimulationNodeDatum>) => this.graphProperties.linkDistance[this.getNodeAsDiscoveryHierarchicalData(linkData.source).group])
+                                   .strength((linkData: d3.SimulationLinkDatum<d3.SimulationNodeDatum>) => this.graphProperties.linkStrength[this.getNodeAsDiscoveryHierarchicalData(linkData.source).group])
+                                   .iterations(2))
                   .force("charge", d3.forceManyBody()
-                                     .strength((nodeData: d3.SimulationNodeDatum) => this.graphProperties.forceManyBodyStrength[this.getNodeAsDiscoveryHierarchicalData(nodeData).group]))
-          
-                  .force("x", d3.forceX())
-                  .force("y", d3.forceY())
-                  .force("center", d3.forceCenter(this.graphProperties.width / 2, this.graphProperties.height / 2))
+                                     .strength((nodeData: d3.SimulationNodeDatum) => this.graphProperties.forceManyBodyStrength[this.getNodeAsDiscoveryHierarchicalData(nodeData).group] / this.nodes.length))
+        
+
 
     // Create the links using the links data.
     this.currentRenderedLinks = parentElement.append("g")

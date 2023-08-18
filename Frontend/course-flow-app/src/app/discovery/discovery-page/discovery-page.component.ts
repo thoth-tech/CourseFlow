@@ -17,6 +17,6 @@ export class DiscoveryPageComponent {
   discoveryDisplayTypes = EDiscoveryDisplayTypes
 
   // Tracking the current enum states.
-  groupBySelection: EDiscoveryGroupUnitsBy = EDiscoveryGroupUnitsBy.faculty;
-  displayTypeSelection: EDiscoveryDisplayTypes = EDiscoveryDisplayTypes.text_based_lists
+  groupBySelection: EDiscoveryGroupUnitsBy = EDiscoveryGroupUnitsBy.course;
+  displayTypeSelection: EDiscoveryDisplayTypes = EDiscoveryDisplayTypes.node_based_graph
 }

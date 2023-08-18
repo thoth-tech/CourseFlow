@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 // Data Type Imports
 import { IDiscoveryHierarchicalData, IDiscoveryGraphProperties } from './interfaces/discoveryInterfaces';
 
+// Enums
 import { EDiscoveryGroupUnitsBy } from "./enum/discoveryEnums"
 
 // Data Handling Imports

@@ -32,6 +32,11 @@ function processJsonData() : IDiscoveryHierarchicalData  {
         // The unit object containing data of a unit.
         const currentObject: any = unitDataArray[index];
       
+        // For now, due to the way the layout gets ruined if there is courses with no majors, I'll exclude them for now.
+        if (currentObject["majors"].length === 0) {
+            break;
+        }
+
         // Local var for the majors
         let majors: IDiscoveryHierarchicalData[] = []
 
@@ -40,7 +45,7 @@ function processJsonData() : IDiscoveryHierarchicalData  {
             id:  currentObject["code"],
             name: currentObject["name"],
             description: currentObject["overview"],
-            group: "0",
+            group: "1",
             children: majors
         }
         
@@ -58,7 +63,7 @@ function processJsonData() : IDiscoveryHierarchicalData  {
                 id: major["code"],
                 name: major["name"],
                 description: "",
-                group: "1",
+                group: "2",
                 children: units
             }
 
@@ -73,7 +78,7 @@ function processJsonData() : IDiscoveryHierarchicalData  {
                     id: unit,
                     name: unit,
                     description: "",
-                    group: "2",
+                    group: "3",
                     children: []
                 }
 
