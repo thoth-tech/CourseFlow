@@ -4,7 +4,7 @@
  */
 
 // Data Type Imports
-import { IDiscoveryJsonUnitData, IDiscoveryHierarchicalData } from '../interfaces/discoveryInterfaces';
+import { IDiscoveryFacultyJsonUnitData, IDiscoveryHierarchicalData } from '../interfaces/discoveryInterfaces';
 
 // JSON Data Imports
 import  * as unitDataJson from "../../data/unit_data.json"
@@ -23,7 +23,7 @@ const facultyNames: Record<string, string> = {
 }
 
 // Function Exports
-export const getDiscoveryUnitData : IDiscoveryHierarchicalData = processJsonData();
+export const getFacultyDiscoveryUnitData : IDiscoveryHierarchicalData = processJsonData();
 
 // Function for Data Handling
 function processJsonData() : IDiscoveryHierarchicalData  {
@@ -34,7 +34,7 @@ function processJsonData() : IDiscoveryHierarchicalData  {
     let unitData: IDiscoveryHierarchicalData = {
         id: "root",
         name: 'Faculty',
-        description: "Find your ideal unit based on your interests.",
+        description: "Find your ideal unit based on faculty and unit codes",
         group: "0",
         children: []
     }
@@ -43,7 +43,7 @@ function processJsonData() : IDiscoveryHierarchicalData  {
     for (let index = 0; index < unitDataArray.length; index++) {
         
         // The unit object containing data of a unit.
-        const unitObject: IDiscoveryJsonUnitData = unitDataArray[index] as IDiscoveryJsonUnitData;
+        const unitObject: IDiscoveryFacultyJsonUnitData = unitDataArray[index] as IDiscoveryFacultyJsonUnitData;
 
         // Get the unit code.
         let unitCode: string = unitObject.code;

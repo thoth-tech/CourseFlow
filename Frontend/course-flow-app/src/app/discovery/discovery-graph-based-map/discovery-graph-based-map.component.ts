@@ -1,8 +1,11 @@
 // Angular Imports
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 // Data Type Imports
 import { IDiscoveryHierarchicalData, IDiscoveryGraphProperties, IDiscoveryGraphZoomLevelProperties } from 'src/app/interfaces/discoveryInterfaces';
+
+// Enum Imports
+import { EDiscoveryGroupUnitsBy } from "../../enum/discoveryEnums"
 
 // Services Imports
 import { DiscoveryService } from 'src/app/discovery.service';
@@ -18,6 +21,18 @@ import * as d3 from "d3";
 })
 export class DiscoveryGraphBasedMapComponent {
 
+  // Params from the parent component
+  @Input() set groupUnitsBy(value: EDiscoveryGroupUnitsBy) {
+
+    // On input group by units value change, we need to fetch the related data - TODO This will need to be optimized when backend is implemented.
+    this.root = d3.hierarchy<IDiscoveryHierarchicalData>(this.discoveryService.getDiscoveryUnitData(value))
+    this.links = this.root.links();
+    this.nodes  = this.root.descendants();
+
+    // Create the discovery map.
+    this.createDiscoveryMap();
+  }
+
   // Contains all graph related properties.
   graphProperties: IDiscoveryGraphProperties;
   currentGraphZoomLevelProperties: IDiscoveryGraphZoomLevelProperties;
@@ -28,32 +43,28 @@ export class DiscoveryGraphBasedMapComponent {
   links: d3.HierarchyLink<IDiscoveryHierarchicalData>[];
   nodes: d3.HierarchyNode<IDiscoveryHierarchicalData>[];
 
-  // Node and link visuals.
+  // Canvas, node and link visuals.
+  baseSvgCanvasElement: d3.Selection<SVGSVGElement, unknown, HTMLElement, any> | null = null;
   currentRenderedNodes: d3.Selection<SVGGElement | d3.BaseType, d3.HierarchyNode<IDiscoveryHierarchicalData>, SVGGElement, unknown> | null = null;;
   currentRenderedLinks: d3.Selection<SVGGElement | d3.BaseType, d3.HierarchyLink<IDiscoveryHierarchicalData>, SVGGElement, unknown> | null = null;
+
+  // Sim cache.
+  sim: d3.Simulation<d3.SimulationNodeDatum, undefined> | null = null;
 
   /**
    * Constructor for the component.
    * @param discoveryService Injected discovery service
    */
   constructor(private discoveryService: DiscoveryService) {
-        
+
     // Get the graph properties.
     this.graphProperties = this.discoveryService.getGraphProperties();
     this.currentGraphZoomLevelProperties = this.graphProperties.zoomLevelProperties["0"];
 
     // Define the hierarchy of nodes and links.
-    this.root = d3.hierarchy<IDiscoveryHierarchicalData>(this.discoveryService.getDiscoveryUnitData())
+    this.root = d3.hierarchy<IDiscoveryHierarchicalData>(this.discoveryService.getDiscoveryUnitData(this.groupUnitsBy))
     this.links = this.root.links();
     this.nodes  = this.root.descendants();
-  }
-
-  /**
-   * Called after component is created.
-   */
-  ngOnInit(): void {
-
-    this.createDiscoveryMap();
   }
 
   /**
@@ -61,17 +72,27 @@ export class DiscoveryGraphBasedMapComponent {
    */
   createDiscoveryMap(): void {
 
+    // If sim exists, stop the sim in case it is still running it.
+    if (this.sim) {
+      this.sim.stop();
+    }
+
+    // Remove canvas if aleady exists
+    if (this.baseSvgCanvasElement) {
+      this.baseSvgCanvasElement.remove()
+    }
+
     // Create the svg canvas element.
-    let baseSvgCanvasElement = this.createBaseCanvas();
+    this.baseSvgCanvasElement = this.createBaseCanvas();
 
     // To be able to zoom inside the base canvas, we need to attach a group element to the canvas.
-    let zoomableGroupElement = baseSvgCanvasElement.append("g");
+    let zoomableGroupElement = this.baseSvgCanvasElement.append("g");
 
     // Start graph simulation.
     this.startGraphSimulation(zoomableGroupElement);
 
     // Handle zooming capabilities.
-    this.handleZoom(zoomableGroupElement, baseSvgCanvasElement); 
+    this.handleZoom(zoomableGroupElement, this.baseSvgCanvasElement); 
   }
 
   /**
@@ -131,7 +152,7 @@ export class DiscoveryGraphBasedMapComponent {
   startGraphSimulation(parentElement:d3.Selection<SVGGElement, unknown, HTMLElement, any>): void {
 
     // Create the physics simulation.
-    const sim = d3.forceSimulation(this.nodes as d3.SimulationNodeDatum[])
+    this.sim = d3.forceSimulation(this.nodes as d3.SimulationNodeDatum[])
                   .force("link", d3.forceLink(this.links as d3.SimulationLinkDatum<d3.SimulationNodeDatum>[])
                                    .id((nodeData: d3.SimulationNodeDatum) => this.getNodeAsDiscoveryHierarchicalData(nodeData).id)
                                    .distance((linkData: d3.SimulationLinkDatum<d3.SimulationNodeDatum>) => this.graphProperties.linkDistance[this.getNodeAsDiscoveryHierarchicalData(linkData.source).group])
@@ -172,7 +193,7 @@ export class DiscoveryGraphBasedMapComponent {
       .style('font-weight', (nodeData: d3.HierarchyNode<IDiscoveryHierarchicalData>) => this.currentGraphZoomLevelProperties.textFontWieight[this.getNodeAsDiscoveryHierarchicalData(nodeData).group])
 
     // Start the actual simulation tick.
-    sim.on("tick", () => {
+    this.sim.on("tick", () => {
 
       if (this.currentRenderedLinks != null) {
 
@@ -188,9 +209,9 @@ export class DiscoveryGraphBasedMapComponent {
         this.currentRenderedNodes.attr("transform", (nodeData: d3.HierarchyNode<IDiscoveryHierarchicalData>) => `translate(${(nodeData as d3.SimulationNodeDatum).x || 0}, ${(nodeData as d3.SimulationNodeDatum).y || 0})`);
       }
 
-      console.log(sim.alpha())
-      if (sim.alpha() < 0.05) {
-        sim.stop();
+      // Stopping the sim after a certain point - can remove this if allowing users to move nodes around.
+      if (this.sim && this.sim.alpha() < 0.05) {
+        this.sim.stop();
       }
 
     })

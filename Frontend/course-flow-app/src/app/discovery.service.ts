@@ -4,8 +4,11 @@ import { Injectable } from '@angular/core';
 // Data Type Imports
 import { IDiscoveryHierarchicalData, IDiscoveryGraphProperties } from './interfaces/discoveryInterfaces';
 
+import { EDiscoveryGroupUnitsBy } from "./enum/discoveryEnums"
+
 // Data Handling Imports
-import { getDiscoveryUnitData } from './dataHandling/discoveryUnitJsonDataHandler';
+import { getFacultyDiscoveryUnitData } from './dataHandling/discoveryFacultyJsonDataHandler';
+import { getCourseDiscoveryUnitData } from './dataHandling/discoveryCourseJsonDataHandler';
 import { getGraphProperties } from './dataHandling/discoveryGraphPropertiesDataHandler';
 
 @Injectable({
@@ -19,9 +22,34 @@ export class DiscoveryService {
    * Get all unit data.
    * @returns All unit data.
    */
-  getDiscoveryUnitData(): IDiscoveryHierarchicalData {
+  getDiscoveryUnitData(groupUnitsByQuery: EDiscoveryGroupUnitsBy): IDiscoveryHierarchicalData {
     
-    return getDiscoveryUnitData;
+    let data = getFacultyDiscoveryUnitData;
+
+    switch (groupUnitsByQuery) {
+
+      case EDiscoveryGroupUnitsBy.faculty:
+
+        data = getFacultyDiscoveryUnitData;
+        break;
+    
+      case EDiscoveryGroupUnitsBy.course:
+
+        data = getCourseDiscoveryUnitData;
+        break;
+
+      case EDiscoveryGroupUnitsBy.related_units:
+
+        data = getFacultyDiscoveryUnitData;
+        break;
+
+      default:
+
+        data = getFacultyDiscoveryUnitData;
+        break;
+    }
+
+    return data;
   }
 
   /**

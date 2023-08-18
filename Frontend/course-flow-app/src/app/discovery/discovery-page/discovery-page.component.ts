@@ -1,15 +1,9 @@
+// Angular Imports
 import { Component } from '@angular/core';
 
-enum EDiscoveryGroupUnitsBy {
-  faculty,
-  degree,
-  related_units
-}
+// Enum Imports
+import { EDiscoveryGroupUnitsBy, EDiscoveryDisplayTypes } from "../../enum/discoveryEnums"
 
-enum EDiscoveryDisplayTypes {
-  node_based_graph,
-  text_based_lists
-}
 
 @Component({
   selector: 'app-discovery-page',

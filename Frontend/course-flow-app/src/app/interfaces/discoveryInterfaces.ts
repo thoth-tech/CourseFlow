@@ -4,7 +4,7 @@ import * as d3 from "d3";
  * Discovery JSON Data Types.
  *******************************************************************************************************************************/
 
-export interface IDiscoveryJsonUnitData {
+export interface IDiscoveryFacultyJsonUnitData {
     id: object;
     code: string;
     title: string;

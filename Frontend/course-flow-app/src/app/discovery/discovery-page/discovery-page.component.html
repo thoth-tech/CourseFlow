@@ -23,7 +23,7 @@
                     <mat-radio-group class="discovery-selection-radio-group" [(ngModel)]="groupBySelection">
 
                         <mat-radio-button [value]="discoveryGroupUnitsBy.faculty">Faculty</mat-radio-button>
-                        <mat-radio-button [value]="discoveryGroupUnitsBy.degree">Degree</mat-radio-button>
+                        <mat-radio-button [value]="discoveryGroupUnitsBy.course">Course</mat-radio-button>
                         <mat-radio-button [value]="discoveryGroupUnitsBy.related_units">Related Units</mat-radio-button>
 
                     </mat-radio-group>
@@ -60,8 +60,8 @@
     <mat-sidenav-content class="discovery-page-content" [ngSwitch]="displayTypeSelection">
 
         <div>
-            <app-discovery-graph-based-map *ngSwitchCase="discoveryDisplayTypes.node_based_graph"/>
-            <app-discovery-text-based-lists *ngSwitchCase="discoveryDisplayTypes.text_based_lists"/>
+            <app-discovery-graph-based-map *ngSwitchCase="discoveryDisplayTypes.node_based_graph" [groupUnitsBy]="groupBySelection"/>
+            <app-discovery-text-based-lists *ngSwitchCase="discoveryDisplayTypes.text_based_lists" [groupUnitsBy]="groupBySelection"/>
         </div>
 
 
