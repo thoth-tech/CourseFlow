@@ -25,6 +25,7 @@ export class DiscoveryService {
    */
   getDiscoveryUnitData(groupUnitsByQuery: EDiscoveryGroupUnitsBy): IDiscoveryHierarchicalData {
     
+    // TODO Swap out when connected with backend.
     let data = getFacultyDiscoveryUnitData;
 
     switch (groupUnitsByQuery) {

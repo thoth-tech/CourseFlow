@@ -21,8 +21,37 @@ import * as d3 from "d3";
 })
 export class DiscoveryGraphBasedMapComponent {
 
+  // Contains all graph related visual properties.
+  graphProperties: IDiscoveryGraphProperties = {} as IDiscoveryGraphProperties;
+  currentGraphZoomLevelProperties: IDiscoveryGraphZoomLevelProperties = {} as IDiscoveryGraphZoomLevelProperties;
+  currentZoomLevel = 0;
+
+  // Node related properties containing the core link and node data - not to be confused with the node and link visuals.
+  root: d3.HierarchyNode<IDiscoveryHierarchicalData> = {} as d3.HierarchyNode<IDiscoveryHierarchicalData>;
+  links: d3.HierarchyLink<IDiscoveryHierarchicalData>[] = [];
+  nodes: d3.HierarchyNode<IDiscoveryHierarchicalData>[] = [];
+
+  // Canvas, node and link visuals.
+  baseSvgCanvasElement: d3.Selection<SVGSVGElement, unknown, HTMLElement, any> | null = null;
+  currentRenderedNodes: d3.Selection<SVGGElement | d3.BaseType, d3.HierarchyNode<IDiscoveryHierarchicalData>, SVGGElement, unknown> | null = null;;
+  currentRenderedLinks: d3.Selection<SVGGElement | d3.BaseType, d3.HierarchyLink<IDiscoveryHierarchicalData>, SVGGElement, unknown> | null = null;
+
+  // Simulation.
+  sim: d3.Simulation<d3.SimulationNodeDatum, undefined> | null = null;
+
+  /**
+   * Constructor for the component.
+   * @param discoveryService Injected discovery service
+   */
+  constructor(private discoveryService: DiscoveryService) {
+  }
+
   // Params from the parent component
   @Input() set groupUnitsBy(value: EDiscoveryGroupUnitsBy) {
+
+    // Get the graph properties.
+    this.graphProperties = this.discoveryService.getGraphProperties();
+    this.currentGraphZoomLevelProperties = this.graphProperties.zoomLevelProperties["0"];
 
     // On input group by units value change, we need to fetch the related data - TODO This will need to be optimized when backend is implemented.
     this.root = d3.hierarchy<IDiscoveryHierarchicalData>(this.discoveryService.getDiscoveryUnitData(value))
@@ -31,40 +60,6 @@ export class DiscoveryGraphBasedMapComponent {
 
     // Create the discovery map.
     this.createDiscoveryMap();
-  }
-
-  // Contains all graph related properties.
-  graphProperties: IDiscoveryGraphProperties;
-  currentGraphZoomLevelProperties: IDiscoveryGraphZoomLevelProperties;
-  currentZoomLevel = 0;
-
-  // Node related properties containing the core link and node data - not to be confused with the node and link visuals.
-  root: d3.HierarchyNode<IDiscoveryHierarchicalData>;
-  links: d3.HierarchyLink<IDiscoveryHierarchicalData>[];
-  nodes: d3.HierarchyNode<IDiscoveryHierarchicalData>[];
-
-  // Canvas, node and link visuals.
-  baseSvgCanvasElement: d3.Selection<SVGSVGElement, unknown, HTMLElement, any> | null = null;
-  currentRenderedNodes: d3.Selection<SVGGElement | d3.BaseType, d3.HierarchyNode<IDiscoveryHierarchicalData>, SVGGElement, unknown> | null = null;;
-  currentRenderedLinks: d3.Selection<SVGGElement | d3.BaseType, d3.HierarchyLink<IDiscoveryHierarchicalData>, SVGGElement, unknown> | null = null;
-
-  // Sim cache.
-  sim: d3.Simulation<d3.SimulationNodeDatum, undefined> | null = null;
-
-  /**
-   * Constructor for the component.
-   * @param discoveryService Injected discovery service
-   */
-  constructor(private discoveryService: DiscoveryService) {
-
-    // Get the graph properties.
-    this.graphProperties = this.discoveryService.getGraphProperties();
-    this.currentGraphZoomLevelProperties = this.graphProperties.zoomLevelProperties["0"];
-
-    // Define the hierarchy of nodes and links.
-    this.root = d3.hierarchy<IDiscoveryHierarchicalData>(this.discoveryService.getDiscoveryUnitData(this.groupUnitsBy))
-    this.links = this.root.links();
-    this.nodes  = this.root.descendants();
   }
 
   /**
@@ -106,8 +101,8 @@ export class DiscoveryGraphBasedMapComponent {
       .append("svg")
       .attr("width", this.graphProperties.width)
       .attr("height", this.graphProperties.height)
-      .style("background-color", "#ececec")
-      .style("border-radius", "20px");
+      .style("background-color", this.graphProperties.canvasColor)
+      .style("border-radius", this.graphProperties.canvasBorderRadius);
   }
 
   /**
@@ -122,6 +117,7 @@ export class DiscoveryGraphBasedMapComponent {
     let zoomBehaviour = d3.zoom<SVGSVGElement, unknown>().on("zoom", (event) => {
         
         // Work out the zoom level and change graph properties.
+        // TODO Requires improvement in terms of flexibility.
         if (this.currentZoomLevel != 0 && event.transform.k <= 0.8) {
           this.currentZoomLevel = 0
           this.currentGraphZoomLevelProperties = this.graphProperties.zoomLevelProperties["0"]
@@ -151,7 +147,7 @@ export class DiscoveryGraphBasedMapComponent {
    */
   startGraphSimulation(parentElement:d3.Selection<SVGGElement, unknown, HTMLElement, any>): void {
 
-    // Create the physics simulation.
+    // Create the physics simulation and apply different types of forces.
     this.sim = d3.forceSimulation(this.nodes as d3.SimulationNodeDatum[])
                   .force("link", d3.forceLink(this.links as d3.SimulationLinkDatum<d3.SimulationNodeDatum>[])
                                    .id((nodeData: d3.SimulationNodeDatum) => this.getNodeAsDiscoveryHierarchicalData(nodeData).id)
@@ -163,7 +159,6 @@ export class DiscoveryGraphBasedMapComponent {
                                      .strength((nodeData: d3.SimulationNodeDatum) => this.graphProperties.forceManyBodyStrength[this.getNodeAsDiscoveryHierarchicalData(nodeData).group] / this.nodes.length))
         
 
-
     // Create the links using the links data.
     this.currentRenderedLinks = parentElement.append("g")
       .selectAll("line")
@@ -173,7 +168,7 @@ export class DiscoveryGraphBasedMapComponent {
       .attr("stroke-width", (linkData: d3.HierarchyLink<IDiscoveryHierarchicalData>) => this.currentGraphZoomLevelProperties.linkWidth[this.getNodeAsDiscoveryHierarchicalData(linkData.source).group])
       .attr("stroke-opacity", (linkData: d3.HierarchyLink<IDiscoveryHierarchicalData>) => this.currentGraphZoomLevelProperties.linkOpacity[this.getNodeAsDiscoveryHierarchicalData(linkData.source).group])
 
-    // Create a node group based on the node data. 
+    // Create a node group, based on the node data. 
     // We can add shapes and text to this group.
     this.currentRenderedNodes = parentElement.selectAll("node")
       .data(this.nodes)
@@ -213,7 +208,6 @@ export class DiscoveryGraphBasedMapComponent {
       if (this.sim && this.sim.alpha() < 0.05) {
         this.sim.stop();
       }
-
     })
   }
 

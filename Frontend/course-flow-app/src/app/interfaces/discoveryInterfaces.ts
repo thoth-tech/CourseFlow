@@ -37,6 +37,8 @@ export interface IDiscoveryHierarchicalData {
 export interface IDiscoveryGraphProperties {
     width: number;
     height: number;
+    canvasColor: string;
+    canvasBorderRadius: string;
     iniitialCanvasTranslationOffsetX: number;
     iniitialCanvasTranslationOffsetY: number;
     initialZoomScale: number;
