@@ -50,7 +50,9 @@ export class DiscoveryGraphBasedMapComponent {
   constructor(private discoveryService: DiscoveryService) {
   }
 
-  // Params from the parent component
+  /**
+   * Input for group units by param.
+   */
   @Input() set groupUnitsBy(value: EDiscoveryGroupUnitsBy) {
 
     // Cache the current group by units enum
@@ -61,7 +63,7 @@ export class DiscoveryGraphBasedMapComponent {
     this.currentGraphZoomLevelProperties = this.graphProperties.zoomLevelProperties["0"];
 
     // On input group by units value change, we need to fetch the related data - TODO This will need to be optimized when backend is implemented.
-    this.resetGraph()
+    this.resetGraphWithNewData(this.discoveryService.getAllDiscoveryUnitData(this.currentGroupByUnitValue));
   }
 
   /**
@@ -192,6 +194,7 @@ export class DiscoveryGraphBasedMapComponent {
     // Start the actual simulation tick.
     this.sim.on("tick", () => {
 
+      // Set up the link line positions using (x, y) coordinates for source and target nodes - these are calculated from the physics simulation.
       if (this.currentRenderedLinks != null) {
 
         this.currentRenderedLinks
@@ -201,6 +204,7 @@ export class DiscoveryGraphBasedMapComponent {
         .attr("y2", (linkData: d3.HierarchyLink<IDiscoveryHierarchicalData>) => (linkData.target as d3.SimulationNodeDatum).y || 0)
       }
 
+      // Set up node positions based on their (x, y) coordinates - calculated from physics simulation.
       if (this.currentRenderedNodes != null) {
 
         this.currentRenderedNodes.attr("transform", (nodeData: d3.HierarchyNode<IDiscoveryHierarchicalData>) => `translate(${(nodeData as d3.SimulationNodeDatum).x || 0}, ${(nodeData as d3.SimulationNodeDatum).y || 0})`);
@@ -256,22 +260,26 @@ export class DiscoveryGraphBasedMapComponent {
    */
   showUnitDetailedGraph(event: PointerEvent, node: d3.HierarchyNode<IDiscoveryHierarchicalData>): void {
     
-    // Get the detailed data by id
-    this.root = d3.hierarchy<IDiscoveryHierarchicalData>(this.discoveryService.getDiscoveryUnitDataById(node.data.id, this.currentGroupByUnitValue));
-    this.links = this.root.links();
-    this.nodes  = this.root.descendants();
+    let foundUnitData = this.discoveryService.getDiscoveryUnitDataById(node.data.id, this.currentGroupByUnitValue);
 
-    // Create the discovery map.
-    this.createDiscoveryMap();
+    this.resetGraphWithNewData(foundUnitData);
   }
 
   /**
    * Resets the graph to the original graph with all the nodes.
    */
-  resetGraph(): void {
+  resetGraphToOriginalData(): void {
+
+    this.resetGraphWithNewData(this.discoveryService.getAllDiscoveryUnitData(this.currentGroupByUnitValue));
+  }
+
+  /**
+   * Resets the graph with data provided.
+   */
+  resetGraphWithNewData(data: IDiscoveryHierarchicalData): void {
 
     // Get the detailed data by id
-    this.root = d3.hierarchy<IDiscoveryHierarchicalData>(this.discoveryService.getAllDiscoveryUnitData(this.currentGroupByUnitValue));
+    this.root = d3.hierarchy<IDiscoveryHierarchicalData>(data);
     this.links = this.root.links();
     this.nodes  = this.root.descendants();
 

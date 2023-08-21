@@ -94,8 +94,8 @@ export function getDetailedCourseUnitData(id: string): IDiscoveryHierarchicalDat
 
     let unitDataArray: object[] = unitDataJson;
 
-    // Find unit by the id
-    let unitData: object = {};
+    // Find unit by the id - 
+    let unitData: any = {};
     for (let index = 0; index < unitDataArray.length; index++) {
         
         let currentUnitAtIndex: any = unitDataArray[index];
@@ -110,8 +110,8 @@ export function getDetailedCourseUnitData(id: string): IDiscoveryHierarchicalDat
 
     // Set the root node to the unit we are trying to find.
     detailedUnitInformation = {
-        id: id,
-        name: id,
+        id: unitData["code"],
+        name: unitData["name"],
         description: "",
         group: "0",
         children: []
