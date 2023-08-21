@@ -9,7 +9,7 @@ import { IDiscoveryGraphProperties } from '../interfaces/discoveryInterfaces';
 export const getGraphProperties : IDiscoveryGraphProperties = processJsonData();
 
 // JSON Data Imports
-import  * as graphData from "../../data/graphProperties.json"
+import  * as graphData from "../../data/mainGraphProperties.json"
 
 // Function for Data Handling
 function processJsonData() : IDiscoveryGraphProperties  {

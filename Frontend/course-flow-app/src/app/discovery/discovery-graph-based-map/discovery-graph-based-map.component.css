@@ -1,6 +1,25 @@
 .graph-based-map-container {
+    padding: 5em;
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
+    gap: 2em;
+}
+
+.graph-based-map-container button {
+    padding: 1em;
+    font-size: 20pt;
+}
+
+.detailed-card-panel {
+    width: 400px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.detailed-card-panel mat-card-content {
+    overflow-y: scroll;
 }

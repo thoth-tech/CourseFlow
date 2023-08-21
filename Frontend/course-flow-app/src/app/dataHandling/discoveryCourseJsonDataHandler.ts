@@ -9,11 +9,8 @@ import { IDiscoveryFacultyJsonUnitData, IDiscoveryHierarchicalData } from '../in
 // JSON Data Imports
 import  * as unitDataJson from "../../data/courses.json"
 
-// Function Exports
-export const getCourseDiscoveryUnitData : IDiscoveryHierarchicalData = processJsonData();
-
 // Function for Data Handling
-function processJsonData() : IDiscoveryHierarchicalData  {
+export function getCourseDiscoveryUnitData() : IDiscoveryHierarchicalData  {
 
     let unitDataArray: object[] = unitDataJson;
     
@@ -21,7 +18,7 @@ function processJsonData() : IDiscoveryHierarchicalData  {
     let unitData: IDiscoveryHierarchicalData = {
         id: "root",
         name: 'Course',
-        description: "Find your ideal unit based on course and major/minor sequences.",
+        description: "Lorem Ipsum".repeat(200),
         group: "0",
         children: []
     }
@@ -89,4 +86,79 @@ function processJsonData() : IDiscoveryHierarchicalData  {
     }
 
     return unitData;
+}
+
+
+// Function to find a unit by id, format the appropriate data and return it.
+export function getDetailedCourseUnitData(id: string): IDiscoveryHierarchicalData {
+
+    let unitDataArray: object[] = unitDataJson;
+
+    // Find unit by the id
+    let unitData: object = {};
+    for (let index = 0; index < unitDataArray.length; index++) {
+        
+        let currentUnitAtIndex: any = unitDataArray[index];
+
+        if (currentUnitAtIndex["code"] == id) {
+
+            unitData = currentUnitAtIndex;
+        }
+    }
+
+    let detailedUnitInformation: IDiscoveryHierarchicalData = {} as IDiscoveryHierarchicalData;
+
+    // Set the root node to the unit we are trying to find.
+    detailedUnitInformation = {
+        id: id,
+        name: id,
+        description: "",
+        group: "0",
+        children: []
+    }
+
+    // Create the pre-req and co-req objects
+    let preReqNode: IDiscoveryHierarchicalData = {
+        
+        id: "Pre-req",
+        name: "Pre-req",
+        description: "",
+        group: "1",
+        children: []
+    }
+
+    let coReqNode: IDiscoveryHierarchicalData = {
+        
+        id: "Co-req",
+        name: "Co-req",
+        description: "",
+        group: "1",
+        children: []
+    }
+
+    // Attach the pre-req and co-req nodes
+    detailedUnitInformation.children.push(preReqNode)
+    detailedUnitInformation.children.push(coReqNode)
+
+    // The course json data lacks pre-req and co-req data but I'll add in nodes to also help with layout
+    for (let index = 0; index < 10; index++) {
+        
+        preReqNode.children.push({
+            id: index.toString(),
+            name: index.toString(),
+            description: "",
+            group: "-1",
+            children: []
+        }) 
+
+        coReqNode.children.push({
+            id: index.toString(),
+            name: index.toString(),
+            description: "",
+            group: "-1",
+            children: []
+        })
+    }
+
+    return detailedUnitInformation;
 }

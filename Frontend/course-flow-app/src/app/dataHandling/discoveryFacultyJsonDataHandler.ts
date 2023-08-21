@@ -22,11 +22,8 @@ const facultyNames: Record<string, string> = {
     "L": "Other"
 }
 
-// Function Exports
-export const getFacultyDiscoveryUnitData : IDiscoveryHierarchicalData = processJsonData();
-
 // Function for Data Handling
-function processJsonData() : IDiscoveryHierarchicalData  {
+export function getFacultyDiscoveryUnitData() : IDiscoveryHierarchicalData  {
 
     let unitDataArray: object[] = unitDataJson;
     
@@ -106,4 +103,66 @@ function processJsonData() : IDiscoveryHierarchicalData  {
     }
 
     return unitData;
+}
+
+// Function to find a unit by id, format the appropriate data and return it.
+export function getDetailedFacultyUnitData(id: string): IDiscoveryHierarchicalData {
+    let unitDataArray: object[] = unitDataJson;
+
+    // Set the root node to the unit we are trying to find.
+    let detailedUnitInformation: IDiscoveryHierarchicalData = {
+        id: id,
+        name: id,
+        description: "",
+        group: "0",
+        children: []
+    }
+
+    // Create the pre-req and co-req objects
+    let preReqNode: IDiscoveryHierarchicalData = {
+        
+        id: "Pre-req",
+        name: "Pre-req",
+        description: "",
+        group: "1",
+        children: []
+    }
+
+    let coReqNode: IDiscoveryHierarchicalData = {
+        
+        id: "Co-req",
+        name: "Co-req",
+        description: "",
+        group: "1",
+        children: []
+    }
+
+    // Attach the pre-req and co-req nodes
+    detailedUnitInformation.children.push(preReqNode);
+    detailedUnitInformation.children.push(coReqNode);
+
+    // Find unit by the id
+    let unitData: any = {};
+    for (let index = 0; index < unitDataArray.length; index++) {
+        
+        let currentUnitAtIndex: any = unitDataArray[index];
+
+        if (currentUnitAtIndex["code"] == id) {
+
+            unitData = currentUnitAtIndex;
+        }
+    }
+
+    // The faculty json data has prereq info inside the contraints
+    let contraints: any = unitData["constraints"];
+    
+    for (let index = 0; index < contraints.length; index++) {
+        
+        if (contraints[index].get("type") === "prerequisites") {
+
+            preReqNode.children.push(contraints[index].get("units"))
+        }
+    }
+
+    return detailedUnitInformation;
 }

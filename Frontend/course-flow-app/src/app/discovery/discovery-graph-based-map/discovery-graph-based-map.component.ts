@@ -26,6 +26,9 @@ export class DiscoveryGraphBasedMapComponent {
   currentGraphZoomLevelProperties: IDiscoveryGraphZoomLevelProperties = {} as IDiscoveryGraphZoomLevelProperties;
   currentZoomLevel = 0;
 
+  // Current group by unit enum value
+  currentGroupByUnitValue: EDiscoveryGroupUnitsBy = EDiscoveryGroupUnitsBy.faculty;
+
   // Node related properties containing the core link and node data - not to be confused with the node and link visuals.
   root: d3.HierarchyNode<IDiscoveryHierarchicalData> = {} as d3.HierarchyNode<IDiscoveryHierarchicalData>;
   links: d3.HierarchyLink<IDiscoveryHierarchicalData>[] = [];
@@ -33,6 +36,7 @@ export class DiscoveryGraphBasedMapComponent {
 
   // Canvas, node and link visuals.
   baseSvgCanvasElement: d3.Selection<SVGSVGElement, unknown, HTMLElement, any> | null = null;
+  zoomableGroupElement: d3.Selection<SVGGElement, unknown, HTMLElement, any> | null = null;
   currentRenderedNodes: d3.Selection<SVGGElement | d3.BaseType, d3.HierarchyNode<IDiscoveryHierarchicalData>, SVGGElement, unknown> | null = null;;
   currentRenderedLinks: d3.Selection<SVGGElement | d3.BaseType, d3.HierarchyLink<IDiscoveryHierarchicalData>, SVGGElement, unknown> | null = null;
 
@@ -49,17 +53,15 @@ export class DiscoveryGraphBasedMapComponent {
   // Params from the parent component
   @Input() set groupUnitsBy(value: EDiscoveryGroupUnitsBy) {
 
+    // Cache the current group by units enum
+    this.currentGroupByUnitValue = value;
+
     // Get the graph properties.
     this.graphProperties = this.discoveryService.getGraphProperties();
     this.currentGraphZoomLevelProperties = this.graphProperties.zoomLevelProperties["0"];
 
     // On input group by units value change, we need to fetch the related data - TODO This will need to be optimized when backend is implemented.
-    this.root = d3.hierarchy<IDiscoveryHierarchicalData>(this.discoveryService.getDiscoveryUnitData(value))
-    this.links = this.root.links();
-    this.nodes  = this.root.descendants();
-
-    // Create the discovery map.
-    this.createDiscoveryMap();
+    this.resetGraph()
   }
 
   /**
@@ -81,13 +83,13 @@ export class DiscoveryGraphBasedMapComponent {
     this.baseSvgCanvasElement = this.createBaseCanvas();
 
     // To be able to zoom inside the base canvas, we need to attach a group element to the canvas.
-    let zoomableGroupElement = this.baseSvgCanvasElement.append("g");
+    this.zoomableGroupElement = this.baseSvgCanvasElement.append("g");
 
     // Start graph simulation.
-    this.startGraphSimulation(zoomableGroupElement);
+    this.startGraphSimulation(this.zoomableGroupElement);
 
     // Handle zooming capabilities.
-    this.handleZoom(zoomableGroupElement, this.baseSvgCanvasElement); 
+    this.handleZoom(this.zoomableGroupElement, this.baseSvgCanvasElement); 
   }
 
   /**
@@ -151,8 +153,7 @@ export class DiscoveryGraphBasedMapComponent {
     this.sim = d3.forceSimulation(this.nodes as d3.SimulationNodeDatum[])
                   .force("link", d3.forceLink(this.links as d3.SimulationLinkDatum<d3.SimulationNodeDatum>[])
                                    .id((nodeData: d3.SimulationNodeDatum) => this.getNodeAsDiscoveryHierarchicalData(nodeData).id)
-                                   // TODO From some playing with values, it seems the link distance doesn't do much.
-                                   //.distance((linkData: d3.SimulationLinkDatum<d3.SimulationNodeDatum>) => this.graphProperties.linkDistance[this.getNodeAsDiscoveryHierarchicalData(linkData.source).group])
+                                   .distance((linkData: d3.SimulationLinkDatum<d3.SimulationNodeDatum>) => this.graphProperties.linkDistance[this.getNodeAsDiscoveryHierarchicalData(linkData.source).group])
                                    .strength((linkData: d3.SimulationLinkDatum<d3.SimulationNodeDatum>) => this.graphProperties.linkStrength[this.getNodeAsDiscoveryHierarchicalData(linkData.source).group])
                                    .iterations(2))
                   .force("charge", d3.forceManyBody()
@@ -173,6 +174,7 @@ export class DiscoveryGraphBasedMapComponent {
     this.currentRenderedNodes = parentElement.selectAll("node")
       .data(this.nodes)
       .join("g")
+      .on("click", (event: PointerEvent, node: d3.HierarchyNode<IDiscoveryHierarchicalData>) => this.showUnitDetailedGraph(event, node))
 
     // Append a circle shape to the node group.
     this.currentRenderedNodes.append('circle')
@@ -249,4 +251,31 @@ export class DiscoveryGraphBasedMapComponent {
     }
   }
 
+  /**
+   * Shows a new graph for a unit with its own specific connections and information.
+   */
+  showUnitDetailedGraph(event: PointerEvent, node: d3.HierarchyNode<IDiscoveryHierarchicalData>): void {
+    
+    // Get the detailed data by id
+    this.root = d3.hierarchy<IDiscoveryHierarchicalData>(this.discoveryService.getDiscoveryUnitDataById(node.data.id, this.currentGroupByUnitValue));
+    this.links = this.root.links();
+    this.nodes  = this.root.descendants();
+
+    // Create the discovery map.
+    this.createDiscoveryMap();
+  }
+
+  /**
+   * Resets the graph to the original graph with all the nodes.
+   */
+  resetGraph(): void {
+
+    // Get the detailed data by id
+    this.root = d3.hierarchy<IDiscoveryHierarchicalData>(this.discoveryService.getAllDiscoveryUnitData(this.currentGroupByUnitValue));
+    this.links = this.root.links();
+    this.nodes  = this.root.descendants();
+
+    // Create the discovery map.
+    this.createDiscoveryMap();
+  }
 }

@@ -1,6 +1,30 @@
 <div class="graph-based-map-container">
 
+    <!-- Reset Button -->
+    <button mat-raised-button color="primary" (click)="resetGraph()"> Reset </button>
+
     <!-- d3.js based svg element will be added to this div element by the id. -->
     <div id="graphBasedMap"></div>
+
+    <!-- More detailed card panel -->
+    <mat-card class="detailed-card-panel">
+
+        <mat-card-header>
+
+            <mat-card-title> {{ root.data.name }} </mat-card-title>
+
+        </mat-card-header>
+
+        <mat-divider/>
+
+        <mat-card-content>
+
+            <p>
+                {{ root.data.description }}
+            </p>
+
+        </mat-card-content>
+
+    </mat-card>
 </div>
 

@@ -20,7 +20,7 @@ export class DiscoveryTextBasedListsComponent {
   // Params from the parent component
   @Input() set groupUnitsBy(value: EDiscoveryGroupUnitsBy) {
 
-    this.unitData = this.discoveryService.getDiscoveryUnitData(value);
+    this.unitData = this.discoveryService.getAllDiscoveryUnitData(value);
     this.previousData = [];
   }
 
@@ -30,7 +30,7 @@ export class DiscoveryTextBasedListsComponent {
 
   constructor(private discoveryService: DiscoveryService) {
 
-    this.unitData = this.discoveryService.getDiscoveryUnitData(this.groupUnitsBy);
+    this.unitData = this.discoveryService.getAllDiscoveryUnitData(this.groupUnitsBy);
     this.previousData = [];
   }
 

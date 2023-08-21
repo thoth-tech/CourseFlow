@@ -19,6 +19,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatRadioModule } from '@angular/material/radio';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatCardModule} from '@angular/material/card';
+import {MatDividerModule} from '@angular/material/divider';
 
 
 
@@ -35,7 +36,9 @@ import {MatCardModule} from '@angular/material/card';
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
-    MatDialogModule, MatButtonModule, MatIconModule, MatSidenavModule, MatExpansionModule, MatChipsModule, MatRadioModule, MatGridListModule, MatCardModule
+    MatDialogModule, MatButtonModule, MatIconModule, MatSidenavModule, 
+    MatExpansionModule, MatChipsModule, MatRadioModule, MatGridListModule,
+    MatCardModule, MatDividerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
