@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DiscoveryFacultyBasedMapComponent as DiscoveryGraphBasedMapComponent } from './discovery-graph-based-map.component';
+import {DiscoveryGraphBasedMapComponent } from './discovery-graph-based-map.component';
 
 describe('DiscoveryGraphBasedMapComponent', () => {
   let component: DiscoveryGraphBasedMapComponent;
