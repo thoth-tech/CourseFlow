@@ -1,21 +1,34 @@
-import * as d3 from "d3";
+// Angular Imports
+import { InjectionToken } from '@angular/core'
+
+// Enums
+import { EDiscoveryGroupUnitsBy } from "src/app/enum/discoveryEnums"
 
 /*******************************************************************************************************************************
- * Discovery JSON Data Types.
+ * Discovery Data Service Interfaces
  *******************************************************************************************************************************/
 
-export interface IDiscoveryFacultyJsonUnitData {
-    id: object;
-    code: string;
-    title: string;
-    description: string;
-    constraints: Array<IDiscoveryJsonUnitContraintData>;
+export const IDiscoveryDataServiceInjector = new InjectionToken<IDiscoveryDataService>("IDiscoveryDataService");
+
+export interface IDiscoveryDataService {
+
+    getDiscoveryHierarchicalData(groupUnitsByQuery: EDiscoveryGroupUnitsBy): IDiscoveryHierarchicalData;
+    getDiscoveryUnitDataById(id: string, groupUnitsByQuery: EDiscoveryGroupUnitsBy): IDiscoveryHierarchicalData;
 }
 
-export interface IDiscoveryJsonUnitContraintData {
-    type: string;
-    units: Array<string>;
+
+/*******************************************************************************************************************************
+ * Discovery Graph Utilities Service Interfaces
+ *******************************************************************************************************************************/
+
+
+export const IDiscoveryGraphUtilitiesServiceInjector = new InjectionToken<IDiscoveryGraphUtilitiesService>("IDiscoveryGraphUtilitiesService");
+
+export interface IDiscoveryGraphUtilitiesService {
+    
+    getGraphProperties(): IDiscoveryGraphProperties;
 }
+
 
 /*******************************************************************************************************************************
  * Discovery Hierarchical Unit Data Types.
@@ -57,4 +70,21 @@ export interface IDiscoveryGraphZoomLevelProperties {
     textFontWieight: Record<string, number>;
     textXOffset: Record<string, number>;
     textYOffset: Record<string, number>;
+}
+
+/*******************************************************************************************************************************
+ * Discovery JSON Data Types.
+ *******************************************************************************************************************************/
+
+export interface IDiscoveryFacultyJsonUnitData {
+    id: object;
+    code: string;
+    title: string;
+    description: string;
+    constraints: Array<IDiscoveryJsonUnitContraintData>;
+}
+
+export interface IDiscoveryJsonUnitContraintData {
+    type: string;
+    units: Array<string>;
 }

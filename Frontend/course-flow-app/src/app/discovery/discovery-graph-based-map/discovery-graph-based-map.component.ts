@@ -1,14 +1,11 @@
 // Angular Imports
-import { Component, Input } from '@angular/core';
+import { Component, Input, Inject } from '@angular/core';
 
-// Data Type Imports
-import { IDiscoveryHierarchicalData, IDiscoveryGraphProperties, IDiscoveryGraphZoomLevelProperties } from 'src/app/interfaces/discoveryInterfaces';
+// Interface Imports
+import { IDiscoveryDataServiceInjector, IDiscoveryDataService, IDiscoveryHierarchicalData, IDiscoveryGraphProperties, IDiscoveryGraphZoomLevelProperties, IDiscoveryGraphUtilitiesService, IDiscoveryGraphUtilitiesServiceInjector } from 'src/app/interfaces/discoveryInterfaces';
 
 // Enum Imports
 import { EDiscoveryGroupUnitsBy } from "../../enum/discoveryEnums"
-
-// Services Imports
-import { DiscoveryService } from 'src/app/discovery.service';
 
 // Third-Party Imports
 import * as d3 from "d3";
@@ -45,9 +42,10 @@ export class DiscoveryGraphBasedMapComponent {
 
   /**
    * Constructor for the component.
-   * @param discoveryService Injected discovery service
+   * @param discoveryDataService Injected discovery data service.
    */
-  constructor(private discoveryService: DiscoveryService) {
+  constructor(@Inject(IDiscoveryDataServiceInjector) private discoveryDataService: IDiscoveryDataService,
+              @Inject(IDiscoveryGraphUtilitiesServiceInjector) private discoveryGraphUtilitiesService: IDiscoveryGraphUtilitiesService) {
   }
 
   /**
@@ -59,11 +57,11 @@ export class DiscoveryGraphBasedMapComponent {
     this.currentGroupByUnitValue = value;
 
     // Get the graph properties.
-    this.graphProperties = this.discoveryService.getGraphProperties();
+    this.graphProperties = this.discoveryGraphUtilitiesService.getGraphProperties();
     this.currentGraphZoomLevelProperties = this.graphProperties.zoomLevelProperties["0"];
 
     // On input group by units value change, we need to fetch the related data - TODO This will need to be optimized when backend is implemented.
-    this.resetGraphWithNewData(this.discoveryService.getAllDiscoveryUnitData(this.currentGroupByUnitValue));
+    this.resetGraphWithNewData(this.discoveryDataService.getDiscoveryHierarchicalData(this.currentGroupByUnitValue));
   }
 
   /**
@@ -260,7 +258,7 @@ export class DiscoveryGraphBasedMapComponent {
    */
   showUnitDetailedGraph(event: PointerEvent, node: d3.HierarchyNode<IDiscoveryHierarchicalData>): void {
     
-    let foundUnitData = this.discoveryService.getDiscoveryUnitDataById(node.data.id, this.currentGroupByUnitValue);
+    let foundUnitData = this.discoveryDataService.getDiscoveryUnitDataById(node.data.id, this.currentGroupByUnitValue);
 
     this.resetGraphWithNewData(foundUnitData);
   }
@@ -270,7 +268,7 @@ export class DiscoveryGraphBasedMapComponent {
    */
   resetGraphToOriginalData(): void {
 
-    this.resetGraphWithNewData(this.discoveryService.getAllDiscoveryUnitData(this.currentGroupByUnitValue));
+    this.resetGraphWithNewData(this.discoveryDataService.getDiscoveryHierarchicalData(this.currentGroupByUnitValue));
   }
 
   /**

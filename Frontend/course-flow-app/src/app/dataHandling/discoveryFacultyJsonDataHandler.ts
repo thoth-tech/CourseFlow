@@ -7,7 +7,7 @@
 import { IDiscoveryFacultyJsonUnitData, IDiscoveryHierarchicalData } from '../interfaces/discoveryInterfaces';
 
 // JSON Data Imports
-import  * as unitDataJson from "../../data/unit_data.json"
+import  * as unitDataJson from "../../data/faculty_based_unit_data.json"
 
 // Faculty Mapping
 const facultyNames: Record<string, string> = {

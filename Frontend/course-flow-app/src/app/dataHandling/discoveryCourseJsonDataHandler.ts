@@ -7,7 +7,7 @@
 import { IDiscoveryFacultyJsonUnitData, IDiscoveryHierarchicalData } from '../interfaces/discoveryInterfaces';
 
 // JSON Data Imports
-import  * as unitDataJson from "../../data/courses.json"
+import  * as unitDataJson from "../../data/course_data.json"
 
 // Function for Data Handling
 export function getCourseDiscoveryUnitData() : IDiscoveryHierarchicalData  {

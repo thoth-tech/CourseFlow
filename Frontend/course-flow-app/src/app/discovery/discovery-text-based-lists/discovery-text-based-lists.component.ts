@@ -1,14 +1,11 @@
 // Angular Imports
-import { Component, Input } from '@angular/core';
+import { Component, Input, Inject } from '@angular/core';
 
-// Data Type Imports
-import { IDiscoveryHierarchicalData } from 'src/app/interfaces/discoveryInterfaces';
+// Interface Imports
+import { IDiscoveryDataServiceInjector, IDiscoveryDataService, IDiscoveryHierarchicalData } from 'src/app/interfaces/discoveryInterfaces';
 
 // Enum Imports
 import { EDiscoveryGroupUnitsBy } from "../../enum/discoveryEnums"
-
-// Services Imports
-import { DiscoveryService } from 'src/app/discovery.service';
 
 @Component({
   selector: 'app-discovery-text-based-lists',
@@ -20,7 +17,7 @@ export class DiscoveryTextBasedListsComponent {
   // Params from the parent component
   @Input() set groupUnitsBy(value: EDiscoveryGroupUnitsBy) {
 
-    this.unitData = this.discoveryService.getAllDiscoveryUnitData(value);
+    this.unitData = this.discoveryDataService.getDiscoveryHierarchicalData(value);
     this.previousData = [];
   }
 
@@ -28,9 +25,9 @@ export class DiscoveryTextBasedListsComponent {
   previousData: IDiscoveryHierarchicalData[];
   unitData: IDiscoveryHierarchicalData;
 
-  constructor(private discoveryService: DiscoveryService) {
+  constructor(@Inject(IDiscoveryDataServiceInjector) private discoveryDataService: IDiscoveryDataService) {
 
-    this.unitData = this.discoveryService.getAllDiscoveryUnitData(this.groupUnitsBy);
+    this.unitData = this.discoveryDataService.getDiscoveryHierarchicalData(this.groupUnitsBy);
     this.previousData = [];
   }
 
