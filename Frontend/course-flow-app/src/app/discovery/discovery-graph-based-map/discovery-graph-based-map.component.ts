@@ -139,7 +139,7 @@ export class DiscoveryGraphBasedMapComponent {
     baseSvgCanvasElement.call(zoomBehaviour.transform, d3.zoomIdentity.translate(
                               this.graphProperties.width / 2 + this.graphProperties.iniitialCanvasTranslationOffsetX, 
                               this.graphProperties.height / 2 + this.graphProperties.iniitialCanvasTranslationOffsetY)
-                              .scale(this.graphProperties.initialZoomScale))
+                              .scale(150 / this.nodes.length))
                         .call(zoomBehaviour);
   }
 
@@ -154,8 +154,7 @@ export class DiscoveryGraphBasedMapComponent {
                   .force("link", d3.forceLink(this.links as d3.SimulationLinkDatum<d3.SimulationNodeDatum>[])
                                    .id((nodeData: d3.SimulationNodeDatum) => this.getNodeAsDiscoveryHierarchicalData(nodeData).id)
                                    .distance((linkData: any) => this.discoveryGraphUtilitiesService.calculateLinkDistance(linkData))
-                                   .strength((linkData: d3.SimulationLinkDatum<d3.SimulationNodeDatum>) => this.graphProperties.linkStrength[this.getNodeAsDiscoveryHierarchicalData(linkData.source).group])
-                                   .iterations(2))
+                                   .strength(1))
                   .force("charge", d3.forceManyBody()
                                      .strength(this.discoveryGraphUtilitiesService.calculateForceStrength(this.root)))
         
@@ -254,13 +253,11 @@ export class DiscoveryGraphBasedMapComponent {
   }
 
   /**
-   * Shows a new graph for a unit with its own specific connections and information.
+   * Shows a new graph for a node with its own specific connections and information.
    */
   showUnitDetailedGraph(event: PointerEvent, node: d3.HierarchyNode<IDiscoveryHierarchicalData>): void {
-    
-    let foundUnitData = this.discoveryDataService.getDiscoveryUnitDataById(node.data.id, this.currentGroupByUnitValue);
 
-    this.resetGraphWithNewData(foundUnitData);
+    this.resetGraphWithNewData(node.data);
   }
 
   /**

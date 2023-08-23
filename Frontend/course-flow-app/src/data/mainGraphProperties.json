@@ -5,7 +5,7 @@
     "canvasBorderRadius": "20px",
     "iniitialCanvasTranslationOffsetX": 0,
     "iniitialCanvasTranslationOffsetY": 0,
-    "initialZoomScale": 0.1,
+    "initialZoomScale": 0.05,
     "forceManyBodyStrength": {
     "0": -500000,
     "1": -500000,

@@ -13,7 +13,6 @@ export const IDiscoveryDataServiceInjector = new InjectionToken<IDiscoveryDataSe
 export interface IDiscoveryDataService {
 
     getDiscoveryHierarchicalData(groupUnitsByQuery: EDiscoveryGroupUnitsBy): IDiscoveryHierarchicalData;
-    getDiscoveryUnitDataById(id: string, groupUnitsByQuery: EDiscoveryGroupUnitsBy): IDiscoveryHierarchicalData;
 }
 
 

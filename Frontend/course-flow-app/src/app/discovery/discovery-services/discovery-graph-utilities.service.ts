@@ -30,7 +30,7 @@ export class DiscoveryGraphUtilitiesService implements IDiscoveryGraphUtilitiesS
    */
   calculateForceStrength(nodeStructure: any): number {
     
-    let baseForce: number = -1000;
+    let baseForce: number = -100;
 
     // Cast the node structure to a d3.HierarchyNode<IDiscoveryHierarchicalData>.
     let nodes: d3.HierarchyNode<IDiscoveryHierarchicalData> = nodeStructure as d3.HierarchyNode<IDiscoveryHierarchicalData>;
@@ -61,9 +61,15 @@ export class DiscoveryGraphUtilitiesService implements IDiscoveryGraphUtilitiesS
 
     if (linkSource.depth === 0) {
 
+      let linkSourceChildren: d3.HierarchyNode<IDiscoveryHierarchicalData>[]= linkSource.children as d3.HierarchyNode<IDiscoveryHierarchicalData>[];
       let linkTargetChildren: d3.HierarchyNode<IDiscoveryHierarchicalData>[]= linkTarget.children as d3.HierarchyNode<IDiscoveryHierarchicalData>[];
 
-      currentDistance = baseDistance / linkTargetChildren.length;
+      if (linkSourceChildren && linkTargetChildren) {
+        
+        currentDistance = currentDistance * linkSourceChildren.length;
+        currentDistance = currentDistance / linkTargetChildren.length;
+      }
+
     }
 
     return currentDistance;
