@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 
 // Interface Imports
-import { IDiscoveryGraphProperties, IDiscoveryGraphUtilitiesService } from 'src/app/interfaces/discoveryInterfaces';
+import { IDiscoveryGraphProperties, IDiscoveryGraphUtilitiesService, IDiscoveryHierarchicalData } from 'src/app/interfaces/discoveryInterfaces';
 
 // Json containing graph properties
 import  * as graphData from "src/data/mainGraphProperties.json"
@@ -17,12 +17,55 @@ export class DiscoveryGraphUtilitiesService implements IDiscoveryGraphUtilitiesS
   /**
    * Get graph properties.
    */
-  getGraphProperties(): IDiscoveryGraphProperties {
+  getGraphBaseProperties(): IDiscoveryGraphProperties {
    
     let graphProperties: IDiscoveryGraphProperties = graphData;
 
     return graphProperties;
   }
 
+  /**
+   * Calculates a force for a given node structure.
+   * @param nodeStructure Node structure that can be cast depending on the service used.
+   */
+  calculateForceStrength(nodeStructure: any): number {
+    
+    let baseForce: number = -1000;
+
+    // Cast the node structure to a d3.HierarchyNode<IDiscoveryHierarchicalData>.
+    let nodes: d3.HierarchyNode<IDiscoveryHierarchicalData> = nodeStructure as d3.HierarchyNode<IDiscoveryHierarchicalData>;
+
+    // Simple node tree height based calculation.
+    let treeHeight: number = nodes.height;
+    let currentForce: number = baseForce * treeHeight;
+
+    // Return the current force.
+    return currentForce;
+  }
+
+  /**
+   * Calculates the link distance for a given link structure.
+   * @param linkStructure Link structure that can be cast depending on the service used.
+   */
+  calculateLinkDistance(linkStructure: any): number {
   
+    let baseDistance: number = 100;
+    let currentDistance: number = baseDistance;
+
+    // Cast to a d3.SimulationLinkDatum<d3.SimulationNodeDatum>
+    let link: d3.HierarchyLink<IDiscoveryHierarchicalData>  = linkStructure as d3.HierarchyLink<IDiscoveryHierarchicalData>;
+
+    // I want the nodes from depth 0 to 1 to have a large spread from the root node.
+    let linkSource: d3.HierarchyNode<IDiscoveryHierarchicalData> = link.source as d3.HierarchyNode<IDiscoveryHierarchicalData>
+    let linkTarget: d3.HierarchyNode<IDiscoveryHierarchicalData> = link.target as d3.HierarchyNode<IDiscoveryHierarchicalData>
+
+    if (linkSource.depth === 0) {
+
+      let linkTargetChildren: d3.HierarchyNode<IDiscoveryHierarchicalData>[]= linkTarget.children as d3.HierarchyNode<IDiscoveryHierarchicalData>[];
+
+      currentDistance = baseDistance / linkTargetChildren.length;
+    }
+
+    return currentDistance;
+  }
 }

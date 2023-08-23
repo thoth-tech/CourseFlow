@@ -57,7 +57,7 @@ export class DiscoveryGraphBasedMapComponent {
     this.currentGroupByUnitValue = value;
 
     // Get the graph properties.
-    this.graphProperties = this.discoveryGraphUtilitiesService.getGraphProperties();
+    this.graphProperties = this.discoveryGraphUtilitiesService.getGraphBaseProperties();
     this.currentGraphZoomLevelProperties = this.graphProperties.zoomLevelProperties["0"];
 
     // On input group by units value change, we need to fetch the related data - TODO This will need to be optimized when backend is implemented.
@@ -153,11 +153,11 @@ export class DiscoveryGraphBasedMapComponent {
     this.sim = d3.forceSimulation(this.nodes as d3.SimulationNodeDatum[])
                   .force("link", d3.forceLink(this.links as d3.SimulationLinkDatum<d3.SimulationNodeDatum>[])
                                    .id((nodeData: d3.SimulationNodeDatum) => this.getNodeAsDiscoveryHierarchicalData(nodeData).id)
-                                   .distance((linkData: d3.SimulationLinkDatum<d3.SimulationNodeDatum>) => this.graphProperties.linkDistance[this.getNodeAsDiscoveryHierarchicalData(linkData.source).group])
+                                   .distance((linkData: any) => this.discoveryGraphUtilitiesService.calculateLinkDistance(linkData))
                                    .strength((linkData: d3.SimulationLinkDatum<d3.SimulationNodeDatum>) => this.graphProperties.linkStrength[this.getNodeAsDiscoveryHierarchicalData(linkData.source).group])
                                    .iterations(2))
                   .force("charge", d3.forceManyBody()
-                                     .strength((nodeData: d3.SimulationNodeDatum) => this.graphProperties.forceManyBodyStrength[this.getNodeAsDiscoveryHierarchicalData(nodeData).group] / this.nodes.length))
+                                     .strength(this.discoveryGraphUtilitiesService.calculateForceStrength(this.root)))
         
 
     // Create the links using the links data.

@@ -26,12 +26,14 @@ export const IDiscoveryGraphUtilitiesServiceInjector = new InjectionToken<IDisco
 
 export interface IDiscoveryGraphUtilitiesService {
     
-    getGraphProperties(): IDiscoveryGraphProperties;
+    getGraphBaseProperties(): IDiscoveryGraphProperties;
+    calculateForceStrength(nodeStructure: any): number;
+    calculateLinkDistance(linkStructure: any): number;
 }
 
 
 /*******************************************************************************************************************************
- * Discovery Hierarchical Unit Data Types.
+ * Discovery Hierarchical Data Types.
  *******************************************************************************************************************************/
 
 export interface IDiscoveryHierarchicalData {
