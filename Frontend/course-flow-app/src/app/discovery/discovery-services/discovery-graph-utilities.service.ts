@@ -74,4 +74,23 @@ export class DiscoveryGraphUtilitiesService implements IDiscoveryGraphUtilitiesS
 
     return currentDistance;
   }
+
+  /**
+   * TODO The idea for this method is to scale the zoom by the nodes we are currently viewing compared to the original/base node number.
+   * @param currentNodes Current nodes being used in the simulation.
+   * @param originalNodes Original nodes of the base graph.
+   * @returns An initial zoom value.
+   */
+  calculateInitialZoom(currentNodes: any, originalNodes: any): number {
+
+    let zoom = 1;
+
+    // TODO Need to have an actual proper calculation for this - I chose 200 based on visuals of the graph while testing.
+    let initialZoomAmount = 250 / originalNodes.length;
+    let currentZoomAmount = (1 / currentNodes.length) + initialZoomAmount;
+
+    zoom = originalNodes.length === currentNodes.length ? initialZoomAmount : currentZoomAmount;
+
+    return zoom;
+  }
 }

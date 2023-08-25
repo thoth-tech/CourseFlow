@@ -21,8 +21,8 @@ export class JsonFileDiscoveryDataService implements IDiscoveryDataService {
   facultyBasedUnitDataArray: object[] = facultyBasedUnitJsonData;
 
   // Cache the hierarchical data.
-  discoveryCourseBasedHierarchicalData: IDiscoveryHierarchicalData = {} as IDiscoveryHierarchicalData;
-  discoveryFacultyBasedHierarchicalData: IDiscoveryHierarchicalData = {} as IDiscoveryHierarchicalData;
+  discoveryCourseBasedHierarchicalData: IDiscoveryHierarchicalData | null = null;
+  discoveryFacultyBasedHierarchicalData: IDiscoveryHierarchicalData | null = null;
 
   /**
    * Constructor
@@ -39,27 +39,35 @@ export class JsonFileDiscoveryDataService implements IDiscoveryDataService {
 
       case EDiscoveryGroupUnitsBy.faculty:
         
-        this.discoveryCourseBasedHierarchicalData = this.getFacultyUnitDataAsHierarchicalData();
+        if (this.discoveryFacultyBasedHierarchicalData) {
 
-        break;
+          return this.discoveryFacultyBasedHierarchicalData;
+        }
+
+        this.discoveryFacultyBasedHierarchicalData = this.getFacultyUnitDataAsHierarchicalData();
+        return this.discoveryFacultyBasedHierarchicalData;
       
       case EDiscoveryGroupUnitsBy.course:
 
+        if (this.discoveryCourseBasedHierarchicalData) {
+
+          return this.discoveryCourseBasedHierarchicalData;
+        }
+
         this.discoveryCourseBasedHierarchicalData = this.getCourseDataAsHierarchicalData();
-        break;
-
-      case EDiscoveryGroupUnitsBy.related_units:
-
-        // TODO To be implemented
-        break;
+        return this.discoveryCourseBasedHierarchicalData
 
       default:
 
+        if (this.discoveryCourseBasedHierarchicalData) {
+
+          return this.discoveryCourseBasedHierarchicalData;
+        }
+      
         this.discoveryCourseBasedHierarchicalData = this.getFacultyUnitDataAsHierarchicalData();
-        break;
+        return this.discoveryCourseBasedHierarchicalData;
     }
 
-    return this.discoveryCourseBasedHierarchicalData;
   }
 
   /**

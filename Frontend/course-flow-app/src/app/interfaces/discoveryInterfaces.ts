@@ -28,6 +28,7 @@ export interface IDiscoveryGraphUtilitiesService {
     getGraphBaseProperties(): IDiscoveryGraphProperties;
     calculateForceStrength(nodeStructure: any): number;
     calculateLinkDistance(linkStructure: any): number;
+    calculateInitialZoom(currentNodes: any, originalNodes: any): number;
 }
 
 

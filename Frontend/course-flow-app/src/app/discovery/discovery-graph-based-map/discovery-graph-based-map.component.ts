@@ -26,10 +26,14 @@ export class DiscoveryGraphBasedMapComponent {
   // Current group by unit enum value
   currentGroupByUnitValue: EDiscoveryGroupUnitsBy = EDiscoveryGroupUnitsBy.faculty;
 
-  // Node related properties containing the core link and node data - not to be confused with the node and link visuals.
-  root: d3.HierarchyNode<IDiscoveryHierarchicalData> = {} as d3.HierarchyNode<IDiscoveryHierarchicalData>;
-  links: d3.HierarchyLink<IDiscoveryHierarchicalData>[] = [];
-  nodes: d3.HierarchyNode<IDiscoveryHierarchicalData>[] = [];
+  // Original/base nodes hierarchy cache.
+  originalHierarchicalData: IDiscoveryHierarchicalData = {} as IDiscoveryHierarchicalData;
+  originalRoot: d3.HierarchyNode<IDiscoveryHierarchicalData> = {} as d3.HierarchyNode<IDiscoveryHierarchicalData>;
+
+  // Current node related properties containing the core link and node data - not to be confused with the node and link visuals.
+  currentRoot: d3.HierarchyNode<IDiscoveryHierarchicalData> = {} as d3.HierarchyNode<IDiscoveryHierarchicalData>;
+  currentLinks: d3.HierarchyLink<IDiscoveryHierarchicalData>[] = [];
+  currentNodes: d3.HierarchyNode<IDiscoveryHierarchicalData>[] = [];
 
   // Canvas, node and link visuals.
   baseSvgCanvasElement: d3.Selection<SVGSVGElement, unknown, HTMLElement, any> | null = null;
@@ -60,8 +64,14 @@ export class DiscoveryGraphBasedMapComponent {
     this.graphProperties = this.discoveryGraphUtilitiesService.getGraphBaseProperties();
     this.currentGraphZoomLevelProperties = this.graphProperties.zoomLevelProperties["0"];
 
-    // On input group by units value change, we need to fetch the related data - TODO This will need to be optimized when backend is implemented.
-    this.resetGraphWithNewData(this.discoveryDataService.getDiscoveryHierarchicalData(this.currentGroupByUnitValue));
+    // Get the data
+    this.originalHierarchicalData = this.discoveryDataService.getDiscoveryHierarchicalData(this.currentGroupByUnitValue);
+    
+    // Set the original root node which we can use later if needed (such as getting the node descendents etc).
+    this.originalRoot = d3.hierarchy<IDiscoveryHierarchicalData>(this.originalHierarchicalData);
+
+    // Reset graph with new data.
+    this.resetGraphWithNewData(this.originalHierarchicalData);
   }
 
   /**
@@ -139,7 +149,7 @@ export class DiscoveryGraphBasedMapComponent {
     baseSvgCanvasElement.call(zoomBehaviour.transform, d3.zoomIdentity.translate(
                               this.graphProperties.width / 2 + this.graphProperties.iniitialCanvasTranslationOffsetX, 
                               this.graphProperties.height / 2 + this.graphProperties.iniitialCanvasTranslationOffsetY)
-                              .scale(150 / this.nodes.length))
+                              .scale(this.discoveryGraphUtilitiesService.calculateInitialZoom(this.currentNodes, this.originalRoot.descendants())))
                         .call(zoomBehaviour);
   }
 
@@ -150,19 +160,19 @@ export class DiscoveryGraphBasedMapComponent {
   startGraphSimulation(parentElement:d3.Selection<SVGGElement, unknown, HTMLElement, any>): void {
 
     // Create the physics simulation and apply different types of forces.
-    this.sim = d3.forceSimulation(this.nodes as d3.SimulationNodeDatum[])
-                  .force("link", d3.forceLink(this.links as d3.SimulationLinkDatum<d3.SimulationNodeDatum>[])
+    this.sim = d3.forceSimulation(this.currentNodes as d3.SimulationNodeDatum[])
+                  .force("link", d3.forceLink(this.currentLinks as d3.SimulationLinkDatum<d3.SimulationNodeDatum>[])
                                    .id((nodeData: d3.SimulationNodeDatum) => this.getNodeAsDiscoveryHierarchicalData(nodeData).id)
                                    .distance((linkData: any) => this.discoveryGraphUtilitiesService.calculateLinkDistance(linkData))
                                    .strength(1))
                   .force("charge", d3.forceManyBody()
-                                     .strength(this.discoveryGraphUtilitiesService.calculateForceStrength(this.root)))
+                                     .strength(this.discoveryGraphUtilitiesService.calculateForceStrength(this.currentRoot)))
         
 
     // Create the links using the links data.
     this.currentRenderedLinks = parentElement.append("g")
       .selectAll("line")
-      .data(this.links)
+      .data(this.currentLinks)
       .join("line")
       .attr("stroke", "black")
       .attr("stroke-width", (linkData: d3.HierarchyLink<IDiscoveryHierarchicalData>) => this.currentGraphZoomLevelProperties.linkWidth[this.getNodeAsDiscoveryHierarchicalData(linkData.source).group])
@@ -171,7 +181,7 @@ export class DiscoveryGraphBasedMapComponent {
     // Create a node group, based on the node data. 
     // We can add shapes and text to this group.
     this.currentRenderedNodes = parentElement.selectAll("node")
-      .data(this.nodes)
+      .data(this.currentNodes)
       .join("g")
       .on("click", (event: PointerEvent, node: d3.HierarchyNode<IDiscoveryHierarchicalData>) => this.showUnitDetailedGraph(event, node))
 
@@ -265,7 +275,7 @@ export class DiscoveryGraphBasedMapComponent {
    */
   resetGraphToOriginalData(): void {
 
-    this.resetGraphWithNewData(this.discoveryDataService.getDiscoveryHierarchicalData(this.currentGroupByUnitValue));
+    this.resetGraphWithNewData(this.originalHierarchicalData);
   }
 
   /**
@@ -274,9 +284,9 @@ export class DiscoveryGraphBasedMapComponent {
   resetGraphWithNewData(data: IDiscoveryHierarchicalData): void {
 
     // Get the detailed data by id
-    this.root = d3.hierarchy<IDiscoveryHierarchicalData>(data);
-    this.links = this.root.links();
-    this.nodes  = this.root.descendants();
+    this.currentRoot = d3.hierarchy<IDiscoveryHierarchicalData>(data);
+    this.currentLinks = this.currentRoot.links();
+    this.currentNodes  = this.currentRoot.descendants();
 
     // Create the discovery map.
     this.createDiscoveryMap();
