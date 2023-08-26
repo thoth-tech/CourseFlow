@@ -11,6 +11,9 @@ class Unit:
         self.description = ""
         self.constraints = []
         self.is_discontinued = False
+        # TODO: Consider removing prerequisites and corequisites fields in favour of using constraints classes
+        self.prerequisites = set()
+        self.corequisites = set()
         Unit.id += 1
 
     def to_dict(self):

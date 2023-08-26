@@ -4,6 +4,7 @@ from typing import Dict, Tuple, List
 import matplotlib.pyplot as plt
 import networkx as nx
 
+from Backend.Main.Models.constraint import PrerequisitesFulfilledConstraint, CorequisitesFulfilledConstraint
 from Backend.Main.Models.unit import Unit
 
 
@@ -21,6 +22,19 @@ def unit_distance_metric(unit_1: Unit, unit_2: Unit) -> float:
         similarity += 0.1 * scale
     if unit_1.code[:4] == unit_2.code[:4]:
         similarity += 0.1 * scale
+    # fixme: Prereqs and coreqs fields removed by previous commit, need to change this to work with the new Unit format
+    for constraint in unit_1.constraints:
+        if isinstance(constraint, PrerequisitesFulfilledConstraint) and unit_2 in constraint.prerequisites:
+            similarity += 0.6 * scale
+        elif isinstance(constraint, CorequisitesFulfilledConstraint) and unit_2 in constraint.corequisites:
+            similarity += 0.6 * scale
+    # fixme: Verify if similarity may be applied twice for the same pair
+    for constraint in unit_2.constraints:
+        if isinstance(constraint, PrerequisitesFulfilledConstraint) and unit_1 in constraint.prerequisites:
+            similarity += 0.6 * scale
+        elif isinstance(constraint, CorequisitesFulfilledConstraint) and unit_1 in constraint.corequisites:
+            similarity += 0.6 * scale
+
     if unit_1 in unit_2.prerequisites or unit_2 in unit_1.prerequisites \
             or unit_1 in unit_2.corequisites or unit_2 in unit_1.corequisites:
         similarity += 0.6 * scale
@@ -67,6 +81,7 @@ def create_unit_network(units: Dict[str, Unit]) -> Tuple[nx.DiGraph, List[Tuple[
     for code, unit in units.items():
         # Add prerequisite units
         if unit.prerequisites:
+            # fixme: Update to use new Unit format
             for prereq_unit in unit.prerequisites:
                 edge = (prereq_unit.code, code)
                 if prereq_unit.code not in units.keys():
@@ -74,6 +89,7 @@ def create_unit_network(units: Dict[str, Unit]) -> Tuple[nx.DiGraph, List[Tuple[
                 visible_edges.add(edge)
         # Add co-requisite units
         if unit.corequisites:
+            # fixme: Update to use new Unit format
             for coreq_unit in unit.corequisites:
                 edge = (coreq_unit.code, code)
                 if coreq_unit.code not in units.keys() or edge in visible_edges:
