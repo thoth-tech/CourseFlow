@@ -2,7 +2,7 @@
 import { Component, Input, Inject } from '@angular/core';
 
 // Interface Imports
-import { IDiscoveryDataServiceInjector, IDiscoveryDataService, IDiscoveryHierarchicalData, IDiscoveryGraphProperties, IDiscoveryGraphZoomLevelProperties, IDiscoveryGraphUtilitiesService, IDiscoveryGraphUtilitiesServiceInjector } from 'src/app/interfaces/discoveryInterfaces';
+import { IDiscoveryDataServiceInjector, IDiscoveryDataService, IDiscoveryHierarchicalData, IDiscoveryGraphProperties, IDiscoveryGraphUtilitiesService, IDiscoveryGraphUtilitiesServiceInjector } from 'src/app/interfaces/discoveryInterfaces';
 
 // Enum Imports
 import { EDiscoveryGroupUnitsBy } from "../../enum/discoveryEnums"
@@ -20,8 +20,6 @@ export class DiscoveryGraphBasedMapComponent {
 
   // Contains all graph related visual properties.
   graphProperties: IDiscoveryGraphProperties = {} as IDiscoveryGraphProperties;
-  currentGraphZoomLevelProperties: IDiscoveryGraphZoomLevelProperties = {} as IDiscoveryGraphZoomLevelProperties;
-  currentZoomLevel = 0;
 
   // Current group by unit enum value
   currentGroupByUnitValue: EDiscoveryGroupUnitsBy = EDiscoveryGroupUnitsBy.faculty;
@@ -62,7 +60,6 @@ export class DiscoveryGraphBasedMapComponent {
 
     // Get the graph properties.
     this.graphProperties = this.discoveryGraphUtilitiesService.getGraphBaseProperties();
-    this.currentGraphZoomLevelProperties = this.graphProperties.zoomLevelProperties["0"];
 
     // Get the data
     this.originalHierarchicalData = this.discoveryDataService.getDiscoveryHierarchicalData(this.currentGroupByUnitValue);
@@ -128,19 +125,6 @@ export class DiscoveryGraphBasedMapComponent {
     // Create the zoom behaviour for the zoomable element.
     let zoomBehaviour = d3.zoom<SVGSVGElement, unknown>().on("zoom", (event) => {
         
-        // Work out the zoom level and change graph properties.
-        // TODO Requires improvement in terms of flexibility.
-        if (this.currentZoomLevel != 0 && event.transform.k <= 0.8) {
-          this.currentZoomLevel = 0
-          this.currentGraphZoomLevelProperties = this.graphProperties.zoomLevelProperties["0"]
-          this.modifyElementsAtZoomLevel();
-        }
-        else if (this.currentZoomLevel != 1 && event.transform.k > 0.8) {
-          this.currentZoomLevel = 1;
-          this.currentGraphZoomLevelProperties = this.graphProperties.zoomLevelProperties["1"]
-          this.modifyElementsAtZoomLevel();
-        }
-
         // Control the transform of the zoomable element.
         zoomableElement.attr("transform", event.transform)
     })
@@ -164,7 +148,7 @@ export class DiscoveryGraphBasedMapComponent {
                   .force("link", d3.forceLink(this.currentLinks as d3.SimulationLinkDatum<d3.SimulationNodeDatum>[])
                                    .id((nodeData: d3.SimulationNodeDatum) => this.getNodeAsDiscoveryHierarchicalData(nodeData).id)
                                    .distance((linkData: any) => this.discoveryGraphUtilitiesService.calculateLinkDistance(linkData))
-                                   .strength(1))
+                                   .strength((linkData: any) => this.discoveryGraphUtilitiesService.calculateLinkStrengthDistance(linkData)))
                   .force("charge", d3.forceManyBody()
                                      .strength(this.discoveryGraphUtilitiesService.calculateForceStrength(this.currentRoot)))
         
@@ -174,29 +158,29 @@ export class DiscoveryGraphBasedMapComponent {
       .selectAll("line")
       .data(this.currentLinks)
       .join("line")
-      .attr("stroke", "black")
-      .attr("stroke-width", (linkData: d3.HierarchyLink<IDiscoveryHierarchicalData>) => this.currentGraphZoomLevelProperties.linkWidth[this.getNodeAsDiscoveryHierarchicalData(linkData.source).group])
-      .attr("stroke-opacity", (linkData: d3.HierarchyLink<IDiscoveryHierarchicalData>) => this.currentGraphZoomLevelProperties.linkOpacity[this.getNodeAsDiscoveryHierarchicalData(linkData.source).group])
+      .attr("stroke", (linkData: any) => this.discoveryGraphUtilitiesService.calculateLinkColor(linkData))
+      .attr("stroke-width", (linkData: any) => this.discoveryGraphUtilitiesService.calculateLinkStrokeWidth(linkData))
+      .attr("stroke-opacity", (linkData: any) => this.discoveryGraphUtilitiesService.calculateLinkOpacity(linkData))
 
     // Create a node group, based on the node data. 
     // We can add shapes and text to this group.
     this.currentRenderedNodes = parentElement.selectAll("node")
       .data(this.currentNodes)
       .join("g")
-      .on("click", (event: PointerEvent, node: d3.HierarchyNode<IDiscoveryHierarchicalData>) => this.showUnitDetailedGraph(event, node))
+      .on("click", (event: PointerEvent, node: d3.HierarchyNode<IDiscoveryHierarchicalData>) => this.handleOnNodeClicked(event, node))
 
     // Append a circle shape to the node group.
     this.currentRenderedNodes.append('circle')
-      .attr("fill", (nodeData: d3.HierarchyNode<IDiscoveryHierarchicalData>) => this.currentGraphZoomLevelProperties.nodeColor[nodeData.data.group])
-      .attr("r", (nodeData: d3.HierarchyNode<IDiscoveryHierarchicalData>) => this.currentGraphZoomLevelProperties.nodeRadius[nodeData.data.group])
+      .attr("fill", (nodeData: any) => this.discoveryGraphUtilitiesService.calculateNodeColor(nodeData))
+      .attr("r", (nodeData: any) => this.discoveryGraphUtilitiesService.calculateNodeRadius(nodeData))
     
     // Append text to the node group.
     this.currentRenderedNodes.append("text")
-      .text((nodeData: d3.HierarchyNode<IDiscoveryHierarchicalData>) => this.getNodeAsDiscoveryHierarchicalData(nodeData).name)          
-      .attr('x', (nodeData: d3.HierarchyNode<IDiscoveryHierarchicalData>) => this.currentGraphZoomLevelProperties.textXOffset[this.getNodeAsDiscoveryHierarchicalData(nodeData).group])
-      .attr('y', (nodeData: d3.HierarchyNode<IDiscoveryHierarchicalData>) => this.currentGraphZoomLevelProperties.textYOffset[this.getNodeAsDiscoveryHierarchicalData(nodeData).group])
-      .style('font-size', (nodeData: d3.HierarchyNode<IDiscoveryHierarchicalData>) => this.currentGraphZoomLevelProperties.textFontSize[this.getNodeAsDiscoveryHierarchicalData(nodeData).group])
-      .style('font-weight', (nodeData: d3.HierarchyNode<IDiscoveryHierarchicalData>) => this.currentGraphZoomLevelProperties.textFontWieight[this.getNodeAsDiscoveryHierarchicalData(nodeData).group])
+      .text((nodeData: any) => this.getNodeAsDiscoveryHierarchicalData(nodeData).name)     
+      .style('font-size', (nodeData: any) => this.discoveryGraphUtilitiesService.calculateTextFontSize(nodeData))  
+      .style('font-weight', (nodeData: any) => this.discoveryGraphUtilitiesService.calculateTextFontWeight(nodeData))   
+      .attr('x', (nodeData: any) => this.discoveryGraphUtilitiesService.calculateTextXOffset(nodeData))
+      .attr('y', (nodeData: any) => this.discoveryGraphUtilitiesService.calculateTextYOffset(nodeData))
 
     // Start the actual simulation tick.
     this.sim.on("tick", () => {
@@ -234,38 +218,9 @@ export class DiscoveryGraphBasedMapComponent {
   }
 
   /**
-   * Modify rendered node and link properties based on zoom level.
+   * Handles the response once a node has been clicked.
    */
-  modifyElementsAtZoomLevel(): void {
-
-    // Modify node properties
-    if (this.currentRenderedNodes) {
-
-      this.currentRenderedNodes.select('circle')
-        .attr("fill", (nodeData: d3.HierarchyNode<IDiscoveryHierarchicalData>) => this.currentGraphZoomLevelProperties.nodeColor[nodeData.data.group])
-        .attr("r", (nodeData: d3.HierarchyNode<IDiscoveryHierarchicalData>) => this.currentGraphZoomLevelProperties.nodeRadius[nodeData.data.group])
-
-      this.currentRenderedNodes.select("text")
-        .text((nodeData: d3.HierarchyNode<IDiscoveryHierarchicalData>) => this.getNodeAsDiscoveryHierarchicalData(nodeData).name)          
-        .attr('x', (nodeData: d3.HierarchyNode<IDiscoveryHierarchicalData>) => this.currentGraphZoomLevelProperties.textXOffset[this.getNodeAsDiscoveryHierarchicalData(nodeData).group])
-        .attr('y', (nodeData: d3.HierarchyNode<IDiscoveryHierarchicalData>) => this.currentGraphZoomLevelProperties.textYOffset[this.getNodeAsDiscoveryHierarchicalData(nodeData).group])
-        .style('font-size', (nodeData: d3.HierarchyNode<IDiscoveryHierarchicalData>) => this.currentGraphZoomLevelProperties.textFontSize[this.getNodeAsDiscoveryHierarchicalData(nodeData).group])
-        .style('font-weight', (nodeData: d3.HierarchyNode<IDiscoveryHierarchicalData>) => this.currentGraphZoomLevelProperties.textFontWieight[this.getNodeAsDiscoveryHierarchicalData(nodeData).group])
-    }
-
-    // Modify line properties
-    if (this.currentRenderedLinks) {
-      
-      this.currentRenderedLinks
-        .attr("stroke-width", (linkData: d3.HierarchyLink<IDiscoveryHierarchicalData>) => this.currentGraphZoomLevelProperties.linkWidth[this.getNodeAsDiscoveryHierarchicalData(linkData.source).group])
-        .attr("stroke-opacity", (linkData: d3.HierarchyLink<IDiscoveryHierarchicalData>) => this.currentGraphZoomLevelProperties.linkOpacity[this.getNodeAsDiscoveryHierarchicalData(linkData.source).group])
-    }
-  }
-
-  /**
-   * Shows a new graph for a node with its own specific connections and information.
-   */
-  showUnitDetailedGraph(event: PointerEvent, node: d3.HierarchyNode<IDiscoveryHierarchicalData>): void {
+  handleOnNodeClicked(event: PointerEvent, node: d3.HierarchyNode<IDiscoveryHierarchicalData>): void {
 
     this.resetGraphWithNewData(node.data);
   }

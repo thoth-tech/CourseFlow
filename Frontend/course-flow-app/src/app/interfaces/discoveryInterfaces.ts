@@ -26,9 +26,25 @@ export const IDiscoveryGraphUtilitiesServiceInjector = new InjectionToken<IDisco
 export interface IDiscoveryGraphUtilitiesService {
     
     getGraphBaseProperties(): IDiscoveryGraphProperties;
-    calculateForceStrength(nodeStructure: any): number;
-    calculateLinkDistance(linkStructure: any): number;
     calculateInitialZoom(currentNodes: any, originalNodes: any): number;
+
+    // Force Sim Calculations
+    calculateForceStrength(nodeData: any): number;
+    calculateLinkDistance(linkData: any): number;
+    calculateLinkStrengthDistance(linkData: any): number;
+
+    // Link Property Calculations.
+    calculateLinkColor(linkData: any): string;
+    calculateLinkStrokeWidth(linkData: any): number;
+    calculateLinkOpacity(linkData: any): number;
+
+    // Node Property Calculations.
+    calculateNodeRadius(nodeData: any) : number;
+    calculateNodeColor(nodeData: any) : string;
+    calculateTextXOffset(nodeData: any) : number;
+    calculateTextYOffset(nodeData: any) : number;
+    calculateTextFontSize(nodeData: any) : number;
+    calculateTextFontWeight(nodeData: any) : number;
 }
 
 
@@ -56,22 +72,19 @@ export interface IDiscoveryGraphProperties {
     iniitialCanvasTranslationOffsetX: number;
     iniitialCanvasTranslationOffsetY: number;
     initialZoomScale: number;
-    forceManyBodyStrength: Record<string, number>;
-    linkStrength: Record<string, number>;
-    linkDistance: Record<string, number>;
-    zoomLevelProperties: Record<string, IDiscoveryGraphZoomLevelProperties>;
-}
-
-export interface IDiscoveryGraphZoomLevelProperties {
-    linkWidth: Record<string, number>;
-    linkOpacity: Record<string, number>;
-    nodeRadius: Record<string, number>;
-    nodeColor: Record<string, string>;
-    textColor: Record<string, string>;
-    textFontSize: Record<string, number>;
-    textFontWieight: Record<string, number>;
-    textXOffset: Record<string, number>;
-    textYOffset: Record<string, number>;
+    forceManyBodyStrength: number;
+    linkStrength: number;
+    linkDistance: number;
+    linkColor: string;
+    linkWidth: number;
+    linkOpacity: number;
+    nodeRadius: number;
+    nodeColor: string;
+    textColor: string;
+    textFontSize: number;
+    textFontWieight: number;
+    textXOffset: number;
+    textYOffset: number;
 }
 
 /*******************************************************************************************************************************
