@@ -4,7 +4,7 @@ from typing import Dict, Tuple, List
 import matplotlib.pyplot as plt
 import networkx as nx
 
-from Backend.Models.unit import Unit
+from Backend.Main.Models.unit import Unit
 
 
 def unit_distance_metric(unit_1: Unit, unit_2: Unit) -> float:

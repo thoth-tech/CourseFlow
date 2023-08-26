@@ -1,5 +1,5 @@
-from Backend.Persistence.connect import mongodb_connect
-from Backend.Persistence.unit_repository import MongodbUnitRepository
+from Backend.Main.Persistence.connect import mongodb_connect
+from Backend.Main.Persistence.unit_repository import MongodbUnitRepository
 from DataIntegration import handbook_reader
 from DataIntegration import visualizer
 

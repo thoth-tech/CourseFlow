@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
 from typing import Iterable
 
-from Backend.Models.unit import Unit
-from Backend.Persistence.connect import mongodb_connect
+from Backend.Main.Models.unit import Unit
+from Backend.Main.Persistence.connect import mongodb_connect
 
 
 class UnitRepository(ABC):

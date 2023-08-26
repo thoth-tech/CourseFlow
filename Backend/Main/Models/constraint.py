@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
 from typing import Iterable, Callable
 
-from Backend.Models.stream import Stream
-from Backend.Models.unit import Unit
+from Backend.Main.Models.stream import Stream
+from Backend.Main.Models.unit import Unit
 
 
 # todo: write tests for all of these constraints
