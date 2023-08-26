@@ -79,22 +79,22 @@ def create_unit_network(units: Dict[str, Unit]) -> Tuple[nx.DiGraph, List[Tuple[
     # Find all edges that need to be shown
     visible_edges = set()
     for code, unit in units.items():
-        # Add prerequisite units
-        if unit.prerequisites:
-            # fixme: Update to use new Unit format
-            for prereq_unit in unit.prerequisites:
-                edge = (prereq_unit.code, code)
-                if prereq_unit.code not in units.keys():
-                    continue
-                visible_edges.add(edge)
-        # Add co-requisite units
-        if unit.corequisites:
-            # fixme: Update to use new Unit format
-            for coreq_unit in unit.corequisites:
-                edge = (coreq_unit.code, code)
-                if coreq_unit.code not in units.keys() or edge in visible_edges:
-                    continue
-                visible_edges.add(edge)
-        # todo: Think of a way to display incompatible units
+        for constraint in unit.constraints:
+            # Add prerequisite units
+            if isinstance(constraint, PrerequisitesFulfilledConstraint):
+                for prereq_unit in constraint.prerequisites:
+                    edge = (prereq_unit.code, code)
+                    if prereq_unit.code not in units.keys():
+                        continue
+                    visible_edges.add(edge)
+
+            # Add co-requisite units
+            if isinstance(constraint, CorequisitesFulfilledConstraint):
+                for coreq_unit in constraint.corequisites:
+                    edge = (coreq_unit.code, code)
+                    if coreq_unit.code not in units.keys() or edge in visible_edges:
+                        continue
+                    visible_edges.add(edge)
+            # todo: Think of a way to display incompatible units
 
     return G, list(visible_edges)
