@@ -10,7 +10,8 @@ def handbook_reader_and_unit_map_visualizer_demo():
 
     # todo: Remove debug filter. The filter is here to speed up the graph creation progress while in development.
     units = {code: unit for code, unit in units.items() if code.startswith("SIT")}
-    unit_network, visible_edges = visualizer.create_unit_network(units)
+    unit_distances = visualizer.calculate_unit_distances(units)
+    unit_network, visible_edges = visualizer.create_unit_network(units, unit_distances)
     visualizer.draw_unit_network(unit_network, visible_edges)
 
 

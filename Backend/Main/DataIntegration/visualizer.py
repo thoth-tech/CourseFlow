@@ -59,22 +59,32 @@ def draw_unit_network(network: nx.DiGraph, visible_edges: List[Tuple[str, str]])
     plt.show()
 
 
-def create_unit_network(units: Dict[str, Unit]) -> Tuple[nx.DiGraph, List[Tuple[str, str]]]:
+def calculate_unit_distances(units: Dict[str, Unit]) -> Dict[Tuple[str, str], float]:
+    # todo: Optimize for larger graphs if necessary. Consider using multithreading.
+    # Calculate each unit's distance to each other
+    unit_distances = {}
+    for code_a, unit_a in units.items():
+        for code_b, unit_b in units.items():
+            if code_a == code_b:
+                continue
+            distance = unit_distance_metric(unit_a, unit_b)
+            # Don't add an edge between unrelated units to reduce network layout computations
+            if distance < 1:
+                unit_distances[(code_a, code_b)] = distance
+
+    return unit_distances
+
+
+def create_unit_network(units: Dict[str, Unit], distances: Dict[Tuple[str, str], float]) -> Tuple[nx.DiGraph, List[Tuple[str, str]]]:
     G = nx.DiGraph()
 
     # Add units to graph
     for code in units.keys():
         G.add_node(code)
 
-    # todo: Optimize for larger graphs if necessary. Consider using multithreading.
-    # Calculate each unit's "distance" to each other
-    for code_a, unit_a in units.items():
-        for code_b, unit_b in units.items():
-            if code_a == code_b:
-                continue
-            distance = unit_distance_metric(unit_a, unit_b)
-            if distance < 1:
-                G.add_edge(code_a, code_b, weight=distance)
+    # Calculate each unit's distance to each other
+    for (code_a, code_b), distance in distances.items():
+        G.add_edge(code_a, code_b, weight=distance)
 
     # Find all edges that need to be shown
     visible_edges = set()
