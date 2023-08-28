@@ -35,10 +35,6 @@ def unit_distance_metric(unit_1: Unit, unit_2: Unit) -> float:
         elif isinstance(constraint, CorequisitesFulfilledConstraint) and unit_1 in constraint.corequisites:
             similarity += 0.6 * scale
 
-    if unit_1 in unit_2.prerequisites or unit_2 in unit_1.prerequisites \
-            or unit_1 in unit_2.corequisites or unit_2 in unit_1.corequisites:
-        similarity += 0.6 * scale
-
     # Calculate distance using similarity score
     distance = math.exp(-similarity)
 
