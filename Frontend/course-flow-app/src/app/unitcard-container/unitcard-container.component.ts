@@ -1,40 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-export interface Unit {
-  unitCode: string;
-  unitName: string;
-  unitType: string;
-}
+import { Unit } from '../interfaces/unit.model';
 
 @Component({
   selector: 'app-unitcard-container',
-  template: `
-    <div class="unit-list-container">
-      <app-unit-card 
-        *ngFor="let unit of units; let i = index"
-        [unitCode]="unit.unitCode"
-        [unitName]="unit.unitName"
-        [unitType]="unit.unitType"
-        (infoClicked)="onInfoClicked(i)">
-      </app-unit-card>
-    </div>
-  `,
+  templateUrl: `./unitcard-container.component.html`,
   styleUrls: ['./unitcard-container.component.css']
 })
 
-export class UnitcardContainerComponent {
+export class UnitcardContainerComponent implements OnInit {
   units: Unit[] = [];
+  groupedUnits: Unit[][] = [];
+
+  @Input() containerNumber: number = 1;
 
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.http.get<any[]>('../../assets/json/pretend-unit-data.json').subscribe(data => {
+    this.http.get<Unit[]>('../../assets/json/compsci-units.json').subscribe(data => {
       this.units = data;
+      this.groupUnits();
     });
   }
 
-  onInfoClicked(index: number) {
-    console.log('Info clicked for unit with index:', index);
+  groupUnits() {
+    const groupSize = 4;
+    for (let i = 0; i < this.units.length; i += groupSize) {
+      this.groupedUnits.push(this.units.slice(i, i + groupSize));
+    }
   }
 }

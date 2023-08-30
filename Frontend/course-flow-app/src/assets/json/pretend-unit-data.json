@@ -1,23 +1,134 @@
 [
-    {
-      "unitCode": "SIT102",
-      "unitName": "Introduction to Programming",
-      "unitType": "Core"
-    },
-    {
-      "unitCode": "SIT103",
-      "unitName": "Database Fundamentals",
-      "unitType": "Core"
-    },
-    {
-      "unitCode": "SIT192",
-      "unitName": "Discrete Mathematics",
-      "unitType": "Core"
-    },
-    {
-      "unitCode": "MAF101",
-      "unitName": "Fundamentals of Finance",
-      "unitType": "Elective"
-    }
-  ]
-  
+  {
+    "Code": "EDU101",
+    "Name": "Education, Knowledge and Society",
+    "Type": "Core",
+    "Content": "This is the first specialist Education Studies unit being offered in the Bachelor of Arts. During this unit you will be asked to explore, debate, discuss and challenge your own understanding, beliefs, experiences in education and begin the process of critical reflection around the purpose and value of education today.",
+    "CreditPoints": "1",
+    "Prerequisite": "Nil",
+    "ULOs": [
+      "Reflect on your own experience of education and/or schooling in terms of formal and informal learning activities and draw on examples to compare the different principles underpinning these educational activities",
+      "Identify, compare, contrast and present characteristics of different approaches to education in relation to important philosophical and educational concerns",
+      "Engage in collegial conversation and give meaningful feedback to critically evaluate different approaches to education how the nature of knowledge is understood, what sort of people are students to become, and what sort of society is being promoted",
+      "Discuss and apply key theories of the sociology of education to analyse the relationship between education and society and how this informs your emerging personal philosophy of education"
+    ],
+    "GLOs": [
+      "GLO1",
+      "GLO2",
+      "GLO3",
+      "GLO4",
+      "GLO7"
+    ],
+    "Assessment": [
+      {
+        "Description": "Assessment 1 - Reflection on Education",
+        "Weight": 10.0,
+        "WeekDue": "Week 4"
+      },
+      {
+        "Description": "Assessment 2 - Multimedia Presentation &amp; Peer Feedback",
+        "Weight": 40.0,
+        "WeekDue": "Week 6"
+      },
+      {
+        "Description": "Assessment 3 - Individual Analytic Essay",
+        "Weight": 50.0,
+        "WeekDue": "Week 11"
+      }
+    ]
+  },
+  {
+    "Code": "EDU102",
+    "Name": "From Aristotle to ATARS: the History, Philosophy and Future of Education",
+    "Type": "Core",
+    "Content": "This unit investigates how key ideas about Education have developed throughout human history and analyses how these ideas have been influenced by significant historical events. It considers the changing role that Education has played in the development of human civilisation since the early days of the ancient Greeks, and considers the development of different philosophical perspectives informing educational activity. The unit develops an understanding of what can be considered to be the threshold principles in the contemporary discipline of Education.",
+    "CreditPoints": "1",
+    "Prerequisite": "Nil",
+    "ULOs": [
+      "Describe the discipline of Education in terms of its threshold principles of curriculum, pedagogy and assessment",
+      "Discuss the historical development of educational thought since early human civilisation and use digital technology to explain the changing role of Education in human society",
+      "Analyse how ideas about Education are influenced by historical context and communicate this understanding using digital technologies"
+    ],
+    "GLOs": [
+      "GLO1",
+      "GLO2",
+      "GLO3",
+      "GLO4"
+    ],
+    "Assessment": [
+      {
+        "Description": "Assessment 1 - Multimedia presentation",
+        "Weight": 50.0,
+        "WeekDue": "Information not yet available"
+      },
+      {
+        "Description": "Assessment 2 - Analytic Essay",
+        "Weight": 50.0,
+        "WeekDue": "Information not yet available"
+      }
+    ]
+  },
+  {
+    "Code": "EDU201",
+    "Name": "Educational Psychology",
+    "Type": "Core",
+    "Content": "This units investigates how the field of psychology is applied to the work of educators to better understand how people learn and become motivated to engage in educational activities. It considers key theories of educational psychology and examines how these theories have informed our understanding of learning and teaching in a range of educational contexts. The unit compares different approaches to educational psychology research as case studies, and applies examples of these approaches to analyse educational problems of practice.",
+    "CreditPoints": "1",
+    "Prerequisite": "Nil",
+    "ULOs": [
+      "Describe the key theories of educational psychology and discuss how these theories have informed our understanding of learning and teaching in a range of educational contexts",
+      "Compare different approaches to educational psychology research and apply one of these approaches to analyse an authentic educational case study"
+    ],
+    "GLOs": [
+      "GLO1",
+      "GLO2",
+      "GLO4",
+      "GLO5"
+    ],
+    "Assessment": [
+      {
+        "Description": "Assessment 1 - Essay",
+        "Weight": 50.0,
+        "WeekDue": "Week 6"
+      },
+      {
+        "Description": "Assessment 2 - Report",
+        "Weight": 50.0,
+        "WeekDue": "Week 11"
+      }
+    ]
+  },
+  {
+    "Code": "EDU202",
+    "Name": "Educators and Learners",
+    "Type": "Core",
+    "Content": "This unit examines how educators&rsquo; work can be understood in terms of curriculum design, developing and conducting teaching/learning activities, and assessing evidence of students&rsquo; learning. It considers contemporary theories informing these dimensions of Education and considers how educators form productive learning relationships. These elements of educators&rsquo; work are considered in their applications to a range of educational contexts, including working with children, adolescents, and adult learners. The units considers how this knowledge can be applied to designing educational programs that are responsive to the needs of different learners and their local contexts.&nbsp;",
+    "CreditPoints": "1",
+    "Prerequisite": "Nil",
+    "ULOs": [
+      "Discuss key theories informing the work of contemporary educators when developing curriculum programs and their approaches to teaching, learning and assessment",
+      "Apply knowledge of curriculum theory, effective pedagogy and assessment to develop an educational program for a group of learners",
+      "Analyse how educators form productive learning relationships with learners in a range of educational contexts"
+    ],
+    "GLOs": [
+      "GLO1",
+      "GLO4",
+      "GLO5"
+    ],
+    "Assessment": [
+      {
+        "Description": "Assessment 1 - Case Study",
+        "Weight": 50.0,
+        "WeekDue": "Week 6"
+      },
+      {
+        "Description": "Assessment 2 - Program Design",
+        "Weight": 50.0,
+        "WeekDue": "Week 12"
+      }
+    ]
+  }
+]
+
+
+

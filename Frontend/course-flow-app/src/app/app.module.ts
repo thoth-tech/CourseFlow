@@ -14,6 +14,9 @@ import { MainSideNavComponent } from './main-side-nav/main-side-nav.component';
 import { TrimesterContainerComponent } from './trimester-container/trimester-container.component';
 import { YearContainerComponent } from './year-container/year-container.component';
 
+import { MatDialogModule } from '@angular/material/dialog';
+import { UnitDetailDialogComponent } from './unit-detail-dialog/unit-detail-dialog.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,14 +25,16 @@ import { YearContainerComponent } from './year-container/year-container.componen
     UnitcardContainerComponent,
     MainSideNavComponent,
     TrimesterContainerComponent,
-    YearContainerComponent
+    YearContainerComponent,
+    UnitDetailDialogComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

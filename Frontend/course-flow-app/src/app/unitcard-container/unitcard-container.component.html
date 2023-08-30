@@ -1,0 +1,16 @@
+<div class="container-number">
+    Number {{ containerNumber }}
+</div>
+
+
+<ng-container *ngFor="let group of groupedUnits">
+    <div class="unit-list-container">
+      <app-unit-card 
+        *ngFor="let unit of group"
+        [unitCode]="unit.Code"
+        [unitName]="unit.Name"
+        [unitType]="unit.Type"
+        [unit]="unit">
+      </app-unit-card>
+    </div>
+  </ng-container>

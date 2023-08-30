@@ -1,0 +1,39 @@
+<div class="dialog">
+    <div class="header">
+        <div class="unit-name">{{ data.Name }}</div>
+        <div class="unit-code">{{ data.Code }}</div>
+        <div class="unit-type">{{ data.Type }}</div>
+    </div>
+
+    <div class="credit-points"><strong>Credit Points:</strong> {{ data.CreditPoints }}</div>
+    <div class="prerequisite"><strong>Prerequisite:</strong> {{ data.Prerequisite }}</div>
+
+    <div class="main-content">
+        <div class="unit-content">{{ data.Content }}</div>
+
+        <div class="ulos-header">ULOs</div>
+        <div class="ulos-list">
+            <div class="ulo-item" *ngFor="let ulo of data.ULOs">{{ ulo }}</div>
+        </div>
+
+        <div class="glos-header">GLOs</div>
+        <div class="glos-list">
+            <div class="glo-item" *ngFor="let glo of data.GLOs">{{ glo }}</div>
+        </div>
+    </div>
+
+    <div class="assessments">
+        <div class="assessments-header" (click)="toggleDropdown()">
+            Assessments
+            <span class="dropdown-icon">{{ isDropdownOpen ? '▲' : '▼' }}</span>
+        </div>
+        
+        <div *ngIf="isDropdownOpen">
+            <div class="assessment-item" *ngFor="let assessment of data.Assessment">
+                <div class="assessment-description">{{ assessment.Description }}</div>
+                <div class="assessment-weight"><strong>Weight:</strong> {{ assessment.Weight }}%</div>
+                <div class="assessment-weekdue"><strong>Week Due:</strong> {{ assessment.WeekDue }}</div>
+            </div>
+        </div>
+    </div>
+</div>
