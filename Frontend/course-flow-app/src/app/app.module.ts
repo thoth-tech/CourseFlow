@@ -13,6 +13,9 @@ import { DiscoveryGraphUtilitiesService } from './discovery/discovery-services/d
 // Routing Imports
 import { AppRoutingModule } from './app-routing.module';
 
+// Ngx Graph
+import { NgxGraphModule } from '@swimlane/ngx-graph';
+
 // Component Imports
 import { AppComponent } from './app.component';
 import { DiscoveryPageComponent } from './discovery/discovery-page/discovery-page.component';
@@ -33,6 +36,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,6 +50,7 @@ import {MatDividerModule} from '@angular/material/divider';
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
+    NgxGraphModule,
     MatDialogModule, MatButtonModule, MatIconModule, MatSidenavModule, 
     MatExpansionModule, MatChipsModule, MatRadioModule, MatGridListModule,
     MatCardModule, MatDividerModule
