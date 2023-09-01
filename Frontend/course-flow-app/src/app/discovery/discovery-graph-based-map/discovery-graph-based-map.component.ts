@@ -8,6 +8,11 @@ import { Node, Edge } from "@swimlane/ngx-graph"
 // Enum Imports
 import { EDiscoveryGroupUnitsBy } from "../../enum/discoveryEnums"
 
+interface NodeStack {
+  currentNode: IDiscoveryHierarchicalData,
+  parentNode: IDiscoveryHierarchicalData | null
+}
+
 @Component({
   selector: 'app-discovery-graph-based-map',
   templateUrl: './discovery-graph-based-map.component.html',
@@ -18,8 +23,12 @@ export class DiscoveryGraphBasedMapComponent {
   // Hierarchical data
   discoveryHierarchicalData: IDiscoveryHierarchicalData = {} as IDiscoveryHierarchicalData
 
+  // Node data
   nodes: Node[] = []
   links: Edge[] = []
+
+  // Graph render control
+  displayGraph = false;
 
   /**
    * Constructor for the component.
@@ -40,40 +49,73 @@ export class DiscoveryGraphBasedMapComponent {
     this.links = [];
 
     // Start the processing of hierarchical data.
-    this.processHierarchicalData(this.discoveryHierarchicalData);
+    this.processHierarchicalData(this.discoveryHierarchicalData, true);
   }
 
   /**
    * Process the hierarchical data.
    * @param hierarchicalData hierarchical data.
    */
-  processHierarchicalData(hierarchicalData: IDiscoveryHierarchicalData) {
+  processHierarchicalData(hierarchicalData: IDiscoveryHierarchicalData, addRootNode: boolean) {
 
-    // Add the root node.
-    this.nodes.push({
-      id: hierarchicalData.id,
-      label: hierarchicalData.name
-    })
+    let currentNodes: Node[] = []
+    let currentLinks: Edge[] = []
 
-    // Loop through children nodes.
-    hierarchicalData.children.forEach(node => {
+    let stack: NodeStack[] = [{
+      currentNode: hierarchicalData,
+      parentNode: null
+    }];
+    
+    // Keep looping while we have items in the stack.
+    while (stack.length !== 0) {
       
-      // Add the node.
-      this.nodes.push({
-        id: node.id,
-        label: node.name
+      // Get the last NodeStack object and cast to NodeStack to remove TypeScript errors.
+      let nodeStack: NodeStack = stack.pop() as NodeStack;
+
+      // Add the node to the node array
+      currentNodes.push({
+        id: nodeStack.currentNode.id,
+        label: nodeStack.currentNode.name
       })
 
-      // Create a link
-      this.links.push({
-        id: node.id,
-        source: hierarchicalData.id,
-        target: node.id
-      })
+      // If this has a parent node, create a link.
+      if (nodeStack.parentNode !== null) {
 
-    });
+        currentLinks.push({
+          id: nodeStack.parentNode.id + nodeStack.currentNode.id,
+          source: nodeStack.parentNode.id,
+          target: nodeStack.currentNode.id
+        })
+      }
 
+      // If there are children nodes, add them to the stack
+      let nodeChildren = nodeStack.currentNode.children
 
-    this.links
+      if (nodeChildren.length !== 0) {
+
+        for (let i = 0; i < nodeChildren.length; i++) {
+          
+          let node = nodeChildren[i];
+
+          stack.push({
+            currentNode: node,
+            parentNode: nodeStack.currentNode
+          })
+          
+        }
+      }
+    }
+
+    // Add the local nodes and links to the class scoped variables.
+    this.nodes = currentNodes;
+    this.links = currentLinks;
+
+    // Turn on the graph once loaded.
+    this.displayGraph = true;
+  }
+
+  onNodeClicked(event: any): void {
+
+    console.log(event)
   }
 }

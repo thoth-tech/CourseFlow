@@ -4,18 +4,20 @@
     <button mat-raised-button color="primary"> Reset </button>
 
     <ngx-graph
+        *ngIf="displayGraph"
         [view]="[1200, 1200]"
         [zoomLevel]="0.2"
         layout="colaForceDirected"
         [links]="links"
         [nodes]="nodes"
+        (select)="onNodeClicked($event)"
     >
 
     </ngx-graph>
 
     <!-- More detailed card panel -->
     <mat-card class="detailed-card-panel">
-        
+
     </mat-card>
 </div>
 

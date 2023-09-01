@@ -57,6 +57,7 @@ export interface IDiscoveryHierarchicalData {
     name: string;
     description: string;
     group: string;
+    height: number;
     children: IDiscoveryHierarchicalData[];
 }
 

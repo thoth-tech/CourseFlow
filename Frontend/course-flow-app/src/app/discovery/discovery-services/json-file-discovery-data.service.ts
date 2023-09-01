@@ -9,7 +9,7 @@ import { IDiscoveryHierarchicalData, IDiscoveryDataService } from 'src/app/inter
 
 // JSON Data Imports
 import  * as courseJsonData from "src/data/courseData.json";
-import * as facultyBasedUnitJsonData from "src/data/facultyBasedUnitData.json";
+import * as facultyBasedUnitJsonData from "src/data/units.json";
 
 @Injectable({
   providedIn: 'root'
@@ -82,6 +82,7 @@ export class JsonFileDiscoveryDataService implements IDiscoveryDataService {
       name: 'Course',
       description: "Find your ideal units by course.",
       group: "0",
+      height: 3,
       children: []
     }
   
@@ -105,6 +106,7 @@ export class JsonFileDiscoveryDataService implements IDiscoveryDataService {
           name: courseData["name"],
           description: courseData["overview"],
           group: "1",
+          height: 2,
           children: majors
       }
         
@@ -123,6 +125,7 @@ export class JsonFileDiscoveryDataService implements IDiscoveryDataService {
             name: major["name"],
             description: "",
             group: "2",
+            height: 1,
             children: units
         }
 
@@ -138,6 +141,7 @@ export class JsonFileDiscoveryDataService implements IDiscoveryDataService {
                 name: unit,
                 description: "",
                 group: "3",
+                height: 0,
                 children: []
             }
 
@@ -174,6 +178,7 @@ export class JsonFileDiscoveryDataService implements IDiscoveryDataService {
         name: 'Faculty',
         description: "Find your ideal unit based on faculty and unit codes",
         group: "0",
+        height: 0,
         children: []
     }
 
@@ -184,7 +189,7 @@ export class JsonFileDiscoveryDataService implements IDiscoveryDataService {
         const unitObject: any = this.facultyBasedUnitDataArray[index];
 
         // Get the unit code.
-        let unitCode: string = unitObject.code;
+        let unitCode: string = unitObject.Code;
 
         // Get the first letter which will correspond to a faculty and map to the faculty mapping record.
         let facultyCode: string = unitCode[0];
@@ -205,6 +210,7 @@ export class JsonFileDiscoveryDataService implements IDiscoveryDataService {
                 name: facultyName,
                 description: "",
                 group: "1",
+                height: 0,
                 children: []
             }
 
@@ -224,6 +230,7 @@ export class JsonFileDiscoveryDataService implements IDiscoveryDataService {
                 name: disciplineCode,
                 description: "",
                 group: "2",
+                height: 0,
                 children: []
             }
 
@@ -237,6 +244,7 @@ export class JsonFileDiscoveryDataService implements IDiscoveryDataService {
             name: `${unitObject.code}: ${unitObject.title}`,
             description: unitObject.description,
             group: "3",
+            height: 0,
             children: []
         }
 
