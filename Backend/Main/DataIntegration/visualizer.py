@@ -3,6 +3,10 @@ from typing import Dict, Tuple, List
 
 import matplotlib.pyplot as plt
 import networkx as nx
+import numpy as np
+import tensorflow as tf
+from keras import models
+from keras import layers
 
 from Backend.Main.Models.constraint import PrerequisitesFulfilledConstraint, CorequisitesFulfilledConstraint
 from Backend.Main.Models.unit import Unit
@@ -39,6 +43,49 @@ def unit_distance_metric(unit_1: Unit, unit_2: Unit) -> float:
     distance = math.exp(-similarity)
 
     return distance
+
+
+def loss(_, unit_positions: tf.Tensor) -> float:
+    # todo: create loss function that:
+    #  - increases as non-similar units are close together
+    #  - increases as similar units are far from each other
+    #  - increases by a lot when two units are too close to each other
+    #  - uses tensorflow operations so it's easily parallelizable in the future
+
+    # TODO: replace dummy loss function with proper loss function
+    mse = tf.keras.losses.MeanSquaredError()
+    return mse(_, unit_positions)
+
+def build_network_layout(units: Dict[str, Unit], distances: Dict[Tuple[str, str], float]) -> Dict[str, Tuple[float, float]]:
+    """Uses a simple neural network to create an optimal network layout"""
+
+    # Create an adjacency matrix with the distances between each unit as the edge weights
+    distance_matrix = np.zeros((len(units), len(units)), dtype=float)
+    unit_names = sorted(units.keys())
+    for (from_unit, to_unit), distance in distances.items():
+        from_index = unit_names.index(from_unit)
+        to_index = unit_names.index(to_unit)
+        distance_matrix[from_index, to_index] = distance
+
+    # Create a simple neural network model
+    n_hidden_layer_nodes = len(units) + 1
+    n_output_layer_nodes = len(units) * 2  # One node in the output layer for each x, y position of each unit
+    model = models.Sequential([
+        layers.InputLayer(input_shape=(len(units), len(units))),
+        layers.Dense(n_hidden_layer_nodes, activation="relu"),
+        layers.Dense(n_output_layer_nodes, activation="linear")
+    ])
+    model.compile(
+        optimizer="rmsprop",
+        loss=loss
+    )
+
+    # Calculate the ideal positions for each unit in the network diagram
+    model.fit(distance_matrix, np.zeros((len(units),)), epochs=10)
+
+    # Get the ideal positions
+    positions = model.weights[-1].numpy().reshape(len(units), 2)
+    return {name: tuple(positions[i]) for i, name in enumerate(unit_names)}
 
 
 def draw_unit_network(network: nx.DiGraph, visible_edges: List[Tuple[str, str]]):
