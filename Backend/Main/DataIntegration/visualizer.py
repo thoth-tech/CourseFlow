@@ -7,6 +7,7 @@ import numpy as np
 import tensorflow as tf
 from keras import models
 from keras import layers
+from keras.optimizers import RMSprop
 
 from Backend.Main.Models.constraint import PrerequisitesFulfilledConstraint, CorequisitesFulfilledConstraint
 from Backend.Main.Models.unit import Unit
@@ -76,7 +77,7 @@ def build_network_layout(units: Dict[str, Unit], distances: Dict[Tuple[str, str]
         layers.Dense(n_output_layer_nodes, activation="linear")
     ])
     model.compile(
-        optimizer="rmsprop",
+        optimizer=RMSprop(learning_rate=0.1),
         loss=loss
     )
 
