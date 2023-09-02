@@ -14,6 +14,64 @@ from Backend.Main.Models.constraint import PrerequisitesFulfilledConstraint, Cor
 from Backend.Main.Models.unit import Unit
 
 
+class UnitNetworkOptimizer:
+    def __init__(self):
+        # todo
+        pass
+
+    def loss(self, _, unit_positions: tf.Tensor) -> float:
+        # todo: note: input is tf.Tensor of shape (batch size, n units * 2), e.g: (None, 358)
+        #  need to reshape into (batch size, n units, 2) or find a way to work with the data as is
+
+        # todo: create loss function that:
+        #  - increases as non-similar units are close together
+        #  - increases as similar units are far from each other
+        #  - increases by a lot when two units are too close to each other
+        #  - uses tensorflow operations so it's easily parallelizable in the future
+
+        # todo: possible solution: try to position each node so that they match the distances between each unit exactly?
+
+        # TODO: replace dummy loss function with proper loss function
+        mse = tf.keras.losses.MeanSquaredError()
+        return mse(_, unit_positions)
+
+    def build_network_layout(self, units: Dict[str, Unit], distances: Dict[Tuple[str, str], float]) -> Dict[str, Tuple[float, float]]:
+        """Uses a simple neural network to create an optimal network layout"""
+
+        # Create an adjacency matrix with the distances between each unit as the edge weights
+        distance_matrix = np.zeros((len(units), len(units)), dtype=float)
+        unit_names = sorted(units.keys())
+        for (from_unit, to_unit), distance in distances.items():
+            # todo: optimize to O(1): these .index operations are linear searches
+            from_index = unit_names.index(from_unit)
+            to_index = unit_names.index(to_unit)
+            distance_matrix[from_index, to_index] = distance
+
+        # Create a simple neural network model
+        n_hidden_layer_nodes = len(units) + 1
+        n_output_layer_nodes = len(units) * 2  # One node in the output layer for each x, y position of each unit
+        model = models.Sequential([
+            layers.InputLayer(input_shape=(len(units), len(units))),
+            layers.Dense(n_hidden_layer_nodes, activation="relu"),
+            layers.Dense(n_output_layer_nodes, activation="linear")
+        ])
+        model.compile(
+            optimizer=RMSprop(learning_rate=0.1),
+            loss=self.loss
+        )
+
+        # Calculate the ideal positions for each unit in the network diagram
+        model.fit(distance_matrix,
+                  np.zeros((len(units),)),
+                  epochs=100,
+                  callbacks=[EarlyStopping(monitor="loss", patience=20, min_delta=0.01)]
+                  )
+
+        # Get the ideal positions
+        positions = model.weights[-1].numpy().reshape(len(units), 2)
+        return {name: tuple(positions[i]) for i, name in enumerate(unit_names)}
+
+
 def unit_distance_metric(unit_1: Unit, unit_2: Unit) -> float:
     if unit_1.code == unit_2.code:
         return 0
@@ -45,53 +103,6 @@ def unit_distance_metric(unit_1: Unit, unit_2: Unit) -> float:
     distance = math.exp(-similarity)
 
     return distance
-
-
-def loss(_, unit_positions: tf.Tensor) -> float:
-    # todo: create loss function that:
-    #  - increases as non-similar units are close together
-    #  - increases as similar units are far from each other
-    #  - increases by a lot when two units are too close to each other
-    #  - uses tensorflow operations so it's easily parallelizable in the future
-
-    # TODO: replace dummy loss function with proper loss function
-    mse = tf.keras.losses.MeanSquaredError()
-    return mse(_, unit_positions)
-
-def build_network_layout(units: Dict[str, Unit], distances: Dict[Tuple[str, str], float]) -> Dict[str, Tuple[float, float]]:
-    """Uses a simple neural network to create an optimal network layout"""
-
-    # Create an adjacency matrix with the distances between each unit as the edge weights
-    distance_matrix = np.zeros((len(units), len(units)), dtype=float)
-    unit_names = sorted(units.keys())
-    for (from_unit, to_unit), distance in distances.items():
-        from_index = unit_names.index(from_unit)
-        to_index = unit_names.index(to_unit)
-        distance_matrix[from_index, to_index] = distance
-
-    # Create a simple neural network model
-    n_hidden_layer_nodes = len(units) + 1
-    n_output_layer_nodes = len(units) * 2  # One node in the output layer for each x, y position of each unit
-    model = models.Sequential([
-        layers.InputLayer(input_shape=(len(units), len(units))),
-        layers.Dense(n_hidden_layer_nodes, activation="relu"),
-        layers.Dense(n_output_layer_nodes, activation="linear")
-    ])
-    model.compile(
-        optimizer=RMSprop(learning_rate=0.1),
-        loss=loss
-    )
-
-    # Calculate the ideal positions for each unit in the network diagram
-    model.fit(distance_matrix,
-              np.zeros((len(units),)),
-              epochs=100,
-              callbacks=[EarlyStopping(monitor="loss", patience=20, min_delta=0.01)]
-              )
-
-    # Get the ideal positions
-    positions = model.weights[-1].numpy().reshape(len(units), 2)
-    return {name: tuple(positions[i]) for i, name in enumerate(unit_names)}
 
 
 def draw_unit_network(network: nx.DiGraph, visible_edges: List[Tuple[str, str]]):
