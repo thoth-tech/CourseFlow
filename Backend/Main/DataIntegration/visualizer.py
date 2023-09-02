@@ -35,7 +35,7 @@ class UnitNetworkOptimizer:
         mse = tf.keras.losses.MeanSquaredError()
         return mse(_, unit_positions)
 
-    def build_network_layout(self, units: Dict[str, Unit], distances: Dict[Tuple[str, str], float]) -> Dict[str, Tuple[float, float]]:
+    def build(self, units: Dict[str, Unit], distances: Dict[Tuple[str, str], float]) -> Dict[str, Tuple[float, float]]:
         """Uses a simple neural network to create an optimal network layout"""
 
         # Create an adjacency matrix with the distances between each unit as the edge weights
