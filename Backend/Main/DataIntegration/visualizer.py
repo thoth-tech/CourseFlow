@@ -7,6 +7,7 @@ import numpy as np
 import tensorflow as tf
 from keras import models
 from keras import layers
+from keras.callbacks import EarlyStopping
 from keras.optimizers import RMSprop
 
 from Backend.Main.Models.constraint import PrerequisitesFulfilledConstraint, CorequisitesFulfilledConstraint
@@ -82,7 +83,11 @@ def build_network_layout(units: Dict[str, Unit], distances: Dict[Tuple[str, str]
     )
 
     # Calculate the ideal positions for each unit in the network diagram
-    model.fit(distance_matrix, np.zeros((len(units),)), epochs=10)
+    model.fit(distance_matrix,
+              np.zeros((len(units),)),
+              epochs=100,
+              callbacks=[EarlyStopping(monitor="loss", patience=20, min_delta=0.01)]
+              )
 
     # Get the ideal positions
     positions = model.weights[-1].numpy().reshape(len(units), 2)
