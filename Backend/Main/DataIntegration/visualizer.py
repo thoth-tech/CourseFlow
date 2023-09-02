@@ -19,13 +19,11 @@ class UnitNetworkOptimizer:
         self.units = units
         # Create an adjacency matrix with the distances between each unit as the edge weights
         self.distance_matrix = np.zeros((len(units), len(units)), dtype=float)
-        self.unit_names = sorted(units.keys())
+        self.unit_names = {name: i for i, name in enumerate(sorted(units.keys()))}
         for (from_unit, to_unit), distance in distances.items():
-            # todo: optimize to O(1): these .index operations are linear searches
-            from_index = self.unit_names.index(from_unit)
-            to_index = self.unit_names.index(to_unit)
+            from_index = self.unit_names[from_unit]
+            to_index = self.unit_names[to_unit]
             self.distance_matrix[from_index, to_index] = distance
-
 
     def loss(self, _, unit_positions: tf.Tensor) -> float:
         # todo: note: input is tf.Tensor of shape (batch size, n units * 2), e.g: (None, 358)
@@ -68,7 +66,7 @@ class UnitNetworkOptimizer:
 
         # Get the ideal positions
         positions = model.weights[-1].numpy().reshape(len(self.units), 2)
-        return {name: tuple(positions[i]) for i, name in enumerate(self.unit_names)}
+        return {name: tuple(positions[i]) for name, i in self.unit_names.items()}
 
 
 def unit_distance_metric(unit_1: Unit, unit_2: Unit) -> float:
