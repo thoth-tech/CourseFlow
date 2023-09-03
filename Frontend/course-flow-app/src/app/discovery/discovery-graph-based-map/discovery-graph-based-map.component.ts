@@ -1,17 +1,18 @@
 // Angular Imports
 import { Component, Input, Inject } from '@angular/core';
 
+// Ngx-graph Imports
+import { Edge, Node } from '@swimlane/ngx-graph';
+
+// Class Imports
+import { PositionBasedLayout } from './PositionBasedLayout';
+
 // Interface Imports
-import { IDiscoveryDataServiceInjector, IDiscoveryDataService, IDiscoveryHierarchicalData, IDiscoveryGraphProperties, IDiscoveryGraphUtilitiesService, IDiscoveryGraphUtilitiesServiceInjector } from 'src/app/interfaces/discoveryInterfaces';
-import { Node, Edge } from "@swimlane/ngx-graph"
+import { IDiscoveryDataServiceInjector, IDiscoveryDataService, IDiscoveryNodeData } from 'src/app/interfaces/discoveryInterfaces';
 
 // Enum Imports
 import { EDiscoveryGroupUnitsBy } from "../../enum/discoveryEnums"
 
-interface NodeStack {
-  currentNode: IDiscoveryHierarchicalData,
-  parentNode: IDiscoveryHierarchicalData | null
-}
 
 @Component({
   selector: 'app-discovery-graph-based-map',
@@ -20,98 +21,51 @@ interface NodeStack {
 })
 export class DiscoveryGraphBasedMapComponent {
 
-  // Hierarchical data
-  discoveryHierarchicalData: IDiscoveryHierarchicalData = {} as IDiscoveryHierarchicalData
+  // Custom Layout
+  positionBasedLayout: PositionBasedLayout = new PositionBasedLayout();
 
-  // Node data
-  nodes: Node[] = []
-  links: Edge[] = []
+  // Data
+  nodes: Node[] = [] as Node[];
+  edges: Edge[] = [] as Edge[];
 
   // Graph render control
-  displayGraph = false;
+  displayGraph = true;
 
   /**
    * Constructor for the component.
    * @param discoveryDataService Injected discovery data service.
    */
-  constructor(@Inject(IDiscoveryDataServiceInjector) private discoveryDataService: IDiscoveryDataService,
-              @Inject(IDiscoveryGraphUtilitiesServiceInjector) private discoveryGraphUtilitiesService: IDiscoveryGraphUtilitiesService) {
-  }
+  constructor(@Inject(IDiscoveryDataServiceInjector) private discoveryDataService: IDiscoveryDataService) {}
 
   /**
    * Input for group units by param.
    */
   @Input() set groupUnitsBy(value: EDiscoveryGroupUnitsBy) {
 
-    this.discoveryHierarchicalData = this.discoveryDataService.getDiscoveryHierarchicalData(value);
+    let discoverNodeData = this.discoveryDataService.getDiscoveryNodeData(value);
 
-    this.nodes = [];
-    this.links = [];
+    // Set the nodes.
+    this.nodes = discoverNodeData;
 
-    // Start the processing of hierarchical data.
-    this.processHierarchicalData(this.discoveryHierarchicalData, true);
-  }
+    // We will have to go through the connections inside the discovery node data and create the edges.
+    let edges = [] as Edge[];
 
-  /**
-   * Process the hierarchical data.
-   * @param hierarchicalData hierarchical data.
-   */
-  processHierarchicalData(hierarchicalData: IDiscoveryHierarchicalData, addRootNode: boolean) {
+    discoverNodeData.forEach((nodeData) => {
 
-    let currentNodes: Node[] = []
-    let currentLinks: Edge[] = []
+      nodeData.connections.forEach((connection) => {
 
-    let stack: NodeStack[] = [{
-      currentNode: hierarchicalData,
-      parentNode: null
-    }];
-    
-    // Keep looping while we have items in the stack.
-    while (stack.length !== 0) {
-      
-      // Get the last NodeStack object and cast to NodeStack to remove TypeScript errors.
-      let nodeStack: NodeStack = stack.pop() as NodeStack;
+        let edge: Edge = {
+          id:  nodeData.id + connection,
+          label: nodeData.id + connection,
+          source: nodeData.id,
+          target: connection,
+        };
 
-      // Add the node to the node array
-      currentNodes.push({
-        id: nodeStack.currentNode.id,
-        label: nodeStack.currentNode.name
+        edges.push(edge);
       })
+    })
 
-      // If this has a parent node, create a link.
-      if (nodeStack.parentNode !== null) {
-
-        currentLinks.push({
-          id: nodeStack.parentNode.id + nodeStack.currentNode.id,
-          source: nodeStack.parentNode.id,
-          target: nodeStack.currentNode.id
-        })
-      }
-
-      // If there are children nodes, add them to the stack
-      let nodeChildren = nodeStack.currentNode.children
-
-      if (nodeChildren.length !== 0) {
-
-        for (let i = 0; i < nodeChildren.length; i++) {
-          
-          let node = nodeChildren[i];
-
-          stack.push({
-            currentNode: node,
-            parentNode: nodeStack.currentNode
-          })
-          
-        }
-      }
-    }
-
-    // Add the local nodes and links to the class scoped variables.
-    this.nodes = currentNodes;
-    this.links = currentLinks;
-
-    // Turn on the graph once loaded.
-    this.displayGraph = true;
+    this.edges = [...edges];
   }
 
   onNodeClicked(event: any): void {

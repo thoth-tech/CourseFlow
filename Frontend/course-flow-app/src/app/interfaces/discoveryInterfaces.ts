@@ -12,7 +12,7 @@ export const IDiscoveryDataServiceInjector = new InjectionToken<IDiscoveryDataSe
 
 export interface IDiscoveryDataService {
 
-    getDiscoveryHierarchicalData(groupUnitsByQuery: EDiscoveryGroupUnitsBy): IDiscoveryHierarchicalData;
+    getDiscoveryNodeData(groupUnitsByQuery: EDiscoveryGroupUnitsBy): IDiscoveryNodeData[];
 }
 
 
@@ -49,8 +49,16 @@ export interface IDiscoveryGraphUtilitiesService {
 
 
 /*******************************************************************************************************************************
- * Discovery Hierarchical Data Types.
+ * Discovery Data Types.
  *******************************************************************************************************************************/
+
+export interface IDiscoveryNodeData {
+    id: string,
+    x: number,
+    y: number,
+    connections: string[],
+    color: string
+}
 
 export interface IDiscoveryHierarchicalData {
     id: string;

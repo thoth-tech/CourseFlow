@@ -1,8 +1,7 @@
-<div class="text-based-list-container">
+<!-- <div class="text-based-list-container">
 
     <h2 class="text-based-list-title"> {{ unitData.name }}</h2>
 
-    <!-- Back Button -->
     <button 
         class="text-based-list-back-button"
         mat-raised-button color="primary" 
@@ -12,10 +11,8 @@
         Back 
     </button>
 
-    <!-- Using regular css grids for this - material's grids were terrible for laying out content (overflowing off screen). -->
     <div class="text-based-list-grid-container">
 
-        <!-- Loop through the current unit data's children to display the information at different layers of the hierarchy. -->
         <div class="text-based-list-grid-item" *ngFor="let data of unitData.children;">
             
             <mat-card>
@@ -28,7 +25,6 @@
 
                 <mat-card-actions>
 
-                    <!-- View More Button -->
                     <button mat-raised-button color="primary" (click)="onViewMorePressed(data)"> View More </button>
 
                 </mat-card-actions>
@@ -40,3 +36,5 @@
     </div>
 
 </div>
+
+-->

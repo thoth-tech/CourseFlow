@@ -7,9 +7,9 @@
         *ngIf="displayGraph"
         [view]="[1200, 1200]"
         [zoomLevel]="0.2"
-        layout="colaForceDirected"
-        [links]="links"
+        [links]="edges"
         [nodes]="nodes"
+        [layout]="positionBasedLayout"
         (select)="onNodeClicked($event)"
     >
 
