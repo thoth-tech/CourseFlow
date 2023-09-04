@@ -1,5 +1,5 @@
 import math
-from typing import Dict, Tuple, List
+from typing import Dict, Tuple, List, Set
 
 import matplotlib.pyplot as plt
 import networkx as nx
@@ -71,17 +71,7 @@ def calculate_unit_distances(units: Dict[str, Unit]) -> Dict[Tuple[str, str], fl
     return unit_distances
 
 
-def create_unit_network(units: Dict[str, Unit], distances: Dict[Tuple[str, str], float]) -> Tuple[nx.DiGraph, List[Tuple[str, str]]]:
-    G = nx.DiGraph()
-
-    # Add units to graph
-    for code in units.keys():
-        G.add_node(code)
-
-    # Calculate each unit's distance to each other
-    for (code_a, code_b), distance in distances.items():
-        G.add_edge(code_a, code_b, weight=distance)
-
+def find_visible_edges(units: Dict[str, Unit]) -> Set[Tuple[str, str]]:
     # Find all edges that need to be shown
     visible_edges = set()
     for code, unit in units.items():
@@ -103,4 +93,18 @@ def create_unit_network(units: Dict[str, Unit], distances: Dict[Tuple[str, str],
                     visible_edges.add(edge)
             # todo: Think of a way to display incompatible units
 
-    return G, list(visible_edges)
+    return visible_edges
+
+
+def create_unit_network(units: Dict[str, Unit], distances: Dict[Tuple[str, str], float]) -> nx.DiGraph:
+    G = nx.DiGraph()
+
+    # Add units to graph
+    for code in units.keys():
+        G.add_node(code)
+
+    # Calculate each unit's distance to each other
+    for (code_a, code_b), distance in distances.items():
+        G.add_edge(code_a, code_b, weight=distance)
+
+    return G
