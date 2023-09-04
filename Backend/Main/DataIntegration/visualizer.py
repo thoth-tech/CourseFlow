@@ -41,17 +41,19 @@ class UnitNetworkOptimizer:
         #  - uses tensorflow operations so it's easily parallelizable in the future
 
         # todo: possible solution: try to position each node so that they match the distances between each unit exactly?
-        # Use MSE on each node compared to every other node, comparing the distance between the two nodes to the
-        # distance in the distance matrix
-        # TODO: replace dummy loss function with proper loss function
 
+        loss = 0
+        # Calculate the Euclidean distances between each node to every other node as a (n, n) tensor
+        # fixme: When using batch sizes > 1 this reshape puts all the distances into the same tensor even if they belong
+        #  to a different sample
         unit_positions = tf.reshape(unit_positions, (2, -1, 1))
         differences = unit_positions - tf.transpose(unit_positions, perm=[0, 2, 1])
         squared_distances = tf.reduce_sum(tf.square(differences), axis=0)
         euclidean_distances = tf.sqrt(squared_distances)
+        # Increase the loss as the distances between units deviates from the distances in the distance matrix
+        loss += tf.keras.losses.MeanSquaredError()(self.distance_matrix, euclidean_distances)
 
-        mse = tf.keras.losses.MeanSquaredError()
-        return mse(self.distance_matrix, euclidean_distances)
+        return loss
 
     def build(self) -> Dict[str, Tuple[float, float]]:
         """Uses a simple neural network to create an optimal network layout"""
