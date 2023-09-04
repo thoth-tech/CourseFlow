@@ -18,11 +18,16 @@ class UnitNetworkOptimizer:
     def __init__(self, units: Dict[str, Unit], distances: Dict[Tuple[str, str], float]):
         self.units = units
         # Create an adjacency matrix with the distances between each unit as the edge weights
-        self.distance_matrix = np.zeros((len(units), len(units)), dtype=float)
+        self.distance_matrix = np.ones((len(units), len(units)), dtype=float) * 10
+        np.fill_diagonal(self.distance_matrix, 0)
         self.unit_names = {name: i for i, name in enumerate(sorted(units.keys()))}
-        for (from_unit, to_unit), distance in distances.items():
+        for (from_unit, to_unit), similarity in distances.items():
             from_index = self.unit_names[from_unit]
             to_index = self.unit_names[to_unit]
+            # Invert the similarity to get the distance
+            distance = 1 - similarity
+            # todo: Find a way to encourage the algorithm to maximize the distance between dissimilar units,
+            #  e.g.: consider setting distance to +inf if similarity is 0
             self.distance_matrix[from_index, to_index] = distance
 
     def loss(self, _, unit_positions: tf.Tensor) -> float:
@@ -36,10 +41,17 @@ class UnitNetworkOptimizer:
         #  - uses tensorflow operations so it's easily parallelizable in the future
 
         # todo: possible solution: try to position each node so that they match the distances between each unit exactly?
-
+        # Use MSE on each node compared to every other node, comparing the distance between the two nodes to the
+        # distance in the distance matrix
         # TODO: replace dummy loss function with proper loss function
+
+        unit_positions = tf.reshape(unit_positions, (2, -1, 1))
+        differences = unit_positions - tf.transpose(unit_positions, perm=[0, 2, 1])
+        squared_distances = tf.reduce_sum(tf.square(differences), axis=0)
+        euclidean_distances = tf.sqrt(squared_distances)
+
         mse = tf.keras.losses.MeanSquaredError()
-        return mse(_, unit_positions)
+        return mse(self.distance_matrix, euclidean_distances)
 
     def build(self) -> Dict[str, Tuple[float, float]]:
         """Uses a simple neural network to create an optimal network layout"""
@@ -61,7 +73,8 @@ class UnitNetworkOptimizer:
         model.fit(self.distance_matrix,
                   np.zeros((len(self.units),)),
                   epochs=100,
-                  callbacks=[EarlyStopping(monitor="loss", patience=20, min_delta=0.01)]
+                  callbacks=[EarlyStopping(monitor="loss", patience=20, min_delta=0.01)],
+                  batch_size=1
                   )
 
         # Get the ideal positions
