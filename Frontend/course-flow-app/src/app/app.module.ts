@@ -4,11 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 // Interface Improts
-import { IDiscoveryDataServiceInjector, IDiscoveryGraphUtilitiesServiceInjector } from 'src/app/interfaces/discoveryInterfaces'
+import { IDiscoveryDataServiceInjector } from 'src/app/interfaces/discoveryInterfaces'
 
 // Service Imports
 import { JsonFileDiscoveryDataService } from 'src/app/discovery/discovery-services/json-file-discovery-data.service'
-import { DiscoveryGraphUtilitiesService } from './discovery/discovery-services/discovery-graph-utilities.service';
 
 // Routing Imports
 import { AppRoutingModule } from './app-routing.module';
@@ -51,8 +50,7 @@ import {MatDividerModule} from '@angular/material/divider';
     MatCardModule, MatDividerModule
   ],
   providers: [
-    { provide: IDiscoveryDataServiceInjector, useClass: JsonFileDiscoveryDataService },
-    { provide: IDiscoveryGraphUtilitiesServiceInjector, useClass: DiscoveryGraphUtilitiesService }
+    { provide: IDiscoveryDataServiceInjector, useClass: JsonFileDiscoveryDataService }
   ],
   bootstrap: [AppComponent]
 })

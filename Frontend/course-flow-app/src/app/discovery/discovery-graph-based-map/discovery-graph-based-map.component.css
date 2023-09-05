@@ -11,15 +11,3 @@
     padding: 1em;
     font-size: 20pt;
 }
-
-.detailed-card-panel {
-    width: 400px;
-    height: 500px;
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-}
-
-.detailed-card-panel mat-card-content {
-    overflow-y: scroll;
-}

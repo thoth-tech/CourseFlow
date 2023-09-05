@@ -12,7 +12,7 @@ export const IDiscoveryDataServiceInjector = new InjectionToken<IDiscoveryDataSe
 
 export interface IDiscoveryDataService {
 
-    getDiscoveryHierarchicalData(groupUnitsByQuery: EDiscoveryGroupUnitsBy): IDiscoveryHierarchicalData;
+    getDiscoveryData(groupUnitsByQuery: EDiscoveryGroupUnitsBy): IDiscoveryData;
 }
 
 
@@ -49,15 +49,26 @@ export interface IDiscoveryGraphUtilitiesService {
 
 
 /*******************************************************************************************************************************
- * Discovery Hierarchical Data Types.
+ * Discovery Data Types.
  *******************************************************************************************************************************/
 
-export interface IDiscoveryHierarchicalData {
+export interface IDiscoveryData {
+    
+    nodeData: IDiscoveryNodeData[]
+}
+
+export interface IDiscoveryNodeData {
+
     id: string;
-    name: string;
+    label: string;
+    group: number;
     description: string;
-    group: string;
-    children: IDiscoveryHierarchicalData[];
+    x: number | string;
+    y: number | string;
+    inConnections: string[];
+    outConnections: string[];
+    coConnections: string[];
+    restrictedConnections: string[];
 }
 
 /*******************************************************************************************************************************
@@ -85,21 +96,4 @@ export interface IDiscoveryGraphProperties {
     textFontWieight: number;
     textXOffset: number;
     textYOffset: number;
-}
-
-/*******************************************************************************************************************************
- * Discovery JSON Data Types.
- *******************************************************************************************************************************/
-
-export interface IDiscoveryFacultyJsonUnitData {
-    id: object;
-    code: string;
-    title: string;
-    description: string;
-    constraints: Array<IDiscoveryJsonUnitContraintData>;
-}
-
-export interface IDiscoveryJsonUnitContraintData {
-    type: string;
-    units: Array<string>;
 }
