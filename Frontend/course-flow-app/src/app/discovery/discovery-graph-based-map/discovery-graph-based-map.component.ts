@@ -105,23 +105,22 @@ export class DiscoveryGraphBasedMapComponent {
       // Append a circle shape to the node group.
       renderedNodeGroup.append('circle')
                        .attr("fill", "blue")
-                       .attr("r", 5)
+                       .attr("r", 2)
 
       // Append text to the node group.
       renderedNodeGroup.append("text")
         .text((nodeData) => nodeData.label)  
-        .style("opacity", (nodeData) => {
+        .style("font-size", 50)
+        .style("visibility", (nodeData) => {
 
-          let opacity = 0;
+          let visibility = "hidden";
 
-          if (nodeData.label === "A") {
-            
-            opacity = 1;
+          if (nodeData.group === 1) {
+            visibility = "visible";
           }
 
-          return opacity;
+          return visibility
         })
-        .style("font-size", 50)
       }
   }
 }

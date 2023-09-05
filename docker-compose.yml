@@ -1,0 +1,11 @@
+services:
+  frontend:
+    build:
+      context: ./frontend/course-flow-app
+      dockerfile: Dockerfile
+    container_name: course-flow-app
+    ports:
+      - '4200:4200'
+    volumes:
+      - ./frontend/course-flow-app:/frontend
+      - /frontend/node_modules

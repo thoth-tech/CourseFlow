@@ -54,7 +54,8 @@ export interface IDiscoveryGraphUtilitiesService {
 
 export interface IDiscoveryData {
     
-    nodeData: IDiscoveryNodeData[]
+    nodeData: IDiscoveryNodeData[];
+    linkData: IDiscoveryLinkData[];
 }
 
 export interface IDiscoveryNodeData {
@@ -69,6 +70,12 @@ export interface IDiscoveryNodeData {
     outConnections: string[];
     coConnections: string[];
     restrictedConnections: string[];
+}
+
+export interface IDiscoveryLinkData {
+    id: string;
+    source: string;
+    target: string;
 }
 
 /*******************************************************************************************************************************

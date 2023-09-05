@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 import { EDiscoveryGroupUnitsBy } from 'src/app/enum/discoveryEnums';
 
 // Interface Imports
-import { IDiscoveryDataService, IDiscoveryData, IDiscoveryNodeData } from 'src/app/interfaces/discoveryInterfaces';
+import { IDiscoveryDataService, IDiscoveryData, IDiscoveryNodeData, IDiscoveryLinkData } from 'src/app/interfaces/discoveryInterfaces';
 
 // JSON Data Imports
 import  * as facultyData from "src/data/facultyData.json";
@@ -29,7 +29,25 @@ export class JsonFileDiscoveryDataService implements IDiscoveryDataService {
 
       case EDiscoveryGroupUnitsBy.faculty:
         
-        discoveryNodeData.nodeData = facultyData as IDiscoveryNodeData[]
+        // Add the nodes.
+        discoveryNodeData.nodeData = facultyData as IDiscoveryNodeData[];
+
+        // Figure out the links and add them.
+        let linkData = [] as IDiscoveryLinkData[];
+
+        for (let i = 0; i < discoveryNodeData.nodeData.length; i++) {
+
+          let node = discoveryNodeData.nodeData[i];
+          
+          linkData.push({
+            id: node.id + node.inConnections[0],
+            source: node.inConnections[0],
+            target: node.id
+          })
+
+          discoveryNodeData.linkData = linkData;
+        }
+        
         break;
     
       default:
