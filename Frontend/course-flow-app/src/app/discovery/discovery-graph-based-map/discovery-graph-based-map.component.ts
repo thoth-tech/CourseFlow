@@ -21,7 +21,7 @@ import { EDiscoveryGroupUnitsBy } from "../../enum/discoveryEnums"
 })
 export class DiscoveryGraphBasedMapComponent {
 
-  // Custom Layout
+  // Custom Layout - use this with [layout] in the html if you want to use the custom position based layout.
   positionBasedLayout: PositionBasedLayout = new PositionBasedLayout();
 
   // Data
@@ -65,7 +65,7 @@ export class DiscoveryGraphBasedMapComponent {
       })
     })
 
-    this.edges = [...edges];
+    this.edges = edges;
   }
 
   onNodeClicked(event: any): void {

@@ -9,7 +9,8 @@
         [zoomLevel]="0.2"
         [links]="edges"
         [nodes]="nodes"
-        [layout]="positionBasedLayout"
+        layout="colaForceDirected"
+        [autoCenter]="true"
         (select)="onNodeClicked($event)"
     >
 
