@@ -1,0 +1,12 @@
+@import 'src/themes/themes.scss';
+
+.header {
+    padding: 20px;
+    text-align: left;
+    color: white;
+    background: linear-gradient(to right, #610d74 0%, #ffffff 100%);
+    font-size: 30px;
+    img{
+        width: 80px;
+    }
+  }
