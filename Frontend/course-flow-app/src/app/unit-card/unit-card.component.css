@@ -1,0 +1,101 @@
+
+.unit-card {
+    display: flex;
+    background-color: aliceblue;
+    justify-content: space-between;
+    width: 220px;
+    height: 110px;
+    background-color: #F5F5F5;
+    color: #5C5C5C;
+    border-radius: 15px;
+    padding: 10px;
+    gap: 1vw;
+}
+
+.left-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+.unit-code-and-name {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.unit-name {
+    color: #181818;
+}
+
+.unit-type {
+    padding-bottom: 2px;
+}
+
+
+
+.right-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.unit-status-background {
+    background-color: #7ED957;
+    height: 25px;
+    width: 45px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 2px;
+}
+
+.info-icon {
+    padding-right: 12px;
+}
+
+
+
+/* .unit-card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    position: relative;
+}
+
+.unit-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.unit-code {
+    font-weight: bold;
+}
+
+.status-symbol.completed {
+    color: green;
+    background-image: url('path-to-check-icon');
+}
+
+.unit-body {
+    padding-top: 10px;
+}
+
+.unit-name {
+    display: block;
+}
+
+.unit-type {
+    display: block;
+    color: #777;
+}
+
+.info-icon {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    cursor: pointer;
+} */
+

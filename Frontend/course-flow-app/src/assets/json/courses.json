@@ -1,0 +1,2057 @@
+[
+  {
+    "code": "S306",
+    "name": "Bachelor of Computer Science",
+    "year": "2023",
+    "overview": "This course equips you with the knowledge and practical skills needed to design and develop innovative software solutions to address multifaceted information and technology problems faced by our community, business and industry. Learn what it takes to create and integrate complex new computing technologies while exploring existing and emerging challenges. You will explore areas such as data analytics, machine learning, robotics, intelligent and autonomous systems, and telecommunications.Computer scientists are problem solvers and innovators and at Deakin, you will get a competitive edge in the job market. Gain hands-on experience with current technologies and training in fundamental concepts, models and methods. Extend your skills through a work placement and develop valuable professional networks. Professional accreditation by the Australian Computer Society (ACS) means your degree will be recognised around the world.Want to drive change through technology?",
+    "core": [
+      "STP050",
+      "SIT010",
+      "STP010",
+      "SIT111",
+      "SIT192",
+      "SIT112",
+      "SIT102",
+      "SIT232",
+      "SIT103",
+      "SIT292",
+      "SIT202",
+      "SIT221",
+      "SIT215",
+      "SIT223",
+      "SIT320",
+      "SIT374",
+      "SIT306",
+      "SIT344",
+      "SIT315",
+      "SIT378"
+    ],
+    "majors": [
+      {
+        "code": "MN-S000011",
+        "name": "Cloud Technologies",
+        "units": [
+          "SIT233",
+          "SIT325",
+          "SIT323",
+          "SIT314"
+        ]
+      },
+      {
+        "code": "MN-S000005",
+        "name": "Embedded Systems",
+        "units": [
+          "SIT122",
+          "SIT123",
+          "SIT210",
+          "SIT329"
+        ]
+      },
+      {
+        "code": "MN-S000012",
+        "name": "Full Stack Development",
+        "units": [
+          "SIT120",
+          "SIT331",
+          "SIT313",
+          "SIT305"
+        ]
+      },
+      {
+        "code": "MN-S000006",
+        "name": "Game Design",
+        "units": [
+          "SIT151",
+          "SIT253",
+          "SIT254",
+          "SIT283"
+        ]
+      },
+      {
+        "code": "MN-S000009",
+        "name": "Virtual and Augmented Reality",
+        "units": [
+          "SIT183",
+          "SIT283",
+          "SIT253",
+          "SIT383"
+        ]
+      }
+    ],
+    "specialisations": []
+  },
+  {
+    "code": "S406",
+    "name": "Bachelor of Computer Science (Honours)",
+    "year": "2023",
+    "overview": "Computer scientists are problem solvers and innovators. Throughout this specialised four-year course, you will develop the knowledge and practical skills required to design and develop innovative software solutions to address multifaceted information and technology challenges. You will have access to specialised facilities, including dedicated robotics, cyber security and augmented and virtual reality laboratories supported by experienced, industry-connected staff.You&rsquo;ll also have opportunities to undertake a professional placement as part of studies, work in teams with an industry partner to tackle authentic business challenges as part of a capstone project, focus your studies towards the area that interests you most by undertaking at least one major or minor in an area of your choosing, and culminate your knowledge in your final year through completion of an honours research project.Want to drive change through the adoption of innovative technology?",
+    "core": [
+      "STP050",
+      "SIT010",
+      "STP010",
+      "SIT111",
+      "SIT192",
+      "SIT112",
+      "SIT102",
+      "SIT232",
+      "SIT103",
+      "SIT292",
+      "SIT202",
+      "SIT221",
+      "SIT215",
+      "SIT223",
+      "SIT320",
+      "SIT374",
+      "SIT306",
+      "SIT344",
+      "SIT315",
+      "SIT378",
+      "SIT723",
+      "SIT724",
+      "SIT746"
+    ],
+    "majors": [
+      {
+        "code": "MN-S000011",
+        "name": "Cloud Technologies",
+        "units": [
+          "SIT233",
+          "SIT325",
+          "SIT323",
+          "SIT314"
+        ]
+      },
+      {
+        "code": "MN-S000005",
+        "name": "Embedded Systems",
+        "units": [
+          "SIT122",
+          "SIT123",
+          "SIT210",
+          "SIT329"
+        ]
+      },
+      {
+        "code": "MN-S000012",
+        "name": "Full Stack Development",
+        "units": [
+          "SIT120",
+          "SIT331",
+          "SIT313",
+          "SIT305"
+        ]
+      },
+      {
+        "code": "MN-S000006",
+        "name": "Game Design",
+        "units": [
+          "SIT151",
+          "SIT253",
+          "SIT254",
+          "SIT283"
+        ]
+      },
+      {
+        "code": "MN-S000009",
+        "name": "Virtual and Augmented Reality",
+        "units": [
+          "SIT183",
+          "SIT283",
+          "SIT253",
+          "SIT383"
+        ]
+      },
+      {
+        "code": "MN-S000018",
+        "name": "Information Technologies Research",
+        "units": [
+          "SLE761",
+          "SIT718",
+          "SIT747"
+        ]
+      }
+    ],
+    "specialisations": []
+  },
+  {
+    "code": "S308",
+    "name": "Bachelor of Artificial Intelligence",
+    "year": "2023",
+    "overview": "Deakin&rsquo;s Bachelor of Artificial Intelligence equips you with the knowledge and skills to design, develop and evolve software solutions that harness the latest advances in artificial intelligence (AI). Get hands-on experience developing AI-driven software solutions with the support of academics who are leaders in this emerging field. Our world-class research in AI feeds directly into our classrooms, ensuring what you learn is at the cutting edge of industry expectations and capabilities. You will have access to fully equipped computer labs with the latest software and technologies to ensure you graduate with the specialist skills to design and build the intelligent systems of the future. You will also have opportunities to obtain certificates from the training program for Microsoft Azure AI. With a minimum of 100 hours of industry experience, you&rsquo;ll develop in-demand skills working side-by-side with experienced AI specialists. Want the skills to build intelligent machines and software that power our future?",
+    "core": [
+      "STP050",
+      "SIT010",
+      "STP010",
+      "SIT102",
+      "SIT192",
+      "SIT111",
+      "SIT114",
+      "SIT232",
+      "SIT103",
+      "SIT202",
+      "SIT194",
+      "SIT221",
+      "SIT215",
+      "SIT220",
+      "SIT307",
+      "SIT223",
+      "SIT292",
+      "SIT319",
+      "SIT330",
+      "SIT374",
+      "SIT332",
+      "SIT378",
+      "SIT306",
+      "SIT344"
+    ],
+    "majors": [
+      {
+        "code": "MN-S000011",
+        "name": "Cloud Technologies",
+        "units": [
+          "SIT233",
+          "SIT325",
+          "SIT323",
+          "SIT314"
+        ]
+      },
+      {
+        "code": "MN-S000015",
+        "name": "Cyber Security",
+        "units": [
+          "SIT182",
+          "SIT218",
+          "SIT284",
+          "SIT379"
+        ]
+      },
+      {
+        "code": "MN-S000016",
+        "name": "Cyber Security Analytics",
+        "units": [
+          "SIT182",
+          "SIT282",
+          "SIT384",
+          "SIT326",
+          "SIT327"
+        ]
+      },
+      {
+        "code": "MN-S000005",
+        "name": "Embedded Systems",
+        "units": [
+          "SIT122",
+          "SIT123",
+          "SIT210",
+          "SIT329"
+        ]
+      },
+      {
+        "code": "MN-M30005",
+        "name": "Finance",
+        "units": [
+          "MAF101",
+          "MAF203",
+          "MAF202",
+          "MAF306",
+          "MAF307"
+        ]
+      },
+      {
+        "code": "MN-S000012",
+        "name": "Full Stack Development",
+        "units": [
+          "SIT120",
+          "SIT331",
+          "SIT313",
+          "SIT305"
+        ]
+      },
+      {
+        "code": "MN-S000017",
+        "name": "Health Analytics",
+        "units": [
+          "HBS107",
+          "HBS108",
+          "HSH205",
+          "HSH216"
+        ]
+      },
+      {
+        "code": "MN-M30012",
+        "name": "Human Resource Management",
+        "units": [
+          "MMM132",
+          "MMH230",
+          "MMH231",
+          "MMH232",
+          "MMH349"
+        ]
+      },
+      {
+        "code": "MN-M30008",
+        "name": "Marketing",
+        "units": [
+          "MMK101",
+          "MMK251",
+          "MMK266",
+          "MMK295",
+          "MMK368"
+        ]
+      },
+      {
+        "code": "MN-M30009",
+        "name": "Retail Management",
+        "units": [
+          "MMK101",
+          "MMK217",
+          "MIS313",
+          "MMK280",
+          "MMK317"
+        ]
+      },
+      {
+        "code": "MN-S000003",
+        "name": "Security Management",
+        "units": [
+          "MIS211",
+          "MMH356",
+          "MMM132",
+          "SIT284"
+        ]
+      },
+      {
+        "code": "MN-S000020",
+        "name": "Sports Analytics",
+        "units": [
+          "HSE010",
+          "HSE104",
+          "HSE202",
+          "HSE311",
+          "HSE314"
+        ]
+      },
+      {
+        "code": "MN-S000021",
+        "name": "Sustainability and Environmental Science",
+        "units": [
+          "SLE101",
+          "SLE121",
+          "SLE207",
+          "SLE239"
+        ]
+      },
+      {
+        "code": "MN-S000009",
+        "name": "Virtual and Augmented Reality",
+        "units": [
+          "SIT183",
+          "SIT283",
+          "SIT253",
+          "SIT383"
+        ]
+      }
+    ],
+    "specialisations": []
+  },
+  {
+    "code": "S408",
+    "name": "Bachelor of Artificial Intelligence (Honours)",
+    "year": "2023",
+    "overview": "Artificial Intelligence (AI) is driving digital disruption through the development of smart systems and machines capable of performing tasks that typically require human intelligence. From self-driving cars to the proliferation of smart assistants, AI is a growing part of everyday life. This specialised four-year course prepares you with the knowledge and skills required to design, develop and evolve software solutions that harness the latest advances in AI.You will study up-to-the-minute trends, insights and emerging topics to ensure you graduate with a highly relevant skill-set that is sought-after by employers across the globe. You will explore different AI tools and techniques as you learn key concepts and deep dive into advanced topics in machine learning, language and speech processing and robotics.Want the skills to develop the intelligent systems that drive digital disruption?",
+    "core": [
+      "STP050",
+      "SIT010",
+      "STP010",
+      "SIT102",
+      "SIT192",
+      "SIT111",
+      "SIT114",
+      "SIT232",
+      "SIT103",
+      "SIT202",
+      "SIT194",
+      "SIT221",
+      "SIT215",
+      "SIT220",
+      "SIT307",
+      "SIT223",
+      "SIT292",
+      "SIT319",
+      "SIT330",
+      "SIT374",
+      "SIT332",
+      "SIT378",
+      "SIT306",
+      "SIT344",
+      "SIT723",
+      "SIT724",
+      "SIT746"
+    ],
+    "majors": [
+      {
+        "code": "MN-S000011",
+        "name": "Cloud Technologies",
+        "units": [
+          "SIT233",
+          "SIT325",
+          "SIT323",
+          "SIT314"
+        ]
+      },
+      {
+        "code": "MN-S000015",
+        "name": "Cyber Security",
+        "units": [
+          "SIT182",
+          "SIT218",
+          "SIT284",
+          "SIT379"
+        ]
+      },
+      {
+        "code": "MN-S000016",
+        "name": "Cyber Security Analytics",
+        "units": [
+          "SIT182",
+          "SIT282",
+          "SIT384",
+          "SIT326",
+          "SIT327"
+        ]
+      },
+      {
+        "code": "MN-S000005",
+        "name": "Embedded Systems",
+        "units": [
+          "SIT122",
+          "SIT123",
+          "SIT210",
+          "SIT329"
+        ]
+      },
+      {
+        "code": "MN-M30005",
+        "name": "Finance",
+        "units": [
+          "MAF101",
+          "MAF203",
+          "MAF202",
+          "MAF306",
+          "MAF307"
+        ]
+      },
+      {
+        "code": "MN-S000012",
+        "name": "Full Stack Development",
+        "units": [
+          "SIT120",
+          "SIT331",
+          "SIT313",
+          "SIT305"
+        ]
+      },
+      {
+        "code": "MN-S000017",
+        "name": "Health Analytics",
+        "units": [
+          "HBS107",
+          "HBS108",
+          "HSH205",
+          "HSH216"
+        ]
+      },
+      {
+        "code": "MN-M30012",
+        "name": "Human Resource Management",
+        "units": [
+          "MMM132",
+          "MMH230",
+          "MMH231",
+          "MMH232",
+          "MMH349"
+        ]
+      },
+      {
+        "code": "MN-M30008",
+        "name": "Marketing",
+        "units": [
+          "MMK101",
+          "MMK251",
+          "MMK266",
+          "MMK295",
+          "MMK368"
+        ]
+      },
+      {
+        "code": "MN-M30009",
+        "name": "Retail Management",
+        "units": [
+          "MMK101",
+          "MMK217",
+          "MIS313",
+          "MMK280",
+          "MMK317"
+        ]
+      },
+      {
+        "code": "MN-S000003",
+        "name": "Security Management",
+        "units": [
+          "MIS211",
+          "MMH356",
+          "MMM132",
+          "SIT284"
+        ]
+      },
+      {
+        "code": "MN-S000020",
+        "name": "Sports Analytics",
+        "units": [
+          "HSE010",
+          "HSE104",
+          "HSE202",
+          "HSE311",
+          "HSE314"
+        ]
+      },
+      {
+        "code": "MN-S000021",
+        "name": "Sustainability and Environmental Science",
+        "units": [
+          "SLE101",
+          "SLE121",
+          "SLE207",
+          "SLE239"
+        ]
+      },
+      {
+        "code": "MN-S000009",
+        "name": "Virtual and Augmented Reality",
+        "units": [
+          "SIT183",
+          "SIT283",
+          "SIT253",
+          "SIT383"
+        ]
+      },
+      {
+        "code": "MN-S000018",
+        "name": "Information Technologies Research",
+        "units": [
+          "SLE761",
+          "SIT718",
+          "SIT747"
+        ]
+      }
+    ],
+    "specialisations": []
+  },
+  {
+    "code": "S326",
+    "name": "Bachelor of Information Technology",
+    "year": "2023",
+    "overview": "The information technology industry is central to the way we work, learn, play, communicate and socialise. Build a solid foundation for your future career with core IT skills suitable across multiple industries. During Deakin&rsquo;s Bachelor of Information Technology, you will gain the essential skills and experience required to embark on a career in IT, while developing specialist knowledge in an industry-relevant major study area of your choosing.This course will give you the opportunity to explore and experiment in areas like programming, networking, entrepreneurship and user-centred design. You will undertake a specialised capstone project and access co-working spaces, enabling you to collaborate with like-minded peers and kickstart your own professional network. An honours year is available for high-achieving students interested in undertaking a focused research project.Want a diverse career at the forefront of new technology?",
+    "core": [
+      "STP050",
+      "SIT010",
+      "STP010",
+      "SIT102",
+      "SIT124",
+      "SIT103",
+      "SIT112",
+      "SIT120",
+      "SIT182",
+      "MIS201",
+      "SIT224",
+      "SIT216",
+      "SIT223",
+      "SIT317",
+      "SIT328",
+      "SIT374",
+      "SIT378",
+      "SIT306",
+      "SIT344"
+    ],
+    "majors": [
+      {
+        "code": "MN-S000001",
+        "name": "Application Development",
+        "units": [
+          "SIT232",
+          "SIT305",
+          "SIT313",
+          "SIT323"
+        ]
+      },
+      {
+        "code": "MN-S000003",
+        "name": "Security Management",
+        "units": [
+          "MIS211",
+          "MMH356",
+          "MMM132",
+          "SIT284"
+        ]
+      },
+      {
+        "code": "MN-S000004",
+        "name": "Cyber Security Network Operations",
+        "units": [
+          "SIT192",
+          "SIT202",
+          "SIT327",
+          "SIT379"
+        ]
+      },
+      {
+        "code": "MN-S000005",
+        "name": "Embedded Systems",
+        "units": [
+          "SIT122",
+          "SIT123",
+          "SIT210",
+          "SIT329"
+        ]
+      },
+      {
+        "code": "MN-S000006",
+        "name": "Game Design",
+        "units": [
+          "SIT151",
+          "SIT253",
+          "SIT254",
+          "SIT283"
+        ]
+      },
+      {
+        "code": "MN-S000007",
+        "name": "Network and Cloud Technologies",
+        "units": [
+          "SIT233",
+          "SIT232",
+          "SIT314",
+          "SIT323"
+        ]
+      },
+      {
+        "code": "MN-S000008",
+        "name": "Programming",
+        "units": [
+          "SIT221",
+          "SIT232",
+          "SIT313",
+          "SIT315"
+        ]
+      },
+      {
+        "code": "MN-S000009",
+        "name": "Virtual and Augmented Reality",
+        "units": [
+          "SIT183",
+          "SIT283",
+          "SIT253",
+          "SIT383"
+        ]
+      }
+    ],
+    "specialisations": []
+  },
+  {
+    "code": "S334",
+    "name": "Bachelor of Cyber Security",
+    "year": "2023",
+    "overview": "Cyber security threats are a rapidly growing global challenge for individuals and businesses alike. Secure technology is not only pivotal to business, but to living everyday life. As a result, cyber security professionals are in high demand around the world. Deakin&rsquo;s Bachelor of Cyber Security equips you with the essential skills to investigate and combat cybercrime and cyber terrorism. You will have the expertise to tackle one of the fastest growing criminal threats to modern-day society.Gain practical and theoretical knowledge with an emphasis on assessing cyber security in a working environment, and the business, ethical and legal implications of risk management. You will cover areas such as computer crime and digital forensics and gain the skills to identify, diagnose and manage the challenges of cyber security. As a graduate, you will be well prepared for an exciting career in one of the most in-demand global industries. Are you ready to join the fight against cyber crime?",
+    "core": [
+      "SIT102",
+      "SIT111",
+      "SIT182",
+      "SIT192",
+      "STP050",
+      "SIT010",
+      "STP010",
+      "SIT202",
+      "SIT232",
+      "SIT282",
+      "SIT384",
+      "SIT218",
+      "SIT223",
+      "SIT324",
+      "SIT327",
+      "SIT374",
+      "SIT379",
+      "SIT378",
+      "SIT306",
+      "SIT344"
+    ],
+    "majors": [
+      {
+        "code": "MN-S000003",
+        "name": "Security Management",
+        "units": [
+          "MIS211",
+          "MMH356",
+          "MMM132",
+          "SIT284"
+        ]
+      },
+      {
+        "code": "MN-S000010",
+        "name": "Network Security",
+        "units": [
+          "SIT221",
+          "SIT281",
+          "SIT325",
+          "SIT326"
+        ]
+      }
+    ],
+    "specialisations": []
+  },
+  {
+    "code": "S434",
+    "name": "Bachelor of Cyber Security (Honours)",
+    "year": "2023",
+    "overview": "Secure technology is not only pivotal to business, but to living everyday life. As a result, cyber security professionals are in high demand around the world. Deakin&rsquo;s Bachelor of Cyber Security (Honours) is a specialised four-year course equips you with the essential skills to investigate and protect computer systems, networks and programs through exploration of best practice in the identification, diagnosis, analysis and management of cyber security challenges.You will assess cyber security systems in a working environment, and cover areas such as computer crime and digital forensics while gaining the skills to identify, diagnose and manage risk. You will undertake a professional placement, work in teams with an industry partner to tackle authentic business challenges as part of a capstone project, focus your studies by undertaking a minor in an area of your choosing, and complete an honours research project in your final year.Ready to secure the digital future?",
+    "core": [
+      "SIT102",
+      "SIT111",
+      "SIT182",
+      "SIT192",
+      "STP050",
+      "SIT010",
+      "STP010",
+      "SIT202",
+      "SIT232",
+      "SIT282",
+      "SIT384",
+      "SIT218",
+      "SIT223",
+      "SIT324",
+      "SIT327",
+      "SIT374",
+      "SIT379",
+      "SIT378",
+      "SIT306",
+      "SIT344",
+      "SIT723",
+      "SIT724",
+      "SIT746"
+    ],
+    "majors": [
+      {
+        "code": "MN-S000003",
+        "name": "Security Management",
+        "units": [
+          "MIS211",
+          "MMH356",
+          "MMM132",
+          "SIT284"
+        ]
+      },
+      {
+        "code": "MN-S000010",
+        "name": "Network Security",
+        "units": [
+          "SIT221",
+          "SIT281",
+          "SIT325",
+          "SIT326"
+        ]
+      },
+      {
+        "code": "MN-S000018",
+        "name": "Information Technologies Research",
+        "units": [
+          "SLE761",
+          "SIT718",
+          "SIT747"
+        ]
+      }
+    ],
+    "specialisations": []
+  },
+  {
+    "code": "S379",
+    "name": "Bachelor of Data Science",
+    "year": "2023",
+    "overview": "With every click, swipe, search, share and stream data is created. The rate of data generation is phenomenal and its sheer volume and complexity gives rise to considerable opportunity as businesses strive to harness the power of big data to remain competitive. Throughout the Bachelor of Data Science you will explore the entire lifecycle of data to develop a deep understanding of how information is created, gathered, processed, analysed and used to generate insights and inform strategic decisions. This course provides you with an opportunity to propel yourself into the thriving field of data science. You will study innovative course content covering the latest data science trends, insights and emerging topics to ensure you graduate with a specialist, technical and highly relevant skill-set that is sought-after by employers across the globe. Explore different analytical methods, tools and techniques as you learn key concepts and deep dive into advanced topics in machine learning, AI and predictive analytics.Want to hone your analytical skills for a rewarding career in data science?",
+    "core": [
+      "STP050",
+      "SIT010",
+      "STP010",
+      "SIT111",
+      "SIT192",
+      "SIT112",
+      "SIT102",
+      "SIT103",
+      "SIT191",
+      "SIT232",
+      "SIT292",
+      "SIT202",
+      "SIT220",
+      "SIT221",
+      "SIT223",
+      "SIT343",
+      "SIT123",
+      "SIT330",
+      "SIT307",
+      "SIT374",
+      "SIT319",
+      "SIT378",
+      "SIT306",
+      "SIT344"
+    ],
+    "majors": [
+      {
+        "code": "MN-S000011",
+        "name": "Cloud Technologies",
+        "units": [
+          "SIT233",
+          "SIT325",
+          "SIT323",
+          "SIT314"
+        ]
+      },
+      {
+        "code": "MN-S000015",
+        "name": "Cyber Security",
+        "units": [
+          "SIT182",
+          "SIT218",
+          "SIT284",
+          "SIT379"
+        ]
+      },
+      {
+        "code": "MN-S000016",
+        "name": "Cyber Security Analytics",
+        "units": [
+          "SIT182",
+          "SIT282",
+          "SIT384",
+          "SIT326",
+          "SIT327"
+        ]
+      },
+      {
+        "code": "MN-A000066",
+        "name": "Education",
+        "units": [
+          "EDU101",
+          "EDU102",
+          "EDU201",
+          "EDU202",
+          "EDU203",
+          "EDU301",
+          "EDU302",
+          "EDU303"
+        ]
+      },
+      {
+        "code": "MN-S000005",
+        "name": "Embedded Systems",
+        "units": [
+          "SIT122",
+          "SIT123",
+          "SIT210",
+          "SIT329"
+        ]
+      },
+      {
+        "code": "MN-M30005",
+        "name": "Finance",
+        "units": [
+          "MAF101",
+          "MAF203",
+          "MAF202",
+          "MAF306",
+          "MAF307"
+        ]
+      },
+      {
+        "code": "MN-S000012",
+        "name": "Full Stack Development",
+        "units": [
+          "SIT120",
+          "SIT331",
+          "SIT313",
+          "SIT305"
+        ]
+      },
+      {
+        "code": "MN-S000017",
+        "name": "Health Analytics",
+        "units": [
+          "HBS107",
+          "HBS108",
+          "HSH205",
+          "HSH216"
+        ]
+      },
+      {
+        "code": "MN-M30012",
+        "name": "Human Resource Management",
+        "units": [
+          "MMM132",
+          "MMH230",
+          "MMH231",
+          "MMH232",
+          "MMH349"
+        ]
+      },
+      {
+        "code": "MN-M30008",
+        "name": "Marketing",
+        "units": [
+          "MMK101",
+          "MMK251",
+          "MMK266",
+          "MMK295",
+          "MMK368"
+        ]
+      },
+      {
+        "code": "MN-S000019",
+        "name": "Psychology",
+        "units": [
+          "HPS104",
+          "HPS111",
+          "HPS201",
+          "HPS301"
+        ]
+      },
+      {
+        "code": "MN-M30009",
+        "name": "Retail Management",
+        "units": [
+          "MMK101",
+          "MMK217",
+          "MIS313",
+          "MMK280",
+          "MMK317"
+        ]
+      },
+      {
+        "code": "MN-S000003",
+        "name": "Security Management",
+        "units": [
+          "MIS211",
+          "MMH356",
+          "MMM132",
+          "SIT284"
+        ]
+      },
+      {
+        "code": "MN-S000020",
+        "name": "Sports Analytics",
+        "units": [
+          "HSE010",
+          "HSE104",
+          "HSE202",
+          "HSE311",
+          "HSE314"
+        ]
+      },
+      {
+        "code": "MN-S000021",
+        "name": "Sustainability and Environmental Science",
+        "units": [
+          "SLE101",
+          "SLE121",
+          "SLE207",
+          "SLE239"
+        ]
+      },
+      {
+        "code": "MN-S000009",
+        "name": "Virtual and Augmented Reality",
+        "units": [
+          "SIT183",
+          "SIT283",
+          "SIT253",
+          "SIT383"
+        ]
+      }
+    ],
+    "specialisations": []
+  },
+  {
+    "code": "S479",
+    "name": "Bachelor of Data Science (Honours)",
+    "year": "2023",
+    "overview": "Explore the entire lifecycle of data to develop a deep understanding of how information is used to generate insights that inform strategic decisions in the competitive business world in the Bachelor of Data Science (Honours). You&rsquo;ll undertake a professional placement, work in teams with an industry partner to tackle authentic business challenges using real-world data sets, hone your skills through focused studies in an area that interests you most and complete a research project in your final year.Propel yourself into the thriving field of data science. You will study the latest data science trends, insights and emerging topics to ensure you graduate with a highly relevant skill-set that is sought-after by employers across the globe. Explore different analytical methods, tools and techniques as you learn key concepts and deep dive into advanced topics in machine learning, AI and predictive analytics.Want to hone your analytical skills for a rewarding career in data science?",
+    "core": [
+      "STP050",
+      "SIT010",
+      "STP010",
+      "SIT111",
+      "SIT192",
+      "SIT112",
+      "SIT102",
+      "SIT103",
+      "SIT191",
+      "SIT232",
+      "SIT292",
+      "SIT202",
+      "SIT220",
+      "SIT221",
+      "SIT223",
+      "SIT343",
+      "SIT123",
+      "SIT330",
+      "SIT307",
+      "SIT374",
+      "SIT319",
+      "SIT378",
+      "SIT306",
+      "SIT344",
+      "SIT723",
+      "SIT724",
+      "SIT746"
+    ],
+    "majors": [
+      {
+        "code": "MN-S000011",
+        "name": "Cloud Technologies",
+        "units": [
+          "SIT233",
+          "SIT325",
+          "SIT323",
+          "SIT314"
+        ]
+      },
+      {
+        "code": "MN-S000015",
+        "name": "Cyber Security",
+        "units": [
+          "SIT182",
+          "SIT218",
+          "SIT284",
+          "SIT379"
+        ]
+      },
+      {
+        "code": "MN-S000016",
+        "name": "Cyber Security Analytics",
+        "units": [
+          "SIT182",
+          "SIT282",
+          "SIT384",
+          "SIT326",
+          "SIT327"
+        ]
+      },
+      {
+        "code": "MN-A000066",
+        "name": "Education",
+        "units": [
+          "EDU101",
+          "EDU102",
+          "EDU201",
+          "EDU202",
+          "EDU203",
+          "EDU301",
+          "EDU302",
+          "EDU303"
+        ]
+      },
+      {
+        "code": "MN-S000005",
+        "name": "Embedded Systems",
+        "units": [
+          "SIT122",
+          "SIT123",
+          "SIT210",
+          "SIT329"
+        ]
+      },
+      {
+        "code": "MN-M30005",
+        "name": "Finance",
+        "units": [
+          "MAF101",
+          "MAF203",
+          "MAF202",
+          "MAF306",
+          "MAF307"
+        ]
+      },
+      {
+        "code": "MN-S000012",
+        "name": "Full Stack Development",
+        "units": [
+          "SIT120",
+          "SIT331",
+          "SIT313",
+          "SIT305"
+        ]
+      },
+      {
+        "code": "MN-S000017",
+        "name": "Health Analytics",
+        "units": [
+          "HBS107",
+          "HBS108",
+          "HSH205",
+          "HSH216"
+        ]
+      },
+      {
+        "code": "MN-M30012",
+        "name": "Human Resource Management",
+        "units": [
+          "MMM132",
+          "MMH230",
+          "MMH231",
+          "MMH232",
+          "MMH349"
+        ]
+      },
+      {
+        "code": "MN-S000018",
+        "name": "Information Technologies Research",
+        "units": [
+          "SLE761",
+          "SIT718",
+          "SIT747"
+        ]
+      },
+      {
+        "code": "MN-M30008",
+        "name": "Marketing",
+        "units": [
+          "MMK101",
+          "MMK251",
+          "MMK266",
+          "MMK295",
+          "MMK368"
+        ]
+      },
+      {
+        "code": "MN-S000019",
+        "name": "Psychology",
+        "units": [
+          "HPS104",
+          "HPS111",
+          "HPS201",
+          "HPS301"
+        ]
+      },
+      {
+        "code": "MN-M30009",
+        "name": "Retail Management",
+        "units": [
+          "MMK101",
+          "MMK217",
+          "MIS313",
+          "MMK280",
+          "MMK317"
+        ]
+      },
+      {
+        "code": "MN-S000003",
+        "name": "Security Management",
+        "units": [
+          "MIS211",
+          "MMH356",
+          "MMM132",
+          "SIT284"
+        ]
+      },
+      {
+        "code": "MN-S000020",
+        "name": "Sports Analytics",
+        "units": [
+          "HSE010",
+          "HSE104",
+          "HSE202",
+          "HSE311",
+          "HSE314"
+        ]
+      },
+      {
+        "code": "MN-S000021",
+        "name": "Sustainability and Environmental Science",
+        "units": [
+          "SLE101",
+          "SLE121",
+          "SLE207",
+          "SLE239"
+        ]
+      },
+      {
+        "code": "MN-S000009",
+        "name": "Virtual and Augmented Reality",
+        "units": [
+          "SIT183",
+          "SIT283",
+          "SIT253",
+          "SIT383"
+        ]
+      }
+    ],
+    "specialisations": []
+  },
+  {
+    "code": "S464",
+    "name": "Bachelor of Software Engineering (Honours)",
+    "year": "2023",
+    "overview": "Create the smart software and systems of the future by studying Deakin&rsquo;s Bachelor of Software Engineering (Honours). This course arms you with the skills needed to build disruptive technologies that create change, making you a sought-after expert ready to solve tomorrow&rsquo;s business problems through creative computing solutions. Explore a broad range of exciting study areas, including robotics, algorithms, programming and software architecture, and apply your skills in world-class facilities.You will have access to Deakin&rsquo;s $1.2 million Robotics and Internet of Things (RIoT) Lab, where you will acquire specialist skills in robotics, cyber-physical systems and the Internet of Things. Gain practical experience and learn how to work successfully in a team with project-based learning activities and contribute to real-world projects alongside professional engineers during 450 hours of industry placement. Want to be at the forefront of robotics, computing and smart technologies?",
+    "core": [
+      "STP050",
+      "SIT010",
+      "STP010",
+      "SIT102",
+      "SIT111",
+      "SEJ104",
+      "SIT192",
+      "SIT123",
+      "SIT217",
+      "SIT232",
+      "SIT103",
+      "SIT202",
+      "SIT210",
+      "SIT221",
+      "SET111",
+      "SIT313",
+      "SIT331",
+      "SIT223",
+      "SIT315",
+      "SIT216",
+      "SIT310",
+      "SIT374",
+      "SIT314",
+      "SIT329",
+      "SIT378",
+      "SIT344",
+      "SIT732",
+      "SIT723",
+      "SEL703",
+      "SIT724",
+      "SIT746"
+    ],
+    "majors": [
+      {
+        "code": "MN-S000013",
+        "name": "Artificial Intelligence",
+        "units": [
+          "SIT114",
+          "SIT215",
+          "SIT292",
+          "SIT330",
+          "SIT332"
+        ]
+      },
+      {
+        "code": "MN-S000011",
+        "name": "Cloud Technologies",
+        "units": [
+          "SIT233",
+          "SIT325",
+          "SIT323",
+          "SIT314"
+        ]
+      },
+      {
+        "code": "MN-S000015",
+        "name": "Cyber Security",
+        "units": [
+          "SIT182",
+          "SIT218",
+          "SIT284",
+          "SIT379"
+        ]
+      },
+      {
+        "code": "MN-S000006",
+        "name": "Game Design",
+        "units": [
+          "SIT151",
+          "SIT253",
+          "SIT254",
+          "SIT283"
+        ]
+      },
+      {
+        "code": "MN-S000009",
+        "name": "Virtual and Augmented Reality",
+        "units": [
+          "SIT183",
+          "SIT283",
+          "SIT253",
+          "SIT383"
+        ]
+      },
+      {
+        "code": "MN-S000014",
+        "name": "Data Science",
+        "units": [
+          "SIT199",
+          "SIT292",
+          "SIT307",
+          "SIT319"
+        ]
+      },
+      {
+        "code": "MN-S000018",
+        "name": "Information Technologies Research",
+        "units": [
+          "SLE761",
+          "SIT718",
+          "SIT747"
+        ]
+      }
+    ],
+    "specialisations": []
+  },
+  {
+    "code": "S470",
+    "name": "Bachelor of Information Technology (Honours)",
+    "year": "2023",
+    "overview": "Gain a competitive edge with in-depth knowledge of your chosen discipline through a supervised research project in Deakin&rsquo;s Bachelor of Information Technology (Honours). This course connects you with teachers working in the field, supporting you to explore deeper approaches to future technologies and opening doors to further research.Graduates from Deakin&rsquo;s honours program are in high demand for their investigative, exploratory and lateral thinking approach to IT. By undertaking a focused research project, you&rsquo;ll graduate with advanced technical expertise in your chosen specialisation, as well as the skills to become a creative, solutions-driven professional in this dynamic industry.Are you a high performer wanting to investigate specialised knowledge through a focused research project?",
+    "core": [
+      "STP050",
+      "SIT723",
+      "SIT724",
+      "SIT746"
+    ],
+    "majors": [],
+    "specialisations": []
+  },
+  {
+    "code": "S506",
+    "name": "Graduate Certificate of Emerging Technologies for Supply Chain",
+    "year": "2023",
+    "overview": "In today&rsquo;s digital and data-driven world, emerging technologies are increasingly being utilised by industries keen to create business advantage through greater operating efficiencies. The Graduate Certificate of Emerging Technologies for Supply Chain brings together Deakin&rsquo;s expertise in data analytics, blockchain and supply chain logistics to equip you with the enhanced technical skills required to effectively manage supply chains. This course is ideally suited to those with an IT background who are currently working in the supply chain industry and have a desire to upskill by exploring how emerging technologies can enhance the management of supply networks. The course introduces you to state-of-the-art blockchain technologies relevant to the supply chain industry and demonstrates the application of these technologies through real-world case studies.Want to gain expert skills and advance your career in the industry?",
+    "core": [
+      "STP050",
+      "SIT718",
+      "SIT728",
+      "SIT742",
+      "SIT720",
+      "SIT763"
+    ],
+    "majors": [],
+    "specialisations": []
+  },
+  {
+    "code": "S535 ",
+    "name": "Not found",
+    "year": "2023",
+    "overview": "",
+    "core": [],
+    "majors": [],
+    "specialisations": []
+  },
+  {
+    "code": "S635",
+    "name": "Graduate Diploma of Cyber Security",
+    "year": "2023",
+    "overview": "The Graduate Diploma of Cyber Security is available as an exit option from the Master of Cyber Security. The course provides you with the specialist knowledge required to detect, analyse and confront cyber-security challenges faced by organisations around the world.",
+    "core": [
+      "STP050",
+      "SIT736",
+      "SIT719",
+      "SIT735",
+      "SIT703",
+      "SIT763",
+      "SIT738",
+      "SIT716"
+    ],
+    "majors": [],
+    "specialisations": []
+  },
+  {
+    "code": "S734",
+    "name": "Master of Cyber Security",
+    "year": "2023",
+    "overview": "In an increasingly digital world, cyber attacks are an everyday occurrence. As a result, cyber security professionals are in high demand around the world to protect organisations in all sectors from increasingly sophisticated cyber threats. Deakin&rsquo;s Master of Cyber Security equips you with the specialised skills to investigate and combat cyber crime, and prepares you for a successful career in cyber security anywhere in the world. Throughout the Master of Cyber Security, you will learn how to detect, analyse and confront cyber security challenges. You&rsquo;ll focus on a range of studies, and gain knowledge about system security and digital forensics, analytics, organisational security and human aspects of cyber security. This vital experience prepares you to counter the number one criminal threat to modern-day society. Ready to take on an expert security role within business, government or law enforcement?",
+    "core": [
+      "STP050",
+      "SIT771",
+      "SIT772",
+      "SIT773",
+      "SIT774",
+      "SIT736",
+      "SIT719",
+      "SIT763",
+      "SIT716",
+      "SIT735",
+      "SIT703",
+      "SIT704",
+      "SIT738",
+      "SIT753",
+      "SIT764",
+      "SIT782"
+    ],
+    "majors": [],
+    "specialisations": []
+  },
+  {
+    "code": "S735",
+    "name": "Master of Cyber Security (Professional)",
+    "year": "2023",
+    "overview": "In an increasingly digital world, a serious challenge facing organisations is how to deal with the dramatic increase and severity of cyber attacks. Professionals with cyber security skills are crucial for the ongoing success of our digital future. The Master of Cyber Security (Professional) prepares you to meet this demand, equipping you with the skills to tackle cyber security challenges from both a technical and organisational perspective. The Master of Cyber Security (Professional) extends the specialised cyber security skills obtained in the Master of Cyber Security by providing you with opportunities to gain practical experience. You can choose to undertake a period of industry-based learning or a research project under the supervision of our internationally recognised research staff.Want to combat cyber crime and cyber terrorism?",
+    "core": [
+      "STP050",
+      "SIT736",
+      "SIT719",
+      "SIT735",
+      "SIT703",
+      "SIT704",
+      "SIT763",
+      "SIT716",
+      "SIT738",
+      "SIT753",
+      "SIT764",
+      "SIT782",
+      "STP710",
+      "SIT753",
+      "SIT791",
+      "SIT723",
+      "SIT753",
+      "SIT723"
+    ],
+    "majors": [],
+    "specialisations": []
+  },
+  {
+    "code": "S536",
+    "name": "Graduate Certificate of Artificial Intelligence",
+    "year": "2023",
+    "overview": "Artificial intelligence (AI) is driving digital disruption, with new technology helping redefine many industries. Many companies are looking to take advantage of recent advances in AI, which is creating a large demand for skilled professionals around the world. Deakin&rsquo;s Graduate Certificate of Artificial Intelligence provides IT professionals with foundational knowledge of AI and the skills necessary to design and develop advanced AI-driven solutions to solve challenging, real-world problems. Want the skills to build intelligent machines and software solutions that power our future?",
+    "core": [
+      "STP050",
+      "SIT720",
+      "SIT787",
+      "SIT788",
+      "SIT799"
+    ],
+    "majors": [],
+    "specialisations": []
+  },
+  {
+    "code": "S636",
+    "name": "Graduate Diploma of Artificial Intelligence",
+    "year": "2023",
+    "overview": "The Graduate Diploma of Artificial Intelligence is available as an exit option from the Master of Artificial Intelligence. The course provides you with an understanding of artificial intelligence, deep learning, reinforcement learning, and the application of these algorithms in computer vision and speech processing.",
+    "core": [
+      "STP050",
+      "SIT720",
+      "SIT787",
+      "SIT719",
+      "SIT744",
+      "SIT796",
+      "SIT799",
+      "SIT789",
+      "SIT788",
+      "SIT764"
+    ],
+    "majors": [],
+    "specialisations": []
+  },
+  {
+    "code": "S736",
+    "name": "Master of Applied Artificial Intelligence",
+    "year": "2023",
+    "overview": "Artificial intelligence (AI) is driving digital disruption, with new technology helping redefine many industries. Many companies are looking to take advantage of recent advances in AI, which is creating a large demand for skilled professionals around the globe. Deakin&rsquo;s Master of Applied Artificial Intelligence equips you with the specialist knowledge and skills necessary to design and develop software solutions that harness the latest advances in AI. This course develops your understanding of AI technologies, deep learning, reinforcement learning and the application of these algorithms in computer vision and speech processing. Ready to drive digital disruption and harness the power of AI?",
+    "core": [
+      "STP050",
+      "SIT771",
+      "SIT772",
+      "SIT773",
+      "SIT774",
+      "SIT720",
+      "SIT787",
+      "SIT753",
+      "SIT744",
+      "SIT796",
+      "SIT799",
+      "SIT789",
+      "SIT788",
+      "SIT770",
+      "SIT764",
+      "SIT782"
+    ],
+    "majors": [],
+    "specialisations": []
+  },
+  {
+    "code": "S737",
+    "name": "Master of Applied Artificial Intelligence (Professional)",
+    "year": "2023",
+    "overview": "Artificial intelligence (AI) is driving digital disruption, with new technology helping redefine many industries. Many companies are looking to take advantage of recent advances in AI, which is creating a large demand for skilled professionals.Deakin&rsquo;s Master of Applied Artificial Intelligence (Professional) equips you with the specialist knowledge and skills necessary to design and develop cutting-edge software solutions that harness the latest advances in AI. The Master of Applied Artificial Intelligence (Professional) extends the Master of Applied Artificial Intelligence by providing you with the opportunity to undertake industry-based learning or engage in an in-depth research project under the supervision of our internationally recognised research staff. Ready to drive digital disruption and harness the power of AI?",
+    "core": [
+      "STP050",
+      "SIT720",
+      "SIT787",
+      "SIT770",
+      "SIT744",
+      "SIT788",
+      "SIT789",
+      "SIT796",
+      "SIT799",
+      "SIT753",
+      "SIT764",
+      "SIT782",
+      "STP710",
+      "SIT753",
+      "SIT791",
+      "SIT723",
+      "SIT746",
+      "SIT753",
+      "SIT723"
+    ],
+    "majors": [],
+    "specialisations": [
+      {
+        "code": "SP-S000092",
+        "name": "Blockchain and Software Development",
+        "units": [
+          "SIT708",
+          "SIT725",
+          "SIT728",
+          "SIT737"
+        ]
+      },
+      {
+        "code": "SP-MDBS004",
+        "name": "Business Analytics",
+        "units": [
+          "MIS770",
+          "MIS771",
+          "MIS772",
+          "MIS714",
+          "MIS781"
+        ]
+      },
+      {
+        "code": "SP-S000028",
+        "name": "Cyber Security",
+        "units": [
+          "SIT716",
+          "SIT704",
+          "SIT703",
+          "SIT735",
+          "SIT736",
+          "SIT738",
+          "SIT763"
+        ]
+      },
+      {
+        "code": "SP-S000055",
+        "name": "Data Science",
+        "units": [
+          "SIT718",
+          "SIT720",
+          "SIT741",
+          "SIT742",
+          "SIT743",
+          "SIT744",
+          "SIT731"
+        ]
+      },
+      {
+        "code": "SP-MDBS012",
+        "name": "Information Systems",
+        "units": [
+          "MIS701",
+          "MIS761",
+          "MIS770",
+          "MIS782"
+        ]
+      },
+      {
+        "code": "SP-S000021",
+        "name": "Networking and Cloud Technologies",
+        "units": [
+          "SIT706",
+          "SIT716",
+          "SIT727",
+          "SIT722",
+          "SIT729",
+          "SIT737"
+        ]
+      },
+      {
+        "code": "SP-S000083",
+        "name": "Virtual Reality",
+        "units": [
+          "SIT758",
+          "SIT755",
+          "SIT756",
+          "SIT757"
+        ]
+      }
+    ]
+  },
+  {
+    "code": "S538",
+    "name": "Graduate Certificate of Information Technology Management",
+    "year": "2023",
+    "overview": "Information technology is driving digital disruption, with new technology helping redefine many industries. To successfully take advantage of the opportunities that information technology offers, businesses need skilled staff who can lead and manage IT projects, services and departments.The Graduate Certificate of Information Technology Management equips you with knowledge and skills necessary to lead and manage information technology projects and people within enterprise. This course provides IT professionals with foundational knowledge of information technology management, including networking, analytics, and service management. As a graduate you will have an expert understanding of the role of IT management within businesses and strategies for leading and executing successful project and service delivery.",
+    "core": [
+      "STP050",
+      "SIT716",
+      "SIT719",
+      "SIT794"
+    ],
+    "majors": [],
+    "specialisations": []
+  },
+  {
+    "code": "S638",
+    "name": "Graduate Diploma of Information Technology Management",
+    "year": "2023",
+    "overview": "The Graduate Diploma of Information Technology Management is available as an exit option from the Master of Information Technology Management. The course will equip you with the knowledge and skills necessary to lead and manage information technology projects, services and departments.???",
+    "core": [
+      "STP050",
+      "SIT716",
+      "SIT719",
+      "SIT722",
+      "SIT740",
+      "SIT794"
+    ],
+    "majors": [],
+    "specialisations": []
+  },
+  {
+    "code": "S738",
+    "name": "Master of Information Technology Management",
+    "year": "2023",
+    "overview": "Information technology is driving digital disruption, with new technology helping redefine many industries. To take advantage of the opportunities that information technology offers, businesses need skilled staff who can lead and manage IT projects, services, and departments. Deakin&rsquo;s Master of Information Technology Management will equip you with the knowledge and skills necessary to lead and manage information technology projects and people within enterprise. This course develops your understanding of the many aspects of IT including networking, cyber security, operations, and enterprise systems.As an enterprise manager you will work alongside, manage and lead artificial intelligence specialists, software engineers, data scientists, application developers and business analysts. This course is ideal for students without a computing background, as well as those who would like to support their industry experience with a recognised academic qualification.",
+    "core": [
+      "STP050",
+      "SIT771",
+      "SIT772",
+      "SIT773",
+      "SIT774",
+      "SIT716",
+      "SIT719",
+      "SIT794",
+      "SIT714",
+      "SIT722",
+      "SIT740",
+      "SIT763",
+      "SIT753",
+      "SIT764",
+      "SIT782"
+    ],
+    "majors": [],
+    "specialisations": []
+  },
+  {
+    "code": "S739",
+    "name": "Master of Information Technology Management (Professional)",
+    "year": "2023",
+    "overview": "Information technology is driving digital disruption, with new technology helping redefine many industries. To take advantage of the opportunities that information technology offers, businesses need skilled staff who can lead and manage IT projects, services, and departments.Deakin&rsquo;s Master of Information Technology Management (Professional) equips you with the specialist knowledge and skills necessary to lead and manage information technology projects and people within enterprises.This course develops your understanding of the many aspects of IT, including networking, cyber security, operations and enterprise systems. As an enterprise manager you will work alongside, manage and lead artificial intelligence specialists, software engineers, data scientists, application developers and business analysts. This course is ideal for those with a computing background and provides the opportunity to undertake a period of industry-based learning or a research project.",
+    "core": [
+      "STP050",
+      "SIT716",
+      "SIT719",
+      "SIT794",
+      "SIT714",
+      "SIT722",
+      "SIT740",
+      "SIT763",
+      "SIT753",
+      "SIT764",
+      "SIT782",
+      "STP710",
+      "SIT753",
+      "SIT791",
+      "SIT723",
+      "SIT753",
+      "SIT723"
+    ],
+    "majors": [],
+    "specialisations": []
+  },
+  {
+    "code": "S576",
+    "name": "Graduate Certificate of Data Analytics",
+    "year": "2023",
+    "overview": "The sheer volume and complexity of data already at the fingertips of businesses and research organisations gives rise to challenges that must be solved by tomorrow&rsquo;s graduates. With an increasing emphasis on the use of data to inform day-to-day operations and long-term strategic decisions, modern organisations are reliant on data analysts. This course will equip you with the essential skills and knowledge in data analytics to meet this demand. With a focus on fundamental data analytics, this course covers foundation skills, security and privacy issues, research and development, and real-world analytics. You will learn to use data to support organisational decision-making, ensuring you graduate ready for employment across a range of industries, or to undertake further studies in IT and data science. This course is ideal for students without a computing background, as well as those who would like to support their industry experience with a recognised academic qualification.",
+    "core": [
+      "STP050",
+      "SIT718",
+      "SIT731",
+      "SIT787"
+    ],
+    "majors": [],
+    "specialisations": []
+  },
+  {
+    "code": "S577",
+    "name": "Graduate Certificate of Data Science",
+    "year": "2023",
+    "overview": "The Graduate Certificate of Data Science covers modern data science concepts, statistical data analysis, descriptive analytics and machine learning to equip you with the theory, methodologies, techniques and tools of modern data science. Through this course, you will develop the ability to confidently work with any type of data, to identify trends, make predictions, draw conclusions, drive innovations, make decisions and share information that influences people.The sheer volume and complexity of data already available to businesses gives rise to challenges that must be solved by tomorrow&rsquo;s graduates. Employers are placing increasing emphasis on the use of data to inform day-to-day operations and long-term strategic decisions. This course gives you essential skills in data analytics, enabling you to discover insights and support decision-making across a range of industries.",
+    "core": [
+      "STP050",
+      "SIT742",
+      "MIS771",
+      "SIT720",
+      "SIT741"
+    ],
+    "majors": [],
+    "specialisations": []
+  },
+  {
+    "code": "S677",
+    "name": "Graduate Diploma of Data Science",
+    "year": "2023",
+    "overview": "The Graduate Diploma of Data Science covers modern data science concepts, statistical data analysis, descriptive analytics and machine learning to equip you with the theory, methodologies, techniques and tools of modern data science. Through this course, you will develop the ability to confidently work with any type of data, to identify trends, make predictions, draw conclusions, drive innovations, make decisions and share information that influences people. The sheer volume and complexity of data already available to businesses gives rise to challenges that must be solved by tomorrow&rsquo;s graduates. Employers are placing increasing emphasis on the use of data to inform day-to-day operations and long-term strategic decisions. This course gives you essential skills in data analytics, enabling you to discover insights and support decision-making across a range of industries.",
+    "core": [
+      "STP050",
+      "SIT718",
+      "SIT731",
+      "SIT787",
+      "SIT720",
+      "SIT741",
+      "SIT742"
+    ],
+    "majors": [],
+    "specialisations": []
+  },
+  {
+    "code": "S773",
+    "name": "Master of Data Science (Global)",
+    "year": "2023",
+    "overview": "Indian nationals residing in India are encouraged to consider the Master of Data Science (Global). Designed for IT professionals interested in gaining a master level qualification in emerging technology areas including machine learning, data science and AI, this course is offered in partnership with Great Learning and builds upon relevant postgraduate programs to provide graduates with an opportunity to extend their learning in data science through completion of in-depth studies at Deakin.",
+    "core": [
+      "SIT719",
+      "SIT741",
+      "STP050",
+      "SIG788",
+      "SIG787",
+      "SIG720",
+      "SIG742",
+      "SIG718",
+      "SIG731"
+    ],
+    "majors": [],
+    "specialisations": []
+  },
+  {
+    "code": "S777",
+    "name": "Master of Data Science",
+    "year": "2023",
+    "overview": "The sheer volume and complexity of data already at the fingertips of businesses and research organisations gives rise to challenges that must be solved by tomorrow&rsquo;s graduates. With modern organisations placing increasing emphasis on the use of data to inform day-to-day operations and long-term strategic decisions, Deakin&rsquo;s Master of Data Science equips you for a career in this fast-growing sector. Throughout your studies you will gain the technical skills to harness the power of data through artificial intelligence and machine learning. Use your insights to develop innovative solutions to the important challenges being faced by industry and governments. With a growing demand for data specialists in every sector, you&rsquo;ll be able to help organisations manage risk, optimise performance and add a competitive advantage through the increasing volumes of data collection. Want to become a data science specialist capable of using data to learn insights and support decision making?",
+    "core": [
+      "STP050",
+      "SIT771",
+      "SIT772",
+      "SIT773",
+      "SIT774",
+      "SIT718",
+      "SIT731",
+      "SIT787",
+      "SIT720",
+      "SIT741",
+      "SIT742",
+      "SIT753",
+      "SIT743",
+      "SIT744",
+      "SIT764",
+      "SIT782"
+    ],
+    "majors": [],
+    "specialisations": []
+  },
+  {
+    "code": "S770",
+    "name": "Master of Data Science (Professional)",
+    "year": "2023",
+    "overview": "The sheer volume and complexity of data at the fingertips of business gives rise to challenges that must be solved by tomorrow's graduates. Modern organisations are placing increasing emphasis on the use of data to inform day-to-day operations and long-term strategic decisions. You will explore the various origins of data and the methods to manage, organise and manipulate data within regulatory, ethical and security constraints.You will develop specialised skills in categorising and transferring raw data into meaningful information for the benefit of prediction and robust decision-making. You will gain the technical skills to harness the power of data through artificial intelligence and machine learning to develop innovative solutions to the challenges being faced by industry and governments. With a growing demand for data specialists in every sector, you will be equipped with the skills to optimise performance and add a competitive advantage.Want to take your career to the next level with specialised study?",
+    "core": [
+      "STP050",
+      "SIT718",
+      "SIT731",
+      "SIT787",
+      "SIT720",
+      "SIT741",
+      "SIT742",
+      "SIT743",
+      "SIT744",
+      "SIT753",
+      "SIT764",
+      "SIT782",
+      "STP710",
+      "SIT753",
+      "SIT791",
+      "SIT723",
+      "SIT753",
+      "SIT723"
+    ],
+    "majors": [],
+    "specialisations": [
+      {
+        "code": "SP-S000028",
+        "name": "Cyber Security",
+        "units": [
+          "SIT716",
+          "SIT704",
+          "SIT703",
+          "SIT735",
+          "SIT736",
+          "SIT738",
+          "SIT763"
+        ]
+      },
+      {
+        "code": "SP-S000093",
+        "name": "AI and Computer Vision",
+        "units": [
+          "SIT788",
+          "SIT789",
+          "SIT796",
+          "SIT799"
+        ]
+      },
+      {
+        "code": "SP-S000094",
+        "name": "Analytics in Internet of Things",
+        "units": [
+          "SIT725",
+          "SIT729",
+          "SIT730",
+          "SIT722",
+          "SIT732"
+        ]
+      },
+      {
+        "code": "SP-S000092",
+        "name": "Blockchain and Software Development",
+        "units": [
+          "SIT708",
+          "SIT725",
+          "SIT728",
+          "SIT737"
+        ]
+      },
+      {
+        "code": "SP-MDBS004",
+        "name": "Business Analytics",
+        "units": [
+          "MIS770",
+          "MIS771",
+          "MIS772",
+          "MIS714",
+          "MIS781"
+        ]
+      },
+      {
+        "code": "SP-MDBS012",
+        "name": "Information Systems",
+        "units": [
+          "MIS701",
+          "MIS761",
+          "MIS770",
+          "MIS782"
+        ]
+      },
+      {
+        "code": "SP-S000021",
+        "name": "Networking and Cloud Technologies",
+        "units": [
+          "SIT706",
+          "SIT716",
+          "SIT727",
+          "SIT722",
+          "SIT729",
+          "SIT737"
+        ]
+      }
+    ]
+  },
+  {
+    "code": "S578",
+    "name": "Graduate Certificate of Information Technology",
+    "year": "2023",
+    "overview": "Developed in consultation with industry, this course will teach you how information technologies are critical to everyday business operations. You will gain essential, industry-relevant information technology (IT) skills &ndash; from software design and engineering to information retrieval and web development. This course is ideal for students without a computing background, as well as those who would like to bolster their industry experience with a recognised academic qualification. You&rsquo;ll graduate with the essential IT knowledge and skills for employment across a range of industries or for further studies in IT.",
+    "core": [
+      "STP050",
+      "SIT771",
+      "SIT772",
+      "SIT773",
+      "SIT774"
+    ],
+    "majors": [],
+    "specialisations": []
+  },
+  {
+    "code": "S678",
+    "name": "Graduate Diploma of Information Technology",
+    "year": "2023",
+    "overview": "Through a powerful combination of leading-edge theory, project-based learning and practical experience, the Graduate Diploma of Information Technology equips you with the technical knowledge and advanced skills required to tackle complex, industry-focused problems head on. The course is ideally suited to those who have completed an undergraduate degree in a discipline outside of the information systems or computer science fields. You'll be introduced to the concepts of system design and learn how to design and implement software independently. This includes designing systems with data abstraction, object-oriented analysis and design techniques, as well as developing the necessary skills to manage IT projects and a team of IT professionals. Ready to be at the forefront of cutting-edge tech?",
+    "core": [
+      "STP050",
+      "SIT771",
+      "SIT772",
+      "SIT773",
+      "SIT774",
+      "SIT719",
+      "SIT725"
+    ],
+    "majors": [],
+    "specialisations": []
+  },
+  {
+    "code": "S776",
+    "name": "Master of Information Technology",
+    "year": "2023",
+    "overview": "Deakin&rsquo;s Master of Information Technology provides a combination of leading-edge theory and technical knowledge with hands-on practical experience. It will prepare you for a successful career as an IT professional in Australia and around the world. Delivered in a supportive learning environment, this course will transform you into a competent IT professional with the capacity to develop and implement IT solutions to complex industry-related problems. As a graduate, you will possess a solid understanding of the issues, concepts and practices in IT and a broad knowledge of the technological aspects of IT. You will also develop a range of transferrable skills that will enable you to be an effective and efficient IT professional. Want to be at the forefront of cutting-edge tech and advance your career in any sector?",
+    "core": [
+      "STP050",
+      "SIT771",
+      "SIT772",
+      "SIT773",
+      "SIT774",
+      "SIT719",
+      "SIT725",
+      "SIT726",
+      "SIT753",
+      "SIT740",
+      "SIT722",
+      "SIT764",
+      "SIT782"
+    ],
+    "majors": [],
+    "specialisations": []
+  },
+  {
+    "code": "S779",
+    "name": "Master of Information Technology (Professional)",
+    "year": "2023",
+    "overview": "The Master of Information Technology (Professional) is designed to extend the specialised information technology skills obtained in the Master of Information Technology by providing students with the opportunity to undertake a period of industry-based learning or a research project under the supervision of our internationally-recognised research staff.You will develop expert knowledge of the technical aspects of information technology as well as in-depth skills in your chosen area of specialisation.This course has a strong IT industry focus and empowers students to apply the acquired knowledge and skills towards professional practice and enables them to create innovative IT solutions to solve real-world problems. Students will develop teamwork and leadership skills through close mentorship during industry projects and engagement in researching cutting edge IT solutions.Want to gain in demand IT skills and advance you career across any industry?",
+    "core": [
+      "STP050",
+      "SIT719",
+      "SIT725",
+      "SIT726",
+      "SIT740",
+      "SIT722",
+      "SIT753",
+      "SIT764",
+      "SIT782",
+      "STP710",
+      "SIT753",
+      "SIT791",
+      "SIT723",
+      "SIT753",
+      "SIT723"
+    ],
+    "majors": [],
+    "specialisations": [
+      {
+        "code": "SP-S000091",
+        "name": "Internet of Things",
+        "units": [
+          "SIT729",
+          "SIT730",
+          "SIT732",
+          "SIT716",
+          "SIT722"
+        ]
+      },
+      {
+        "code": "SP-S000055",
+        "name": "Data Science",
+        "units": [
+          "SIT718",
+          "SIT720",
+          "SIT741",
+          "SIT742",
+          "SIT743",
+          "SIT744",
+          "SIT731"
+        ]
+      },
+      {
+        "code": "SP-S000021",
+        "name": "Networking and Cloud Technologies",
+        "units": [
+          "SIT706",
+          "SIT716",
+          "SIT727",
+          "SIT722",
+          "SIT729",
+          "SIT737"
+        ]
+      },
+      {
+        "code": "SP-S000023",
+        "name": "Software and Services Development",
+        "units": [
+          "SIT707",
+          "SIT708",
+          "SIT728",
+          "SIT737"
+        ]
+      },
+      {
+        "code": "SP-S000028",
+        "name": "Cyber Security",
+        "units": [
+          "SIT716",
+          "SIT704",
+          "SIT703",
+          "SIT735",
+          "SIT736",
+          "SIT738",
+          "SIT763"
+        ]
+      },
+      {
+        "code": "SP-S000062",
+        "name": "Emerging Technologies for Supply Chain",
+        "units": [
+          "SIT718",
+          "SIT720",
+          "SIT728",
+          "SIT729",
+          "SIT763",
+          "SIT742"
+        ]
+      },
+      {
+        "code": "SP-S000083",
+        "name": "Virtual Reality",
+        "units": [
+          "SIT758",
+          "SIT755",
+          "SIT756",
+          "SIT757"
+        ]
+      }
+    ]
+  },
+  {
+    "code": "D380",
+    "name": "Bachelor of Criminology/Bachelor of Cyber Security",
+    "year": "2023",
+    "overview": "Deakin&rsquo;s Bachelor of Criminology/Bachelor of Cyber Security is the only degree of its kind in Australia. Today cyber security is a significant challenge for individuals and businesses alike. This course will equip you with an understanding of the major drivers of criminal behaviour, along with the industry-relevant skills to tackle what is quickly becoming a critical threat to society. You will gain expertise in securing data and data communications, as well as investigating and providing solutions to cyber crime.",
+    "core": [],
+    "majors": [],
+    "specialisations": []
+  },
+  {
+    "code": "D397",
+    "name": "Bachelor of Laws/Bachelor of Cyber Security",
+    "year": "2023",
+    "overview": "Protect society from the growing threat of cybercrime by studying Australia's only combined law and cyber security degree. Through Deakin's Bachelor of Laws/Bachelor of Cyber Security, you can explore roles in both fields or use your dual expertise to become an in-demand cyber security lawyer, capable of handling the complex issues of our evolving digital world.Professionals with cyber security risk detection and mitigation skills are needed more than ever and it's not just everyday consumers who are facing the threat of cybercrime. Government and businesses need professionals who can identify risks and provide legal protection for their digital operations.This degree puts you in a position to answer the call. Graduate with two degrees in two years fewer than if you studied each degree separately and develop advanced skills in cyber security that perfectly complement legal knowledge.Ready to earn the power to make a difference?",
+    "core": [],
+    "majors": [],
+    "specialisations": []
+  },
+  {
+    "code": "D310",
+    "name": "Bachelor of Arts / Bachelor of Information Technology",
+    "year": "2023",
+    "overview": "Want a career that is both rich in diverse experience and prepares you for the future? Deakin&rsquo;s Bachelor of Arts/Bachelor of Information Technology allows you to have just that. This course equips you with the transferable skills needed to seamlessly move between the roles of the future, along with the technical knowledge and critical thinking skills to not only negotiate but also shape that future.Combining arts with IT will see you graduate with a diverse, in-demand skillset that sets you apart in industry. You will develop specialist knowledge in your chosen arts disciplines and learn how to apply critical, creative and strategic thinking to real-world issues. In your IT studies, you will gain the skills and experience required to embark on a technology rich career, while also developing foundational knowledge and skills in areas such as cloud computing, game development or cyber security.If you want to become a leader in the forefront of technology, why not graduate with a set of complementary skills that boost your employability?",
+    "core": [],
+    "majors": [],
+    "specialisations": []
+  }
+]

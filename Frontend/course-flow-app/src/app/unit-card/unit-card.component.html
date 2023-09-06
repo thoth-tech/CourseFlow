@@ -1,0 +1,24 @@
+<div class="unit-card">
+    <div class="left-side">
+        <div class="unit-code-and-name">
+            <div class="unit-code">{{ unitCode }}</div>
+            <div class="unit-name">{{ unitName }}</div>
+        </div>
+        <div class="unit-type">{{ unitType }}</div>
+    </div>
+
+    <div class="right-side">
+        <div class="unit-status">
+          <div class="unit-status-background">
+            <div class="unit-status-icon">
+              <img src="../../assets/icons/complete-icon.svg">
+            </div>
+          </div>
+        </div>
+
+        <div class="info-icon" (click)="openUnitPopup()">
+            <img src="../../assets/icons/unit-card-info-icon.svg">
+          </div>
+    </div>
+</div>
+  

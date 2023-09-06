@@ -1,0 +1,83 @@
+[
+    {
+      "code": "S306",
+      "name": "Bachelor of Computer Science",
+      "year": "2023",
+      "overview": "This course equips you with the knowledge and practical skills needed to design and develop innovative software solutions to address multifaceted information and technology problems faced by our community, business and industry. Learn what it takes to create and integrate complex new computing technologies while exploring existing and emerging challenges. You will explore areas such as data analytics, machine learning, robotics, intelligent and autonomous systems, and telecommunications.Computer scientists are problem solvers and innovators and at Deakin, you will get a competitive edge in the job market. Gain hands-on experience with current technologies and training in fundamental concepts, models and methods. Extend your skills through a work placement and develop valuable professional networks. Professional accreditation by the Australian Computer Society (ACS) means your degree will be recognised around the world.Want to drive change through technology?",
+      "core": [
+        "STP050",
+        "SIT010",
+        "STP010",
+        "SIT111",
+        "SIT192",
+        "SIT112",
+        "SIT102",
+        "SIT232",
+        "SIT103",
+        "SIT292",
+        "SIT202",
+        "SIT221",
+        "SIT215",
+        "SIT223",
+        "SIT320",
+        "SIT374",
+        "SIT306",
+        "SIT344",
+        "SIT315",
+        "SIT378"
+      ],
+      "majors": [
+        {
+          "code": "MN-S000011",
+          "name": "Cloud Technologies",
+          "units": [
+            "SIT233",
+            "SIT325",
+            "SIT323",
+            "SIT314"
+          ]
+        },
+        {
+          "code": "MN-S000005",
+          "name": "Embedded Systems",
+          "units": [
+            "SIT122",
+            "SIT123",
+            "SIT210",
+            "SIT329"
+          ]
+        },
+        {
+          "code": "MN-S000012",
+          "name": "Full Stack Development",
+          "units": [
+            "SIT120",
+            "SIT331",
+            "SIT313",
+            "SIT305"
+          ]
+        },
+        {
+          "code": "MN-S000006",
+          "name": "Game Design",
+          "units": [
+            "SIT151",
+            "SIT253",
+            "SIT254",
+            "SIT283"
+          ]
+        },
+        {
+          "code": "MN-S000009",
+          "name": "Virtual and Augmented Reality",
+          "units": [
+            "SIT183",
+            "SIT283",
+            "SIT253",
+            "SIT383"
+          ]
+        }
+      ],
+      "specialisations": []
+    }
+]
