@@ -11,3 +11,39 @@
     padding: 1em;
     font-size: 20pt;
 }
+
+.detailed-panel-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.detailed-panel {
+    margin-top: 2em;
+    margin-bottom: 2em;
+    width: 350px;
+}
+
+.detailed-panel-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.detailed-panel-section button{
+    /* Couldn't get this to go to the bottom of the menu - tried all forms of flex related properties. */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.detailed-panel-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.detailed-panel h3 {
+    margin-top: 4em;
+}

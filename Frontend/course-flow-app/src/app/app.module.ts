@@ -16,9 +16,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DiscoveryPageComponent } from './discovery/discovery-page/discovery-page.component';
 import { DiscoveryGraphBasedMapComponent } from './discovery/discovery-graph-based-map/discovery-graph-based-map.component';
-import { DiscoveryDetailDialogComponent } from './discovery/discovery-detail-dialog/discovery-detail-dialog.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DiscoveryTextBasedListsComponent } from './discovery/discovery-text-based-lists/discovery-text-based-lists.component';
+import { DiscoveryDetailedSidePanelComponent } from './discovery/discovery-detailed-side-panel/discovery-detailed-side-panel.component';
 
 // Material UI Imports
 import { MatDialogModule } from '@angular/material/dialog';
@@ -36,9 +36,9 @@ import {MatDividerModule} from '@angular/material/divider';
   declarations: [
     AppComponent,
     DiscoveryPageComponent,
-    DiscoveryDetailDialogComponent,
     DiscoveryGraphBasedMapComponent,
     DiscoveryTextBasedListsComponent,
+    DiscoveryDetailedSidePanelComponent,
   ],
   imports: [
     BrowserModule,

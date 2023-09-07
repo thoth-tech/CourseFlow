@@ -33,19 +33,25 @@ export class DiscoveryGraphBasedMapComponent {
   currentZoomLevel: number = 0.2;
 
   // Node Properties.
-  nodeColor: string = "rgba(255, 0, 0, 0.8)"
+  nodeColor: string = "rgba(255, 0, 0, 0.5)"
   nodeRadius: number = 5;
   selectedNodeColor: string = "rgba(0, 0, 255, 0.8)";
 
   // Text Properties
-  fontSize: number = 5;
+  fontSize: number = 2;
 
   // Link/Edge Properties
   linkWidth: number = 0.1;
   linkOpacity: number = 0.1;
   linkColor: string = "black";
   selectedLinkColor: string = "rgba(0, 0, 255, 0.5)";
-   
+  
+  // Selected node
+  currentSelectedNode = {} as IDiscoveryNodeData;
+
+  // Detailed Menu Properties
+  detailedMenuOpen = true;
+
   constructor(@Inject(IDiscoveryDataServiceInjector) private discoveryDataService: IDiscoveryDataService) {}
 
   /**
@@ -159,13 +165,12 @@ export class DiscoveryGraphBasedMapComponent {
         .data(this.discoveryData.nodeData)
         .join("g")
         .attr("transform", nodeData => `translate(${(nodeData as any).x * this.width}, ${(nodeData as any).y * this.height})`)
-        .on("click", (event, nodeData) => this.handleOnNodeClicked(nodeData))
 
       // Append a circle shape to the node group.
       this.renderedNodeGroup.append('circle')
         .attr("fill", this.nodeColor)
         .attr("r", this.nodeRadius)
-        .attr("opacity", this.initialZoomLevel)
+        .on("click", (event, nodeData) => this.handleOnNodeClicked(nodeData))
 
       // Append text to the node group.
       this.renderedNodeGroup.append("text")
@@ -214,6 +219,13 @@ export class DiscoveryGraphBasedMapComponent {
    * Handles logic when a node is clicked.
    */
   handleOnNodeClicked(nodeClicked: IDiscoveryNodeData): void {
+
+    this.currentSelectedNode = nodeClicked;
+
+    // Toggle the detailed panel.
+    this.detailedMenuOpen = true;
+
+    // Visual updates.
     this.toggleNode(nodeClicked.id);
     this.toggleLinks(nodeClicked.id);
   }
@@ -290,11 +302,7 @@ export class DiscoveryGraphBasedMapComponent {
    */
   updateNodesOnZoom(zoomValue: number) : void {
 
-    if (this.renderedNodeGroup) {
 
-      this.renderedNodeGroup.selectAll("circle")
-        .attr("opacity", zoomValue)
-    }
   }
 
   /**
@@ -336,5 +344,13 @@ export class DiscoveryGraphBasedMapComponent {
         })
     }
 
+  }
+
+  /**
+   * Close the details panel.
+   */
+  closeDetailsPanel(): void {
+
+    this.detailedMenuOpen = false;
   }
 }
