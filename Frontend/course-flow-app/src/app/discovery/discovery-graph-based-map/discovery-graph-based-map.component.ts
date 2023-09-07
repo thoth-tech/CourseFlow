@@ -35,6 +35,7 @@ export class DiscoveryGraphBasedMapComponent {
   // Node Properties.
   nodeColor: string = "rgba(255, 0, 0, 0.8)"
   nodeRadius: number = 5;
+  selectedNodeColor: string = "rgba(0, 0, 255, 0.8)";
 
   // Text Properties
   fontSize: number = 5;
@@ -43,7 +44,7 @@ export class DiscoveryGraphBasedMapComponent {
   linkWidth: number = 0.1;
   linkOpacity: number = 0.1;
   linkColor: string = "black";
-  selectedLinkColor: string = "rgba(255, 0, 0, 0.5)";
+  selectedLinkColor: string = "rgba(0, 0, 255, 0.5)";
    
   constructor(@Inject(IDiscoveryDataServiceInjector) private discoveryDataService: IDiscoveryDataService) {}
 
@@ -213,7 +214,7 @@ export class DiscoveryGraphBasedMapComponent {
    * Handles logic when a node is clicked.
    */
   handleOnNodeClicked(nodeClicked: IDiscoveryNodeData): void {
-
+    this.toggleNode(nodeClicked.id);
     this.toggleLinks(nodeClicked.id);
   }
 
@@ -221,9 +222,22 @@ export class DiscoveryGraphBasedMapComponent {
    * Modify required node properties to highlight node clicked.
    * @param nodeId Node id.
    */
-  toggleNode(): void {
+  toggleNode(nodeId: string): void {
 
+    if (this.renderedNodeGroup) {
 
+      this.renderedNodeGroup.selectAll("circle")
+      .filter((nodeData: any) => nodeData.id !== nodeId)
+        .attr("r", this.nodeRadius)
+        .attr("fill", this.nodeColor)
+        .attr("opacity", 0.1)
+        
+      this.renderedNodeGroup.selectAll("circle")
+        .filter((nodeData: any) => nodeData.id === nodeId)
+          .attr("r", this.nodeRadius * 2)
+          .attr("fill", this.selectedNodeColor)
+          .attr("opacity", 1)
+    }
   }
 
   /**
