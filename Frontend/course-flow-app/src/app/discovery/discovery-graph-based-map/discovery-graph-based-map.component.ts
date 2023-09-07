@@ -29,12 +29,21 @@ export class DiscoveryGraphBasedMapComponent {
   // Graph Properties.
   width: number = 1920;
   height: number = 1920;
-  zoomLevel: number = 0.5;
+  initialZoomLevel: number = 0.2;
+  currentZoomLevel: number = 0.2;
 
-  // Edge Properties
+  // Node Properties.
+  nodeColor: string = "rgba(255, 0, 0, 0.8)"
+  nodeRadius: number = 5;
+
+  // Text Properties
+  fontSize: number = 5;
+
+  // Link/Edge Properties
   linkWidth: number = 0.1;
   linkOpacity: number = 0.1;
   linkColor: string = "black";
+  selectedLinkColor: string = "rgba(255, 0, 0, 0.5)";
    
   constructor(@Inject(IDiscoveryDataServiceInjector) private discoveryDataService: IDiscoveryDataService) {}
 
@@ -80,8 +89,6 @@ export class DiscoveryGraphBasedMapComponent {
     this.renderLinks();
 
     this.renderNodes();
-
-
   }
 
   /**
@@ -109,9 +116,24 @@ export class DiscoveryGraphBasedMapComponent {
         
       if (this.zoomableGroupElement) {
 
+        // Handle zoom.
         this.zoomableGroupElement.attr("transform", event.transform)
-      }
 
+        // To help with optimization, lets only update visuals on intervals.
+        // d3.js has a quantize function to help with this.
+        let quantizedZoomDelegate: d3.ScaleQuantize<number, never> = d3.scaleQuantize([0, 1], [0, 0.2, 0.4, 0.6, 0.8, 1]);
+        let quantizedZoom: number = quantizedZoomDelegate(event.transform.k);
+
+
+        // Update visuals based on zoom level and if the value has actually changed.
+        if (quantizedZoom < this.currentZoomLevel || quantizedZoom > this.currentZoomLevel) {
+
+          this.currentZoomLevel = quantizedZoom;
+
+          this.updateNodesOnZoom(quantizedZoom);
+          this.updateTextOnZoom(quantizedZoom)
+        }
+      }
     })
 
     // If we have a base canvas, apply/call the zoom behaviour to the element.
@@ -119,7 +141,7 @@ export class DiscoveryGraphBasedMapComponent {
 
         this.baseSvgCanvasElement.call(zoomBehaviour.transform, 
           d3.zoomIdentity.translate(this.width / 4, this.height / 4)
-                         .scale(this.zoomLevel))
+                         .scale(this.initialZoomLevel))
                          .call(zoomBehaviour);
     }
   }
@@ -140,24 +162,30 @@ export class DiscoveryGraphBasedMapComponent {
 
       // Append a circle shape to the node group.
       this.renderedNodeGroup.append('circle')
-        .attr("fill", "blue")
-        .attr("r", 2)
+        .attr("fill", this.nodeColor)
+        .attr("r", this.nodeRadius)
+        .attr("opacity", this.initialZoomLevel)
 
       // Append text to the node group.
       this.renderedNodeGroup.append("text")
         .text((nodeData) => nodeData.label)  
-        .style("font-size", 50)
-        .style("visibility", (nodeData) => {
+        .style("visibility", (nodeData) => nodeData.group === 1 ? "visible" : "hidden")
+        .style("font-size", (nodeData) =>  {
 
-          let visibility = "hidden";
+          let fontSize = this.fontSize;
 
           if (nodeData.group === 1) {
-            visibility = "visible";
+
+            fontSize *= 50;
           }
 
-          return visibility
+          return fontSize;
+
         })
       }
+
+      // Calling this to set the initial opacity (and inverse opacity).
+      this.updateTextOnZoom(this.currentZoomLevel);
   }
 
   /**
@@ -189,11 +217,18 @@ export class DiscoveryGraphBasedMapComponent {
     this.toggleLinks(nodeClicked.id);
   }
 
+  /**
+   * Modify required node properties to highlight node clicked.
+   * @param nodeId Node id.
+   */
+  toggleNode(): void {
+
+
+  }
 
   /**
    * Modify required link properties to highlight related links to node.
-   * @param originNodeId Origin node id.
-   * @param targetNodeId Target node id.
+   * @param nodeId Node id.
    */
   toggleLinks(nodeId: string): void {
     
@@ -205,7 +240,7 @@ export class DiscoveryGraphBasedMapComponent {
           let color = this.linkColor;
           
           if (nodeId === link.source || nodeId === link.target) {
-            color = "blue"
+            color = this.selectedLinkColor;
           }
 
           return color;
@@ -233,5 +268,59 @@ export class DiscoveryGraphBasedMapComponent {
           return width;
         })
     }
+  }
+
+  /**
+   * Update nodes based on zoom level.
+   * @param zoomValue Current zoom level.
+   */
+  updateNodesOnZoom(zoomValue: number) : void {
+
+    if (this.renderedNodeGroup) {
+
+      this.renderedNodeGroup.selectAll("circle")
+        .attr("opacity", zoomValue)
+    }
+  }
+
+  /**
+   * Update text based on zoom level.
+   * @param zoomValue Current zoom level.
+   */
+  updateTextOnZoom(zoomValue: number) : void {
+
+    if (this.renderedNodeGroup) {
+
+      this.renderedNodeGroup.selectAll("text")
+        .style("visibility", (nodeData: any) => {
+
+          let discoveryNodeData: IDiscoveryNodeData = nodeData as IDiscoveryNodeData;
+          let visibility: string = "visible"
+
+          if (discoveryNodeData.group === 2 && zoomValue < 1) {
+
+            visibility = "hidden";
+          }
+
+          return visibility;
+        })
+        .attr("opacity", (nodeData: any) => {
+
+          let discoveryNodeData: IDiscoveryNodeData = nodeData as IDiscoveryNodeData;
+          let opacity: number = zoomValue;
+          
+          // Basically, make group 1 fade out as we zoom in, and make group 2 (the lowest layer group) fade in.
+          if (discoveryNodeData.group == 1) {
+            opacity = 1 - zoomValue;
+          }
+          else if (discoveryNodeData.group == 2) {
+            opacity = zoomValue;
+          }
+
+          return opacity;
+
+        })
+    }
+
   }
 }
