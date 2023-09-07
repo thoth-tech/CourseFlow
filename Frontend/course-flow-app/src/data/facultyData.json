@@ -7,7 +7,7 @@
         "x": 0.0,
         "y": 0.0,
         "inConnections": [
-            null
+            
         ],
         "outConnections": [],
         "coConnections": [],
@@ -21,7 +21,7 @@
         "x": 1.2182096242904663,
         "y": 1.2236741781234741,
         "inConnections": [
-            "root"
+            "root","H"
         ],
         "outConnections": [],
         "coConnections": [],
