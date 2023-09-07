@@ -50,7 +50,7 @@ export class DiscoveryGraphBasedMapComponent {
   currentSelectedNode = {} as IDiscoveryNodeData;
 
   // Detailed Menu Properties
-  detailedMenuOpen = true;
+  detailedMenuOpen = false;
 
   constructor(@Inject(IDiscoveryDataServiceInjector) private discoveryDataService: IDiscoveryDataService) {}
 

@@ -31,11 +31,17 @@
     flex-direction: column;
 }
 
-.detailed-panel-section button{
-    /* Couldn't get this to go to the bottom of the menu - tried all forms of flex related properties. */
+.detailed-panel-section h2{
+    margin-top: 2em;
+    word-wrap: break-word;
+}
+
+.detailed-panel-section button {
+
     position: absolute;
+    top: 0;
     bottom: 0;
-    left: 0;
+    left: 10;
     right: 0;
 }
 
