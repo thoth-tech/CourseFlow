@@ -1,11 +1,11 @@
 // Angular Imports
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 
 // Enum Imports
 import { EDiscoveryGroupUnitsBy } from 'src/app/enum/discoveryEnums';
 
 // Interface Imports
-import { IDiscoveryDataService, IDiscoveryData, IDiscoveryNodeData, IDiscoveryLinkData } from 'src/app/interfaces/discoveryInterfaces';
+import { IDiscoveryDataService, IDiscoveryData, IDiscoveryNodeData, IDiscoveryLinkData, IConnectionData } from 'src/app/interfaces/discoveryInterfaces';
 
 // JSON Data Imports
 import facultyData from "src/data/facultyData.json";
@@ -15,12 +15,18 @@ import facultyData from "src/data/facultyData.json";
 })
 export class JsonFileDiscoveryDataService implements IDiscoveryDataService {
 
-  // Json data
+  // Observables.
+  @Output() nodeSelectedEvent$: EventEmitter<IDiscoveryNodeData> = new EventEmitter();
+
+  // Json data.
   discoveryJsonData: Record<EDiscoveryGroupUnitsBy, object> = {
     [EDiscoveryGroupUnitsBy.faculty]: facultyData,
     [EDiscoveryGroupUnitsBy.course]: facultyData,
     [EDiscoveryGroupUnitsBy.related_units]: facultyData,
   };
+
+  // Discovery data cache.
+  discoveryData = {} as IDiscoveryData;
 
   constructor() {
 
@@ -32,12 +38,10 @@ export class JsonFileDiscoveryDataService implements IDiscoveryDataService {
    */
   getDiscoveryData(groupUnitsByQuery: EDiscoveryGroupUnitsBy): IDiscoveryData {
     
-    let discoveryData = {} as IDiscoveryData;
+    this.processNodes(this.discoveryData);
+    this.processLinks(this.discoveryData);
 
-    this.processNodes(discoveryData);
-    this.processLinks(discoveryData);
-
-    return discoveryData
+    return this.discoveryData
   }
 
   /**
@@ -66,7 +70,6 @@ export class JsonFileDiscoveryDataService implements IDiscoveryDataService {
       this.addLinkUsingConnections(node, linkData, node.inConnections);
       this.addLinkUsingConnections(node, linkData, node.outConnections);
       this.addLinkUsingConnections(node, linkData, node.coConnections);
-      this.addLinkUsingConnections(node, linkData, node.restrictedConnections);
     }
 
     discoveryData.linkData = linkData;
@@ -78,24 +81,63 @@ export class JsonFileDiscoveryDataService implements IDiscoveryDataService {
    * @param linkData Link data array we are 
    * @param nodeConnectionArray Array of node ids which will be used to create the links.
    */
-  addLinkUsingConnections(node: IDiscoveryNodeData, linkData: IDiscoveryLinkData[], nodeConnectionArray: string[]): void {
+  addLinkUsingConnections(node: IDiscoveryNodeData, linkData: IDiscoveryLinkData[], nodeConnectionArray: IConnectionData[]): void {
 
-    for (let i = 0; i < nodeConnectionArray.length; i++) {
-        
-      // Since we can have connections going in and out from a node, we will likely come accross them multiple times.
-      // Hence, we check the two possible id combinations to ensure we don't double up on links.
-      // Link Ids will always be added from the current node id to the id within the connection array.
-      let foundLink: IDiscoveryLinkData | undefined = linkData.find((link) => link.id === node.id + nodeConnectionArray[i] || link.id === nodeConnectionArray[i] + node.id);
+    // Each node connection array contains an object of type IConnectionData.
+    // Within these contain groups on different types of links.
+    // The following loops are essentially processing all of these and creating links only if the link id doesn't exist (two combo of link ids will be checked).
+    nodeConnectionArray.forEach((connectionData) => {
 
-      if (foundLink !== undefined) {
-        continue;
+      let connectionIds = connectionData.connectionIds;
+
+      for (let i = 0; i < connectionIds.length; i++) {
+
+        let foundLink: IDiscoveryLinkData | undefined = linkData.find((link) => link.id === node.id + connectionIds[i] || link.id === connectionIds[i] + node.id);
+
+        if (foundLink !== undefined) {
+          continue;
+        }
+
+        linkData.push({
+          id: node.id + nodeConnectionArray[i],
+          source: node.id,
+          target: connectionIds[i]
+        }) 
       }
+    })
+  }
 
-      linkData.push({
-        id: node.id + nodeConnectionArray[i],
-        source: node.id,
-        target: nodeConnectionArray[i]
-      })  
+  /**
+   * Searches the discovery node data for a node based on the id.
+   * @param id Id of node data.
+   */
+  findDiscoveryNodeById(id: string): IDiscoveryNodeData | undefined {
+
+    let foundNode = {} as IDiscoveryNodeData | undefined;
+
+    if (this.discoveryData) {
+
+      foundNode = this.discoveryData.nodeData.find((nodeData) => nodeData.id === id)
+      
     }
+
+    return foundNode;
+  }
+
+  /**
+   * Intended to be used as a messaging method for deep nested components that display connections of the nodes.
+   * @param id Id of the node which originates from a list of connection.
+   */
+  onDetailedConnectionClicked(id: string): void {
+
+    let selectedNode = {} as IDiscoveryNodeData | undefined;
+
+    if (this.discoveryData) {
+
+      selectedNode = this.discoveryData.nodeData.find((nodeData) => nodeData.id === id)
+      
+    }
+
+    this.nodeSelectedEvent$.emit(selectedNode);
   }
 }

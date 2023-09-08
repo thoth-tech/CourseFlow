@@ -18,7 +18,6 @@ import { DiscoveryPageComponent } from './discovery/discovery-page/discovery-pag
 import { DiscoveryGraphBasedMapComponent } from './discovery/discovery-graph-based-map/discovery-graph-based-map.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DiscoveryTextBasedListsComponent } from './discovery/discovery-text-based-lists/discovery-text-based-lists.component';
-import { DiscoveryDetailedSidePanelComponent } from './discovery/discovery-detailed-side-panel/discovery-detailed-side-panel.component';
 
 // Material UI Imports
 import { MatDialogModule } from '@angular/material/dialog';
@@ -31,6 +30,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
+import { DiscoveryDetailedContentComponent } from './discovery/discovery-detailed-content/discovery-detailed-content.component';
+import { DiscoveryConnectionSelectablesComponent } from './discovery/discovery-connection-selectables/discovery-connection-selectables.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {MatDividerModule} from '@angular/material/divider';
     DiscoveryPageComponent,
     DiscoveryGraphBasedMapComponent,
     DiscoveryTextBasedListsComponent,
-    DiscoveryDetailedSidePanelComponent,
+    DiscoveryDetailedContentComponent,
+    DiscoveryConnectionSelectablesComponent,
   ],
   imports: [
     BrowserModule,

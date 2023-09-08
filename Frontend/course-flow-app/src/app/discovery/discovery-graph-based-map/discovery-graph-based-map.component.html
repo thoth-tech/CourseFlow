@@ -4,57 +4,10 @@
 
         <div class="detailed-panel-section">
 
-            <h2> {{currentSelectedNode.label}} </h2>
-    
-            <mat-divider/>
+            <app-discovery-detailed-content [detailedData]="currentSelectedNode"/>
 
-            <div class="detailed-panel-content">
+            <button mat-raised-button color="primary" (click)="closeDetailsPanel()"> Close </button>
 
-                <div>
-    
-                    <h3>Description</h3>
-        
-                    <p>{{currentSelectedNode.description}}</p>
-    
-                </div>
-    
-                <div>
-    
-                    <h3>Prerequisites</h3>
-        
-                    <p></p>
-    
-                </div>
-    
-                <div>
-    
-                    <h3>Corequisites</h3>
-        
-                    <p></p>
-    
-                </div>
-    
-        
-                <div>
-    
-                    <h3>Exclusive</h3>
-        
-                    <p></p>
-    
-                </div>
-    
-        
-                <div>
-    
-                    <h3>Related</h3>
-        
-                    <p></p>
-    
-                </div>
-    
-            </div>
-
-            <button mat-button (click)="closeDetailsPanel()"> Close </button>
         </div>
         
     </mat-sidenav>
@@ -71,9 +24,3 @@
     </mat-sidenav-content>
 
 </mat-sidenav-container>
-
-
-
-
-
-

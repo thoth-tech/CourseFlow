@@ -1,0 +1,25 @@
+<div class="detailed-container">
+
+    <h2> {{ detailedData.label }} </h2>
+
+    <mat-divider/>
+
+    <div class="detailed-content">
+
+        <div>
+
+            <h3>Description</h3>
+
+            <p>{{ detailedData.description }}</p>
+
+        </div>
+
+        <app-discovery-connection-selectables [connectionsData]="detailedData.inConnections"/>
+
+        <app-discovery-connection-selectables [connectionsData]="detailedData.outConnections"/>
+
+        <app-discovery-connection-selectables [connectionsData]="detailedData.coConnections"/>
+
+    </div>
+
+</div>

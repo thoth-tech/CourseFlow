@@ -64,6 +64,14 @@ export class DiscoveryGraphBasedMapComponent {
   }
 
   /**
+   * On Init.
+   */
+  ngOnInit() {
+
+    this.discoveryDataService.nodeSelectedEvent$.subscribe((node) => this.handleOnNodeClicked(node));
+  }
+
+  /**
    * Finds a node by id.
    * @param id Id of the node.
    * @returns Found node.

@@ -29,27 +29,12 @@
 .detailed-panel-section {
     display: flex;
     flex-direction: column;
-}
-
-.detailed-panel-section h2{
-    margin-top: 2em;
-    word-wrap: break-word;
+    justify-content: space-between;
+    min-height: 100%;
 }
 
 .detailed-panel-section button {
-
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 10;
-    right: 0;
-}
-
-.detailed-panel-content {
-    display: flex;
-    flex-direction: column;
-}
-
-.detailed-panel h3 {
-    margin-top: 4em;
+    position: sticky;
+    bottom: 10px;
+    margin: 2em;
 }

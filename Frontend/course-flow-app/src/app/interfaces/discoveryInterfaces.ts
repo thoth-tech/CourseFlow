@@ -1,5 +1,5 @@
 // Angular Imports
-import { InjectionToken } from '@angular/core'
+import { InjectionToken, EventEmitter } from '@angular/core'
 
 // Enums
 import { EDiscoveryGroupUnitsBy } from "src/app/enum/discoveryEnums"
@@ -12,7 +12,17 @@ export const IDiscoveryDataServiceInjector = new InjectionToken<IDiscoveryDataSe
 
 export interface IDiscoveryDataService {
 
+    // Observable.
+    nodeSelectedEvent$: EventEmitter<IDiscoveryNodeData>;
+
+    // Data Fetching.
     getDiscoveryData(groupUnitsByQuery: EDiscoveryGroupUnitsBy): IDiscoveryData;
+
+    // Data Search.
+    findDiscoveryNodeById(id: string): IDiscoveryNodeData | undefined;
+
+    // Event Emitters
+    onDetailedConnectionClicked(id: string): void;
 }
 
 
@@ -66,16 +76,20 @@ export interface IDiscoveryNodeData {
     description: string;
     x: number | string;
     y: number | string;
-    inConnections: string[];
-    outConnections: string[];
-    coConnections: string[];
-    restrictedConnections: string[];
+    inConnections: IConnectionData[];
+    outConnections: IConnectionData[];
+    coConnections: IConnectionData[];
 }
 
 export interface IDiscoveryLinkData {
     id: string;
     source: string;
     target: string;
+}
+
+export interface IConnectionData {
+    label: string;
+    connectionIds: string[]
 }
 
 /*******************************************************************************************************************************
