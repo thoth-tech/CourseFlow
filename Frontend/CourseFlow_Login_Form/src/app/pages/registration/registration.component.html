@@ -1,0 +1,63 @@
+<div class="header-card">
+    <app-header-banner></app-header-banner>
+</div>
+
+<div class="register-container">
+    <div [formGroup] = "registerForm" class="register-content">
+
+        <p class="title">Sign Up</p>
+        <p class="title-intro">Welcome back</p>
+        <mat-form-field appearance="outline">
+            <mat-label>Username</mat-label>
+            <input formControlName="username" matInput type="text">
+
+            <mat-error *ngif="registerForm.controls['username'].hasError('required')">
+                Username is required
+            </mat-error>
+
+            <mat-error *ngif="registerForm.controls['username'].hasError('email')">
+                Inavlid Email
+            </mat-error>
+
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Phone Number</mat-label>
+            <input formControlName="username" matInput type="text">
+
+            <mat-error *ngif="registerForm.controls['phoneNumber'].hasError('required')">
+                Phone Number is required
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">
+            <mat-icon (click)="hide = !hide" matSuffix>{{ hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            <mat-error *ngif="registerForm.controls['password'].hasError('required')">
+                Password is required
+            </mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="outline">
+            <mat-label>Confirm Password</mat-label>
+            <input formControlName="password" matInput [type]="hideConfirmPassword ? 'password' : 'text'">
+            <mat-icon (click)="hideConfirmPassword = !hideConfirmPassword" matSuffix>{{ hideConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+            <mat-error *ngif="registerForm.controls['confirmPassword'].hasError('required')">
+                Confirm Password is required
+            </mat-error>
+        </mat-form-field>
+
+        <p class="alternative">Already have an Account? <span [routerLink]="['/login']">Login!</span></p>
+
+        <div class="or-line-divider">
+            <p>Or</p>
+        </div>
+
+        <div class="google-card">
+            <app-google-login-card></app-google-login-card>
+        </div>
+
+    </div>
+</div>

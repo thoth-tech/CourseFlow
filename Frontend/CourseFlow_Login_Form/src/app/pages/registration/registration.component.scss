@@ -1,0 +1,63 @@
+@import '/src/themes//themes.scss';
+
+.header-card{
+    margin-bottom: $padding10;
+}
+.register-container{
+    width: 100%;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .title{
+        font-size: $font-size34;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: $padding16;
+    }
+    .title-intro{
+        font-size: $font-size24;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: $padding16;
+    }
+    .forgot-label{
+        font-size: $font-size16;
+        color: $primary-color;
+        text-align: center;
+        cursor: pointer;
+
+    }
+    .alternative{
+        font-weight: 500;
+        text-align: center;
+        margin-top: $padding10;
+        span{
+            color: $primary-color;
+            margin-left: $padding16;
+            cursor: pointer;
+        }
+    }
+    .or-line-divider{
+        margin-top: $padding40;
+        border: $thin-border;
+        position: relative;
+        p{
+            position: absolute;
+            background: white;
+            width: 30px;
+            transform: translate(-50%,-50%);
+            text-align: center;
+            left: 50%;
+        }
+    }
+    .google-card{
+        margin-top: $padding20;
+    }
+    .register-content{
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+
+    }
+}
