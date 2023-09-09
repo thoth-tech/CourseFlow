@@ -5,7 +5,8 @@
 <div class="login-container">
     <div [formGroup] = "loginForm" class="login-content">
 
-        <p class="title">Login</p>
+        <img src="../assets/images/CourseFlow_Logo_white.png" alt="CourseFlowLogo" class="logo">
+        <p class="title">Log In</p>
         <p class="title-intro">Welcome back</p>
         <mat-form-field appearance="outline">
             <mat-label>Username</mat-label>
@@ -30,15 +31,14 @@
             </mat-error>
         </mat-form-field>
 
-        <p class="forgot-label">Forgot Password?</p>
+        <p class="forgot-label"> <span [routerLink]="['/forgot-password']">Forgot Password?</span></p>
 
         <p class="alternative">Don't have an Account? <span [routerLink]="['/register']">Sign up!</span></p>
-
+        <button  [disabled]="loginForm.invalid" (click)="loginWithEmailAndPassword()" class="btn btnFil">Login</button>
         <div class="or-line-divider">
             <p>Or</p>
         </div>
-
-        <div class="google-card">
+        <div (click)="logInWithGoogle()" class="google-card">
             <app-google-login-card></app-google-login-card>
         </div>
 
