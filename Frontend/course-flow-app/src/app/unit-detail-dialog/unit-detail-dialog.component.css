@@ -1,3 +1,52 @@
 .dialog {
+    background-color: white;
+}
+
+.close-button {
+    background: red;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: flex;
+    right: 8px !important;
+    top: 8px !important;
+    border: none;
+    position: absolute;
+    font: 5px;
+    cursor: pointer;
+}
+
+.header {
+    background-color: black;
     color: white;
+    text-align: center;
+    font-weight: bold;
+    padding: 15px;
+    box-shadow: 0px 6px 6px 0px rgba(0, 0, 0, 0.25);
+}
+
+.content {
+    padding: 20px;
+}
+
+.unit-content {
+    display: block;
+    padding-bottom: 10px;
+}
+
+.credit-points, 
+.prerequisite,
+.unit-chairs,
+.availability, 
+.hurdle,
+.activities,
+.note,
+.link {
+    padding-bottom: 10px;
+}
+
+
+
+td {
+    padding-right: 120px;
 }
