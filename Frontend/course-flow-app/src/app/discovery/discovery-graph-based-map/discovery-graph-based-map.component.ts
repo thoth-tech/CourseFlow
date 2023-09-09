@@ -23,6 +23,7 @@ export class DiscoveryGraphBasedMapComponent {
   // Canvas, node and link visuals.
   baseSvgCanvasElement: d3.Selection<SVGSVGElement, unknown, HTMLElement, any> | null = null;
   zoomableGroupElement: d3.Selection<SVGGElement, unknown, HTMLElement, any> | null = null;
+  zoomBehaviour: d3.ZoomBehavior<SVGSVGElement, unknown> | null = null;
   renderedNodeGroup: d3.Selection<SVGGElement | d3.BaseType, IDiscoveryNodeData, SVGGElement, unknown> | null = null;
   renderedLinks: d3.Selection<SVGGElement | d3.BaseType, IDiscoveryLinkData, SVGGElement, unknown> | null = null;
 
@@ -31,6 +32,7 @@ export class DiscoveryGraphBasedMapComponent {
   height: number = 1920;
   initialZoomLevel: number = 0.2;
   currentZoomLevel: number = 0.2;
+  currentQuantizedZoomLevel: number = 0.2;
 
   // Node Properties.
   nodeColor: string = "rgba(255, 0, 0, 0.5)"
@@ -47,7 +49,7 @@ export class DiscoveryGraphBasedMapComponent {
   selectedLinkColor: string = "rgba(0, 0, 255, 0.5)";
   
   // Selected node
-  currentSelectedNode = {} as IDiscoveryNodeData;
+  currentSelectedNode = {} as IDiscoveryNodeData | null;
 
   // Detailed Menu Properties
   detailedMenuOpen = false;
@@ -118,7 +120,8 @@ export class DiscoveryGraphBasedMapComponent {
       .attr("width", this.width)
       .attr("height", this.height)
       .style("background-color", "white")
-      .style("border-radius", "20px");
+      .style("border-radius", "20px")
+      .on("click", () => this.handleOnCanvasClicked());
   }
 
   /**
@@ -127,23 +130,25 @@ export class DiscoveryGraphBasedMapComponent {
   initializeZoom(): void {
   
     // Create the zoom behaviour with zoomimg in/out functionality.
-    let zoomBehaviour = d3.zoom<SVGSVGElement, unknown>().on("zoom", (event) => {
+    this.zoomBehaviour = d3.zoom<SVGSVGElement, unknown>().on("zoom", (event) => {
         
       if (this.zoomableGroupElement) {
 
         // Handle zoom.
         this.zoomableGroupElement.attr("transform", event.transform)
 
+        this.currentZoomLevel =  event.transform.k;
+
         // To help with optimization, lets only update visuals on intervals.
         // d3.js has a quantize function to help with this.
         let quantizedZoomDelegate: d3.ScaleQuantize<number, never> = d3.scaleQuantize([0, 1], [0, 0.2, 0.4, 0.6, 0.8, 1]);
-        let quantizedZoom: number = quantizedZoomDelegate(event.transform.k);
+        let quantizedZoom: number = quantizedZoomDelegate(this.currentZoomLevel);
 
 
         // Update visuals based on zoom level and if the value has actually changed.
-        if (quantizedZoom < this.currentZoomLevel || quantizedZoom > this.currentZoomLevel) {
+        if (quantizedZoom < this.currentQuantizedZoomLevel || quantizedZoom > this.currentQuantizedZoomLevel) {
 
-          this.currentZoomLevel = quantizedZoom;
+          this.currentQuantizedZoomLevel = quantizedZoom;
 
           this.updateNodesOnZoom(quantizedZoom);
           this.updateTextOnZoom(quantizedZoom)
@@ -154,10 +159,10 @@ export class DiscoveryGraphBasedMapComponent {
     // If we have a base canvas, apply/call the zoom behaviour to the element.
     if (this.baseSvgCanvasElement) {
 
-        this.baseSvgCanvasElement.call(zoomBehaviour.transform, 
+        this.baseSvgCanvasElement.call(this.zoomBehaviour.transform, 
           d3.zoomIdentity.translate(this.width / 4, this.height / 4)
                          .scale(this.initialZoomLevel))
-                         .call(zoomBehaviour);
+                         .call(this.zoomBehaviour);
     }
   }
 
@@ -178,7 +183,10 @@ export class DiscoveryGraphBasedMapComponent {
       this.renderedNodeGroup.append('circle')
         .attr("fill", this.nodeColor)
         .attr("r", this.nodeRadius)
-        .on("click", (event, nodeData) => this.handleOnNodeClicked(nodeData))
+        .on("click", (event, nodeData) => {
+          event.stopPropagation();
+          this.handleOnNodeClicked(nodeData);
+        })
 
       // Append text to the node group.
       this.renderedNodeGroup.append("text")
@@ -199,7 +207,7 @@ export class DiscoveryGraphBasedMapComponent {
       }
 
       // Calling this to set the initial opacity (and inverse opacity).
-      this.updateTextOnZoom(this.currentZoomLevel);
+      this.updateTextOnZoom(this.currentQuantizedZoomLevel);
   }
 
   /**
@@ -224,6 +232,21 @@ export class DiscoveryGraphBasedMapComponent {
   }
 
   /**
+   * Handle on canvas clicked.
+   */
+  handleOnCanvasClicked(): void {
+
+    this.currentSelectedNode = null;
+
+    // Toggle the detailed panel off.
+    this.detailedMenuOpen = false;
+    
+    // Visual updates.
+    this.toggleNode("");
+    this.toggleLinks("");
+  }
+
+  /**
    * Handles logic when a node is clicked.
    */
   handleOnNodeClicked(nodeClicked: IDiscoveryNodeData): void {
@@ -236,6 +259,19 @@ export class DiscoveryGraphBasedMapComponent {
     // Visual updates.
     this.toggleNode(nodeClicked.id);
     this.toggleLinks(nodeClicked.id);
+
+    // Transition the view to the node.
+    const transition = d3.zoomIdentity
+      .translate(
+        (this.width / 2) - (nodeClicked.x as number * this.width), 
+        (this.height / 2) - (nodeClicked.y as number * this.height))
+
+
+    if (this.zoomBehaviour) {
+
+      this.baseSvgCanvasElement?.transition().duration(2000).call(this.zoomBehaviour.transform, transition);
+    }
+
   }
 
   /**
@@ -245,6 +281,17 @@ export class DiscoveryGraphBasedMapComponent {
   toggleNode(nodeId: string): void {
 
     if (this.renderedNodeGroup) {
+
+      // Reset nodes back to original appearance if no id is passed in.
+      if (nodeId.length === 0) {
+
+        this.renderedNodeGroup.selectAll("circle")
+          .attr("r", this.nodeRadius)
+          .attr("fill", this.nodeColor)
+          .attr("opacity", 1)
+
+        return;
+      }
 
       this.renderedNodeGroup.selectAll("circle")
       .filter((nodeData: any) => nodeData.id !== nodeId)

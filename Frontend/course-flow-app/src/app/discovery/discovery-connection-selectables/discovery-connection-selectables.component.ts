@@ -11,7 +11,7 @@ import { IDiscoveryDataService, IDiscoveryDataServiceInjector, IConnectionData, 
 })
 export class DiscoveryConnectionSelectablesComponent {
 
-  @Input() connectionsData!: IConnectionData[]; 
+  @Input() connectionsData: IConnectionData[] | undefined = [] as IConnectionData[]; 
   
   constructor(@Inject(IDiscoveryDataServiceInjector) private discoveryDataService: IDiscoveryDataService) {}
 

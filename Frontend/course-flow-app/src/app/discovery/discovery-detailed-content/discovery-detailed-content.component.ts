@@ -11,5 +11,5 @@ import { IDiscoveryNodeData } from 'src/app/interfaces/discoveryInterfaces';
 })
 export class DiscoveryDetailedContentComponent {
 
-  @Input() detailedData!: IDiscoveryNodeData; 
+  @Input() detailedData: IDiscoveryNodeData | null = {} as IDiscoveryNodeData; 
 }
