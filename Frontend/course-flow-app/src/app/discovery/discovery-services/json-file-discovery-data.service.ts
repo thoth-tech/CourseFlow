@@ -21,8 +21,7 @@ export class JsonFileDiscoveryDataService implements IDiscoveryDataService {
   // Json data.
   discoveryJsonData: Record<EDiscoveryGroupUnitsBy, object> = {
     [EDiscoveryGroupUnitsBy.faculty]: facultyData,
-    [EDiscoveryGroupUnitsBy.course]: facultyData,
-    [EDiscoveryGroupUnitsBy.related_units]: facultyData,
+    [EDiscoveryGroupUnitsBy.course]: facultyData
   };
 
   // Discovery data cache.

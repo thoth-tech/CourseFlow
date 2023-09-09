@@ -1,7 +1,6 @@
 export enum EDiscoveryGroupUnitsBy {
     faculty,
-    course,
-    related_units
+    course
   }
   
 export  enum EDiscoveryDisplayTypes {
