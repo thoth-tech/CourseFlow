@@ -62,6 +62,7 @@ export class DiscoveryGraphBasedMapComponent {
   @Input() set groupUnitsBy(value: EDiscoveryGroupUnitsBy) {
 
     this.discoveryData = this.discoveryDataService.getDiscoveryData(value);
+    this.detailedMenuOpen = false;
     this.createDiscoveryMap();
   }
 

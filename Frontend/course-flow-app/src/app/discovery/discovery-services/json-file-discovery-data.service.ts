@@ -9,6 +9,7 @@ import { IDiscoveryDataService, IDiscoveryData, IDiscoveryNodeData, IDiscoveryLi
 
 // JSON Data Imports
 import facultyData from "src/data/facultyData.json";
+import courseData from "src/data/courseData.json"
 
 @Injectable({
   providedIn: 'root'
@@ -19,12 +20,15 @@ export class JsonFileDiscoveryDataService implements IDiscoveryDataService {
   @Output() nodeSelectedEvent$: EventEmitter<IDiscoveryNodeData> = new EventEmitter();
 
   // Json data.
-  discoveryJsonData: Record<EDiscoveryGroupUnitsBy, object> = {
+  discoveryJsonData: Record<EDiscoveryGroupUnitsBy, object[]> = {
     [EDiscoveryGroupUnitsBy.faculty]: facultyData,
-    [EDiscoveryGroupUnitsBy.course]: facultyData
+    [EDiscoveryGroupUnitsBy.course]: courseData
   };
 
   // Discovery data cache.
+  discoveryDataCache: Record<EDiscoveryGroupUnitsBy, IDiscoveryData> = {} as Record<EDiscoveryGroupUnitsBy, IDiscoveryData>;
+
+  // Current discovery data
   discoveryData = {} as IDiscoveryData;
 
   constructor() {
@@ -37,41 +41,54 @@ export class JsonFileDiscoveryDataService implements IDiscoveryDataService {
    */
   getDiscoveryData(groupUnitsByQuery: EDiscoveryGroupUnitsBy): IDiscoveryData {
     
-    this.processNodes(this.discoveryData);
-    this.processLinks(this.discoveryData);
+    this.discoveryData = {} as IDiscoveryData;
 
-    return this.discoveryData
+    if (groupUnitsByQuery in this.discoveryDataCache) {
+
+      this.discoveryData = this.discoveryDataCache[groupUnitsByQuery];
+    }
+    else {
+
+      let discoveryDataAsJson: IDiscoveryNodeData[] = this.discoveryJsonData[groupUnitsByQuery] as IDiscoveryNodeData[];
+
+      this.processNodes(discoveryDataAsJson);
+      this.processLinks();
+
+      this.discoveryDataCache[groupUnitsByQuery] = this.discoveryData;
+
+    }
+
+    return this.discoveryData;
   }
 
   /**
    * Process data and add in nodes.
    * @param discoveryData Discovery data containing data for nodes and links.
    */
-  processNodes(discoveryData: IDiscoveryData) : void {
+  processNodes(nodeJsonData: IDiscoveryNodeData[]) : void {
     
-    discoveryData.nodeData = facultyData as IDiscoveryNodeData[];
-
+    this.discoveryData.nodeData = nodeJsonData as IDiscoveryNodeData[];
   }
 
   /**
    * Process data and add in links/edges.
    * @param discoveryData Discovery data containing data for nodes and links.
    */
-  processLinks(discoveryData: IDiscoveryData): void {
+  processLinks(): void {
 
     let linkData = [] as IDiscoveryLinkData[];
 
     // Go through each node, check all connection arrays, and create the links.
-    for (let i = 0; i < discoveryData.nodeData.length; i++) {
+    for (let i = 0; i < this.discoveryData.nodeData.length; i++) {
 
-      let node = discoveryData.nodeData[i];
+      let node = this.discoveryData.nodeData[i];
 
       this.addLinkUsingConnections(node, linkData, node.inConnections);
       this.addLinkUsingConnections(node, linkData, node.outConnections);
       this.addLinkUsingConnections(node, linkData, node.coConnections);
     }
 
-    discoveryData.linkData = linkData;
+    this.discoveryData.linkData = linkData;
   }
 
   /**

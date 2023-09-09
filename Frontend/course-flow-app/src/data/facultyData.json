@@ -7,10 +7,6 @@
         "x": 0.0,
         "y": 0.0,
         "inConnections": [
-            {
-                "label": "Related Faculties",
-                "connectionIds": []
-            }
         ],
         "outConnections": [],
         "coConnections": []
@@ -24,7 +20,7 @@
         "y": 0.580714225769043,
         "inConnections": [
             {
-                "label": "Related Faculties",
+                "label": "Faculty Graph",
                 "connectionIds": [
                     "root"
                 ]
@@ -9240,7 +9236,7 @@
         "y": -0.10424548387527466,
         "inConnections": [
             {
-                "label": "Related Faculties",
+                "label": "Faculty Graph",
                 "connectionIds": [
                     "root"
                 ]
@@ -10716,7 +10712,7 @@
         "y": 0.6449677348136902,
         "inConnections": [
             {
-                "label": "Related Faculties",
+                "label": "Faculty Graph",
                 "connectionIds": [
                     "root"
                 ]
@@ -19698,7 +19694,7 @@
         "y": 1.0522900819778442,
         "inConnections": [
             {
-                "label": "Related Faculties",
+                "label": "Faculty Graph",
                 "connectionIds": [
                     "root"
                 ]
@@ -29472,7 +29468,7 @@
         "y": -0.11068204045295715,
         "inConnections": [
             {
-                "label": "Related Faculties",
+                "label": "Faculty Graph",
                 "connectionIds": [
                     "root"
                 ]
