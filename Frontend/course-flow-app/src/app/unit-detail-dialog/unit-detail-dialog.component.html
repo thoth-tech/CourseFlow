@@ -1,17 +1,88 @@
 <div class="dialog">
     <div class="header">
-        <div class="unit-name">{{ data.Name }}</div>
         <div class="unit-code">{{ data.Code }}</div>
+        <div class="unit-name">{{ data.Name }}</div>
         <div class="unit-type">{{ data.Type }}</div>
+        <div class="close-button" (click)="closeUnitPopup()"></div>
     </div>
 
-    <div class="credit-points"><strong>Credit Points:</strong> {{ data.CreditPoints }}</div>
-    <div class="prerequisite"><strong>Prerequisite:</strong> {{ data.Prerequisite }}</div>
+    <div class="content">
+        <div class="unit-content"><strong>Unit Overview:</strong> The unit will teach students the fundamentals of
+            structured programming and explore the mechanics of how these programs operate within the computer.
+        </div>
 
-    <div class="main-content">
-        <div class="unit-content">{{ data.Content }}</div>
+        <div class="unit-chairs">
+            <table>
+                <tr>
+                    <td>
+                        <strong>Unit Chairs:</strong>
+                    </td>
+                    <td>
+                        <strong>Campus:</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        T1 - Lecturer 1 (lecture1@deakin.edu.au) <br />
+                        T2 - Lecturer 2 (lecture2@deakin.edu.au) <br />
+                        T3 - Nil
+                    </td>
+                    <td>
+                        Burwood (Melbourne) <br />
+                        Waurn Ponds (Geelong) <br />
+                        Online
+                    </td>
+                </tr>
+            </table>
+        </div>
 
-        <div class="ulos-header">ULOs</div>
+        <div class="credit-points"><strong>Credit Points:</strong> {{ data.CreditPoints }}</div>
+        <div class="availability"><strong>Available in:</strong> Trimester 1 & Trimester 2</div>
+        <div class="prerequisite"><strong>Prerequisite:</strong> {{ data.Prerequisite }}</div>
+        <div class="hurdle"><strong>Hurdle Requirement:</strong> To be eligible to obtain a pass in this unit, students
+            must meet certain milestones as part of the portfolio.
+        </div>
+
+        <div class="activities">
+            <strong>Learning Activities</strong>
+            <table>
+                <tr>
+                    <td>
+                        <strong>On-Campus:</strong>
+                    </td>
+                    <td>
+                        <strong>Cloud-Campus:</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        - 1 x 3 hour seminar per week <br />
+                        - Weekly meetings <br />
+                        - 4 x 2 hour assessments (weeks 4, 7, 9, and 11) <br />
+
+                    <td>
+                        - Online independent and collaborative learning including 1 x 2 hour online seminar per week
+                        <br />
+                        - Weekly meetings <br />
+                        - 2 x 20 minute assessments (between weeks 7 and 11) <br />
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="unit-content"><strong>Content:</strong> {{ data.Content }}</div>
+
+        <div class="note"><strong>Note:</strong>Learning experiences and assessment activities in this unit require that
+            students have access to specific computing equipment, including a microphone/headset and webcam.
+        </div>
+
+        <div class="link"><a href="https://www.deakin.edu.au/courses-search/unit.php?unit=SIT102" target="_blank">Click for more info</a></div>
+
+
+
+
+
+        <!-- <div class="ulos-header">ULOs</div>
         <div class="ulos-list">
             <div class="ulo-item" *ngFor="let ulo of data.ULOs">{{ ulo }}</div>
         </div>
@@ -20,20 +91,20 @@
         <div class="glos-list">
             <div class="glo-item" *ngFor="let glo of data.GLOs">{{ glo }}</div>
         </div>
-    </div>
 
-    <div class="assessments">
-        <div class="assessments-header" (click)="toggleDropdown()">
-            Assessments
-            <span class="dropdown-icon">{{ isDropdownOpen ? '▲' : '▼' }}</span>
-        </div>
-        
-        <div *ngIf="isDropdownOpen">
-            <div class="assessment-item" *ngFor="let assessment of data.Assessment">
-                <div class="assessment-description">{{ assessment.Description }}</div>
-                <div class="assessment-weight"><strong>Weight:</strong> {{ assessment.Weight }}%</div>
-                <div class="assessment-weekdue"><strong>Week Due:</strong> {{ assessment.WeekDue }}</div>
+        <div class="assessments">
+            <div class="assessments-header" (click)="toggleDropdown()">
+                Assessments
+                <span class="dropdown-icon">{{ isDropdownOpen ? '▲' : '▼' }}</span>
             </div>
-        </div>
+
+            <div *ngIf="isDropdownOpen">
+                <div class="assessment-item" *ngFor="let assessment of data.Assessment">
+                    <div class="assessment-description">{{ assessment.Description }}</div>
+                    <div class="assessment-weight"><strong>Weight:</strong> {{ assessment.Weight }}%</div>
+                    <div class="assessment-weekdue"><strong>Week Due:</strong> {{ assessment.WeekDue }}</div>
+                </div>
+            </div>
+        </div> -->
     </div>
 </div>
