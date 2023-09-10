@@ -48,6 +48,9 @@ export class DiscoveryGraphBasedMapComponent {
   linkColor: string = "black";
   selectedLinkColor: string = "rgba(0, 0, 255, 0.5)";
   
+  // Transitioning
+  cameraPanDuration: number = 2000;
+
   // Selected node
   currentSelectedNode = {} as IDiscoveryNodeData | null;
 
@@ -71,6 +74,7 @@ export class DiscoveryGraphBasedMapComponent {
    */
   ngOnInit() {
 
+    // This will allow us to respond to nested events in child components.
     this.discoveryDataService.nodeSelectedEvent$.subscribe((node) => this.handleOnNodeClicked(node));
   }
 
@@ -92,7 +96,7 @@ export class DiscoveryGraphBasedMapComponent {
   }
 
   /**
-   * Create the discovery map.
+   * Create the discovery map with nodes and links.
    */
   createDiscoveryMap(): void {
 
@@ -145,7 +149,6 @@ export class DiscoveryGraphBasedMapComponent {
         let quantizedZoomDelegate: d3.ScaleQuantize<number, never> = d3.scaleQuantize([0, 1], [0, 0.2, 0.4, 0.6, 0.8, 1]);
         let quantizedZoom: number = quantizedZoomDelegate(this.currentZoomLevel);
 
-
         // Update visuals based on zoom level and if the value has actually changed.
         if (quantizedZoom < this.currentQuantizedZoomLevel || quantizedZoom > this.currentQuantizedZoomLevel) {
 
@@ -185,6 +188,7 @@ export class DiscoveryGraphBasedMapComponent {
         .attr("fill", this.nodeColor)
         .attr("r", this.nodeRadius)
         .on("click", (event, nodeData) => {
+          
           event.stopPropagation();
           this.handleOnNodeClicked(nodeData);
         })
@@ -197,13 +201,14 @@ export class DiscoveryGraphBasedMapComponent {
 
           let fontSize = this.fontSize;
 
+          // At the moment, this graph only supports 1 core layer which will represent the core clusters.
+          // TODO Update this block once someone figures out how to cycle through multple layers if multiple layers of clusters are present.
           if (nodeData.group === 1) {
 
             fontSize *= 50;
           }
 
           return fontSize;
-
         })
       }
 
@@ -242,7 +247,7 @@ export class DiscoveryGraphBasedMapComponent {
     // Toggle the detailed panel off.
     this.detailedMenuOpen = false;
     
-    // Visual updates.
+    // Visual updates - un-highlight the nodes and links.
     this.toggleNode("");
     this.toggleLinks("");
   }
@@ -257,7 +262,7 @@ export class DiscoveryGraphBasedMapComponent {
     // Toggle the detailed panel.
     this.detailedMenuOpen = true;
 
-    // Visual updates.
+    // Visual updates - highlights nodes and links.
     this.toggleNode(nodeClicked.id);
     this.toggleLinks(nodeClicked.id);
 
@@ -267,10 +272,9 @@ export class DiscoveryGraphBasedMapComponent {
         (this.width / 2) - (nodeClicked.x as number * this.width), 
         (this.height / 2) - (nodeClicked.y as number * this.height))
 
-
     if (this.zoomBehaviour) {
 
-      this.baseSvgCanvasElement?.transition().duration(2000).call(this.zoomBehaviour.transform, transition);
+      this.baseSvgCanvasElement?.transition().duration(this.cameraPanDuration).call(this.zoomBehaviour.transform, transition);
     }
 
   }
@@ -354,15 +358,17 @@ export class DiscoveryGraphBasedMapComponent {
 
   /**
    * Update nodes based on zoom level.
+   * TODO This can potentially be used to optimize the graph by hiding nodes if far away.
    * @param zoomValue Current zoom level.
    */
   updateNodesOnZoom(zoomValue: number) : void {
 
-
+    
   }
 
   /**
    * Update text based on zoom level.
+   * TODO Mentioned elsewhere, but the graph only supports 1 cluster layer at the moment and the code below reflects that. This can be updated once a good way to zoom through clusters layeers is figured out.
    * @param zoomValue Current zoom level.
    */
   updateTextOnZoom(zoomValue: number) : void {

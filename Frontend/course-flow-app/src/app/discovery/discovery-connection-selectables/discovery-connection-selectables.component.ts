@@ -21,6 +21,8 @@ export class DiscoveryConnectionSelectablesComponent {
    */
   onConnectionButtonClicked(id: string) {
 
+    // We use the discovery data service to emit the event to the parent component. 
+    // This helps avoid passing event handlers layers down the component tree.
     this.discoveryDataService.onDetailedConnectionClicked(id);
   }
 

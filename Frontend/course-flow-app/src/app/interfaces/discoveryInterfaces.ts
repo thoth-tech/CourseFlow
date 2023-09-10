@@ -81,16 +81,18 @@ export interface IDiscoveryNodeData {
     coConnections: IConnectionData[];
 }
 
+export interface IConnectionData {
+    label: string;
+    connectionIds: string[]
+}
+
 export interface IDiscoveryLinkData {
     id: string;
     source: string;
     target: string;
 }
 
-export interface IConnectionData {
-    label: string;
-    connectionIds: string[]
-}
+
 
 /*******************************************************************************************************************************
  * Graph Properties Data Types

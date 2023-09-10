@@ -142,6 +142,7 @@ export class JsonFileDiscoveryDataService implements IDiscoveryDataService {
 
   /**
    * Intended to be used as a messaging method for deep nested components that display connections of the nodes.
+   * TODO This can be moved into a separate service related to events and messages.
    * @param id Id of the node which originates from a list of connection.
    */
   onDetailedConnectionClicked(id: string): void {
