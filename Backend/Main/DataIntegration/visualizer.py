@@ -1,4 +1,5 @@
 import math
+import json
 from typing import Dict, Tuple, List, Set
 
 import matplotlib.pyplot as plt
@@ -45,6 +46,9 @@ def draw_unit_network(network: nx.DiGraph, visible_edges: List[Tuple[str, str]],
     if pos is None:
         # Determine the layout of the graph using the Kamada-Kawai algorithm
         pos = nx.kamada_kawai_layout(network, scale=1)
+    with open("unit_node_positions.json", "w") as fp:
+        json_formatted_pos = {unit : {"x": x, "y": y} for unit, (x, y) in pos.items()}
+        json.dump(json_formatted_pos, fp)
 
     # Draw the graph
     nx.draw_networkx_nodes(network, pos)
