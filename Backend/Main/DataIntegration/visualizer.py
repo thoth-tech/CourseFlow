@@ -41,9 +41,10 @@ def unit_distance_metric(unit_1: Unit, unit_2: Unit) -> float:
     return distance
 
 
-def draw_unit_network(network: nx.DiGraph, visible_edges: List[Tuple[str, str]]):
-    # Determine the layout of the graph using the Kamada-Kawai algorithm
-    pos = nx.kamada_kawai_layout(network, scale=1)
+def draw_unit_network(network: nx.DiGraph, visible_edges: List[Tuple[str, str]], pos: Dict[str, Tuple[float, float]] = None):
+    if pos is None:
+        # Determine the layout of the graph using the Kamada-Kawai algorithm
+        pos = nx.kamada_kawai_layout(network, scale=1)
 
     # Draw the graph
     nx.draw_networkx_nodes(network, pos)
