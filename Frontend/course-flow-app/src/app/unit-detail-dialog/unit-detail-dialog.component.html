@@ -7,9 +7,7 @@
     </div>
 
     <div class="content">
-        <div class="unit-content"><strong>Unit Overview:</strong> The unit will teach students the fundamentals of
-            structured programming and explore the mechanics of how these programs operate within the computer.
-        </div>
+        <div class="unit-content"><strong>Unit Overview:</strong>{{ data.Overview }}</div>
 
         <div class="unit-chairs">
             <table>
@@ -23,25 +21,23 @@
                 </tr>
                 <tr>
                     <td>
-                        T1 - Lecturer 1 (lecture1@deakin.edu.au) <br />
-                        T2 - Lecturer 2 (lecture2@deakin.edu.au) <br />
-                        T3 - Nil
+                        T1 - {{ data.UnitChairT1 }} <br />
+                        T2 - {{ data.UnitChairT2 }} <br />
+                        T3 - {{ data.UnitChairT3 }}
                     </td>
                     <td>
-                        Burwood (Melbourne) <br />
-                        Waurn Ponds (Geelong) <br />
-                        Online
+                        {{ data.Melbourne }} <br />
+                        {{ data.Geelong }} <br />
+                        {{ data.Online }}
                     </td>
                 </tr>
             </table>
         </div>
 
         <div class="credit-points"><strong>Credit Points:</strong> {{ data.CreditPoints }}</div>
-        <div class="availability"><strong>Available in:</strong> Trimester 1 & Trimester 2</div>
+        <div class="availability"><strong>Available in:</strong> {{ data.Availability }}</div>
         <div class="prerequisite"><strong>Prerequisite:</strong> {{ data.Prerequisite }}</div>
-        <div class="hurdle"><strong>Hurdle Requirement:</strong> To be eligible to obtain a pass in this unit, students
-            must meet certain milestones as part of the portfolio.
-        </div>
+        <div class="hurdle"><strong>Hurdle Requirement:</strong> {{ data.Hurdle }}</div>
 
         <div class="activities">
             <strong>Learning Activities</strong>
@@ -56,15 +52,14 @@
                 </tr>
                 <tr>
                     <td>
-                        - 1 x 3 hour seminar per week <br />
-                        - Weekly meetings <br />
-                        - 4 x 2 hour assessments (weeks 4, 7, 9, and 11) <br />
+                        {{ data.OnCampusLearning1 }} <br />
+                        {{ data.OnCampusLearning2 }} <br />
+                        {{ data.OnCampusLearning3 }} <br />
 
                     <td>
-                        - Online independent and collaborative learning including 1 x 2 hour online seminar per week
-                        <br />
-                        - Weekly meetings <br />
-                        - 2 x 20 minute assessments (between weeks 7 and 11) <br />
+                        {{ data.CloudLearning1 }} <br />
+                        {{ data.CloudLearning2 }} <br />
+                        {{ data.CloudLearning3 }}<br />
                     </td>
                 </tr>
             </table>
@@ -72,11 +67,10 @@
 
         <div class="unit-content"><strong>Content:</strong> {{ data.Content }}</div>
 
-        <div class="note"><strong>Note:</strong>Learning experiences and assessment activities in this unit require that
-            students have access to specific computing equipment, including a microphone/headset and webcam.
-        </div>
+        <div class="note"><strong>Note:</strong> {{ data.Note }} </div>
 
-        <div class="link"><a href="https://www.deakin.edu.au/courses-search/unit.php?unit=SIT102" target="_blank">Click for more info</a></div>
+        <div class="link"><a [href]="Unit_Link.link" target="_blank">Click
+                for more info</a></div>
 
 
 
