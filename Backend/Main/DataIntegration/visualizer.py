@@ -61,6 +61,20 @@ def build_network_layout(units: Dict[str, Unit], distances: Dict[Tuple[str, str]
     n_clusters = len(set(labels)) - (1 if -1 in labels else 0)
     n_noise = list(labels).count(-1)
 
+    for label in range(n_clusters):
+        # Create a graph using the nodes that belong to each cluster
+        indices_of_units_in_cluster, = np.where(labels == label)
+        units_in_cluster = {unit_codes[i]: units[unit_codes[i]] for i in indices_of_units_in_cluster}
+        distances_between_units_in_cluster = {}
+        for code_a in units_in_cluster.keys():
+            for code_b in units_in_cluster.keys():
+                if code_a == code_b:
+                    continue
+                edge = (code_a, code_b)
+                if edge in distances.keys():
+                    distances_between_units_in_cluster[edge] = distances[edge]
+        cluster_graph = create_unit_network(units_in_cluster, distances_between_units_in_cluster)
+
     # todo: Use Kamada-Kawai on the nodes within each cluster in parallel
     # todo: Use Kamada-Kawai on each cluster, treating each cluster itself as a node to determine centroid positions
     # todo: Offset the node positions in each cluster with the cluster's centroid
