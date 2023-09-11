@@ -1,6 +1,7 @@
 import math
 import json
 from typing import Dict, Tuple, List, Set
+from threading import Thread
 
 import matplotlib.pyplot as plt
 import networkx as nx
@@ -56,10 +57,13 @@ def build_network_layout(units: Dict[str, Unit], distances: Dict[Tuple[str, str]
         distance_matrix[from_index, to_index] = distance
 
     # Use calculated distances to determine which clusters to form and which cluster each unit should belong to
+    # todo: Create hyperparameter tuner that minimizes the total number of nodes of all clusters by tuning epsilon
+    #  Also consider the total number of clusters + noise nodes
     db = DBSCAN(eps=0.25, min_samples=3, metric='precomputed').fit(distance_matrix)
     labels = db.labels_
     n_clusters = len(set(labels)) - (1 if -1 in labels else 0)
     n_noise = list(labels).count(-1)
+    layout_threads = []
 
     for label in range(n_clusters):
         # Create a graph using the nodes that belong to each cluster
@@ -73,10 +77,18 @@ def build_network_layout(units: Dict[str, Unit], distances: Dict[Tuple[str, str]
                 edge = (code_a, code_b)
                 if edge in distances.keys():
                     distances_between_units_in_cluster[edge] = distances[edge]
-        cluster_graph = create_unit_network(units_in_cluster, distances_between_units_in_cluster)
 
-    # todo: Use Kamada-Kawai on the nodes within each cluster in parallel
+        # Use the Kamada-Kawai network layout algorithm on the nodes within each cluster in parallel
+        cluster_graph = create_unit_network(units_in_cluster, distances_between_units_in_cluster)
+        thread = Thread(target=nx.kamada_kawai_layout, args=(cluster_graph,), kwargs={"scale": 1})
+        layout_threads.append(thread)
+        thread.start()
+
     # todo: Use Kamada-Kawai on each cluster, treating each cluster itself as a node to determine centroid positions
+    # todo: Determine cluster distances somehow
+    # Wait for all threads to finish calculating the network layout
+    for thread in layout_threads:
+        thread.join()
     # todo: Offset the node positions in each cluster with the cluster's centroid
     pass
 
