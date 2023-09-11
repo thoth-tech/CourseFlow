@@ -5,6 +5,7 @@ from typing import Dict, Tuple, List, Set
 import matplotlib.pyplot as plt
 import networkx as nx
 import numpy as np
+from sklearn.cluster import DBSCAN
 
 from Backend.Main.Models.constraint import PrerequisitesFulfilledConstraint, CorequisitesFulfilledConstraint
 from Backend.Main.Models.unit import Unit
@@ -54,7 +55,12 @@ def build_network_layout(units: Dict[str, Unit], distances: Dict[Tuple[str, str]
         to_index = unit_codes_to_index[to_unit]
         distance_matrix[from_index, to_index] = distance
 
-    # todo: Use calculated distances to determine which clusters to form and which cluster each unit should belong to
+    # Use calculated distances to determine which clusters to form and which cluster each unit should belong to
+    db = DBSCAN(eps=0.25, min_samples=3, metric='precomputed').fit(distance_matrix)
+    labels = db.labels_
+    n_clusters = len(set(labels)) - (1 if -1 in labels else 0)
+    n_noise = list(labels).count(-1)
+
     # todo: Use Kamada-Kawai on the nodes within each cluster in parallel
     # todo: Use Kamada-Kawai on each cluster, treating each cluster itself as a node to determine centroid positions
     # todo: Offset the node positions in each cluster with the cluster's centroid
