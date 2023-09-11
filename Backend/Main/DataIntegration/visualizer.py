@@ -87,7 +87,7 @@ def build_network_layout(units: Dict[str, Unit], distances: Dict[Tuple[str, str]
     n_clusters = len(set(labels)) - (1 if -1 in labels else 0)
     n_noise = list(labels).count(-1)
     layout_threads = []
-    clusters = []
+    clusters = {}  # Key: Cluster label, Value: Cluster object
 
     for label in range(n_clusters):
         # Create a graph using the nodes that belong to each cluster
@@ -104,7 +104,7 @@ def build_network_layout(units: Dict[str, Unit], distances: Dict[Tuple[str, str]
 
         # Use the Kamada-Kawai network layout algorithm on the nodes within each cluster in parallel
         cluster_graph = create_unit_network(units_in_cluster, distances_between_units_in_cluster)
-        clusters.append(Cluster(units_in_cluster.keys(), distances, label, cluster_graph))
+        clusters[label] = Cluster(units_in_cluster.keys(), distances, label, cluster_graph)
         thread = Thread(target=nx.kamada_kawai_layout, args=(cluster_graph,), kwargs={"scale": 1})
         layout_threads.append(thread)
         thread.start()
@@ -122,11 +122,11 @@ def build_network_layout(units: Dict[str, Unit], distances: Dict[Tuple[str, str]
         label = -i - 1 # Noise nodes will have negative labels in the root graph starting from -1
         root_layout_graph.add_node(label)
         noise_unit_code = unit_codes[indices_of_noise_units[i]]
-        clusters.append(Cluster(noise_unit_code, distances, label))
+        clusters[label] = Cluster(noise_unit_code, distances, label, graph=None)
 
     # Add edges between nodes, with the distance between each node as the edge weight
-    for node_1 in clusters:
-        for node_2 in clusters:
+    for node_1 in clusters.values():
+        for node_2 in clusters.values():
             if node_1 == node_2:
                 continue
             root_layout_graph.add_edge(node_1.label, node_2.label, weight=node_1.distance(node_2))
