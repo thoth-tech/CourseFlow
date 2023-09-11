@@ -46,10 +46,11 @@ def unit_distance_metric(unit_1: Unit, unit_2: Unit) -> float:
 
 
 class Cluster:
-    def __init__(self, unit_codes: Iterable[str], distances: Dict[Tuple[str, str], float], label: int):
+    def __init__(self, unit_codes: Iterable[str], distances: Dict[Tuple[str, str], float], label: int, graph: nx.DiGraph):
         self.unit_distances = distances
         self.unit_codes = unit_codes
         self.label = label
+        self.graph = graph
 
     def distance(self, other_cluster):
         """Returns the average distance between two clusters"""
@@ -92,7 +93,6 @@ def build_network_layout(units: Dict[str, Unit], distances: Dict[Tuple[str, str]
         # Create a graph using the nodes that belong to each cluster
         indices_of_units_in_cluster, = np.where(labels == label)
         units_in_cluster = {unit_codes[i]: units[unit_codes[i]] for i in indices_of_units_in_cluster}
-        clusters.append(Cluster(units_in_cluster.keys(), distances, label))
         distances_between_units_in_cluster = {}
         for code_a in units_in_cluster.keys():
             for code_b in units_in_cluster.keys():
@@ -104,6 +104,7 @@ def build_network_layout(units: Dict[str, Unit], distances: Dict[Tuple[str, str]
 
         # Use the Kamada-Kawai network layout algorithm on the nodes within each cluster in parallel
         cluster_graph = create_unit_network(units_in_cluster, distances_between_units_in_cluster)
+        clusters.append(Cluster(units_in_cluster.keys(), distances, label, cluster_graph))
         thread = Thread(target=nx.kamada_kawai_layout, args=(cluster_graph,), kwargs={"scale": 1})
         layout_threads.append(thread)
         thread.start()
