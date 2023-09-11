@@ -1,6 +1,6 @@
 import math
 import json
-from typing import Dict, Tuple, List, Set
+from typing import Dict, Tuple, List, Set, Iterable
 from threading import Thread
 
 import matplotlib.pyplot as plt
@@ -45,6 +45,28 @@ def unit_distance_metric(unit_1: Unit, unit_2: Unit) -> float:
     return distance
 
 
+class Cluster:
+    def __init__(self, unit_codes: Iterable[str], distances: Dict[Tuple[str, str], float], label: int):
+        self.unit_distances = distances
+        self.unit_codes = unit_codes
+        self.label = label
+
+    def distance(self, other_cluster):
+        """Returns the average distance between two clusters"""
+        total_distance = 0
+        n_edges = 0
+        for code_a in self.unit_codes:
+            for code_b in other_cluster.unit_codes:
+                if code_a == code_b:
+                    continue
+                edge = (code_a, code_b)
+                if edge in self.unit_distances.keys():
+                    total_distance += self.unit_distances[edge]
+                    n_edges += 1
+
+        return total_distance / n_edges
+
+
 def build_network_layout(units: Dict[str, Unit], distances: Dict[Tuple[str, str], float]) -> Dict[str, Tuple[float, float]]:
     # Create an adjacency matrix with the distances between each unit as the edge weights
     distance_matrix = np.ones((len(units), len(units)), dtype=float)
@@ -64,11 +86,13 @@ def build_network_layout(units: Dict[str, Unit], distances: Dict[Tuple[str, str]
     n_clusters = len(set(labels)) - (1 if -1 in labels else 0)
     n_noise = list(labels).count(-1)
     layout_threads = []
+    clusters = []
 
     for label in range(n_clusters):
         # Create a graph using the nodes that belong to each cluster
         indices_of_units_in_cluster, = np.where(labels == label)
         units_in_cluster = {unit_codes[i]: units[unit_codes[i]] for i in indices_of_units_in_cluster}
+        clusters.append(Cluster(units_in_cluster.keys(), distances, label))
         distances_between_units_in_cluster = {}
         for code_a in units_in_cluster.keys():
             for code_b in units_in_cluster.keys():
@@ -83,9 +107,30 @@ def build_network_layout(units: Dict[str, Unit], distances: Dict[Tuple[str, str]
         thread = Thread(target=nx.kamada_kawai_layout, args=(cluster_graph,), kwargs={"scale": 1})
         layout_threads.append(thread)
         thread.start()
+    
+    root_layout_scale = 1
+    root_layout_graph = nx.DiGraph()
 
-    # todo: Use Kamada-Kawai on each cluster, treating each cluster itself as a node to determine centroid positions
-    # todo: Determine cluster distances somehow
+    # Add cluster nodes
+    for i in range(n_clusters):
+        root_layout_graph.add_node(i)
+
+    # Add noise nodes
+    indices_of_noise_units = np.where(labels == -1)
+    for i in range(n_noise):
+        label = -i - 1 # Noise nodes will have negative labels in the root graph starting from -1
+        root_layout_graph.add_node(label)
+        noise_unit_code = unit_codes[indices_of_noise_units[i]]
+        clusters.append(Cluster(noise_unit_code, distances, label))
+
+    # Add edges between nodes, with the distance between each node as the edge weight
+    for node_1 in clusters:
+        for node_2 in clusters:
+            if node_1 == node_2:
+                continue
+            root_layout_graph.add_edge(node_1.label, node_2.label, weight=node_1.distance(node_2))
+
+
     # Wait for all threads to finish calculating the network layout
     for thread in layout_threads:
         thread.join()
