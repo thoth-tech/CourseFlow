@@ -73,6 +73,14 @@ def build_cluster_network_layout(cluster: UnitCluster, scale: int=1):
 
 
 def build_unit_network_layout(units: Dict[str, Unit], distances: Dict[Tuple[str, str], float]) -> Dict[str, Tuple[float, float]]:
+    ###################
+    # Hyperparameters #
+    ###################
+    epsilon = 0.25 # Smaller values result in smaller and tighter clusters, larger values create larger and more inclusive clusters
+    min_samples_in_epsilon_neighborhood = 3
+    root_layout_scale = 10
+
+
     # Create an adjacency matrix with the distances between each unit as the edge weights
     distance_matrix = np.ones((len(units), len(units)), dtype=float)
     np.fill_diagonal(distance_matrix, 0)
@@ -86,7 +94,7 @@ def build_unit_network_layout(units: Dict[str, Unit], distances: Dict[Tuple[str,
     # Use calculated distances to determine which clusters to form and which cluster each unit should belong to
     # todo: Create hyperparameter tuner that minimizes the total number of nodes of all clusters by tuning epsilon
     #  Also consider the total number of clusters + noise nodes
-    db = DBSCAN(eps=0.25, min_samples=3, metric='precomputed').fit(distance_matrix)
+    db = DBSCAN(eps=epsilon, min_samples=min_samples_in_epsilon_neighborhood, metric='precomputed').fit(distance_matrix)
     labels = db.labels_
     n_clusters = len(set(labels)) - (1 if -1 in labels else 0)
     n_noise = list(labels).count(-1)
@@ -113,7 +121,6 @@ def build_unit_network_layout(units: Dict[str, Unit], distances: Dict[Tuple[str,
         layout_threads.append(thread)
         thread.start()
     
-    root_layout_scale = 1
     root_layout_graph = nx.DiGraph()
 
     # Add cluster nodes
