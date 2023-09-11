@@ -17,6 +17,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { environment } from 'src/environments/environment';
 import { HomeComponent } from './pages/home/home.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { VerificationPageFGComponent } from './pages/verification-page-fg/verification-page-fg.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +26,8 @@ import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password
     GoogleLoginCardComponent,
     HeaderBannerComponent,
     HomeComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    VerificationPageFGComponent
   ],
   imports: [
     BrowserModule,

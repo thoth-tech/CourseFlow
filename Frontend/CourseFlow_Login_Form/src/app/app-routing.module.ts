@@ -4,6 +4,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { VerificationPageFGComponent } from './pages/verification-page-fg/verification-page-fg.component';
 
 /* Routings for the application */
 const routes: Routes = [{
@@ -25,7 +26,11 @@ const routes: Routes = [{
   },
   { path: 'forgot-password', 
     component: ForgotPasswordComponent 
+  },
+  { path: 'forgot-password/verification-page-fg',
+    component: VerificationPageFGComponent
   },]
+  
 
 @NgModule({
   declarations: [],

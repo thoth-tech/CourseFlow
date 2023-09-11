@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { GoogleAuthProvider, getAuth , signInWithPopup} from "firebase/auth";
+import { GoogleAuthProvider, getAuth , signInWithPopup, sendEmailVerification} from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc, collection } from 'firebase/firestore';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
@@ -69,12 +69,7 @@ export class AuthService {
   }
 
   // Unfinished To be added New Method to allow user to verfy email
-  /*
-  sendEmailverification(user : any) {
-    return user.sendEmailVerification();
+  async sendEmailForVerification(user : any) {
+    return sendEmailVerification(user);
   }
-  */
-
-
-  
 }

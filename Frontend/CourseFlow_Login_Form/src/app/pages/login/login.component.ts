@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
-import { Router } from '@angular/router';
+import { Router, UrlSegment } from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
@@ -41,12 +42,18 @@ export class LoginComponent implements OnInit{
   /* this method is called onClick, linked from auth services 
   check auth services file for more info */
   async loginWithEmailAndPassword() {
+    
     const userData = Object.assign(this.loginForm.value, {email: this.loginForm.value.username});
     console.log("Trying to log In: ", userData);
     
     try {
       const res = await this.authService.signWithEmailAndPassword(userData);
-      this.router.navigateByUrl('home');
+      if (res.user?.emailVerified === true) {
+        this.router.navigateByUrl('home'); 
+      } else {
+        window.alert('*** Email not verified, Please verify your email ***');
+        this.router.navigateByUrl('login'); 
+      }
     } catch (error) {
       console.log(error);
       if (error === 'auth/user-not-found') {

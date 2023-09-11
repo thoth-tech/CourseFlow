@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
-import { Auth } from 'firebase/auth';
 
 @Component({
   selector: 'app-registration',
@@ -35,9 +34,24 @@ export class RegistrationComponent implements OnInit{
     }
     try {
       const res = await this.authService.registerWithEmailAndPassword(userData);
-      console.log(userData);
-      this.router.navigateByUrl('login');
+      // now verify user email
+      await this.authService.sendEmailForVerification(res.user!);
+      // this will be new email verification page soon
+      this.router.navigateByUrl('forgot-password/verification-page-fg');
+      // user can click login at verification page once they have verified your email
       await this.authService.createUserDocFromAuth(res, {phoneNumber: userData.phoneNumber});
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  /* this method is called onClick, linked from auth services 
+  check auth services file for more info */
+  async logInWithGoogle(){
+    try {
+      const res = await this.authService.signInWithGoogle();
+      await this.authService.createUserDocFromAuth(res);
+      this.router.navigateByUrl('home');
     } catch (error) {
       console.log(error);
     }

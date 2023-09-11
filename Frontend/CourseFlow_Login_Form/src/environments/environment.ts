@@ -2,13 +2,13 @@
 change firebase config variables if the owner is changed */
 export const environment = {
     production: false,
-    firebaseConfig : {
-      apiKey: "AIzaSyBJyiymdj-0fmWmz8eI3OhtK0-4CwXybnA",
-      authDomain: "courseflow-a31e2.firebaseapp.com",
-      projectId: "courseflow-a31e2",
-      storageBucket: "courseflow-a31e2.appspot.com",
-      messagingSenderId: "844102371698",
-      appId: "1:844102371698:web:cac589022201928b29b5eb",
-      measurementId: "G-G37E01Y1JM"
+    firebaseConfig: {
+      apiKey: "AIzaSyD5exVJKLke-qTg8M-v57cuGKJy3TpMi1A",
+      authDomain: "courseflow-firebase.firebaseapp.com",
+      projectId: "courseflow-firebase",
+      storageBucket: "courseflow-firebase.appspot.com",
+      messagingSenderId: "396425742820",
+      appId: "1:396425742820:web:d2835c5045d1b000cc5ff1",
+      measurementId: "G-VGDWGNTCN1"
     }
 };

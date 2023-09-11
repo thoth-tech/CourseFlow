@@ -30,7 +30,8 @@ export class ForgotPasswordComponent implements OnInit{
     try {
       this.email = this.forgotPasswordForm.value.username;
       this.authService.forgotPasssword(this.email);
-      this.router.navigateByUrl('login');
+      // New Verification Page
+      this.router.navigateByUrl('forgot-password/verification-page-fg');
     } catch (error) { 
       if (error === 'auth/user-not-found') 
       {
