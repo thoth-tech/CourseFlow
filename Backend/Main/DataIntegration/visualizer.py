@@ -42,6 +42,14 @@ def unit_distance_metric(unit_1: Unit, unit_2: Unit) -> float:
     return distance
 
 
+def build_network_layout(units: Dict[str, Unit], distances: Dict[Tuple[str, str], float]) -> Dict[str, Tuple[float, float]]:
+    # todo: Use calculated distances to determine which clusters to form and which cluster each unit should belong to
+    # todo: Use Kamada-Kawai on the nodes within each cluster in parallel
+    # todo: Use Kamada-Kawai on each cluster, treating each cluster itself as a node to determine centroid positions
+    # todo: Offset the node positions in each cluster with the cluster's centroid
+    pass
+
+
 def draw_unit_network(network: nx.DiGraph, visible_edges: List[Tuple[str, str]], pos: Dict[str, Tuple[float, float]] = None):
     if pos is None:
         # Determine the layout of the graph using the Kamada-Kawai algorithm
