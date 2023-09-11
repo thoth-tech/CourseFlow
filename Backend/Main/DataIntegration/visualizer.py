@@ -4,6 +4,7 @@ from typing import Dict, Tuple, List, Set
 
 import matplotlib.pyplot as plt
 import networkx as nx
+import numpy as np
 
 from Backend.Main.Models.constraint import PrerequisitesFulfilledConstraint, CorequisitesFulfilledConstraint
 from Backend.Main.Models.unit import Unit
@@ -43,6 +44,16 @@ def unit_distance_metric(unit_1: Unit, unit_2: Unit) -> float:
 
 
 def build_network_layout(units: Dict[str, Unit], distances: Dict[Tuple[str, str], float]) -> Dict[str, Tuple[float, float]]:
+    # Create an adjacency matrix with the distances between each unit as the edge weights
+    distance_matrix = np.ones((len(units), len(units)), dtype=float)
+    np.fill_diagonal(distance_matrix, 0)
+    unit_codes = sorted(units.keys())
+    unit_codes_to_index = {code: i for i, code in enumerate(unit_codes)}
+    for (from_unit, to_unit), distance in distances.items():
+        from_index = unit_codes_to_index[from_unit]
+        to_index = unit_codes_to_index[to_unit]
+        distance_matrix[from_index, to_index] = distance
+
     # todo: Use calculated distances to determine which clusters to form and which cluster each unit should belong to
     # todo: Use Kamada-Kawai on the nodes within each cluster in parallel
     # todo: Use Kamada-Kawai on each cluster, treating each cluster itself as a node to determine centroid positions
