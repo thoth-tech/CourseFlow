@@ -130,6 +130,10 @@ def build_network_layout(units: Dict[str, Unit], distances: Dict[Tuple[str, str]
                 continue
             root_layout_graph.add_edge(node_1.label, node_2.label, weight=node_1.distance(node_2))
 
+    # Use Kamada-Kawai on each cluster, treating each cluster itself as a node to determine centroid positions
+    thread = Thread(target=nx.kamada_kawai_layout, args=(root_layout_graph,), kwargs={"scale": root_layout_scale})
+    layout_threads.append(thread)
+    thread.start()
 
     # Wait for all threads to finish calculating the network layout
     for thread in layout_threads:
