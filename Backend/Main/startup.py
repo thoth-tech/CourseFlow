@@ -15,7 +15,7 @@ def handbook_reader_and_unit_map_visualizer_demo():
     unit_distances = visualizer.calculate_unit_distances(units)
     visible_edges = list(visualizer.find_visible_edges(units))
     unit_network = visualizer.create_unit_network(units, unit_distances)
-    positions = visualizer.build_network_layout(units, unit_distances)
+    positions = visualizer.build_unit_network_layout(units, unit_distances)
     visualizer.draw_unit_network(unit_network, visible_edges)
 
 

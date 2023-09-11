@@ -68,7 +68,11 @@ class Cluster:
         return total_distance / n_edges
 
 
-def build_network_layout(units: Dict[str, Unit], distances: Dict[Tuple[str, str], float]) -> Dict[str, Tuple[float, float]]:
+def build_cluster_network_layout(cluster: UnitCluster, scale: int=1):
+    cluster.node_positions = nx.kamada_kawai_layout(cluster.graph, scale=scale)
+
+
+def build_unit_network_layout(units: Dict[str, Unit], distances: Dict[Tuple[str, str], float]) -> Dict[str, Tuple[float, float]]:
     # Create an adjacency matrix with the distances between each unit as the edge weights
     distance_matrix = np.ones((len(units), len(units)), dtype=float)
     np.fill_diagonal(distance_matrix, 0)
@@ -105,7 +109,7 @@ def build_network_layout(units: Dict[str, Unit], distances: Dict[Tuple[str, str]
         # Use the Kamada-Kawai network layout algorithm on the nodes within each cluster in parallel
         cluster_graph = create_unit_network(units_in_cluster, distances_between_units_in_cluster)
         clusters[label] = Cluster(units_in_cluster.keys(), distances, label, cluster_graph)
-        thread = Thread(target=nx.kamada_kawai_layout, args=(cluster_graph,), kwargs={"scale": 1})
+        thread = Thread(target=build_cluster_network_layout, args=(clusters[label],))
         layout_threads.append(thread)
         thread.start()
     
@@ -132,7 +136,7 @@ def build_network_layout(units: Dict[str, Unit], distances: Dict[Tuple[str, str]
             root_layout_graph.add_edge(node_1.label, node_2.label, weight=node_1.distance(node_2))
 
     # Use Kamada-Kawai on each cluster, treating each cluster itself as a node to determine centroid positions
-    thread = Thread(target=nx.kamada_kawai_layout, args=(root_layout_graph,), kwargs={"scale": root_layout_scale})
+    thread = Thread(target=build_cluster_network_layout, args=(root_layout_graph, root_layout_scale))
     layout_threads.append(thread)
     thread.start()
 
