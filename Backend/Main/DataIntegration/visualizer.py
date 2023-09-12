@@ -53,6 +53,8 @@ class UnitNetwork(ABC):
         self.unit_positions = {}
 
 class Node(ABC):
+    default_distance = 1
+
     def __init__(self, network: UnitNetwork, depth: int=0, graph_label: int=0):
         self.network = network
         self.depth = depth
@@ -71,7 +73,7 @@ class Node(ABC):
                     total_distance += self.network.unit_distances[edge]
                     n_edges += 1
 
-        return total_distance / n_edges
+        return total_distance / n_edges if n_edges > 0 else Node.default_distance
 
     @abstractmethod
     def __iter__(self):
