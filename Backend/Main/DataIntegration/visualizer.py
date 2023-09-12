@@ -102,7 +102,6 @@ class ClusterNode(Node):
         self.n_clusters = 0
         self.n_noise = 0
         self.sub_clusters = []
-        self.sub_cluster_processing_threads = []
         self.leaf_nodes = []
         self.child_nodes_created = False
         self.layout_complete = False
@@ -149,9 +148,7 @@ class ClusterNode(Node):
             self.layout_graph.add_node(cluster_node_label)
 
             # Process the sub-cluster node in a separate thread
-            thread = Thread(target=cluster_node.build)
-            thread.start()
-            self.sub_cluster_processing_threads.append(thread)
+            cluster_node.build()
 
         # Add the leaf nodes to the layout graph and this cluster
         indices_of_noise_units = np.where(labels == -1)
@@ -192,12 +189,8 @@ class ClusterNode(Node):
             self.network.unit_positions[node.unit_code] = (x, y)
 
         # Apply this cluster's layout to sub-clusters
-        for sub_cluster_processing_thread, sub_cluster in zip(self.sub_cluster_processing_threads, self.sub_clusters):
-            sub_cluster_processing_thread: Thread
+        for sub_cluster in self.sub_clusters:
             sub_cluster: ClusterNode
-
-            # Wait for the sub-cluster to finish processing before applying this cluster's layout to it
-            sub_cluster_processing_thread.join()
 
             for unit_code, (x, y) in sub_cluster.node_positions.items():
                 final_x, final_y = self.network.unit_positions[unit_code]
