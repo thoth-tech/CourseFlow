@@ -49,8 +49,12 @@ def unit_distance_metric(unit_1: Unit, unit_2: Unit) -> float:
 class UnitNetwork(ABC):
     def __init__(self, unit_distances: Dict[Tuple[str, str], float], graph: nx.DiGraph):
         self.unit_distances = unit_distances
-        self.graph = graph
+        self._graph = graph
         self.node_positions = {}
+
+    @property
+    def graph(self):
+        return self._graph
 
 
 class UnitNetworkNode(ABC, UnitNetwork):
@@ -84,6 +88,7 @@ class UnitNetworkRootNode(UnitNetwork):
     def __init__(self, unit_distances: Dict[Tuple[str, str], float]):
         super().__init__(unit_distances, nx.DiGraph())
         self._clusters = {}
+        self._distances_calculated = False
 
     def build(self):
         """Call this after all nodes have been added to calculate the distances"""
@@ -94,12 +99,18 @@ class UnitNetworkRootNode(UnitNetwork):
                 if node_1 == node_2:
                     continue
                 self._graph.add_edge(node_1.label, node_2.label, weight=node_1.distance(node_2))
+        self._distances_calculated = True
 
     def __getitem__(self, cluster_label):
         return self._clusters[cluster_label]
 
     def __setitem__(self, cluster_label, cluster: UnitNetworkNode):
         self._clusters[cluster_label] = cluster
+
+    @property
+    def graph(self):
+        assert self._distances_calculated, ".build() must be called before accessing the graph to calculate the edges"
+        return self._graph
 
 
 class UnitNetworkNoiseNode(UnitNetworkNode):
