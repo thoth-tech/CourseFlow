@@ -224,7 +224,7 @@ def build_unit_network_layout(units: Dict[str, Unit], unit_distances: Dict[Tuple
     root_node = ClusterNode(unit_network, units=units, depth=0, graph_label=0)
     root_node.build()
 
-    return root_node.node_positions
+    return unit_network.unit_positions
 
 
 def draw_unit_network(network: nx.DiGraph, visible_edges: List[Tuple[str, str]], pos: Dict[str, Tuple[float, float]] = None):
