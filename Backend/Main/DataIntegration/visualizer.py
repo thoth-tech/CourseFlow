@@ -83,8 +83,8 @@ class Node(ABC):
 
 class LeafNode(Node):
 
-    def __init__(self, network: UnitNetwork, graph_label: int, depth: int, unit_code: str):
-        super().__init__(network, graph_label, depth)
+    def __init__(self, network: UnitNetwork, depth: int, graph_label: int, unit_code: str):
+        super().__init__(network, depth, graph_label)
         self.unit_code = unit_code
 
     def __iter__(self):
@@ -117,7 +117,7 @@ class ClusterNode(Node):
         if self.depth == 2:
             for leaf_node_label, node_unit_code in enumerate(self.units.keys()):
                 self.layout_graph.add_node(leaf_node_label)
-                self.leaf_nodes.append(LeafNode(self.network, leaf_node_label, self.depth + 1, node_unit_code))
+                self.leaf_nodes.append(LeafNode(self.network, self.depth + 1, leaf_node_label, node_unit_code))
                 self.graph_label_unit_code_map[leaf_node_label] = node_unit_code
             self.child_nodes_created = True
 
@@ -164,7 +164,7 @@ class ClusterNode(Node):
             leaf_node_label = -i - 1
             node_unit_code = unit_codes[indices_of_noise_units[i]]
             self.layout_graph.add_node(leaf_node_label)
-            self.leaf_nodes.append(LeafNode(self.network, leaf_node_label, self.depth + 1, node_unit_code))
+            self.leaf_nodes.append(LeafNode(self.network, self.depth + 1, leaf_node_label, node_unit_code))
             self.graph_label_unit_code_map[leaf_node_label] = node_unit_code
 
         self.child_nodes_created = True
