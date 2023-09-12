@@ -107,9 +107,21 @@ class UnitNetworkNoiseNode(UnitNetworkNode):
 
 class UnitNetworkClusterNode(UnitNetworkNode):
     """Used to determine the layout of units within a cluster"""
-    def __init__(self, unit_codes: Iterable[str], graph: nx.DiGraph, label_in_root_cluster: int, unit_distances: Dict[Tuple[str, str], float]):
-        super().__init__(unit_distances, graph, label_in_root_cluster)
+    def __init__(self, cluster_units: Dict[str, Unit], label_in_root_cluster: int, unit_distances: Dict[Tuple[str, str], float]):
+        unit_codes = cluster_units.keys()
         self.unit_codes = unit_codes
+
+        self.distances_between_units_in_cluster = {}
+        for code_a in unit_codes:
+            for code_b in unit_codes:
+                if code_a == code_b:
+                    continue
+                edge = (code_a, code_b)
+                if edge in unit_distances:
+                    self.distances_between_units_in_cluster[edge] = unit_distances[edge]
+
+        graph = create_unit_graph(cluster_units, self.distances_between_units_in_cluster)
+        super().__init__(unit_distances, graph, label_in_root_cluster)
 
     def __iter__(self):
         return self.unit_codes.__iter__()
@@ -152,18 +164,9 @@ def build_unit_network_layout(units: Dict[str, Unit], distances: Dict[Tuple[str,
         # Create a graph using the nodes that belong to each cluster
         indices_of_units_in_cluster, = np.where(labels == label)
         units_in_cluster = {unit_codes[i]: units[unit_codes[i]] for i in indices_of_units_in_cluster}
-        distances_between_units_in_cluster = {}
-        for code_a in units_in_cluster.keys():
-            for code_b in units_in_cluster.keys():
-                if code_a == code_b:
-                    continue
-                edge = (code_a, code_b)
-                if edge in distances.keys():
-                    distances_between_units_in_cluster[edge] = distances[edge]
 
         # Use the Kamada-Kawai network layout algorithm on the nodes within each cluster in parallel
-        cluster_graph = create_unit_graph(units_in_cluster, distances_between_units_in_cluster)
-        cluster = UnitNetworkClusterNode(units_in_cluster.keys(), cluster_graph, label, distances)
+        cluster = UnitNetworkClusterNode(units_in_cluster, label, distances)
         clusters[label] = cluster
         thread = Thread(target=build_cluster_network_layout, args=(cluster,))
         layout_threads.append(thread)
