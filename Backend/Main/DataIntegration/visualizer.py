@@ -131,7 +131,7 @@ def build_cluster_network_layout(cluster: UnitNetworkClusterNode, scale: int=1):
     cluster.node_positions = nx.kamada_kawai_layout(cluster.graph, scale=scale)
 
 
-def build_unit_network_layout(units: Dict[str, Unit], distances: Dict[Tuple[str, str], float]) -> Dict[str, Tuple[float, float]]:
+def build_unit_network_layout(units: Dict[str, Unit], unit_distances: Dict[Tuple[str, str], float]) -> Dict[str, Tuple[float, float]]:
     ###################
     # Hyperparameters #
     ###################
@@ -145,7 +145,7 @@ def build_unit_network_layout(units: Dict[str, Unit], distances: Dict[Tuple[str,
     np.fill_diagonal(distance_matrix, 0)
     unit_codes = sorted(units.keys())
     unit_codes_to_index = {code: i for i, code in enumerate(unit_codes)}
-    for (from_unit, to_unit), distance in distances.items():
+    for (from_unit, to_unit), distance in unit_distances.items():
         from_index = unit_codes_to_index[from_unit]
         to_index = unit_codes_to_index[to_unit]
         distance_matrix[from_index, to_index] = distance
@@ -166,7 +166,7 @@ def build_unit_network_layout(units: Dict[str, Unit], distances: Dict[Tuple[str,
         units_in_cluster = {unit_codes[i]: units[unit_codes[i]] for i in indices_of_units_in_cluster}
 
         # Use the Kamada-Kawai network layout algorithm on the nodes within each cluster in parallel
-        cluster = UnitNetworkClusterNode(units_in_cluster, label, distances)
+        cluster = UnitNetworkClusterNode(units_in_cluster, label, unit_distances)
         clusters[label] = cluster
         thread = Thread(target=build_cluster_network_layout, args=(cluster,))
         layout_threads.append(thread)
@@ -184,7 +184,7 @@ def build_unit_network_layout(units: Dict[str, Unit], distances: Dict[Tuple[str,
         label = -i - 1 # Noise nodes will have negative labels in the root graph starting from -1
         root_layout_graph.add_node(label)
         noise_unit_code = unit_codes[indices_of_noise_units[i]]
-        clusters[label] = UnitNetworkNoiseNode(distances, noise_unit_code, label)
+        clusters[label] = UnitNetworkNoiseNode(unit_distances, noise_unit_code, label)
 
     # Add edges between nodes, with the distance between each node as the edge weight
     for node_1 in clusters.values():
