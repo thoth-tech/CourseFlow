@@ -107,6 +107,7 @@ class ClusterNode(Node):
         self.layout_complete = False
         self.layouts_applied = False
         self.node_positions = {}
+        self.graph_label_unit_code_map = {}
 
     def identify_and_break_into_sub_clusters(self):
         # Convert remaining nodes to leaf nodes and return if condition met
@@ -115,6 +116,7 @@ class ClusterNode(Node):
             for leaf_node_label, node_unit_code in enumerate(self.units.keys()):
                 self.layout_graph.add_node(leaf_node_label)
                 self.leaf_nodes.append(LeafNode(self.network, leaf_node_label, self.depth + 1, node_unit_code))
+                self.graph_label_unit_code_map[leaf_node_label] = node_unit_code
             self.child_nodes_created = True
 
             return
@@ -161,6 +163,7 @@ class ClusterNode(Node):
             node_unit_code = unit_codes[indices_of_noise_units[i]]
             self.layout_graph.add_node(leaf_node_label)
             self.leaf_nodes.append(LeafNode(self.network, leaf_node_label, self.depth + 1, node_unit_code))
+            self.graph_label_unit_code_map[leaf_node_label] = node_unit_code
 
         self.child_nodes_created = True
 
@@ -187,20 +190,20 @@ class ClusterNode(Node):
         for node in self.leaf_nodes:
             node: LeafNode
 
-            x, y = self.node_positions[node.unit_code]
-            x *= ClusterNode.scale
-            y *= ClusterNode.scale
+            x, y = self.node_positions[node.graph_label]
             self.network.unit_positions[node.unit_code] = (x, y)
 
         # Apply this cluster's layout to sub-clusters
         for sub_cluster in self.sub_clusters:
             sub_cluster: ClusterNode
+            cluster_centroid_x, cluster_centroid_y = self.node_positions[sub_cluster.graph_label]
+            cluster_centroid_x *= ClusterNode.scale
+            cluster_centroid_y *= ClusterNode.scale
 
-            for unit_code, (x, y) in sub_cluster.node_positions.items():
-                final_x, final_y = self.network.unit_positions[unit_code]
-                final_x = final_x + x * ClusterNode.scale
-                final_y = final_y + y * ClusterNode.scale
-                self.network.unit_positions[unit_code] = (final_x, final_y)
+            for graph_label, (x, y) in sub_cluster.node_positions.items():
+                x += cluster_centroid_x
+                y += cluster_centroid_y
+                sub_cluster.node_positions[graph_label] = (x, y)
 
         self.layouts_applied = True
 
