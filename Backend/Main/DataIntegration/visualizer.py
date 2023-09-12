@@ -124,10 +124,14 @@ class ClusterNode(Node):
         np.fill_diagonal(distance_matrix, 0)
         unit_codes = sorted(self.units.keys())
         unit_codes_to_index = {code: i for i, code in enumerate(unit_codes)}
-        for (from_unit, to_unit), distance in self.network.unit_distances.items():
-            from_index = unit_codes_to_index[from_unit]
-            to_index = unit_codes_to_index[to_unit]
-            distance_matrix[from_index, to_index] = distance
+        for from_unit in unit_codes:
+            for to_unit in unit_codes:
+                edge = (from_unit, to_unit)
+                if edge not in self.network.unit_distances.keys():
+                    continue
+                from_index = unit_codes_to_index[from_unit]
+                to_index = unit_codes_to_index[to_unit]
+                distance_matrix[from_index, to_index] = self.network.unit_distances[edge]
 
         # Identify which cluster each unit belongs to based on their distance to each other
         db = DBSCAN(eps=ClusterNode.epsilon,
