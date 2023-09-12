@@ -81,14 +81,24 @@ class UnitNetworkNode(ABC, UnitNetwork):
 
 class UnitNetworkRootNode(UnitNetwork):
     """Used to determine the overall layout of each cluster in the network layout diagram"""
-    def __init__(self, unit_distances: Dict[Tuple[str, str], float], graph: nx.DiGraph):
-        super().__init__(unit_distances, graph)
+    def __init__(self, unit_distances: Dict[Tuple[str, str], float]):
+        super().__init__(unit_distances, nx.DiGraph())
         self._clusters = {}
 
-    def __getitem__(self, cluster_label: str):
+    def build(self):
+        """Call this after all nodes have been added to calculate the distances"""
+
+        # Add edges between nodes, with the distance between each node as the edge weight
+        for node_1 in self._clusters.values():
+            for node_2 in self._clusters.values():
+                if node_1 == node_2:
+                    continue
+                self._graph.add_edge(node_1.label, node_2.label, weight=node_1.distance(node_2))
+
+    def __getitem__(self, cluster_label):
         return self._clusters[cluster_label]
 
-    def __setitem__(self, cluster_label: str, cluster: UnitNetworkNode):
+    def __setitem__(self, cluster_label, cluster: UnitNetworkNode):
         self._clusters[cluster_label] = cluster
 
 
@@ -158,7 +168,7 @@ def build_unit_network_layout(units: Dict[str, Unit], unit_distances: Dict[Tuple
     n_clusters = len(set(labels)) - (1 if -1 in labels else 0)
     n_noise = list(labels).count(-1)
     layout_threads = []
-    clusters = {}  # Key: Cluster label, Value: Cluster object
+    unit_network_root_node = UnitNetworkRootNode(unit_distances)
 
     for label in range(n_clusters):
         # Create a graph using the nodes that belong to each cluster
@@ -166,35 +176,23 @@ def build_unit_network_layout(units: Dict[str, Unit], unit_distances: Dict[Tuple
         units_in_cluster = {unit_codes[i]: units[unit_codes[i]] for i in indices_of_units_in_cluster}
 
         # Use the Kamada-Kawai network layout algorithm on the nodes within each cluster in parallel
-        cluster = UnitNetworkClusterNode(units_in_cluster, label, unit_distances)
-        clusters[label] = cluster
-        thread = Thread(target=build_cluster_network_layout, args=(cluster,))
+        cluster_node = UnitNetworkClusterNode(units_in_cluster, label, unit_distances)
+        unit_network_root_node[label] = cluster_node
+        thread = Thread(target=build_cluster_network_layout, args=(cluster_node,))
         layout_threads.append(thread)
         thread.start()
-    
-    root_layout_graph = nx.DiGraph()
 
-    # Add cluster nodes
-    for i in range(n_clusters):
-        root_layout_graph.add_node(i)
-
-    # Add noise nodes
+    # Add noise nodes to unit network
     indices_of_noise_units = np.where(labels == -1)
     for i in range(n_noise):
-        label = -i - 1 # Noise nodes will have negative labels in the root graph starting from -1
-        root_layout_graph.add_node(label)
+        label = -i - 1  # Noise nodes will have negative labels in the root graph starting from -1
         noise_unit_code = unit_codes[indices_of_noise_units[i]]
-        clusters[label] = UnitNetworkNoiseNode(unit_distances, noise_unit_code, label)
+        unit_network_root_node[label] = UnitNetworkNoiseNode(unit_distances, noise_unit_code, label)
 
-    # Add edges between nodes, with the distance between each node as the edge weight
-    for node_1 in clusters.values():
-        for node_2 in clusters.values():
-            if node_1 == node_2:
-                continue
-            root_layout_graph.add_edge(node_1.label, node_2.label, weight=node_1.distance(node_2))
+    unit_network_root_node.build()
 
     # Use Kamada-Kawai on each cluster, treating each cluster itself as a node to determine centroid positions
-    thread = Thread(target=build_cluster_network_layout, args=(root_layout_graph, root_layout_scale))
+    thread = Thread(target=build_cluster_network_layout, args=(unit_network_root_node.graph, root_layout_scale))
     layout_threads.append(thread)
     thread.start()
 
