@@ -46,20 +46,21 @@ def unit_distance_metric(unit_1: Unit, unit_2: Unit) -> float:
     return distance
 
 
-class Cluster(ABC):
-    def __init__(self, distances: Dict[Tuple[str, str], float], graph: nx.DiGraph):
-        self.unit_distances = distances
+class UnitNetwork(ABC):
+    def __init__(self, unit_distances: Dict[Tuple[str, str], float], graph: nx.DiGraph):
+        self.unit_distances = unit_distances
         self.graph = graph
         self.node_positions = {}
 
 
-class DistanceMeasurableCluster(ABC, Cluster):
-    def __init__(self, distances: Dict[Tuple[str, str], float], graph: nx.DiGraph, label_in_root_cluster: int):
-        super.__init__(self, distances, graph)
+class UnitNetworkNode(ABC, UnitNetwork):
+    """Represents nodes of the root cluster."""
+    def __init__(self, unit_distances: Dict[Tuple[str, str], float], graph: nx.DiGraph, label_in_root_cluster: int):
+        super.__init__(self, unit_distances, graph)
         self.label_in_root_cluster = label_in_root_cluster
 
     def distance(self, other_cluster):
-        """Returns the average distance between two clusters"""
+        """Returns the average distance between two root cluster nodes"""
         total_distance = 0
         n_edges = 0
         for code_a in self:
@@ -78,25 +79,25 @@ class DistanceMeasurableCluster(ABC, Cluster):
         pass
 
 
-class RootCluster(Cluster):
+class UnitNetworkRootNode(UnitNetwork):
     """Used to determine the overall layout of each cluster in the network layout diagram"""
-    def __init__(self, distances: Dict[Tuple[str, str], float], graph: nx.DiGraph):
-        super().__init__(distances, graph)
+    def __init__(self, unit_distances: Dict[Tuple[str, str], float], graph: nx.DiGraph):
+        super().__init__(unit_distances, graph)
         self._clusters = {}
 
     def __getitem__(self, cluster_label: str):
         return self._clusters[cluster_label]
 
-    def __setitem__(self, cluster_label: str, cluster: DistanceMeasurableCluster):
+    def __setitem__(self, cluster_label: str, cluster: UnitNetworkNode):
         self._clusters[cluster_label] = cluster
 
 
-class NoiseNode(DistanceMeasurableCluster):
+class UnitNetworkNoiseNode(UnitNetworkNode):
     """Placeholder for single-unit clusters"""
-    def __init__(self, distances: Dict[Tuple[str, str], float], unit_code: str, label_in_root_cluster: int):
+    def __init__(self, unit_distances: Dict[Tuple[str, str], float], unit_code: str, label_in_root_cluster: int):
         graph = nx.DiGraph()
         graph.add_node(unit_code)
-        super().__init__(distances, graph, label_in_root_cluster)
+        super().__init__(unit_distances, graph, label_in_root_cluster)
         self.unit_code = unit_code
 
     def __iter__(self):
@@ -104,17 +105,17 @@ class NoiseNode(DistanceMeasurableCluster):
 
 
 
-class UnitCluster(DistanceMeasurableCluster):
+class UnitNetworkClusterNode(UnitNetworkNode):
     """Used to determine the layout of units within a cluster"""
-    def __init__(self, unit_codes: Iterable[str], graph: nx.DiGraph, label_in_root_cluster: int, distances: Dict[Tuple[str, str], float]):
-        super().__init__(distances, graph, label_in_root_cluster)
+    def __init__(self, unit_codes: Iterable[str], graph: nx.DiGraph, label_in_root_cluster: int, unit_distances: Dict[Tuple[str, str], float]):
+        super().__init__(unit_distances, graph, label_in_root_cluster)
         self.unit_codes = unit_codes
 
     def __iter__(self):
         return self.unit_codes.__iter__()
 
 
-def build_cluster_network_layout(cluster: UnitCluster, scale: int=1):
+def build_cluster_network_layout(cluster: UnitNetworkClusterNode, scale: int=1):
     cluster.node_positions = nx.kamada_kawai_layout(cluster.graph, scale=scale)
 
 
@@ -162,7 +163,7 @@ def build_unit_network_layout(units: Dict[str, Unit], distances: Dict[Tuple[str,
 
         # Use the Kamada-Kawai network layout algorithm on the nodes within each cluster in parallel
         cluster_graph = create_unit_network(units_in_cluster, distances_between_units_in_cluster)
-        cluster = UnitCluster(units_in_cluster.keys(), cluster_graph, label, distances)
+        cluster = UnitNetworkClusterNode(units_in_cluster.keys(), cluster_graph, label, distances)
         clusters[label] = cluster
         thread = Thread(target=build_cluster_network_layout, args=(cluster,))
         layout_threads.append(thread)
@@ -180,7 +181,7 @@ def build_unit_network_layout(units: Dict[str, Unit], distances: Dict[Tuple[str,
         label = -i - 1 # Noise nodes will have negative labels in the root graph starting from -1
         root_layout_graph.add_node(label)
         noise_unit_code = unit_codes[indices_of_noise_units[i]]
-        clusters[label] = NoiseNode(distances, noise_unit_code, label)
+        clusters[label] = UnitNetworkNoiseNode(distances, noise_unit_code, label)
 
     # Add edges between nodes, with the distance between each node as the edge weight
     for node_1 in clusters.values():
