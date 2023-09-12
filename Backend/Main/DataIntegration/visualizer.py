@@ -162,7 +162,7 @@ def build_unit_network_layout(units: Dict[str, Unit], distances: Dict[Tuple[str,
                     distances_between_units_in_cluster[edge] = distances[edge]
 
         # Use the Kamada-Kawai network layout algorithm on the nodes within each cluster in parallel
-        cluster_graph = create_unit_network(units_in_cluster, distances_between_units_in_cluster)
+        cluster_graph = create_unit_graph(units_in_cluster, distances_between_units_in_cluster)
         cluster = UnitNetworkClusterNode(units_in_cluster.keys(), cluster_graph, label, distances)
         clusters[label] = cluster
         thread = Thread(target=build_cluster_network_layout, args=(cluster,))
@@ -261,7 +261,7 @@ def find_visible_edges(units: Dict[str, Unit]) -> Set[Tuple[str, str]]:
     return visible_edges
 
 
-def create_unit_network(units: Dict[str, Unit], distances: Dict[Tuple[str, str], float]) -> nx.DiGraph:
+def create_unit_graph(units: Dict[str, Unit], distances: Dict[Tuple[str, str], float]) -> nx.DiGraph:
     G = nx.DiGraph()
 
     # Add units to graph
