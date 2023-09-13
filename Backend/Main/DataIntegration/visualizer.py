@@ -96,6 +96,7 @@ class ClusterNode(Node):
     epsilon = 0.25
     min_samples_in_epsilon_neighborhood = 3
     scale = 2
+    max_depth = 10
 
     def __init__(self, network: UnitNetwork, depth: int, graph_label: int, units: Dict[str, Unit]):
         super().__init__(network, depth, graph_label)
@@ -114,7 +115,7 @@ class ClusterNode(Node):
     def identify_and_break_into_sub_clusters(self):
         # Convert remaining nodes to leaf nodes and return if condition met
         # todo: Adjust this condition as necessary
-        if self.depth == 2:
+        if self.depth == ClusterNode.max_depth:
             for leaf_node_label, node_unit_code in enumerate(self.units.keys()):
                 self.layout_graph.add_node(leaf_node_label)
                 self.leaf_nodes.append(LeafNode(self.network, self.depth + 1, leaf_node_label, node_unit_code))
