@@ -193,20 +193,18 @@ class ClusterNode(Node):
         for node in self.leaf_nodes:
             node: LeafNode
 
-            x, y = self.node_positions[node.graph_label]
-            self.network.unit_positions[node.unit_code] = (x, y)
+            pos = self.node_positions[node.graph_label]
+            self.network.unit_positions[node.unit_code] = pos
 
         # Apply this cluster's layout to sub-clusters
         for sub_cluster in self.sub_clusters:
             sub_cluster: ClusterNode
-            cluster_centroid_x, cluster_centroid_y = self.node_positions[sub_cluster.graph_label]
-            cluster_centroid_x *= ClusterNode.scale
-            cluster_centroid_y *= ClusterNode.scale
+            cluster_centroid_pos = self.node_positions[sub_cluster.graph_label]
+            cluster_centroid_pos *= ClusterNode.scale
 
-            for graph_label, (x, y) in sub_cluster.node_positions.items():
-                x += cluster_centroid_x
-                y += cluster_centroid_y
-                sub_cluster.node_positions[graph_label] = (x, y)
+            for graph_label, pos in sub_cluster.node_positions.items():
+                pos += cluster_centroid_pos
+                sub_cluster.node_positions[graph_label] = pos
 
         self.layouts_applied = True
 
@@ -224,8 +222,7 @@ def build_unit_network_layout(units: Dict[str, Unit], unit_distances: Dict[Tuple
     root_node = ClusterNode(unit_network, units=units, depth=0, graph_label=0)
     root_node.build()
 
-    return unit_network.unit_positions
-
+    return {unit_code: (float(x), float(y)) for unit_code, (x, y) in unit_network.unit_positions.items()}
 
 def draw_unit_network(network: nx.DiGraph, visible_edges: List[Tuple[str, str]], pos: Dict[str, Tuple[float, float]] = None):
     if pos is None:
