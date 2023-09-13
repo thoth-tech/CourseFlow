@@ -203,7 +203,7 @@ class ClusterNode(Node):
 
             for graph_label, pos in sub_cluster.node_positions.items():
                 pos += cluster_centroid_pos
-                sub_cluster.node_positions[graph_label] = pos
+                self.node_positions[graph_label] = pos
 
         self.layouts_applied = True
 
