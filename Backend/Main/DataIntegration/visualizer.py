@@ -1,7 +1,7 @@
 import math
 import json
 from itertools import chain
-from typing import Dict, Tuple, List, Set, Iterable
+from typing import Dict, Tuple, List, Set, Iterable, Iterator
 from threading import Thread
 from abc import ABC, abstractmethod
 
@@ -173,8 +173,8 @@ class ClusterNode(Node):
         assert self.child_nodes_created, "identify_and_break_into_sub_clusters() must be completed first"
 
         # Add edges between nodes, with the distance between each node as the edge weight
-        for node_1 in chain(self.sub_clusters.__iter__(), self.leaf_nodes.__iter__()):
-            for node_2 in chain(self.sub_clusters.__iter__(), self.leaf_nodes.__iter__()):
+        for node_1 in self.nodes:
+            for node_2 in self.nodes:
                 if node_1 == node_2:
                     continue
                 self.layout_graph.add_edge(node_1.graph_label, node_2.graph_label, weight=node_1.distance(node_2))
@@ -214,6 +214,10 @@ class ClusterNode(Node):
 
     def __iter__(self):
         return self.units.keys().__iter__()
+
+    @property
+    def nodes(self) -> Iterator:
+        return chain(self.sub_clusters.__iter__(), self.leaf_nodes.__iter__())
 
 
 def build_unit_network_layout(units: Dict[str, Unit], unit_distances: Dict[Tuple[str, str], float]) -> Dict[str, Tuple[float, float]]:
