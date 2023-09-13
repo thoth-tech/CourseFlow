@@ -159,7 +159,7 @@ class ClusterNode(Node):
             cluster_node.build()
 
         # Add the leaf nodes to the layout graph and this cluster
-        indices_of_noise_units = np.where(labels == -1)
+        indices_of_noise_units, = np.where(labels == -1)
         for i in range(n_noise_nodes):
             leaf_node_label = -i - 1
             node_unit_code = unit_codes[indices_of_noise_units[i]]
