@@ -179,8 +179,13 @@ class ClusterNode(Node):
                     continue
                 self.layout_graph.add_edge(node_1.graph_label, node_2.graph_label, weight=node_1.distance(node_2))
 
+        # Give the nodes a random starting position to ensure that the layout clusters don't form a straight line
+        initial_pos = {}
+        for node in self.nodes:
+            initial_pos[node.graph_label] = np.random.rand(2)
+
         # Use the Kamada-Kawai network layout algorithm on the nodes to determine the layout
-        self.node_positions = nx.kamada_kawai_layout(self.layout_graph, scale=ClusterNode.scale)
+        self.node_positions = nx.kamada_kawai_layout(self.layout_graph, scale=ClusterNode.scale, pos=initial_pos)
 
         self.layout_complete = True
 
