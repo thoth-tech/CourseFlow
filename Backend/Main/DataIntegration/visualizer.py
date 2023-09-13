@@ -95,7 +95,7 @@ class ClusterNode(Node):
     # Hyperparameters
     epsilon = 0.25
     min_samples_in_epsilon_neighborhood = 3
-    scale = 10
+    scale = 2
 
     def __init__(self, network: UnitNetwork, depth: int, graph_label: int, units: Dict[str, Unit]):
         super().__init__(network, depth, graph_label)
