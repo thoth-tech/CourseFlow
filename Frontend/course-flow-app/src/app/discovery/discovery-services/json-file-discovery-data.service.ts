@@ -8,8 +8,7 @@ import { EDiscoveryGroupUnitsBy } from 'src/app/enum/discoveryEnums';
 import { IDiscoveryNodeData, IDiscoveryDataService } from 'src/app/interfaces/discoveryInterfaces';
 
 // JSON Data Imports
-import facultyData from "src/data/facultyData.json";
-import * as courseData from "src/data/facultyData.json";
+import facultyData from "src/data/precalculatedPositionExample.json";
 
 @Injectable({
   providedIn: 'root'
