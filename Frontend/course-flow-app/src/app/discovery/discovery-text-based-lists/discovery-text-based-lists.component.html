@@ -1,42 +1,56 @@
-<!-- <div class="text-based-list-container">
-
-    <h2 class="text-based-list-title"> {{ unitData.name }}</h2>
-
+<div class="text-based-list-container">
 
     <button 
         class="text-based-list-back-button"
         mat-raised-button color="primary" 
-        *ngIf="previousData.length !== 0" 
+        *ngIf="previousRootNode.length !== 0" 
         (click)="onBackButtonPressed()"
     > 
         Back 
     </button>
 
+    <!-- The current "root" data/node that we are on will have information displayed in this section. -->
+    <h2 class="text-based-list-title"> {{ currentRootNode.label }} </h2>
 
-    <div class="text-based-list-grid-container">
+    <mat-divider/>
 
+    <p class="text-based-list-description">{{ currentRootNode.description }}</p>
 
-        <div class="text-based-list-grid-item" *ngFor="let data of unitData.children;">
-            
-            <mat-card>
+    <mat-divider/>
 
-                <mat-card-content>
+    <!-- All the connections will be listed here. -->
+    <div *ngFor="let connectionData of currentRootNode.outConnections;">
+ 
+        <h3> {{connectionData.label}} </h3>
 
-                    {{data.name}}
+        <div class="text-based-list-grid-container">
 
-                </mat-card-content>
+            <div class="text-based-list-grid-item" >
+ 
+                <div *ngFor="let connectionId of connectionData.connectionIds;">
 
-                <mat-card-actions>
+                    <mat-card>
+                        
+                        <mat-card-content>
 
+                            {{ getConnectionLabel(connectionId) }}
 
-                    <button mat-raised-button color="primary" (click)="onViewMorePressed(data)"> View More </button>
+                        </mat-card-content>
 
-                </mat-card-actions>
+                        <mat-card-actions>
 
-            </mat-card>
+                            <button mat-raised-button color="primary" (click)="onViewMorePressed(connectionId)"> View More </button>
+        
+                        </mat-card-actions>
+
+                    </mat-card>
+
+                </div>
+
+            </div>
 
         </div>
 
     </div>
 
-</div> -->
+</div>

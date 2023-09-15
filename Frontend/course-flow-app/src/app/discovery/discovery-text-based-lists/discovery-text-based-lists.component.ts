@@ -2,7 +2,7 @@
 import { Component, Input, Inject } from '@angular/core';
 
 // Interface Imports
-import { IDiscoveryDataServiceInjector, IDiscoveryDataService } from 'src/app/interfaces/discoveryInterfaces';
+import { IDiscoveryDataServiceInjector, IDiscoveryDataService, IDiscoveryData, IDiscoveryNodeData, IDiscoveryLinkData } from 'src/app/interfaces/discoveryInterfaces';
 
 // Enum Imports
 import { EDiscoveryGroupUnitsBy } from "../../enum/discoveryEnums"
@@ -14,19 +14,58 @@ import { EDiscoveryGroupUnitsBy } from "../../enum/discoveryEnums"
 })
 export class DiscoveryTextBasedListsComponent {
   
+  discoveryData: IDiscoveryData = {} as IDiscoveryData;
+
+  // Node data trackers.
+  currentRootNode:IDiscoveryNodeData = {} as IDiscoveryNodeData;
+  previousRootNode: IDiscoveryNodeData[] = [] as IDiscoveryNodeData[];
+
   @Input() set groupUnitsBy(value: EDiscoveryGroupUnitsBy) {
 
+    this.discoveryData = this.discoveryDataService.getDiscoveryData(value);
+
+    // This logic unfortunetely will rely on the root node id being set as root.
+    // TODO A better way is needed to for handling of this.
+    this.currentRootNode = this.discoveryDataService.findDiscoveryNodeById("root")!;
   }
 
   constructor(@Inject(IDiscoveryDataServiceInjector) private discoveryDataService: IDiscoveryDataService) {
 
   }
 
-  onViewMorePressed(): void {
+  /**
+   * Callback for when the view more button is pressed.
+   * @param data Data of associated card pressed (this correspond to the node data).
+   */
+  onViewMorePressed(id: string): void {
 
+    this.previousRootNode.push(this.currentRootNode);
+    this.currentRootNode = this.discoveryDataService.findDiscoveryNodeById(id)!;
   }
 
+  /**
+   * Callback for when the back button is pressed.
+   */
   onBackButtonPressed(): void {
 
+    if (this.previousRootNode.length !== 0) {
+      this.currentRootNode = this.previousRootNode.pop()!;
+    }
+  }
+
+  /**
+   * Gets the node label from a node associated with the provided id.
+   * @param id Id of the node we want to get the label of.
+   */
+  getConnectionLabel(id: string): string {
+  
+    let label = "";
+    let foundNode: IDiscoveryNodeData | undefined = this.discoveryDataService.findDiscoveryNodeById(id);
+
+    if (foundNode) {
+      label = foundNode.label;
+    }
+
+    return label;
   }
 }

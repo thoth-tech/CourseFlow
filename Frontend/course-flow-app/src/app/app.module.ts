@@ -32,6 +32,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
 import { DiscoveryDetailedContentComponent } from './discovery/discovery-detailed-content/discovery-detailed-content.component';
 import { DiscoveryConnectionSelectablesComponent } from './discovery/discovery-connection-selectables/discovery-connection-selectables.component';
+import { DiscoveryCardSelectableComponent } from './discovery/discovery-card-selectable/discovery-card-selectable.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { DiscoveryConnectionSelectablesComponent } from './discovery/discovery-c
     DiscoveryTextBasedListsComponent,
     DiscoveryDetailedContentComponent,
     DiscoveryConnectionSelectablesComponent,
+    DiscoveryCardSelectableComponent,
   ],
   imports: [
     BrowserModule,

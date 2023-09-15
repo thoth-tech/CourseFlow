@@ -8,7 +8,12 @@
         "y": 0.0,
         "inConnections": [
         ],
-        "outConnections": [],
+        "outConnections": [
+            {
+                "label": "Faculties",
+                "connectionIds": ["A"]
+            }
+        ],
         "coConnections": []
     },
     {
