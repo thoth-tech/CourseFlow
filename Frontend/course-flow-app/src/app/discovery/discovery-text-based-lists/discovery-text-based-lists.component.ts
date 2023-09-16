@@ -18,7 +18,6 @@ export class DiscoveryTextBasedListsComponent {
 
   // Node data trackers.
   currentRootNode:IDiscoveryNodeData = {} as IDiscoveryNodeData;
-  previousRootNode: IDiscoveryNodeData[] = [] as IDiscoveryNodeData[];
 
   @Input() set groupUnitsBy(value: EDiscoveryGroupUnitsBy) {
 
@@ -30,42 +29,19 @@ export class DiscoveryTextBasedListsComponent {
   }
 
   constructor(@Inject(IDiscoveryDataServiceInjector) private discoveryDataService: IDiscoveryDataService) {
-
+    
+    // This will allow us to respond to nested events in child components.
+    this.discoveryDataService.nodeSelectedEvent$.subscribe((node) => this.onViewMorePressed(node));
   }
 
   /**
    * Callback for when the view more button is pressed.
-   * @param data Data of associated card pressed (this correspond to the node data).
+   * @param node Selected node.
    */
-  onViewMorePressed(id: string): void {
+  onViewMorePressed(node: IDiscoveryNodeData): void {
 
-    this.previousRootNode.push(this.currentRootNode);
-    this.currentRootNode = this.discoveryDataService.findDiscoveryNodeById(id)!;
-  }
+    this.currentRootNode = node!;
 
-  /**
-   * Callback for when the back button is pressed.
-   */
-  onBackButtonPressed(): void {
 
-    if (this.previousRootNode.length !== 0) {
-      this.currentRootNode = this.previousRootNode.pop()!;
-    }
-  }
-
-  /**
-   * Gets the node label from a node associated with the provided id.
-   * @param id Id of the node we want to get the label of.
-   */
-  getConnectionLabel(id: string): string {
-  
-    let label = "";
-    let foundNode: IDiscoveryNodeData | undefined = this.discoveryDataService.findDiscoveryNodeById(id);
-
-    if (foundNode) {
-      label = foundNode.label;
-    }
-
-    return label;
   }
 }

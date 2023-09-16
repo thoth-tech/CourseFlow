@@ -1,7 +1,7 @@
 [
     {
         "id": "root",
-        "label": "Faculty Based Graph",
+        "label": "All Faculties",
         "group": 0,
         "description": "Units grouped by faculty.",
         "x": 0.0,
@@ -25,7 +25,7 @@
         "y": 0.580714225769043,
         "inConnections": [
             {
-                "label": "Faculty Graph",
+                "label": "All Faculties",
                 "connectionIds": [
                     "root"
                 ]

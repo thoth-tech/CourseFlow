@@ -1,1 +1,29 @@
-<p>discovery-card-selectable works!</p>
+<div class="card-selectable-container" *ngFor="let connectionData of connections;">
+ 
+    <h3> {{connectionData.label}} </h3>
+
+    <div class="card-selectable-container-grid-container">
+
+            <div class="card-selectable-container-grid-item" *ngFor="let connectionId of connectionData.connectionIds;">
+
+                <mat-card>
+                    
+                    <mat-card-content>
+
+                        {{ getConnectionLabel(connectionId) }}
+
+                    </mat-card-content>
+
+                    <mat-card-actions>
+
+                        <button mat-raised-button color="primary" (click)="onViewMorePressed(connectionId)"> View More </button>
+    
+                    </mat-card-actions>
+
+                </mat-card>
+
+            </div>
+
+        </div>
+
+</div>
