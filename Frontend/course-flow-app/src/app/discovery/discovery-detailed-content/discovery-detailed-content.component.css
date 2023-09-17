@@ -22,4 +22,5 @@
 
 .detailed-content p {
     word-wrap: break-word;
+    padding: 2em;
 }

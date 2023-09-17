@@ -30,23 +30,23 @@ export class DiscoveryGraphBasedMapComponent {
   // Graph Properties.
   width: number = 1920;
   height: number = 1920;
-  nodeSparsityMultiplier = 3.0;
-  initialZoomLevel: number = 0.2;
-  currentZoomLevel: number = 0.2;
+  nodeSparsityMultiplier = 4.0;
+  initialZoomLevel: number = 0.1;
+  currentZoomLevel: number = 0.1;
   currentQuantizedZoomLevel: number = 0.2;
 
   // Node Properties.
   nodeColor: string = "rgba(255, 0, 0, 0.5)"
-  nodeRadius: number = 20;
+  nodeRadius: number = 30;
   selectedNodeColor: string = "rgba(0, 0, 255, 0.8)";
 
   // Text Properties
-  baseFontSize: number = 10;
-  layerOneFontMultiplier = 30;
+  baseFontSize: number = 30;
+  layerOneFontMultiplier = 15;
 
   // Link/Edge Properties
   linkWidth: number = 0.4;
-  linkOpacity: number = 0.4;
+  linkOpacity: number = 0.2;
   linkColor: string = "black";
   selectedLinkColor: string = "rgba(0, 0, 255, 0.5)";
   
