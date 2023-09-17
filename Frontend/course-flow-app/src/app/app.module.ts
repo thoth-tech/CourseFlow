@@ -17,6 +17,19 @@ import { YearContainerComponent } from './year-container/year-container.componen
 import { MatDialogModule } from '@angular/material/dialog';
 import { UnitDetailDialogComponent } from './unit-detail-dialog/unit-detail-dialog.component';
 
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { NotFoundComponent } from './main-side-nav/pages/not-found/not-found.component';
+import { MajorMinorComponent } from './main-side-nav/pages/majorminor/majorminor.component';
+import { EditComponent } from './main-side-nav/pages/edit/edit.component';
+import { NotificationsComponent } from './main-side-nav/pages/notifications/notifications.component';
+import { CourseUpdatesComponent } from './main-side-nav/pages/courseupdates/courseupdates.component';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +40,11 @@ import { UnitDetailDialogComponent } from './unit-detail-dialog/unit-detail-dial
     TrimesterContainerComponent,
     YearContainerComponent,
     UnitDetailDialogComponent,
+    MajorMinorComponent, 
+    EditComponent, 
+    NotificationsComponent, 
+    CourseUpdatesComponent, 
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +52,12 @@ import { UnitDetailDialogComponent } from './unit-detail-dialog/unit-detail-dial
     BrowserAnimationsModule,
     CommonModule,
     HttpClientModule,
-    MatDialogModule
+    MatDialogModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDividerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
