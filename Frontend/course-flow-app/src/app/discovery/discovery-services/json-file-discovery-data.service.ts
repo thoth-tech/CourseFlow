@@ -9,7 +9,7 @@ import { IDiscoveryDataService, IDiscoveryData, IDiscoveryNodeData, IDiscoveryLi
 
 // JSON Data Imports
 import facultyData from "src/data/facultyData.json";
-import courseData from "src/data/courseData.json"
+import specializationData from "src/data/specializationData.json"
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,7 @@ export class JsonFileDiscoveryDataService implements IDiscoveryDataService {
   // Json data.
   discoveryJsonData: Record<EDiscoveryGroupUnitsBy, object[]> = {
     [EDiscoveryGroupUnitsBy.faculty]: facultyData,
-    [EDiscoveryGroupUnitsBy.course]: courseData
+    [EDiscoveryGroupUnitsBy.specialization]: specializationData
   };
 
   // Discovery data cache.

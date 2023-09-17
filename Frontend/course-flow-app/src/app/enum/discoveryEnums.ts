@@ -1,6 +1,6 @@
 export enum EDiscoveryGroupUnitsBy {
     faculty,
-    course
+    specialization
   }
   
 export  enum EDiscoveryDisplayTypes {

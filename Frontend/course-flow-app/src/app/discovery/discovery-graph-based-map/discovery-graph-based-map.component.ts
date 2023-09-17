@@ -30,21 +30,22 @@ export class DiscoveryGraphBasedMapComponent {
   // Graph Properties.
   width: number = 1920;
   height: number = 1920;
+  nodeSparsityMultiplier = 3.0;
   initialZoomLevel: number = 0.2;
   currentZoomLevel: number = 0.2;
   currentQuantizedZoomLevel: number = 0.2;
 
   // Node Properties.
   nodeColor: string = "rgba(255, 0, 0, 0.5)"
-  nodeRadius: number = 5;
+  nodeRadius: number = 20;
   selectedNodeColor: string = "rgba(0, 0, 255, 0.8)";
 
   // Text Properties
-  fontSize: number = 2;
+  fontSize: number = 4;
 
   // Link/Edge Properties
-  linkWidth: number = 0.1;
-  linkOpacity: number = 0.1;
+  linkWidth: number = 0.4;
+  linkOpacity: number = 0.4;
   linkColor: string = "black";
   selectedLinkColor: string = "rgba(0, 0, 255, 0.5)";
   
@@ -181,7 +182,7 @@ export class DiscoveryGraphBasedMapComponent {
       this.renderedNodeGroup = this.zoomableGroupElement.selectAll("node")
         .data(this.discoveryData.nodeData)
         .join("g")
-        .attr("transform", nodeData => `translate(${(nodeData as any).x * this.width}, ${(nodeData as any).y * this.height})`)
+        .attr("transform", nodeData => `translate(${(nodeData as any).x * this.width * this.nodeSparsityMultiplier}, ${(nodeData as any).y * this.height * this.nodeSparsityMultiplier})`)
 
       // Append a circle shape to the node group.
       this.renderedNodeGroup.append('circle')
@@ -227,10 +228,10 @@ export class DiscoveryGraphBasedMapComponent {
         .selectAll("line")
         .data(this.discoveryData.linkData)
         .join("line")
-        .attr("x1", link => (this.getNodeById(link.source).x as number) * this.width)
-        .attr("y1", link => (this.getNodeById(link.source).y as number) * this.height)
-        .attr("x2", link => (this.getNodeById(link.target).x as number) * this.width)
-        .attr("y2", link => (this.getNodeById(link.target).y as number) * this.height)
+        .attr("x1", link => (this.getNodeById(link.source).x as number) * this.width * this.nodeSparsityMultiplier)
+        .attr("y1", link => (this.getNodeById(link.source).y as number) * this.height * this.nodeSparsityMultiplier)
+        .attr("x2", link => (this.getNodeById(link.target).x as number) * this.width * this.nodeSparsityMultiplier)
+        .attr("y2", link => (this.getNodeById(link.target).y as number) * this.height * this.nodeSparsityMultiplier)
         .attr("stroke", this.linkColor)
         .attr("stroke-width", this.linkWidth)
         .attr("stroke-opacity", this.linkOpacity)
@@ -269,8 +270,8 @@ export class DiscoveryGraphBasedMapComponent {
     // Transition the view to the node.
     const transition = d3.zoomIdentity
       .translate(
-        (this.width / 2) - (nodeClicked.x as number * this.width), 
-        (this.height / 2) - (nodeClicked.y as number * this.height))
+        (this.width / 2) - (nodeClicked.x as number * this.width * this.nodeSparsityMultiplier), 
+        (this.height / 2) - (nodeClicked.y as number * this.height * this.nodeSparsityMultiplier))
 
     if (this.zoomBehaviour) {
 

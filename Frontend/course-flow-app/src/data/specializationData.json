@@ -1,0 +1,585 @@
+[
+    {
+        "id": "root",
+        "label": "Specializations",
+        "group": 0,
+        "description": "Units grouped by specialization.",
+        "x": 0.5,
+        "y": 0.5,
+        "inConnections": [
+            {
+                "label": "",
+                "connectionIds": []
+            }
+        ],
+        "outConnections": [
+            {
+                "label": "All Specializations",
+                "connectionIds": [
+                    "MN-S000011",
+                    "MN-S000005",
+                    "MN-S000012",
+                    "MN-S000006",
+                    "MN-S000009"
+                ]
+            }
+        ],
+        "coConnections": []
+    },
+    {
+        "id": "MN-S000011",
+        "label": "Cloud Technologies",
+        "group": 1,
+        "description": "Description of Cloud Technologies.",
+        "x": 0.13272911254247938,
+        "y": 0.7038145755060039,
+        "inConnections": [
+            {
+                "label": "Graph",
+                "connectionIds": [
+                    "root"
+                ]
+            }
+        ],
+        "outConnections": [
+            {
+                "label": "Units",
+                "connectionIds": [
+                    "SIT233",
+                    "SIT325",
+                    "SIT323",
+                    "SIT314"
+                ]
+            }
+        ],
+        "coConnections": []
+    },
+    {
+        "id": "SIT233",
+        "label": "Cloud Computing",
+        "group": 2,
+        "description": "Cloud computing offers a new model for the delivery of IT services to end users by introducing the ability to deliver infrastructure, platforms, and software via the network.&nbsp; This unit explores the technologies, models, benefits and risks of cloud computing.&nbsp; Technologies that will be examined as part of our studies of cloud computing include virtualisation, cloud management systems, storage systems, networking technologies, and public cloud options offered by commercial organisations.&nbsp; Upon completion of the unit students will have a clear understanding of cloud computing, the technologies used in provisioning clouds, the application of cloud computing to solve problems, and the issues that must be considered when deploying cloud technologies in an organisation.",
+        "x": 0.18403140887179742,
+        "y": 0.5322566829714855,
+        "inConnections": [
+            {
+                "label": "Specializations",
+                "connectionIds": [
+                    "MN-S000011"
+                ]
+            }
+        ],
+        "outConnections": [
+            {
+                "label": "",
+                "connectionIds": []
+            }
+        ],
+        "coConnections": []
+    },
+    {
+        "id": "SIT325",
+        "label": "Advanced Network Security",
+        "group": 2,
+        "description": "A strong understanding of networking is critical for cyber security. This unit will provide students in the network security minor the advanced understanding of networks needed for success in the field. The unit will cover a range of advanced and emerging technologies, such as Software Defined Networks, Internet of Things, and AI based networking.",
+        "x": 0.6107425417449293,
+        "y": 0.2884413288942537,
+        "inConnections": [
+            {
+                "label": "Specializations",
+                "connectionIds": [
+                    "MN-S000011"
+                ]
+            }
+        ],
+        "outConnections": [
+            {
+                "label": "",
+                "connectionIds": []
+            }
+        ],
+        "coConnections": []
+    },
+    {
+        "id": "SIT323",
+        "label": "Cloud Native Application Development",
+        "group": 2,
+        "description": "The cloud native approach to application development reflects modern demands to rapidly adapt to new business requirements, improve utilisation and efficiency of development teams, and deliver high quality reliable and scalable services using cloud technologies.&nbsp; Cloud native applications are constructed using the microservices architecture and typically exist only within the cloud.&nbsp; In this unit students will learn to design, develop, and deploy of cloud native applications according to best practices including infrastructure as code, asynchronous communication, instrumentation, latency management, replication and parallelization, failure management and security.",
+        "x": -0.14290271295293744,
+        "y": -0.2313514196374172,
+        "inConnections": [
+            {
+                "label": "Specializations",
+                "connectionIds": [
+                    "MN-S000011"
+                ]
+            }
+        ],
+        "outConnections": [
+            {
+                "label": "",
+                "connectionIds": []
+            }
+        ],
+        "coConnections": []
+    },
+    {
+        "id": "SIT314",
+        "label": "Software Architecture and Scalability for Internet-Of-Things",
+        "group": 2,
+        "description": "<span lang=\"EN-AU\" xml:lang=\"EN-AU\">This unit introduces students to key challenges and principals when architecting large-scale</span> <span lang=\"EN-AU\" xml:lang=\"EN-AU\">applications for the Internet-of-Things (IoT). </span><span lang=\"EN-AU\" xml:lang=\"EN-AU\">Students will learn and use differ</span><span lang=\"EN-AU\" xml:lang=\"EN-AU\">ent </span><span lang=\"EN-AU\" xml:lang=\"EN-AU\">architecture patterns</span><span lang=\"EN-AU\" xml:lang=\"EN-AU\"> including layered architectures, message-bus style, event-driven, micro-services. Students will also learn</span><span lang=\"EN-AU\" xml:lang=\"EN-AU\"> d</span><span lang=\"EN-AU\" xml:lang=\"EN-AU\">iffe</span><span lang=\"EN-AU\" xml:lang=\"EN-AU\">rent </span><span lang=\"EN-AU\" xml:lang=\"EN-AU\">d</span><span lang=\"EN-AU\" xml:lang=\"EN-AU\">eployment models, quality of service attributes </span><span lang=\"EN-AU\" xml:lang=\"EN-AU\">and trade-offs </span><span lang=\"EN-AU\" xml:lang=\"EN-AU\">and testing</span><span lang=\"EN-AU\" xml:lang=\"EN-AU\"> requirements and frameworks</span>.",
+        "x": 0.729936820484559,
+        "y": -0.06489939509137693,
+        "inConnections": [
+            {
+                "label": "Specializations",
+                "connectionIds": [
+                    "MN-S000011"
+                ]
+            }
+        ],
+        "outConnections": [
+            {
+                "label": "",
+                "connectionIds": []
+            }
+        ],
+        "coConnections": []
+    },
+    {
+        "id": "MN-S000005",
+        "label": "Embedded Systems",
+        "group": 1,
+        "description": "Description of Embedded Systems.",
+        "x": 0.7517903555837854,
+        "y": 0.34370260215494297,
+        "inConnections": [
+            {
+                "label": "Graph",
+                "connectionIds": [
+                    "root"
+                ]
+            }
+        ],
+        "outConnections": [
+            {
+                "label": "Units",
+                "connectionIds": [
+                    "SIT122",
+                    "SIT123",
+                    "SIT210",
+                    "SIT329"
+                ]
+            }
+        ],
+        "coConnections": []
+    },
+    {
+        "id": "SIT122",
+        "label": "Robotics Studio",
+        "group": 2,
+        "description": "This unit introduces the fundamental computational paradigms of robotic systems (sense-reason-act) in the context of a hands-on, studio based learning environment using the mBot ranger robots. Students will learn and practice event-driven programming methods within mBlock5, the visual programming environment for the mBot ranger robot. Problems such as animating movement, responding to stimuli, and creating meaningful behaviours in constrained environmental contexts will form the basis of practical investigations of the robots' capabilities and limitations, as well as the design and development of programmatic solutions.",
+        "x": 0.3100660834678095,
+        "y": 0.6880855355212377,
+        "inConnections": [
+            {
+                "label": "Specializations",
+                "connectionIds": [
+                    "MN-S000005"
+                ]
+            }
+        ],
+        "outConnections": [
+            {
+                "label": "",
+                "connectionIds": []
+            }
+        ],
+        "coConnections": []
+    },
+    {
+        "id": "SIT123",
+        "label": "Data Capture Technologies",
+        "group": 2,
+        "description": "This unit will introduce students to ubiquitous and readily accessible devices for data capture, such as the sensor suite on a mobile smartphone, and those commonly used in homes, vehicles and current examples of cyber-physical systems. Students will be introduced to data capture protocols and methodologies, as well as data presentation and visualisation methods. Through practical investigations and analysis, students will investigate issues of robustness, reliability and validity of data and the effects of these on conclusions drawn from data.",
+        "x": -0.25136705801954784,
+        "y": 0.18607369881362412,
+        "inConnections": [
+            {
+                "label": "Specializations",
+                "connectionIds": [
+                    "MN-S000005"
+                ]
+            }
+        ],
+        "outConnections": [
+            {
+                "label": "",
+                "connectionIds": []
+            }
+        ],
+        "coConnections": []
+    },
+    {
+        "id": "SIT210",
+        "label": "Embedded Systems Development",
+        "group": 2,
+        "description": "Embedded devices are an inseparable part of modern computing systems.&nbsp; They monitor and control dedicated functionality of the systems. Examples of these systems include Anti-lock Brake Systems (ABS) and Airbags in cars to various Internet-of-things as Smart Home applications. This unit will focus on device level programming on devices &nbsp;such as the Particle Photon, AARM Mbed and Raspberry Pi, covering topics such as hardware interfaces and serial communications (GPIO, I2C, UART, SPI), real-time systems development, Open Systems Interconnection Model (OSI). Students will build and prototype embedded devices and &nbsp;systems to capture data, sense the environment, and trigger actions using a range of hardware devices and for a variety of real-world projects.",
+        "x": 0.7543922120113187,
+        "y": 0.1491394628026078,
+        "inConnections": [
+            {
+                "label": "Specializations",
+                "connectionIds": [
+                    "MN-S000005"
+                ]
+            }
+        ],
+        "outConnections": [
+            {
+                "label": "",
+                "connectionIds": []
+            }
+        ],
+        "coConnections": []
+    },
+    {
+        "id": "SIT329",
+        "label": "Advanced Embedded Systems",
+        "group": 2,
+        "description": "This unit provides deep and practical understanding of advanced embedded systems in the context of technology development. It builds on the learning and experiences of SIT123: Data capture technologies and SIT210: Embedded systems development.&nbsp; Students will take their learning beyond simple embedded boards and sensor devices, to understanding, working with and designing full System on Chip (SoC) platforms. Students will learn and experience prototyping hardware solutions using the Verilog and VHDL hardware description languages, and field programmable gate arrays (FPGA) hardware platforms.&nbsp; Students will also work with GPU technologies and understand how these can be used to accelerate some tasks in high-performance embedded applications. With these platforms, students will work towards developing modern embedded system prototypes that satisfy the requirements of challenging embedded applications.",
+        "x": -0.1102097278586121,
+        "y": -0.10232676114283905,
+        "inConnections": [
+            {
+                "label": "Specializations",
+                "connectionIds": [
+                    "MN-S000005"
+                ]
+            }
+        ],
+        "outConnections": [
+            {
+                "label": "",
+                "connectionIds": []
+            }
+        ],
+        "coConnections": []
+    },
+    {
+        "id": "MN-S000012",
+        "label": "Full Stack Development",
+        "group": 1,
+        "description": "Description of Full Stack Development.",
+        "x": -0.10617840536542733,
+        "y": 0.31365351789747786,
+        "inConnections": [
+            {
+                "label": "Graph",
+                "connectionIds": [
+                    "root"
+                ]
+            }
+        ],
+        "outConnections": [
+            {
+                "label": "Units",
+                "connectionIds": [
+                    "SIT120",
+                    "SIT331",
+                    "SIT313",
+                    "SIT305"
+                ]
+            }
+        ],
+        "coConnections": []
+    },
+    {
+        "id": "SIT120",
+        "label": "Introduction to Responsive Web Apps",
+        "group": 2,
+        "description": "In SIT120 students will develop foundational knowledge of and basic skills related to responsive web app design and development. Students will learn basic networking protocols and fundamentals for web, HTML, CSS and advanced web design frameworks such as Vue to build web apps both for desktop and mobile devices. Students will develop an understanding of how web infrastructure, design and programming work together, as well as learn fundamentals of responsive and progressive web design and deployment.",
+        "x": -0.04913359457589988,
+        "y": 0.5003427672313645,
+        "inConnections": [
+            {
+                "label": "Specializations",
+                "connectionIds": [
+                    "MN-S000012"
+                ]
+            }
+        ],
+        "outConnections": [
+            {
+                "label": "",
+                "connectionIds": []
+            }
+        ],
+        "coConnections": []
+    },
+    {
+        "id": "SIT331",
+        "label": "Full Stack Development: Secure Backend Services",
+        "group": 2,
+        "description": "Web technologies are now commonly used to be used to create full applications for traditional desktop, web and mobile devices. Web technologies provide better cross platform support and a more streamlined and consistent application development process. The full web technologies stack includes frontend, backend server, service APIs and databases.&nbsp; Full stack web development involves the use of a full suite of technologies to build the application frontend, backend and supporting infrastructure. A full stack web developer will use contemporary web development tools and frameworks, version control, and modern deployment approaches to create effective and impressive applications.&nbsp; This unit focuses on the backend technologies for the full stack development, including programming service APIs, creating databases and cloud deployment.",
+        "x": 0.6042206765460256,
+        "y": -0.24337975309681067,
+        "inConnections": [
+            {
+                "label": "Specializations",
+                "connectionIds": [
+                    "MN-S000012"
+                ]
+            }
+        ],
+        "outConnections": [
+            {
+                "label": "",
+                "connectionIds": []
+            }
+        ],
+        "coConnections": []
+    },
+    {
+        "id": "SIT313",
+        "label": "Full Stack Development: Secure Frontend Applications",
+        "group": 2,
+        "description": "Web technologies are now commonly used to create full applications for traditional desktop, web and mobile devices. Web technologies provide better cross platform support and a more streamlined and consistent application development process. The full web technologies stack includes frontend, backend server, service APIs and databases. Full stack web development involves the use of a full suite of technologies to build the application frontend, backend and supporting infrastructure. A full stack web developer will use contemporary web development tools and frameworks, version control, and modern deployment approaches to create effective and impressive applications. This unit focuses on the frontend part of the full stack development process by using web technologies for programming frontend interfaces, interact with services and databases to create applications that support a wide variety of device capabilities.<br><br>Students are recommended to do this unit alongside&nbsp;SIT331 Full Stack Development: Secure Backend Services.",
+        "x": -0.21285889725933396,
+        "y": 0.03998413585777116,
+        "inConnections": [
+            {
+                "label": "Specializations",
+                "connectionIds": [
+                    "MN-S000012"
+                ]
+            }
+        ],
+        "outConnections": [
+            {
+                "label": "",
+                "connectionIds": []
+            }
+        ],
+        "coConnections": []
+    },
+    {
+        "id": "SIT305",
+        "label": "Mobile Application Development",
+        "group": 2,
+        "description": "This unit provides a practical introduction to developing applications for mobile devices. Students will spend the unit being introduced to one mobile app development environment. Students will cover the design and the workflow of developing apps in one mobile application platform, a framework for constructing an application, as well as tools for developing, testing, and publishing software for the platform. Students will focus particularly on learning advanced concepts and APIs, and putting those skills into practice to develop a real-world mobile app.",
+        "x": 0.15885665089296858,
+        "y": -0.17692648434736805,
+        "inConnections": [
+            {
+                "label": "Specializations",
+                "connectionIds": [
+                    "MN-S000012"
+                ]
+            }
+        ],
+        "outConnections": [
+            {
+                "label": "",
+                "connectionIds": []
+            }
+        ],
+        "coConnections": []
+    },
+    {
+        "id": "MN-S000006",
+        "label": "Game Design",
+        "group": 1,
+        "description": "Description of Game Design.",
+        "x": 0.026848752014530537,
+        "y": -0.0794513842537068,
+        "inConnections": [
+            {
+                "label": "Graph",
+                "connectionIds": [
+                    "root"
+                ]
+            }
+        ],
+        "outConnections": [
+            {
+                "label": "Units",
+                "connectionIds": [
+                    "SIT151",
+                    "SIT253",
+                    "SIT254",
+                    "SIT283"
+                ]
+            }
+        ],
+        "coConnections": []
+    },
+    {
+        "id": "SIT151",
+        "label": "Game Fundamentals",
+        "group": 2,
+        "description": "This unit is for students to study the concepts that define the design and development of games. Through the combination of practical application and theory, students will learn about designing games with a focus on engaging and refining their creative skills.&nbsp; Students will analyse existing games, learn about current processes of game design and development, and design a game implementation.",
+        "x": 0.3040929780397505,
+        "y": -0.210172993716365,
+        "inConnections": [
+            {
+                "label": "Specializations",
+                "connectionIds": [
+                    "MN-S000006"
+                ]
+            }
+        ],
+        "outConnections": [
+            {
+                "label": "",
+                "connectionIds": []
+            }
+        ],
+        "coConnections": []
+    },
+    {
+        "id": "SIT253",
+        "label": "Content Creation for Interactive Experiences",
+        "group": 2,
+        "description": "This unit aims to provide students with the ability to design and create audio and visual assets for creative productions such as video games and virtual reality. Students will design and build audio and visual elements appropriate to a given creative concept, and apply key concepts including; principles of good audio and visual asset design, representation, audio creation and manipulation, interactive audio, composition, lighting and colour, 3D modelling, and textures to the creation of assets. This hands-on unit will allow students to present their work in a professional portfolio and practice their oral presentation in front of an appropriate audience.",
+        "x": -0.24696083775530459,
+        "y": 0.35822235993067625,
+        "inConnections": [
+            {
+                "label": "Specializations",
+                "connectionIds": [
+                    "MN-S000006",
+                    "MN-S000009"
+                ]
+            }
+        ],
+        "outConnections": [
+            {
+                "label": "",
+                "connectionIds": []
+            }
+        ],
+        "coConnections": []
+    },
+    {
+        "id": "SIT254",
+        "label": "Game Design",
+        "group": 2,
+        "description": "This unit aims to provide students an appreciation of what it means to be a games designer. Students will explore the process of games design and apply key concepts including gameplay mechanics, rule design, play mechanics, game balancing and play testing in implementing a game. Students will also learn how to document a game design, apply professional standards and deliver an industry quality pitch for their game. This is a very hands-on unit, where students will create and implement a games design and critique their peers&rsquo; creations to determine how best to create a game experience for specific audiences.&nbsp; In the process of creating games students will be required to use a variety of software technologies including industry-standard games engines. While prior programming experience would be beneficial, it is not a prerequisite to study this unit.",
+        "x": 0.6554166745516761,
+        "y": 0.4851861327765503,
+        "inConnections": [
+            {
+                "label": "Specializations",
+                "connectionIds": [
+                    "MN-S000006"
+                ]
+            }
+        ],
+        "outConnections": [
+            {
+                "label": "",
+                "connectionIds": []
+            }
+        ],
+        "coConnections": []
+    },
+    {
+        "id": "SIT283",
+        "label": "Development for Virtual and Augmented Reality",
+        "group": 2,
+        "description": "This unit provides a comprehensive introduction to the development processes specific to the creation of effective virtual reality applications. Programming concepts and techniques appropriate to the creation of elements of virtual environments are taught using industry standard development facilities. Data types and manipulation patterns appropriate to the representation of virtual spaces allow students to solve typical problems including those related to responding to user actions, incorporating physical interactions between virtual objects and presenting the virtual world using computer graphics and other forms of output.",
+        "x": -0.05276639879503388,
+        "y": 0.6730333103582974,
+        "inConnections": [
+            {
+                "label": "Specializations",
+                "connectionIds": [
+                    "MN-S000006",
+                    "MN-S000009"
+                ]
+            }
+        ],
+        "outConnections": [
+            {
+                "label": "",
+                "connectionIds": []
+            }
+        ],
+        "coConnections": []
+    },
+    {
+        "id": "MN-S000009",
+        "label": "Virtual and Augmented Reality",
+        "group": 1,
+        "description": "Description of Virtual and Augmented Reality.",
+        "x": 0.5459859261662335,
+        "y": 0.03530657666102471,
+        "inConnections": [
+            {
+                "label": "Graph",
+                "connectionIds": [
+                    "root"
+                ]
+            }
+        ],
+        "outConnections": [
+            {
+                "label": "Units",
+                "connectionIds": [
+                    "SIT183",
+                    "SIT283",
+                    "SIT253",
+                    "SIT383"
+                ]
+            }
+        ],
+        "coConnections": []
+    },
+    {
+        "id": "SIT183",
+        "label": "Interactive Application Design for Virtual and Augmented Reality",
+        "group": 2,
+        "description": "This unit explores the design principles used in creating effective virtual and augmented reality applications. Virtual reality (VR) and augmented reality (AR) systems along with their areas of application (e.g., interactive educational experience, serious games, and immersive environments) are presented and analysed to form a foundation of basic design principles. The unit also provides a way to understand the interactive and cognitive functions of VR and AR systems and how these functions influence the design of assets for VR/AR systems.",
+        "x": 0.43223801599025036,
+        "y": 0.6131747135245645,
+        "inConnections": [
+            {
+                "label": "Specializations",
+                "connectionIds": [
+                    "MN-S000009"
+                ]
+            }
+        ],
+        "outConnections": [
+            {
+                "label": "",
+                "connectionIds": []
+            }
+        ],
+        "coConnections": []
+    },
+    {
+        "id": "SIT383",
+        "label": "Assembling Virtual and Augmented Reality Experiences",
+        "group": 2,
+        "description": "This unit teaches the creation of augmented reality (AR) and mobile virtual reality applications. AR applications allow flexible and novel ways of interacting with the physical world and with other participants in the shared environment. The unit covers the design principles and development processes relevant to the mobile platforms, peripherals and application areas including education, simulation and entertainment that are used for augmented reality solutions.",
+        "x": 0.460153660219783,
+        "y": -0.13399524347442177,
+        "inConnections": [
+            {
+                "label": "Specializations",
+                "connectionIds": [
+                    "MN-S000009"
+                ]
+            }
+        ],
+        "outConnections": [
+            {
+                "label": "",
+                "connectionIds": []
+            }
+        ],
+        "coConnections": []
+    }
+]
