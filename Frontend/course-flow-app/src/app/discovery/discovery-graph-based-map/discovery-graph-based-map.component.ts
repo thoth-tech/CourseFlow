@@ -41,7 +41,8 @@ export class DiscoveryGraphBasedMapComponent {
   selectedNodeColor: string = "rgba(0, 0, 255, 0.8)";
 
   // Text Properties
-  fontSize: number = 4;
+  baseFontSize: number = 10;
+  layerOneFontMultiplier = 30;
 
   // Link/Edge Properties
   linkWidth: number = 0.4;
@@ -200,13 +201,13 @@ export class DiscoveryGraphBasedMapComponent {
         .style("visibility", (nodeData) => nodeData.group === 1 ? "visible" : "hidden")
         .style("font-size", (nodeData) =>  {
 
-          let fontSize = this.fontSize;
+          let fontSize = this.baseFontSize;
 
           // At the moment, this graph only supports 1 core layer which will represent the core clusters.
           // TODO Update this block once someone figures out how to cycle through multple layers if multiple layers of clusters are present.
           if (nodeData.group === 1) {
 
-            fontSize *= 50;
+            fontSize *= this.layerOneFontMultiplier;
           }
 
           return fontSize;
