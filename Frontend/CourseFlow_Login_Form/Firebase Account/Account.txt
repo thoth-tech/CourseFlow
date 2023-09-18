@@ -1,3 +1,0 @@
-This is the firebase account all set up and ready for use:
-email: courseflowfirebase@gmail.com
-password: courseflow@123
