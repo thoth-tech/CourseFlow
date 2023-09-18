@@ -1,12 +1,23 @@
 @import 'src/themes/themes.scss';
 
 .header {
-    padding: 20px;
+    padding: 30px;
     text-align: left;
     color: white;
-    background: linear-gradient(to right, #610d74 0%, #ffffff 100%);
+    // background: linear-gradient(to right, #212ff7 60%, #5d83ed 100%);
+    background: linear-gradient(to left, #404470 20%, #0a0d3d 50%, #0a0d3d 50%, #404470 100%);
     font-size: 30px;
-    img{
-        width: 80px;
-    }
+    font-style: italic;
+    font-family: 'Times New Roman', Times, serif;
+    margin-bottom: -40px;
+    font-weight: bold;
+    box-shadow: 2px 2px 30px #03073f;
+  }
+
+  h1 {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    display: flex;
+    padding-bottom: 10px;
+    text-align: center;
+    justify-content: center;
   }

@@ -41,3 +41,26 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   box-sizing: border-box;
   padding: 0;
 }
+
+.btnFil{
+  margin-top: 30px;
+  padding: 10px;
+  background-color: #111662;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+}
+
+button:disabled{
+  background: rgba(black, 0.12);
+}
+
+.logo {
+  width: 190px;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+

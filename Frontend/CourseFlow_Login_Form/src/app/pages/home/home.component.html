@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="home.component.scss">
+    <title>CourseFlow - CourseMap</title>
+</head>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<body>
+
+
+    <div id="header">
+        <div class="header__left">
+            <div class="logo">
+                <img src="../assets/Transparent-White-Logo.png" alt="CourseFlow logo">
+            </div>
+
+            <nav>
+                <ul>
+                    <li><a href="coursemap-page.html">CourseMap</a></li>
+                    <li><a href="../Discovery/discovery-page.html">Discovery</a></li>
+                    <li><a href="../Analytics/analytics-page.html">Analytics</a></li>
+                </ul>
+            </nav>
+
+        </div>
+
+
+        <div class="header__right">
+            <div class="notification-bell">
+                <img src="../assets/updated-notification-bell.png" class="img-header" alt="notification bell">
+            </div>
+
+            <div class="profile-picture">
+                <img src="../assets/blank-profile.webp" class="img-header" alt="profile image">
+            </div>
+        </div>
+    </div>
+
+
+    <div class="content">
+        <div class="coursemap-dashboard">            
+            <div class="customise-header">Customise Coursemap</div>
+
+            <div class="course-details">                
+                <p>Course Type</p>
+                <select id="course-type-select">
+                    <option value="3">Bachelor degree</option> 
+                    <option value="4">Bachelor degree (Honours)</option> 
+                    <option value="2">Associate degree</option> 
+                    <option value="1">Graduate diploma</option>
+                    <option value="2">Masters degree</option>
+                </select>
+                
+                <p>Study Pace</p>
+                <select id="study-pace">
+                    <option value="full-time">Full-time</option>
+                    <option value="part-time">Part-time</option>
+                </select>
+
+                <br><br>
+
+                <label for="previous-credit">Previous Credit:</label>
+                <input type="number" id="previous-credit" name="previous-credit" min="0" max="24" value="">
+
+                <br><br>
+
+                <label for="units-in-progress">Units in progress:</label>
+                <input type="number" id="units-in-progress" name="units-in-progress" min="0" max="4" value="">
+
+                
+                <br><br><br><br><br><br><br><br><br><br><br>
+                
+                <div>
+                    Course progress:
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-section complete" style="width: 0%;"></div>
+                    <div class="progress-section failed" style="width: 0%;"></div>
+                    <div class="progress-section in-progress" style="width: 0%;"></div>
+                    <div class="progress-section upcoming" style="width: 0%;"></div>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div id="unit-modal-template" class="unit-modal">
+                <div class="modal-container">
+
+
+                    <div class="modal-content">
+                        <div class="unit-titles-modal">
+                            <div class="unit-name">Computer Systems</div>
+                            <div class="unit-code">SIT111</div>
+                        </div>
+
+                        <div class="unit-modal-left">
+                            <div class="current-status-modal">Current status: Incomplete</div>
+                            <div class="enrollment-mode">Enrolment modes: T1: Burwood, Waurn Ponds, Online
+                                T2: Burwood, Online</div>
+                            <div class="EFTSL">EFTSL: 0.125</div>
+                            <div class="credit-points">Credit point(s): 1</div>
+                            <div class="prerequisites">Prerequisites: Nil</div>
+                            <div class="corequisites">Corequisites: SIT102 and SIT192</div>
+                            <div class="incompatibility">Incompatibility: SIT101</div>
+                        </div>
+    
+    
+    
+                    </div>
+
+                    <div class="unit-modal-right">
+                        <span class="close">&times;</span>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="coursemap">
+            <div class="coursemap-container">
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="footer">
+        <div class="footer-link">Privacy Policy</div>
+        <div class="footer-link">Thoth Tech</div>
+        <div class="footer-link-icon">Github</div>
+    </div>
+
+    <script src="coursemap-script.js"></script>
+    <script src="coursemap-script-customise-script.js"></script>
+</body>
+</html>
