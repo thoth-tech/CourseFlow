@@ -1,562 +1,474 @@
 [
     {
-    "Code": "STP050",
-    "Name": "Academic Integrity",
-    "Content": "STP050 is a compulsory zero credit point unit in all courses in the Faculty of Science, Engineering and Built Environment. The unit learning and assessment activities provides students with guidance on what constitutes academic integrity.&nbsp; It will allow students to develop knowledge, skills and good practice principles to avoid plagiarism and collusion and thereby maintain academic integrity.",
-    "CreditPoints": "0",
-    "Prerequisite": "Nil",
-    "ULOs": [
-        "Demonstrate an understanding of the values of academic integrity - honesty, trust, fairness respect and responsibility.",
-        "Identify acceptable and unacceptable behaviours related to acting with academic integrity.",
-        "Demonstrate knowledge of appropriate strategies to act with academic integrity."
-    ],
-    "GLOs": [
-        "GLO1",
-        "GLO4",
-        "GLO6"
-    ],
-    "Assessment": [
-        {
-        "Description": "Online Multiple-Choice Questions Test",
-        "Weight": 100.0,
-        "WeekDue": "Week 11 Students are strongly encouraged to complete this unit by the end of Week 3"
-        }
-    ]
+        "Code": "STP050",
+        "Name": "Academic Integrity",
+        "Overview": "This unit is a mandatory zero-credit-point course in the Faculty of Science, Engineering, and Built Environment, designed to educate students on academic integrity and equip them with the skills to prevent plagiarism and collusion.",
+        "UnitChairT1": "Anneke Veenstra (anneke.veenstra@deakin.edu.au)",
+        "UnitChairT2": "Anneke Veenstra (anneke.veenstra@deakin.edu.au)",
+        "UnitChairT3": "David Francis (d.francis@deakin.edu.au)",
+        "Melbourne": "Burwood (Melbourne)",
+        "Geelong": "Waurn Ponds (Geelong)",
+        "Online": "Online (Cloud)",
+        "CreditPoints": "0",
+        "Availability": "Trimester 1, Trimester 2, Trimester 3",
+        "Prerequisite": "Nil",
+        "Hurdle": "To be eligible to obtain a pass in this unit, students must achieve a minimum mark of 85%. Students are allowed unlimited attempts of the on-line assessment.",
+        "OnCampusLearning1": "All resources will be provided on unit site. Students will be learn on their own pace and complete a 30 minutes online Multiple-Choice Questions test.",
+        "OnCampusLearning2": "",
+        "OnCampusLearning3": "",
+        "CloudLearning1": "All resources will be provided on unit site. Students will be learn on their own pace and complete a 30 minutes online Multiple-Choice Questions test.",
+        "CloudLearning2": "",
+        "CloudLearning3": "",
+        "Content": "STP050 is a compulsory zero credit point unit in all courses in the Faculty of Science, Engineering and Built Environment. The unit learning and assessment activities provides students with guidance on what constitutes academic integrity. It will allow students to develop knowledge, skills and good practice principles to avoid plagiarism and collusion and thereby maintain academic integrity.",
+        "Note": "There is no prescribed text. Unit materials are provided via the unit site. This includes unit topic readings and references to further information.",
+        "link": "https://www.deakin.edu.au/courses-search/unit.php?unit=STP050&year=2023"
     },
     {
-    "Code": "SIT010",
-    "Name": "Safety Induction Program",
-    "Content": "This zero credit point unit is a program of safety information for students involved in information technology laboratory work. The program encompasses information technology hazards, building evacuation procedures, laboratory accident management and first aid procedures and safety work procedures particular to laboratory work.",
-    "CreditPoints": "0",
-    "Prerequisite": "Nil",
-    "ULOs": [
-        "Demonstrate a basic understanding of laboratory safety practices employed within the School and across the University."
-    ],
-    "GLOs": [
-        "GLO1"
-    ],
-    "Assessment": [
-        {
-        "Description": "Multiple-choice test",
-        "Weight": 100.0,
-        "WeekDue": "Week 4"
-        }
-    ]
+        "Code": "STP010",
+        "Name": "Safety Induction Program",
+        "Overview": "This zero-credit-point unit focuses on safety information for IT lab students, covering IT hazards, evacuation, lab accident management, first aid, and lab-specific safety procedures.",
+        "UnitChairT1": "Dr Musa Mammadov (musa.mammadov@deakin.edu.au)",
+        "UnitChairT2": "Dr Musa Mammadov (musa.mammadov@deakin.edu.au)",
+        "UnitChairT3": "Nil",
+        "Melbourne": "Burwood (Melbourne)",
+        "Geelong": "Waurn Ponds (Geelong)",
+        "Online": "Online (Cloud)",
+        "CreditPoints": "0",
+        "Availability": "Trimester 1, Trimester 2",
+        "Prerequisite": "Nil",
+        "Hurdle": "To be eligible to obtain a pass in this unit, students must achieve a minimum mark of 70%. Multiple attempts of the on-line assessment are permitted.",
+        "OnCampusLearning1": "All resources will be provided on unit site. Students will be learn on their own pace and complete a 30 minutes online Multiple-Choice Questions quiz.",
+        "OnCampusLearning2": "",
+        "OnCampusLearning3": "",
+        "CloudLearning1": "All resources will be provided on unit site. Students will be learn on their own pace and complete a 30 minutes online Multiple-Choice Questions quiz.",
+        "CloudLearning2": "",
+        "CloudLearning3": "",
+        "Content": "This zero credit point unit is a program of safety information for students involved in information technology laboratory work. The program encompasses information technology hazards, building evacuation procedures, laboratory accident management and first aid procedures and safety work procedures particular to laboratory work.",
+        "Note": "There is no prescribed text. Unit materials are provided via the unit site. This includes unit topic readings and references to further information.",
+        "link": "https://www.deakin.edu.au/courses-search/unit.php?unit=SIT010"
     },
     {
-    "Code": "STP010",
-    "Name": "Career Tools for Employability",
-    "Content": "This zero credit point unit requires students to undertake and pass the introductory unit online prior to enrolling in a Faculty of Science, Engineering and Built Environment Professional Practice unit, Internship unit, Work Integrated Learning (WIL) project and or Industry Based Learning (IBL) unit.",
-    "CreditPoints": "0",
-    "Prerequisite": "Nil",
-    "ULOs": [
-        "You will create three personalised career tools that will enhance your employability.",
-        "You will demonstrate achievement of foundational knowledge required for your career education journey as a professional."
-    ],
-    "GLOs": [
-        "GLO6"
-    ],
-    "Assessment": [
-        {
-        "Description": "Online multiple choice quiz",
-        "Weight": 100.0,
-        "WeekDue": "Week 6"
-        }
-    ]
+        "Code": "SIT190",
+        "Name": "Introduction to Functions, Relations and Graphs",
+        "Overview": "SIT190 is a foundational math course covering calculus and essential concepts for students across disciplines, including algebra, trigonometry, differentiation, integration, and real-world applications.",
+        "UnitChairT1": "Dr Ria Rushin Joseph (ria.joseph@deakin.edu.au)",
+        "UnitChairT2": "Dr Ria Rushin Joseph (ria.joseph@deakin.edu.au)",
+        "UnitChairT3": "Nil",
+        "Melbourne": "Burwood (Melbourne)",
+        "Geelong": "Waurn Ponds (Geelong)",
+        "Online": "Online (Cloud)",
+        "CreditPoints": "1",
+        "Availability": "Trimester 1, Trimester 2",
+        "Prerequisite": "Students who have successfully completed VCE Maths Methods 3 and 4 and/or Specialist Maths 3 and 4 are not normally eligible to enrol in this unit.",
+        "Hurdle": "To be eligible to obtain a pass in this unit, students must meet certain milestones as part of the portfolio.",
+        "OnCampusLearning1": "- 1 x 3 hour seminar per week",
+        "OnCampusLearning2": "- Weekly meetings",
+        "OnCampusLearning3": "",
+        "CloudLearning1": "- Online independent and collaborative learning including 1 x 2 hour online seminar per week",
+        "CloudLearning2": "- Weekly meetings",
+        "CloudLearning3": "",
+        "Content": "SIT190 aims to develop student understanding of the fundamental functions of applied mathematics, and to introduce calculus to students who have not previously studied it in secondary school. It is designed to prepare students from a number of different disciplines for learning tertiary level mathematics. Students will explore the algebra of polynomials, exponentials, logarithms, trigonometric functions and matrices, and learn rules for differentiating and integrating these functions. Applications studied include graph sketching, maximisation and minimisation problems, areas and kinematics.",
+        "Note": "The texts and reading list for the unit can be found on the University Library. Note that a future teaching period's reading list may not be available until a month prior to the start of that teaching period so you may wish to use the relevant trimester's prior year reading list as a guide only.",
+        "link": "https://www.deakin.edu.au/courses-search/unit.php?unit=SIT190"
     },
     {
-    "Code": "SIT111",
-    "Name": "Computer Systems",
-    "Content": "Over the past 70&nbsp;years,&nbsp;computers have revolutionised nearly every facet of modern life, from healthcare to education, manufacturing to transport, and entertainment to agriculture. Computing hardware and the algorithms encoded into software are thus vital to the continued growth of modern society, as are computer scientists and software engineers - the professionals who design and develop computational solutions to many of the world&rsquo;s problems. In this&nbsp;unit,&nbsp;students will learn the building blocks of computing systems, from basic logic gates to software applications. The unit will provide step-by-step guidance on how to understand the layers of abstractions on which computer systems are based on. Students will engage in a series of activities and tasks to learn how each layer functions and how they operate together as a whole to make a complete computer system.",
-    "CreditPoints": "1",
-    "Prerequisite": "Nil",
-    "ULOs": [
-        "Explain the hardware and software layers of abstraction used in the design and implementation of computer systems, the purpose and function of each layer, and how they operate together to manage complexity.",
-        "Describe and demonstrate how each of the layers within a computer system can be built using lower level abstractions, from the design of chips and gates through assembly language, up to operating systems, high-level languages and applications .",
-        "Identify IT roles relevant to career aspirations, describe their respective skills, responsibilities &amp; professional practices, and reflect on personal strengths and required knowledge and skill development for successful employment in these roles.",
-        "Independently identify knowledge gaps and effectively seek and use appropriate learning resources to acquire necessary knowledge."
-    ],
-    "GLOs": [
-        "GLO1",
-        "GLO3",
-        "GLO6",
-        "GLO8"
-    ],
-    "Assessment": [
-        {
-        "Description": "Learning portfolio",
-        "Weight": 100.0,
-        "WeekDue": "Weekly submissions. Final submission Week 12"
-        }
-    ]
+        "Code": "SIT111",
+        "Name": "Computer Systems",
+        "Overview": " In this unit, students will learn the building blocks of computing systems and the tools used information technology professionals. The unit connects students with hardware and software elements of computer systems, ensuring they are ready to engage with configuring, operating, and building computing systems.",
+        "UnitChairT1": "Dr Niroshinie Fernando (niroshinie.fernando@deakin.edu.au)",
+        "UnitChairT2": "Dr Feifei Chen (feifei.chen@deakin.edu.au)",
+        "UnitChairT3": "Nil",
+        "Melbourne": "Burwood (Melbourne)",
+        "Geelong": "Waurn Ponds (Geelong)",
+        "Online": "Online (Cloud)",
+        "CreditPoints": "1",
+        "Availability": "Trimester 1, Trimester 2",
+        "Prerequisite": "Nil",
+        "Hurdle": "To be eligible to obtain a pass in this unit, students must meet certain milestones as part of the portfolio.",
+        "OnCampusLearning1": "- 1 x 3 hour seminar per week",
+        "OnCampusLearning2": "- Weekly meetings",
+        "OnCampusLearning3": "",
+        "CloudLearning1": "- Online independent and collaborative learning including 1 x 2 hour seminar per week",
+        "CloudLearning2": "- Weekly meetings",
+        "CloudLearning3": "",
+        "Content": "Over the past 70 years, computers have revolutionised nearly every facet of modern life, from healthcare to education, manufacturing to transport, and entertainment to agriculture. Computing hardware and the algorithms encoded into software are thus vital to the continued growth of modern society, as are computer scientists and software engineers - the professionals who design and develop computational solutions to many of the world's problems",
+        "Note": "Equipment requirements: Learning experiences and assessment activities in this unit require that students have access to specific computing equipment, such as single-board computers and microcontrollers. The expected cost of this equipment for this unit is $150. This equipment will also be usable in subsequent units.",
+        "link": "https://www.deakin.edu.au/courses-search/unit.php?unit=SIT111"
     },
     {
-    "Code": "SIT192",
-    "Name": "Discrete Mathematics",
-    "Content": "In this unit you will explore the foundations of discrete mathematics, the basis for mathematical reasoning in applied and computational sciences. You will learn how to rigorously build, from first principles, the tools needed to address a wide range of mathematical and scientific problems. The topics you will cover include number theory, propositional and predicate logic, graph theory, sets, functions, recurrences and combinatorics.&nbsp;SIT192 is designed to prepare you for further study in disciplines where discrete mathematics play a fundamental or foundational role: cryptography, networks, computer programming, and analysis of algorithms.",
-    "CreditPoints": "1",
-    "Prerequisite": "Nil",
-    "ULOs": [
-        "Understand and apply tools from discrete mathematics to solve complex mathematical problems.",
-        "Design and implement rigorous problem-solving strategies from first principles.",
-        "Plan and reflect on task management strategies to successfully fulfil responsibilities",
-        "Identify knowledge gaps and effectively seek and use appropriate learning resources to acquire necessary knowledge"
-    ],
-    "GLOs": [
-        "GLO1",
-        "GLO3",
-        "GLO4",
-        "GLO6"
-    ],
-    "Assessment": [
-        {
-        "Description": "Learning portfolio",
-        "Weight": 100.0,
-        "WeekDue": "Weekly task submissions with final submission in Week 12"
-        }
-    ]
+        "Code": "SIT192",
+        "Name": "Discrete Mathematics",
+        "Overview": "In this unit you will explore the foundations of discrete mathematics, the basis for mathematical reasoning in applied and computational sciences.",
+        "UnitChairT1": "Prof. Julien Ugon (julien.ugon@deakin.edu.au)",
+        "UnitChairT2": "Prof. Simon James (simon.james@deakin.edu.au)",
+        "UnitChairT3": "Nil",
+        "Melbourne": "Burwood (Melbourne)",
+        "Geelong": "Waurn Ponds (Geelong)",
+        "Online": "Online (Cloud)",
+        "CreditPoints": "1",
+        "Availability": "Trimester 1, Trimester 2",
+        "Prerequisite": "Nil",
+        "Hurdle": "To be eligible to obtain a pass in this unit, students must meet certain milestones as part of the Learning Portfolio.",
+        "OnCampusLearning1": "- 1 x 3 hour seminar per week",
+        "OnCampusLearning2": "- Weekly meetings",
+        "OnCampusLearning3": "",
+        "CloudLearning1": "- Online independent and collaborative learning including 1 x 2 hour online seminar per week",
+        "CloudLearning2": "- Weekly meetings",
+        "CloudLearning3": "",
+        "Content": "Studentes will learn how to rigorously build, from first principles, the tools needed to address a wide range of mathematical and scientific problems. The topics you will cover include number theory, propositional and predicate logic, graph theory, sets, functions, recurrences and combinatorics. SIT192 is designed to prepare you for further study in disciplines where discrete mathematics play a fundamental or foundational role: cryptography, networks, computer programming, and analysis of algorithms.",
+        "Note": "Assumed knowledge: Year 12 mathematics or equivalent. The unit SIT190 is recommended for students who did not complete VCE Mathematical Methods 3 and ",
+        "link": "https://www.deakin.edu.au/courses-search/unit.php?unit=SIT192"
     },
     {
-    "Code": "SIT112",
-    "Name": "Data Science Concepts",
-    "Content": "Data science is an emerging field and data scientists must be able to know how to make sense of data. In SIT112, students will develop knowledge of fundamentals in data science, in particular data manipulation and algorithms for analytics. The unit will also cover the practice of data science including ethical and responsible behaviour when crawling, cleaning, analysing, representing and repurposing the data. Students will be able to obtain data, recognise data formats, summarise and visualise relationships in the data, perform exploratory data analysis tasks and build predictive models.",
-    "CreditPoints": "1",
-    "Prerequisite": "Nil",
-    "ULOs": [
-        "Demonstrate data acquisition, data representation and data pre-processing skills to describe, analyse and repurpose data from a variety of sources.",
-        "Apply critical thinking and statistical techniques to understand and visualize relationships in data.",
-        "Apply machine-learning techniques in exploratory data analysis for problems related to commerce, industry and research.",
-        "Design and compute a statistical relationships in data including correlation and linear regression.",
-        "Design and develop data-driven algorithms for outcome prediction."
-    ],
-    "GLOs": [
-        "GLO1",
-        "GLO2",
-        "GLO3",
-        "GLO4",
-        "GLO5",
-        "GLO7"
-    ],
-    "Assessment": [
-        {
-        "Description": "Learning Portfolio",
-        "Weight": 80.0,
-        "WeekDue": "Weekly task submissions with final learning portfolio finalised by the end of week 12"
-        },
-        {
-        "Description": "End-of-Unit Assessment",
-        "Weight": 20.0,
-        "WeekDue": "End-of-Unit Assessment period"
-        }
-    ]
+        "Code": "SIT112",
+        "Name": "Introduction to Data Science and Artificial Intelligence",
+        "Overview": "Thi unit will also cover the practice of data science including ethical and responsible behaviour when crawling, cleaning, analysing, representing and repurposing the data. Students will be able to obtain data, recognise data formats, summarise and visualise relationships in the data, perform exploratory data analysis tasks and build predictive models.",
+        "UnitChairT1": "Dr Davoud Mougouei (davoud.mougouei@deakin.edu.au)",
+        "UnitChairT2": "Dr Davoud Mougouei (davoud.mougouei@deakin.edu.au)",
+        "UnitChairT3": "Nil",
+        "Melbourne": "Burwood (Melbourne)",
+        "Geelong": "Waurn Ponds (Geelong)",
+        "Online": "Online (Cloud)",
+        "CreditPoints": "1",
+        "Availability": "Trimester 1, Trimester 2",
+        "Prerequisite": "Nil",
+        "Hurdle": "To be eligible to obtain a pass in this unit, students must meet certain milestones as part of the portfolio.",
+        "OnCampusLearning1": "- 1 x 2 hour online lecture per week",
+        "OnCampusLearning2": "- 1 x 2 hour practical experiences (workshop) per week",
+        "OnCampusLearning3": "- Weekly meeting",
+        "CloudLearning1": "- Online independent and collaborative learning including 1 x 2 hour online lecture per week (recordings provided)",
+        "CloudLearning2": "- 1 x 2 hour online practical experiences (workshop) per week",
+        "CloudLearning3": "- Weekly meeting",
+        "Content": "Data science is an emerging field and data scientists must be able to know how to make sense of data. In SIT112, students will develop knowledge of fundamentals in data science, in particular data manipulation and algorithms for analytics.",
+        "Note": "The texts and reading list for the unit can be found on the University Library. Note that a future teaching period's reading list may not be available until a month prior to the start of that teaching period so you may wish to use the relevant trimester's prior year reading list as a guide only.",
+        "link": "https://www.deakin.edu.au/courses-search/unit.php?unit=SIT112"
     },
     {
-    "Code": "SIT102",
-    "Name": "Introduction to Programming",
-    "Content": "Computing systems enable innovation and dramatic change in the world and the way we live in it. The capability of these systems evolve through people designing and developing new and innovative software solutions. Whether you are driving this revolution, or benefiting from it, you need to learn how computers work, and how people create software to drive computing processes. In this unit you will learn the fundamentals of structured programming and explore the mechanics of how these programs operate within the computer. The foundational knowledge and skills that you build in this unit will underpin both further programming units and your understanding of broader computing and communication systems in Information Technology contexts.",
-    "CreditPoints": "1",
-    "Prerequisite": "Nil",
-    "ULOs": [
-        "Evaluate procedural program code for correct use of coding conventions, and use code tracing and debugging techniques to identify and correct issues.",
-        "Design, develop,and test procedural programs using specified programming languages to achieve defined program goals, including effective use of data types, programming statements, control flow structures and modularisation techniques.",
-        "Explain the principles of structured procedural programming, using appropriate terminology and by relating these principles to programming syntax and structures developed.",
-        "Analyse, critique the quality, and reflect upon a portfolio of artefacts to justify the achievements of specified objectives and goals with evidence."
-    ],
-    "GLOs": [
-        "GLO1",
-        "GLO2",
-        "GLO4",
-        "GLO5",
-        "GLO6"
-    ],
-    "Assessment": [
-        {
-        "Description": "Learning portfolio",
-        "Weight": 100.0,
-        "WeekDue": "Week 12"
-        }
-    ]
+        "Code": "SIT102",
+        "Name": "Introduction to Programming",
+        "Overview": "In this unit, student will learn the fundamentals of structured programming and explore the mechanics of how these programs operate within the computer. The foundational knowledge and skills that you build in this unit will underpin both further programming units and your understanding of broader computing and communication systems in Information Technology contexts.",
+        "UnitChairT1": "Dr Glory Lee (glory.lee@deakin.edu.au)",
+        "UnitChairT2": "Mr Aaron Spence (aaron.spence@deakin.edu.au)",
+        "UnitChairT3": "Nil",
+        "Melbourne": "Burwood (Melbourne)",
+        "Geelong": "Waurn Ponds (Geelong)",
+        "Online": "Online (Cloud)",
+        "CreditPoints": "1",
+        "Availability": "Trimester 1, Trimester 2",
+        "Prerequisite": "Nil",
+        "Hurdle": "To be eligible to obtain a pass in this unit, students must meet certain milestones as part of the portfolio.",
+        "OnCampusLearning1": "- 1 x 3 hour seminar per week, weekly meetings",
+        "OnCampusLearning2": "- 4 x 2 hour assessments (weeks 4, 7, 9, and 11)",
+        "OnCampusLearning3": "",
+        "CloudLearning1": "- Online independent and collaborative learning including 1 x 2 hour online seminar per week",
+        "CloudLearning2": "- 2 x 20 minute assessments (between weeks 7 and 11)",
+        "CloudLearning3": "- Weekly meeting",
+        "Content": "Computing systems enable innovation and dramatic change in the world and the way we live in it. The capability of these systems evolve through people designing and developing new and innovative software solutions. Whether you are driving this revolution, or benefiting from it, you need to learn how computers work, and how people create software to drive computing processes.",
+        "Note": "Equipment requirements: Learning experiences and assessment activities in this unit require that students have access to specific computing equipment, including a microphone/headset and webcam. The expected cost of this equipment for this unit is $80. This equipment will also be usable in subsequent units. ",
+        "link": "https://www.deakin.edu.au/courses-search/unit.php?unit=SIT102"
     },
     {
-    "Code": "SIT232",
-    "Name": "Object-Oriented Development",
-    "Content": "SIT232 introduces students to object-oriented programming as the fundamental paradigm of modern programming languages and software development. Upon completion of the unit, the students will be ready to develop real-world software following the software design and structure best practices.",
-    "CreditPoints": "1",
-    "Prerequisite": "One of SIT102, SIT153, SIT172 or SEP105",
-    "ULOs": [
-        "Evaluate simple program code for correct use of coding conventions, and use code tracing and debugging techniques to identify and correct issues.",
-        "Apply and explain the principles of object-oriented programming including abstraction, encapsulation, inheritance and polymorphism.",
-        "Implement and test small object-oriented programs that conform to planned system structures and requirements.",
-        "Design, communicate, and evaluate solution structures using appropriate diagrams and textual descriptions.",
-        "Justify meeting specified outcomes through providing relevant evidence and critiquing the quality of that evidence against given criteria."
-    ],
-    "GLOs": [
-        "GLO1",
-        "GLO2",
-        "GLO4",
-        "GLO5",
-        "GLO6"
-    ],
-    "Assessment": [
-        {
-        "Description": "Learning portfolio",
-        "Weight": 100.0,
-        "WeekDue": "Week 12"
-        }
-    ]
+        "Code": "SIT232",
+        "Name": "Object-Oriented Development",
+        "Overview": "Students will learn about the fundamental paradigm of modern programming languages and software development.",
+        "UnitChairT1": "Dr Sergey Polyakovskiy (sergey.polyakovskiy@deakin.edu.au)",
+        "UnitChairT2": "Dr Sergey Polyakovskiy (sergey.polyakovskiy@deakin.edu.au)",
+        "UnitChairT3": "Nil",
+        "Melbourne": "Burwood (Melbourne)",
+        "Geelong": "Waurn Ponds (Geelong)",
+        "Online": "Online (Cloud)",
+        "CreditPoints": "1",
+        "Availability": "Trimester 1, Trimester 2",
+        "Prerequisite": "One of SIT102, SIT153, SIT172 or SEP105",
+        "Hurdle": "To be eligible to obtain a pass in this unit, students must meet certain milestones as part of the portfolio.",
+        "OnCampusLearning1": "- 1 x 2 hour online lecture per week",
+        "OnCampusLearning2": "- 1 x 2 hour practical experience (workshop) per week",
+        "OnCampusLearning3": "- Weekly meeting",
+        "CloudLearning1": "- Online independent and collaborative learning including 1 x 2 hour online lecture per week (recordings provided)",
+        "CloudLearning2": "- 1 x 2 hour online practical experience (workshop) per week",
+        "CloudLearning3": "- Weekly meeting",
+        "Content": "SIT232 introduces students to object-oriented programming as the fundamental paradigm of modern programming languages and software development. Upon completion of the unit, the students will be ready to develop real-world software following the software design and structure best practices.",
+        "Note": "The texts and reading list for the unit can be found on the University Library. Note that a future teaching period's reading list may not be available until a month prior to the start of that teaching period so you may wish to use the relevant trimester's prior year reading list as a guide only.",
+        "link": "https://www.deakin.edu.au/courses-search/unit.php?unit=SIT232"
     },
     {
-    "Code": "SIT103",
-    "Name": "Database Fundamentals",
-    "Content": "This unit will provide a solid foundation for the design, implementation and management of relational database systems. Data modelling is introduced, focusing on entity-relationship (ER) modelling. The skills required to construct such ER diagrams will be explored, with a focus on ensuring that the semantics of the model match those of the real-world it is representing. The relational data model will be presented and the functionality it affords will be explored. The process of constructing, maintaining and retrieving information from the database using SQL will be a focus of this unit.&nbsp;",
-    "CreditPoints": "1",
-    "Prerequisite": "Nil",
-    "ULOs": [
-        "Interpret and explain fundamental concepts of data, information, and knowledge and demonstrate an understanding of differences between traditional file systems and databases.",
-        "Analyse real-world problems to identify data requirements and apply data modelling concepts to design and develop Entity Relationship Diagrams for efficient data representation and storage.",
-        "Design, implement, evaluate and maintain relational database systems using SQL and Database Management Systems and explain the purpose of various SQL commands and operations.",
-        "Analyse and critique achievements of learning outcomes and justify meeting specified outcomes through providing relevant evidence and evaluating the quality of that evidence against given criteria."
-    ],
-    "GLOs": [
-        "GLO1",
-        "GLO3",
-        "GLO4",
-        "GLO5",
-        "GLO6"
-    ],
-    "Assessment": [
-        {
-        "Description": "Learning Portfolio",
-        "Weight": 100.0,
-        "WeekDue": "Week 12"
-        }
-    ]
+        "Code": "SIT103",
+        "Name": "Database Fundamentals",
+        "Overview": "Students will learn how to construct ER diagrams, ensuring that the model's semantics match those of the real-world object it represents. It also teaches how to construct, maintain, and retrieve information relational databases using SQL.",
+        "UnitChairT1": "Dr Sunil Aryal (sunil.aryal@deakin.edu.au)",
+        "UnitChairT2": "Dr Shamsul Huda (shamsul.huda@deakin.edu.au)",
+        "UnitChairT3": "Prof. Jianxin Li (jianxin.li@deakin.edu.au)",
+        "Melbourne": "Burwood (Melbourne)",
+        "Geelong": "Waurn Ponds (Geelong)",
+        "Online": "Online (Cloud)",
+        "CreditPoints": "1",
+        "Availability": "Trimester 1, Trimester 2, Trimester 3",
+        "Prerequisite": "Nil",
+        "Hurdle": "To be eligible to obtain a pass in this unit, students must meet certain milestones as part of the portfolio.",
+        "OnCampusLearning1": "- 1 x 2 hour online lecture per week",
+        "OnCampusLearning2": "- 1 x 2 hour practical experience (workshop) per week",
+        "OnCampusLearning3": "- Weekly meeting",
+        "CloudLearning1": "- Online independent and collaborative learning including 1 x 2 hour online lecture per week (recordings provided)",
+        "CloudLearning2": "- 1 x 2 hour online practical experience (workshop) per week",
+        "CloudLearning3": "- Weekly meeting",
+        "Content": "This unit covers the fundamentals of designing, implementing, and managing relational database systems in industry-standard IT applications. It introduces data modelling, with a specific focus on entity-relationship (ER) modelling",
+        "Note": "The texts and reading list for the unit can be found on the University Library. Note that a future teaching period's reading list may not be available until a month prior to the start of that teaching period so you may wish to use the relevant trimester's prior year reading list as a guide only.",
+        "link": "https://www.deakin.edu.au/courses-search/unit.php?unit=SIT103"
     },
     {
-    "Code": "SIT292",
-    "Name": "Linear Algebra for Data Analysis",
-    "Content": "Linear algebra is the foundation for many sophisticated mathematical and computational methods. In SIT292 students will learn the basics of linear algebra, and solve systems of linear equations. This unit extends students ability apply mathematical formulae and to operate with complex mathematical objects. SIT292 introduces students to vector spaces, matrix theory, systems of linear equations and methods for solving them, eigenvalues and eigenvectors, and their application to similarity of diagonal matrices. The techniques that students learn from this unit will enable them with the analysis of complex data and ensuring its reliability in studies of cryptography.",
-    "CreditPoints": "1",
-    "Prerequisite": "SIT192",
-    "ULOs": [
-        "Perform operations with sets and their subsets and with binary relations.",
-        "Apply the methods of solving linear systems of equations calculating determinants, eigenvalues and eigenvectors of matrices and performing matrix transformations.",
-        "Determine the basis and dimension of linear vector spaces and apply orthogonalisation procedures.",
-        "Apply the theory of linear vector spaces for linear coding and decoding."
-    ],
-    "GLOs": [
-        "GLO1",
-        "GLO4",
-        "GLO5"
-    ],
-    "Assessment": [
-        {
-        "Description": "Problem solving task 1",
-        "Weight": 20.0,
-        "WeekDue": "Week 4"
-        },
-        {
-        "Description": "Problem solving task 2",
-        "Weight": 30.0,
-        "WeekDue": "Week 8"
-        },
-        {
-        "Description": "Investigation",
-        "Weight": 20.0,
-        "WeekDue": "Week 11"
-        },
-        {
-        "Description": "Online tests",
-        "Weight": 30.0,
-        "WeekDue": "Weeks 6 and 12"
-        }
-    ]
+        "Code": "SIT292",
+        "Name": "Linear Algebra for Data Analysis",
+        "Overview": "The techniques that students learn from this unit will enable them with the analysis of complex data and ensuring its reliability in studies of cryptography.",
+        "UnitChairT1": "Nil",
+        "UnitChairT2": "Prof Gleb Beliakov (gleb.beliakov@deakin.edu.au)",
+        "UnitChairT3": "Nil",
+        "Melbourne": "Burwood (Melbourne)",
+        "Online": "Online (Cloud)",
+        "CreditPoints": "1",
+        "Availability": "Trimester 2",
+        "Prerequisite": "SIT192",
+        "Hurdle": "To be eligible to obtain a pass in this unit, students must meet certain milestones as part of the Learning Portfolio.",
+        "OnCampusLearning1": "- 1 x 3 hour seminar per week",
+        "OnCampusLearning2": "- Weekly meetings",
+        "OnCampusLearning3": "",
+        "CloudLearning1": "- Online independent and collaborative learning including 1 x 2 hour online seminar per week",
+        "CloudLearning2": "- Weekly meetings",
+        "CloudLearning3": "",
+        "Content": "Linear algebra is the foundation for many sophisticated mathematical and computational methods. In SIT292 students will learn the basics of linear algebra, and solve systems of linear equations. This unit extends students ability apply mathematical formulae and to operate with complex mathematical objects. SIT292 introduces students to vector spaces, matrix theory, systems of linear equations and methods for solving them, eigenvalues and eigenvectors, and their application to similarity of diagonal matrices",
+        "Note": "The texts and reading list for the unit can be found on the University Library. Note that a future teaching period's reading list may not be available until a month prior to the start of that teaching period so you may wish to use the relevant trimester's prior year reading list as a guide only.",
+        "link": "https://www.deakin.edu.au/courses-search/unit.php?unit=SIT292"
     },
     {
-    "Code": "SIT202",
-    "Name": "Computer Networks and Communication",
-    "Content": "<span lang=\"EN-AU\" xml:lang=\"EN-AU\" data-contrast=\"auto\">A strong understanding of computer networks is fundamental for cyber security. This unit will give students the deep understanding they need of how network protocols across the stack operate, while providing them with the programming and technical skills needed to analyse them. This will provide the focused technical foundation they need to be successful in the course.</span><span data-ccp-props=\"{&quot;335559685&quot;:113,&quot;335559737&quot;:113}\">&nbsp;</span>",
-    "CreditPoints": "1",
-    "Prerequisite": "<p class=\"normaltabletext\">SIT102 and SIT192",
-    "ULOs": [
-        "Explain the layers of abstraction involved in the computer network protocol stack, and how these enable data to flow between machines within a network.",
-        "Design and develop programs that interact with networks at different levels with the network protocol stack to implement and analyse common protocols.",
-        "Use industry-relevant networking tools to analyse different network configurations, real network data, networking protocols, and their operations, and provide networking solutions to given problems.",
-        "Reflect and critique on how networks and protocols are constructed and apply those concepts in analysing real network issues related to security and scalability."
-    ],
-    "GLOs": [
-        "GLO1",
-        "GLO3",
-        "GLO4",
-        "GLO5"
-    ],
-    "Assessment": [
-        {
-        "Description": "Learning portfolio",
-        "Weight": 100.0,
-        "WeekDue": "Weekly submissions. Final submission Week 12"
-        }
-    ]
+        "Code": "SIT202",
+        "Name": "Computer Networks and Communication",
+        "Overview": "This unit provides students with a deep understanding of computer networks, including protocol operation across the stack, programming skills for analysis, and a strong technical foundation crucial for success in cybersecurity.",
+        "UnitChairT1": "Dr Chathu Ranaweera (chathu.ranaweera@deakin.edu.au)",
+        "UnitChairT2": "Dr Glory Lee (glory.lee@deakin.edu.au)",
+        "UnitChairT3": "Nil",
+        "Melbourne": "Burwood (Melbourne)",
+        "Geelong": "Waurn Ponds (Geelong)",
+        "Online": "Online (Cloud)",
+        "CreditPoints": "1",
+        "Availability": "Trimester 1, Trimester 2",
+        "Prerequisite": "SIT102 and SIT192",
+        "Hurdle": "To be eligible to obtain a pass in this unit, students must meet certain milestones as part of the portfolio.",
+        "OnCampusLearning1": "- 1 x 3 hour seminar per week",
+        "OnCampusLearning2": "- Weekly meetings",
+        "OnCampusLearning3": "",
+        "CloudLearning1": "- Online independent and collaborative learning including 1 x 2 hour online seminar per week",
+        "CloudLearning2": "- Weekly meetings",
+        "CloudLearning3": "",
+        "Content": "A strong understanding of computer networks is fundamental for cyber security. This unit will give students the deep understanding they need of how network protocols across the stack operate, while providing them with the programming and technical skills needed to analyse them. This will provide the focused technical foundation they need to be successful in the course.",
+        "Note": "The texts and reading list for the unit can be found on the University Library. Note that a future teaching period's reading list may not be available until a month prior to the start of that teaching period so you may wish to use the relevant trimester's prior year reading list as a guide only.",
+        "link": "https://www.deakin.edu.au/courses-search/unit.php?unit=SIT202"
     },
     {
-    "Code": "SIT221",
-    "Name": "Data Structures and Algorithms",
-    "Content": "SIT221 introduces students to in memory data modelling and computational trade-offs when developing software. Computing platforms from Internet-Of-Things (IoT) devices to supercomputers have limited or restricted resources available to software engineers in terms of memory, computational power, and energy consumption. Writing efficient and high-quality programs is the technical skill every technology company is after. This unit will extend student programming capabilities by exploring the application and implementation of different data structures and algorithms and considerations associated with appropriate selection of these tools to meet different system requirements.",
-    "CreditPoints": "1",
-    "Prerequisite": "SIT131 or SIT232",
-    "ULOs": [
-        "Evaluate the memory usage and computational complexity of different solution strategies and use this to provide recommendations in terms of solution direction for given problem scenarios.",
-        "Create and use a range of data structures and algorithms to design solutions and implement programs that address specified requirements and constraints.",
-        "Document problem and solution constraints, design decisions, and trade-offs involved in creating software solutions for a given problem."
-    ],
-    "GLOs": [
-        "GLO1",
-        "GLO2",
-        "GLO4",
-        "GLO5"
-    ],
-    "Assessment": [
-        {
-        "Description": "Learning portfolio",
-        "Weight": 100.0,
-        "WeekDue": "Week 12"
-        }
-    ]
+        "Code": "SIT221",
+        "Name": "Data Structures and Algorithms",
+        "Overview": "This unit will extend student programming capabilities by exploring the application and implementation of different data structures and algorithms and considerations associated with appropriate selection of these tools to meet different system requirements.",
+        "UnitChairT1": "Dr Sergey Polyakovskiy (sergey.polyakovskiy@deakin.edu.au)",
+        "UnitChairT2": "Nil",
+        "UnitChairT3": "Nil",
+        "Melbourne": "Burwood (Melbourne)",
+        "Geelong": "Waurn Ponds (Geelong)",
+        "Online": "Online (Cloud)",
+        "CreditPoints": "1",
+        "Availability": "Trimester 1",
+        "Prerequisite": "SIT131 or SIT232",
+        "Hurdle": "To be eligible to obtain a pass in this unit, students must meet certain milestones as part of the portfolio.",
+        "OnCampusLearning1": "- 1 x 2 hour online lecture per week",
+        "OnCampusLearning2": "- 1 x 2 hour practical experience (workshop) per week",
+        "OnCampusLearning3": "- Weekly meeting",
+        "CloudLearning1": "- Online independent and collaborative learning including 1 x 2 hour online lecture per week (recordings provided)",
+        "CloudLearning2": "- 1 x 2 hour practical experience (workshop) per week",
+        "CloudLearning3": "- Weekly meeting",
+        "Content": "SIT221 introduces students to in memory data modelling and computational trade-offs when developing software. Computing platforms from Internet-Of-Things (IoT) devices to supercomputers have limited or restricted resources available to software engineers in terms of memory, computational power, and energy consumption. Writing efficient and high-quality programs is the technical skill every technology company is after.",
+        "Note": "The texts and reading list for the unit can be found on the University Library. Note that a future teaching period's reading list may not be available until a month prior to the start of that teaching period so you may wish to use the relevant trimester's prior year reading list as a guide only.",
+        "link": "https://www.deakin.edu.au/courses-search/unit.php?unit=SIT221"
     },
     {
-    "Code": "SIT215",
-    "Name": "Computational Intelligence",
-    "Content": "The development of intelligent systems has been a central quest of computer scientists for more than fifty years, with the objective of creating artificial systems that can solve problems traditionally achievable only by humans. This field is underpinned by a range of computational patterns and methods that cover problems such as searching, problem solving, reasoning, knowledge representation and learning. In this unit students will investigate, through a range of problem-based learning activities, a range of artificial and computational intelligence techniques that underpin modern, advanced intelligent systems such as autonomous vehicles, robotics, game-playing agents, and expert systems.",
-    "CreditPoints": "1",
-    "Prerequisite": "SIT192 and SIT112 OR SIT114",
-    "ULOs": [
-        "Apply specific algorithms and data structures to model a range of problems arising in intelligent systems development.",
-        "Design and implement software artefacts to demonstrate effectiveness and efficiency of solutions for intelligent systems development.",
-        "Apply theoretical concepts and models to explain and communicate the design of intelligent systems."
-    ],
-    "GLOs": [
-        "GLO1",
-        "GLO2",
-        "GLO4",
-        "GLO5",
-        "GLO7"
-    ],
-    "Assessment": [
-        {
-        "Description": "Problem solving tasks (group)",
-        "Weight": 40.0,
-        "WeekDue": "Weeks 5 and 7"
-        },
-        {
-        "Description": "Quiz",
-        "Weight": 20.0,
-        "WeekDue": "Week 9"
-        },
-        {
-        "Description": "Project",
-        "Weight": 40.0,
-        "WeekDue": "Week 11"
-        }
-    ]
+        "Code": "SIT215",
+        "Name": "Computational Intelligence",
+        "Overview": "In this unit students will investigate, through a range of problem-based learning activities, a range of artificial and computational intelligence techniques that underpin modern, advanced intelligent systems such as autonomous vehicles, robotics and game-playing agents.",
+        "UnitChairT1": "Dr Wei Luo (wei.luo@deakin.edu.au)",
+        "UnitChairT2": "Nil",
+        "UnitChairT3": "Nil",
+        "Melbourne": "Burwood (Melbourne)",
+        "Online": "Online (Cloud)",
+        "CreditPoints": "1",
+        "Availability": "Trimester 1",
+        "Prerequisite": "SIT192 and SIT112 OR SIT114",
+        "Hurdle": "To be eligible to obtain a pass in this unit, students must meet certain milestones as part of the portfolio.",
+        "OnCampusLearning1": "- 1 x 2 hour online lecture per week",
+        "OnCampusLearning2": "- 1 x 2 hour practical experience (workshop) per week",
+        "OnCampusLearning3": "",
+        "CloudLearning1": "- Online independent and collaborative learning including 1 x 2 hour online lecture per week (recordings provided)",
+        "CloudLearning2": "- 1 x 2 hour practical experience (workshop) per week",
+        "CloudLearning3": "",
+        "Content": "The development of intelligent systems has been a central quest of computer scientists for more than fifty years, with the objective of creating artificial systems that can solve problems traditionally achievable only by humans. This field is underpinned by a range of computational patterns and methods that cover problems such as searching, problem solving, reasoning, knowledge representation and learning",
+        "Note": "The texts and reading list for the unit can be found on the University Library. Note that a future teaching period's reading list may not be available until a month prior to the start of that teaching period so you may wish to use the relevant trimester's prior year reading list as a guide only.",
+        "link": "https://www.deakin.edu.au/courses-search/unit.php?unit=SIT215"
     },
     {
-    "Code": "SIT223",
-    "Name": "Professional Practice in Information Technology",
-    "Content": "To be successful IT graduates need to understand the use of industry tools and practices, the ways these tools work and connect together, and the underlying professional, ethical, and teamwork knowledge and skills needed to put these into practice in a professional manner. This unit introduces students to IT workflows, agile project management, dev-ops pipelines, version control, and the ways these tools fit together in modern companies. The use of these technologies is underpinned by the behaviours, teamwork, and ethical considerations needed to engage in working in IT in a professional manner. The unit will tackle the big issues facing IT &nbsp;industry with a focus on gender equity and diversity, helping ensure our future IT leaders are well placed to address this and other challenging issues.",
-    "CreditPoints": "1",
-    "Prerequisite": "Must have completed a minimum of two SIT coded units",
-    "ULOs": [
-        "Engage with processes, tools, and practices associated with agile project management across all phases of the dev-ops lifecycle, and use software tools to contribute to real-world projects at each stage in an effective manner.",
-        "Observe and reflect upon the impact of different leadership styles, organisational structures, communication practices, and approaches to conflict management for effective professional relationships within IT companies and projects.",
-        "Evaluate, review, and synthesise real-world scenarios to inform discussion and practice of IT, and relate to professional practice, codes of ethics, and principles of intellectual property and its protection.",
-        "Reflect upon professional practice to develop career plans and apply for work opportunities, as ways of engaging in continuous professional development of discipline specific and transferable skills."
-    ],
-    "GLOs": [
-        "GLO1",
-        "GLO3",
-        "GLO4",
-        "GLO6",
-        "GLO7",
-        "GLO8"
-    ],
-    "Assessment": [
-        {
-        "Description": "Learning portfolio",
-        "Weight": 100.0,
-        "WeekDue": "Week 12"
-        }
-    ]
+        "Code": "SIT223",
+        "Name": "Professional Practice in Information Technology",
+        "Overview": "The unit will tackle the big issues facing the IT industry with a focus on gender equity and diversity, helping ensure our future IT leaders are well placed to address this and other challenging issues.",
+        "UnitChairT1": "Dr Azadeh Ghari Neiat (azadeh.gharineiat@deakin.edu.au)",
+        "UnitChairT2": "Dr Atabak Elmi (atabak.elmi@deakin.edu.au)",
+        "UnitChairT3": "Nil",
+        "Melbourne": "Burwood (Melbourne)",
+        "Geelong": "Waurn Ponds (Geelong)",
+        "Online": "Online (Cloud)",
+        "CreditPoints": "1",
+        "Availability": "Trimester 1, Trimester 2",
+        "Prerequisite": "Must have completed a minimum of two SIT coded units.",
+        "Hurdle": "To be eligible to obtain a pass in this unit, students must meet certain milestones as part of the portfolio.",
+        "OnCampusLearning1": "- 1 x 3 hour seminar per week",
+        "OnCampusLearning2": "- Weekly meetings",
+        "OnCampusLearning3": "",
+        "CloudLearning1": "- Online independent and collaborative learning including 1 x 2 hour online seminar per week",
+        "CloudLearning2": "- Weekly meetings",
+        "CloudLearning3": "",
+        "Content": "To be successful IT graduates need to understand the use of industry tools and practices, the ways these tools work and connect together, and the underlying professional, ethical, and teamwork knowledge and skills needed to put these into practice in a professional manner. This unit introduces students to IT workflows, agile project management, dev-ops pipelines, version control, and the ways these tools fit together in modern companies. The use of these technologies is underpinned by the behaviours, teamwork, and ethical considerations needed to engage in working in IT in a professional manner. ",
+        "Note": "The texts and reading list for the unit can be found on the University Library. Note that a future teaching period's reading list may not be available until a month prior to the start of that teaching period so you may wish to use the relevant trimester's prior year reading list as a guide only.",
+        "link": "https://www.deakin.edu.au/courses-search/unit.php?unit=SIT223"
     },
     {
-    "Code": "SIT320",
-    "Name": "Advanced Algorithms",
-    "Content": "In this advanced programming unit students will examine the design, analysis and implementation of advanced algorithms, explore software design patterns and their use in problem solving, and software testing techniques and tools to verify implementation. The unit will focus on the design and construction of advanced algorithms within software solutions with a strong emphasis on practical application of the algorithms, patterns, and tools under investigation.",
-    "CreditPoints": "1",
-    "Prerequisite": "SIT221",
-    "ULOs": [
-        "Analyse complex scenarios and draw upon appropriate algorithms and design patterns to design, implement and test software solutions that address the identified requirements and constraints.",
-        "Implement, review, and evaluate software solutions that involve the application of complex algorithms and design patterns.",
-        "Clearly present relevant solution features and trade-offs when communicating with both specialist and non-specialist audiences.",
-        "Use software design, implementation, and testing tools in the construction of advanced software solutions."
-    ],
-    "GLOs": [
-        "GLO1",
-        "GLO2",
-        "GLO3",
-        "GLO4",
-        "GLO5"
-    ],
-    "Assessment": [
-        {
-        "Description": "Learning portfolio",
-        "Weight": 100.0,
-        "WeekDue": "Week 12"
-        }
-    ]
+        "Code": "SIT320",
+        "Name": "Advanced Algorithms",
+        "Overview": "The unit will focus on the design and construction of advanced algorithms within software solutions with a strong emphasis on practical application of the algorithms, patterns, and tools under investigation.",
+        "UnitChairT1": "Nil",
+        "UnitChairT2": "Dr Nayyar Zaidi (nayyar.zaidi@deakin.edu.au)",
+        "UnitChairT3": "Nil",
+        "Melbourne": "Burwood (Melbourne)",
+        "Online": "Online (Cloud)",
+        "CreditPoints": "1",
+        "Availability": "Trimester 1, Trimester 2 & Trimester 3",
+        "Prerequisite": "SIT221",
+        "Hurdle": "To be eligible to obtain a pass in this unit, students must meet certain milestones as part of the portfolio.",
+        "OnCampusLearning1": "- 1 x 2 hour online lecture per week",
+        "OnCampusLearning2": "- 1 x 2 hour practical experience (workshop) per week",
+        "OnCampusLearning3": "- Weekly meeting",
+        "CloudLearning1": "- Online independent and collaborative learning including 1 x 2 hour online lecture per week (recordings provided)",
+        "CloudLearning2": "- 1 x 2 hour online practical experience (workshop) per week",
+        "CloudLearning3": "- Weekly meeting",
+        "Content": "In this advanced programming unit students will examine the design, analysis and implementation of advanced algorithms, explore software design patterns and their use in problem solving, and software testing techniques and tools to verify implementation. ",
+        "Note": "The texts and reading list for the unit can be found on the University Library. Note that a future teaching period's reading list may not be available until a month prior to the start of that teaching period so you may wish to use the relevant trimester's prior year reading list as a guide only.",
+        "link": "https://www.deakin.edu.au/courses-search/unit.php?unit=SIT320"
     },
     {
-    "Code": "SIT374",
-    "Name": "Team Project (A) - Project Management and Practices",
-    "Content": "This is the first of two undergraduate capstone units for students within the School of Information Technology. The capstone experience provides students with the opportunity to engage in a real-world, industry-relevant IT project, and to demonstrate the knowledge and skills they have gained across their studies. In this first unit, students learn about project management methodologies and practices, with a particular emphasis on agile project management. Students will join a team and work under the guidance of students from Team Project (B) to advance an ongoing industry-relevant project. Students will develop hands-on experience in using industry-standard tools to contribute to the project, analyse requirements, design solutions, monitor project progress and productivity, and reflect on sprint and project outcomes.",
-    "CreditPoints": "1",
-    "Prerequisite": "Must have completed 16 credit points of study including SIT223 or SIT209",
-    "ULOs": [
-        "Develop and apply discipline specific knowledge, communication skills, digital literacy, and professional practice through engaging in an authentic real-world project.",
-        "Develop and apply problem solving and critical thinking in solving real-world problems and evaluating solutions as a member of a team.",
-        "Apply contemporary Information Technology methods tools and techniques to contribute to real-world projects in ways that meet project and stakeholder needs.",
-        "Reflect on, and take responsibility for, their own learning; manage their own time and processes; by reviewing personal performance as a means of managing continuing professional development.",
-        "Reflect upon knowledge and skills gained, progress towards achievement of learning goals, and communicate how skills developed are transferrable to other real-world contexts."
-    ],
-    "GLOs": [
-        "GLO1",
-        "GLO2",
-        "GLO3",
-        "GLO4",
-        "GLO5",
-        "GLO6",
-        "GLO7",
-        "GLO8"
-    ],
-    "Assessment": [
-        {
-        "Description": "Learning portfolio",
-        "Weight": 100.0,
-        "WeekDue": "Weekly task submissions with final submission in Week 12"
-        }
-    ]
+        "Code": "SIT374",
+        "Name": "Team Project (A) - Project Management and Practices",
+        "Overview": "Students will develop hands-on experience in using industry-standard tools to contribute to the project, analyse requirements, design solutions, monitor project progress and productivity, and reflect on sprint and project outcomes.",
+        "UnitChairT1": "Dr Lennon Chang (lennon.chang@deakin.edu.au)",
+        "UnitChairT2": "Dr Lennon Chang (lennon.chang@deakin.edu.au)",
+        "UnitChairT3": "Dr Atabak Elmi (atabak.elmi@deakin.edu.au)",
+        "Melbourne": "Burwood (Melbourne)",
+        "Geelong": "Waurn Ponds (Geelong)",
+        "Online": "Online (Cloud)",
+        "CreditPoints": "1",
+        "Availability": "Trimester 1, Trimester 2, Trimester 3",
+        "Prerequisite": "Must have completed 16 credit points of study including SIT223 or SIT209",
+        "Hurdle": "To be eligible to obtain a pass in this unit, students must meet certain milestones as part of the portfolio.",
+        "OnCampusLearning1": "Trimester 1 and 2: 5 x 2 hour online lectures (weeks 1, 2, 3, 6, 10), 1 x 1 hour meeting per week.",
+        "OnCampusLearning2": "Trimester 3: Students are required to attend intensive study blocks including 1 x 2 hour online lecture per week (weeks 1-5); 2 x 1 hour meetings per week (weeks 1-5).",
+        "OnCampusLearning3": "",
+        "CloudLearning1": "Trimester 1 and 2: Online independent and collaborative learning including 5 x 2 hour online lectures (weeks 1, 2, 3, 6, 10; recordings provided), 1 x 1 hour online meeting per week.",
+        "CloudLearning2": "Trimester 3: Students are required to attend intensive study blocks of online independent and collaborative learning including 1 x 2 hour online lecture per week (weeks 1-5; recordings provided); 2 x 1 hour meetings per week (weeks 1-5).",
+        "CloudLearning3": "",
+        "Content": "This is the first of two undergraduate capstone units for students within the School of Information Technology. The capstone experience provides students with the opportunity to engage in a real-world, industry-relevant IT project, and to demonstrate the knowledge and skills they have gained across their studies.",
+        "Note": "Please note: Enrolments after Trimester 1 2024: Friday 23 February 2024, Trimester 2 2024: Friday 28 June 2024, Trimester 3 2024: Friday 25 October 2024 are subject to Unit Chair approval. Students are expected to undertake SIT374 and SIT378 in consecutive trimesters. Students should seek advice from the unit chair if they are unable to complete SIT374 and SIT378 consecutively.",
+        "link": "https://www.deakin.edu.au/courses-search/unit.php?unit=SIT374"
     },
     {
-    "Code": "SIT306",
-    "Name": "IT Placements and Industry Experience",
-    "Content": "Integrating study and work experience in a systematic way is essential for forging close links between the university education process and the workplace. In this unit, students will undertake professional work experience with an approved host organisation for a minimum of 100 hours. The exact nature, activities and emphasis in each internship/placement will vary according to the context, resources and expertise of the staff of the host organisation as well as the experience, qualities and aspirations of the student. However, this systematic opportunity will provide students with experiences&nbsp; working in an organisation, critically reflecting on their Course and Graduate Learning Outcomes, and their discipline-specific and generic competencies. Learning and assessment activities in this unit will help students develop an appreciation for these work-life aspects and make decisions about personal and professional development. Most importantly, it will provide students relevant evidence when applying for future work.<br>To complete IT placement students need to source and apply for a placement opportunity. For more information and to complete the application process: please refer to Information Technology Placement or email sebe-wil@deakin.edu.au.",
-    "CreditPoints": "1",
-    "Prerequisite": "STP010, SIT223 and must have passed at least seven SIT-coded units",
-    "ULOs": [
-        "Articulate aspirations, career goals and intended activities to potential employers highlighting key personal and professional capabilities and competencies, to secure a position.",
-        "Participate in and demonstrate evidence of ethical, professional and efficient work practices in IT.",
-        "Use reflective practice to document experience gained and skills developed to become an IT professional during placement experience.",
-        "Show capacity for preparing personal and professional development plans, which contribute to the job search/career development process."
-    ],
-    "GLOs": [
-        "GLO1",
-        "GLO2",
-        "GLO3",
-        "GLO4",
-        "GLO6"
-    ],
-    "Assessment": [
-        {
-        "Description": "Learning Portfolio",
-        "Weight": 100.0,
-        "WeekDue": "Within two weeks of placement completion"
-        }
-    ]
+        "Code": "SIT306",
+        "Name": "IT Placements and Industry Experience",
+        "Overview": "Learning and assessment activities in this unit will help students develop an appreciation for these work-life aspects and make decisions about personal and professional development. Most importantly, it will provide students relevant evidence when applying for future work.",
+        "UnitChairT1": "Dr Shantanu Pal (shantanu.pal@deakin.edu.au)",
+        "UnitChairT2": "Dr Lennon Chang (lennon.chang@deakin.edu.au)",
+        "UnitChairT3": "Dr Ansam Khraisa (ansam.khraisat@deakin.edu.au)",
+        "Melbourne": "Placement",
+        "CreditPoints": "1",
+        "Availability": "Trimester 1, Trimester 2, Trimester 3",
+        "Prerequisite": "STP010, SIT223 and must have passed at least seven SIT-coded units.",
+        "Hurdle": "To be eligible to obtain a pass in this unit, students must demonstrate that they are working to the satisfaction of the host organisation (including skill competency levels, professional code of conduct and project output requirements) at both the mid and end of professional experience (placement). More specifically, both mid and end professional experience (placement) reviews need to be deemed ‘satisfactory’ by your supervisor to achieve the pass level.",
+        "OnCampusLearning1": "Students will be required to complete a professional experience (placement) of between 100 and 160 hours of workplace activities in IT within a relevant external organisation. Professional experience (placements) need to be completed within a 4 to 12 week period. The online learning and assessment activities for the unit will consist of approximately 50 hours and include 2 x 1 hour pre-placement meetings.",
+        "OnCampusLearning2": "",
+        "OnCampusLearning3": "",
+        "CloudLearning1": "Students will be required to complete a professional experience (placement) of between 100 and 160 hours of workplace activities in IT within a relevant external organisation. Professional experience (placements) need to be completed within a 4 to 12 week period. The online learning and assessment activities for the unit will consist of approximately 50 hours and include 2 x 1 hour online pre-placement meetings.",
+        "CloudLearning2": "",
+        "CloudLearning3": "",
+        "Content": "Integrating study and work experience in a systematic way is essential for forging close links between the university education process and the workplace. In this unit, students will undertake professional work experience with an approved host organisation for a minimum of 100 hours. The exact nature, activities, and emphasis in each industry placement will vary according to the context, resources and expertise of the staff of the host organisation as well as the experience, qualities and aspirations of the student",
+        "Note": "Students must contact a student adviser prior to considering enrolment in this unit to obtain an updated course map and ensure they meet the pre-enrolment and course requirements. To be eligible to study this unit, students will first be required to source and secure a placement opportunity with an appropriate host organisation and then submit an application with the SEBE WIL Team for approval. ",
+        "link": "https://www.deakin.edu.au/courses-search/unit.php?unit=SIT306"
     },
     {
-    "Code": "SIT344",
-    "Name": "Professional Practice",
-    "Content": "Integrating study and work experience is essential for forging close links between university education and the workplace. Students will gain professional work experience with an approved host organisation in this unit. The exact nature, activities, and emphasis in each industry placement will vary according to the context, resources, and expertise of staff and the student's experience, qualities, and aspirations. Industry experiences will allow students to learn about and with an organisation. In addition, students will critically reflect on their role as IT professionals, bringing together everything they have learnt in their course to demonstrate achievement of Course and Graduate Learning Outcomes and their readiness for professional work. Learning and assessment activities in this unit will help students appreciate work-life and make decisions about personal and professional development. Most importantly, it will provide relevant evidence when applying for future work.",
-    "CreditPoints": "2",
-    "Prerequisite": "STP010, SIT223 and must have passed at least seven SIT-coded units",
-    "ULOs": [
-        "Articulate aspirations and intended activities to potential employers highlighting key personal and professional capabilities and competencies, to secure a position.",
-        "Develop goals that demonstrates awareness of specific roles and responsibilities to effectively participate in workplace activities and show capacity for preparing personal and professional development plans.",
-        "Demonstrate evidence of ethical, professional, and efficient work practices.",
-        "Demonstrate the ability to undertake industry work as an IT professional, appropriate to the course undertaken, who utilises reflective practice by documenting outcomes achieved and reflecting on experiences gained to improve future performance."
-    ],
-    "GLOs": [
-        "GLO1",
-        "GLO2",
-        "GLO3",
-        "GLO4",
-        "GLO5",
-        "GLO6",
-        "GLO7",
-        "GLO8"
-    ],
-    "Assessment": [
-        {
-        "Description": "Showcase portfolio",
-        "Weight": 100.0,
-        "WeekDue": "Week 12"
-        }
-    ]
+        "Code": "SIT344 ",
+        "Name": "Professional Practice",
+        "Overview": " Learning and assessment activities in this unit will help students appreciate work-life and make decisions about personal and professional development. Most importantly, it will provide relevant evidence when applying for future work.",
+        "UnitChairT1": "Dr Sophie Mckenzie (sophie.mckenzie@deakin.edu.au)",
+        "UnitChairT2": "Dr Lennon Chang (lennon.chang@deakin.edu.au)",
+        "UnitChairT3": "Dr Ansam Khraisa (ansam.khraisat@deakin.edu.au)",
+        "Melbourne": "Placement",
+        "CreditPoints": "2",
+        "Availability": "Trimester 1, Trimester 2, Trimester 3",
+        "Prerequisite": "STP010, SIT223 and must have passed at least seven SIT-coded units.",
+        "Hurdle": "To be eligible to obtain a pass in this unit, students must meet certain milestones as part of the portfolio and demonstrate that they are working to the satisfaction of the host organisation (including skill competency levels, professional code of conduct and project output requirements) at both the mid and end of professional experience (placement). More specifically, both mid and end professional experience (placement) reviews need to be deemed ‘satisfactory’ by your supervisor to achieve the pass level.",
+        "OnCampusLearning1": "Students are required to complete a professional experience (placement) with an approved organisation for a minimum of 450 hours to a maximum of 900 hours full time. The online learning and assessment activities for the unit will consist of approximately 50-100 hours and include a 1 x 1 hour pre-placement meeting.",
+        "OnCampusLearning2": "",
+        "OnCampusLearning3": "",
+        "CloudLearning1": "Students are required to complete a professional experience (placement) with an approved organisation for a minimum of 450 hours to a maximum of 900 hours full time. The online learning and assessment activities for the unit will consist of approximately 50-100 hours and include a 1 x 1 hour online pre-placement meeting.",
+        "CloudLearning2": "",
+        "CloudLearning3": "",
+        "Content": "ntegrating study and work experience is essential for forging close links between university education and the workplace. Students will gain professional work experience with an approved host organisation. The exact nature, activities, and emphasis in each industry placement will vary according to the context, resources, and expertise of staff and the student's experience, qualities, and aspirations. Industry experiences will allow students to learn about and with an organisation. In addition, students will critically reflect on their role as IT professionals, bringing together everything they have learnt in their course to demonstrate achievement of Course and Graduate Learning Outcomes and their readiness for professional work.",
+        "Note": "Students must contact a student adviser prior to considering enrolment in this unit to obtain an updated course map and ensure they meet the pre-enrolment and course requirements. To be eligible to study this unit, students will first be required to source and secure a full-time paid placement opportunity with an appropriate host organisation and then submit an application with the SEBE WIL Team for approval. ",
+        "link": "https://www.deakin.edu.au/courses-search/unit.php?unit=SIT344"
     },
     {
-    "Code": "SIT315",
-    "Name": "Concurrent and Distributed Programming",
-    "Content": "In this unit students will expand their programming skills beyond procedural and object-oriented methods covered in earlier units, investigating parallel and distributed, as well as real-time systems programming. Through both study of theoretical aspects of programming languages and hands-on practicals on these programming paradigms, students will develop an understanding, skills and expertise in choosing and implementing the right programming paradigms to tackle the computational problems at hand.",
-    "CreditPoints": "1",
-    "Prerequisite": "SIT232 ",
-    "ULOs": [
-        "Assess the suitability of different programming paradigms for a range of problem types to facilitate effective language selection and program design.",
-        "Design and implement programs in languages encompassing different programming paradigms to demonstrate effective and efficient computational problem solving.",
-        "Apply the theoretical aspects of different programming paradigms to analyse and critique the design of programs."
-    ],
-    "GLOs": [
-        "GLO1",
-        "GLO2",
-        "GLO4",
-        "GLO5"
-    ],
-    "Assessment": [
-        {
-        "Description": "Learning portfolio",
-        "Weight": 100.0,
-        "WeekDue": "Week 12"
-        }
-    ]
+        "Code": "SIT315",
+        "Name": "Concurrent and Distributed Programming",
+        "Overview": "Students will develop an understanding, skills and expertise in choosing and implementing the right programming paradigms to tackle the computational problems at hand.",
+        "UnitChairT1": "Nil",
+        "UnitChairT2": "Mr Maksym Slavnenko (m.slavnenko@deakin.edu.au)",
+        "UnitChairT3": "Nil",
+        "Melbourne": "Burwood (Melbourne)",
+        "Online": "Online (Cloud)",
+        "CreditPoints": "1",
+        "Availability": "Trimester 2",
+        "Prerequisite": "SIT232",
+        "Hurdle": "To be eligible to obtain a pass in this unit, students must meet certain milestones as part of the portfolio.",
+        "OnCampusLearning1": "- 2 x 1 hour online lecture per week",
+        "OnCampusLearning2": "- 1 x 2 hour seminar per week",
+        "OnCampusLearning3": "",
+        "CloudLearning1": "- Online independent and collaborative learning including 2 x 1 hour online lecture per week (recordings provided)",
+        "CloudLearning2": "- 1 x 2 hour online seminar per week",
+        "CloudLearning3": "",
+        "Content": "In this unit students will expand their programming skills beyond procedural and object-oriented methods covered in earlier units, investigating parallel and distributed, as well as real-time systems programming.",
+        "Note": "The texts and reading list for the unit can be found on the University Library. Note that a future teaching period's reading list may not be available until a month prior to the start of that teaching period so you may wish to use the relevant trimester's prior year reading list as a guide only.",
+        "link": "https://www.deakin.edu.au/courses-search/unit.php?unit=SIT315"
     },
     {
-    "Code": "SIT378",
-    "Name": "Team Project (B) - Execution and Delivery",
-    "Content": "This is the second of two undergraduate capstone units for students within the School of Information Technology. In this unit, students will extend their experiences of IT projects by executing a real-world, industry-relevant project and synthesise knowledge and technical as well as other professional skills acquired during their course. Students will join a team as senior members, and provide guidance and mentoring to Team Project (A) students. As a team, they will apply agile project management methods to iteratively create enhancements to a unique IT product, service or solution in a highly flexible and interactive manner. Students will identify a potential problem or technical gap and experience how to solve it using methods, algorithms and techniques pertinent to the field of IT. Students will be required to further formulate necessary design and/or development strategies, work collaboratively with peers to manage and conduct the implementation of the project and demonstrate outcomes achieved against project goals and targets.",
-    "CreditPoints": "1",
-    "Prerequisite": "Must have completed 18 credit points of study, including SIT374 (students enrolled in D371 must complete MIS398)",
-    "ULOs": [
-        "Demonstrate the apply discipline specific knowledge, communication skills, digital literacy, and professional practice through engaging in an authentic real-world project.",
-        "Demonstrate and apply problem solving and critical thinking in solving real-world problems and evaluating solutions as a member of a team.",
-        "Analyse stakeholders's; needs, project goals, and team capabilities to identify, prioritize, and schedule project deliverables, and take responsibility for the execution of the project plan and associated reporting as a senior member of a team.",
-        "Apply contemporary Information Technology methods tools and techniques to contribute to real-world projects in ways that meet project and stakeholder needs including mentoring team members.",
-        "Reflect on and take responsibility for their own learning; manage their own time and processes; by reviewing personal performance as a means of managing continuing professional development.",
-        "Reflect upon and showcase knowledge and skills gained, demonstrate achievement of learning goals, and communicate how skills developed are transferrable to other real-world contexts."
-    ],
-    "GLOs": [
-        "GLO1",
-        "GLO2",
-        "GLO3",
-        "GLO4",
-        "GLO5",
-        "GLO6",
-        "GLO7",
-        "GLO8"
-    ],
-    "Assessment": [
-        {
-        "Description": "Learning portfolio",
-        "Weight": 100.0,
-        "WeekDue": "Weekly task submission with final submission in Week 12"
-        }
-    ]
+        "Code": "SIT378",
+        "Name": "Team Project (B) - Execution and Delivery",
+        "Overview": "Students will be required to further formulate necessary design and/or development strategies, work collaboratively with peers to manage and conduct the implementation of the project and demonstrate outcomes achieved against project goals and targets. Additionally, students will demonstrate achievement of course learning outcomes by drawing upon a combination of work they contribute to the project and work completed in other units, respectively.",
+        "UnitChairT1": "Dr Luxing Yang (y.luxing@deakin.edu.au)",
+        "UnitChairT2": "Dr Atul Sajjanhar (atul.sajjanhar@deakin.edu.au)",
+        "UnitChairT3": "Dr Atul Sajjanhar (atul.sajjanhar@deakin.edu.au)",
+        "Melbourne": "Burwood (Melbourne)",
+        "Geelong": "Waurn Ponds (Geelong)",
+        "Online": "Online (Cloud)",
+        "CreditPoints": "1",
+        "Availability": "Trimester 1, Trimester 2, Trimester 3",
+        "Prerequisite": "Must have completed 18 credit points of study, including SIT374 (students enrolled in D371 must complete MIS398)",
+        "Hurdle": "To be eligible to obtain a pass in this unit, students must meet certain milestones as part of the portfolio.",
+        "OnCampusLearning1": "Trimester 1 and 2: 4 x 2 hour online lectures (weeks 1, 8, 9, 10), 1 x 1 hour meeting per week.",
+        "OnCampusLearning2": "Trimester 3: Students are required to attend intensive study blocks including 4 x 2 hour online lectures (weeks 1,3,4,5); 2 x 1 hour meetings per week (weeks 1-5).",
+        "OnCampusLearning3": "",
+        "CloudLearning1": "Trimester 1 and 2: Online independent and collaborative learning including 4 x 2 hour online lectures (weeks 1, 8, 9, 10; recordings provided), 1 x 1 hour online meeting per week.",
+        "CloudLearning2": "Trimester 3: Students are required to attend intensive study blocks of online independent and collaborative learning including 1 x 2 hour online lecture per week (weeks 1, 3, 4, 5; recordings provided); 2 x 1 hour meetings per week (weeks 1-5).",
+        "CloudLearning3": "",
+        "Content": "This is the second of two undergraduate capstone units for students within the School of Information Technology. In this unit, students will extend their experiences of IT projects by executing a real-world, industry-relevant project and synthesise knowledge and technical as well as other professional skills acquired during their course. Students will join a team as senior members, and provide guidance and mentoring to Team Project (A) students. As a team, they will apply agile project management methods to iteratively create enhancements to a unique IT product, service or solution in a highly flexible and interactive manner. ",
+        "Note": "Please note: Enrolments after Trimester 1 2024: Friday 23 February 2024, Trimester 2 2024: Friday 28 June 2024, Trimester 3 2024: Friday 25 October 2024 are subject to Unit Chair approval. Students are expected to undertake SIT374 and SIT378 in consecutive trimesters. Students should seek advice from the unit chair if they are unable to complete SIT374 and SIT378 consecutively.",
+        "link": "https://www.deakin.edu.au/courses-search/unit.php?unit=SIT378"
     }
 ]

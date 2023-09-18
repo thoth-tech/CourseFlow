@@ -1,17 +1,82 @@
 <div class="dialog">
     <div class="header">
-        <div class="unit-name">{{ data.Name }}</div>
         <div class="unit-code">{{ data.Code }}</div>
+        <div class="unit-name">{{ data.Name }}</div>
         <div class="unit-type">{{ data.Type }}</div>
+        <div class="close-button" (click)="closeUnitPopup()"></div>
     </div>
 
-    <div class="credit-points"><strong>Credit Points:</strong> {{ data.CreditPoints }}</div>
-    <div class="prerequisite"><strong>Prerequisite:</strong> {{ data.Prerequisite }}</div>
+    <div class="content">
+        <div class="unit-content"><strong>Unit Overview:</strong>{{ data.Overview }}</div>
 
-    <div class="main-content">
-        <div class="unit-content">{{ data.Content }}</div>
+        <div class="unit-chairs">
+            <table>
+                <tr>
+                    <td>
+                        <strong>Unit Chairs:</strong>
+                    </td>
+                    <td style="padding-left:30px;">
+                        <strong>Campus:</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        T1 - {{ data.UnitChairT1 }} <br />
+                        T2 - {{ data.UnitChairT2 }} <br />
+                        T3 - {{ data.UnitChairT3 }}
+                    </td>
+                    <td style="padding-left:30px;">
+                        {{ data.Melbourne }} <br />
+                        {{ data.Geelong }} <br />
+                        {{ data.Online }}
+                    </td>
+                </tr>
+            </table>
+        </div>
 
-        <div class="ulos-header">ULOs</div>
+        <div class="credit-points"><strong>Credit Points:</strong> {{ data.CreditPoints }}</div>
+        <div class="availability"><strong>Available in:</strong> {{ data.Availability }}</div>
+        <div class="prerequisite"><strong>Prerequisite:</strong> {{ data.Prerequisite }}</div>
+        <div class="hurdle"><strong>Hurdle Requirement:</strong> {{ data.Hurdle }}</div>
+
+        <div class="activities">
+            <strong>Learning Activities</strong>
+            <table>
+                <tr>
+                    <td>
+                        <strong>On-Campus:</strong>
+                    </td>
+                    <td>
+                        <strong>Cloud-Campus:</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {{ data.OnCampusLearning1 }} <br />
+                        {{ data.OnCampusLearning2 }} <br />
+                        {{ data.OnCampusLearning3 }} <br />
+
+                    <td>
+                        {{ data.CloudLearning1 }} <br />
+                        {{ data.CloudLearning2 }} <br />
+                        {{ data.CloudLearning3 }}<br />
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="unit-content"><strong>Content:</strong> {{ data.Content }}</div>
+
+        <div class="note"><strong>Note:</strong> {{ data.Note }} </div>
+
+        <div class="link"><a [href]="Unit_Link.link" target="_blank">Click
+                for more info</a></div>
+
+
+
+
+
+        <!-- <div class="ulos-header">ULOs</div>
         <div class="ulos-list">
             <div class="ulo-item" *ngFor="let ulo of data.ULOs">{{ ulo }}</div>
         </div>
@@ -20,20 +85,20 @@
         <div class="glos-list">
             <div class="glo-item" *ngFor="let glo of data.GLOs">{{ glo }}</div>
         </div>
-    </div>
 
-    <div class="assessments">
-        <div class="assessments-header" (click)="toggleDropdown()">
-            Assessments
-            <span class="dropdown-icon">{{ isDropdownOpen ? '▲' : '▼' }}</span>
-        </div>
-        
-        <div *ngIf="isDropdownOpen">
-            <div class="assessment-item" *ngFor="let assessment of data.Assessment">
-                <div class="assessment-description">{{ assessment.Description }}</div>
-                <div class="assessment-weight"><strong>Weight:</strong> {{ assessment.Weight }}%</div>
-                <div class="assessment-weekdue"><strong>Week Due:</strong> {{ assessment.WeekDue }}</div>
+        <div class="assessments">
+            <div class="assessments-header" (click)="toggleDropdown()">
+                Assessments
+                <span class="dropdown-icon">{{ isDropdownOpen ? '▲' : '▼' }}</span>
             </div>
-        </div>
+
+            <div *ngIf="isDropdownOpen">
+                <div class="assessment-item" *ngFor="let assessment of data.Assessment">
+                    <div class="assessment-description">{{ assessment.Description }}</div>
+                    <div class="assessment-weight"><strong>Weight:</strong> {{ assessment.Weight }}%</div>
+                    <div class="assessment-weekdue"><strong>Week Due:</strong> {{ assessment.WeekDue }}</div>
+                </div>
+            </div>
+        </div> -->
     </div>
 </div>
