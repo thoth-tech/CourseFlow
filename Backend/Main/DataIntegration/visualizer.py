@@ -149,6 +149,11 @@ class ClusterNode(Node):
         labels = db.labels_
         n_clusters = len(set(labels)) - (1 if -1 in labels else 0)
         n_noise_nodes = list(labels).count(-1)
+        if n_clusters < 2:
+            self.depth += 1
+            self.identify_and_break_into_sub_clusters()
+            self.child_nodes_created = True
+            return
 
         for cluster_node_label in range(n_clusters):
             # Create a cluster node containing the units identified by the clustering algorithm
