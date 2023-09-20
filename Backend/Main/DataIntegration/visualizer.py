@@ -212,10 +212,12 @@ class ClusterNode(Node):
 
         # Apply this cluster's layout to sub-clusters
         for sub_cluster in self.sub_clusters:
+            # Calculate the position of each sub-cluster's centroid relative to this cluster which is at (0, 0)
             sub_cluster: ClusterNode
             cluster_centroid_pos = self.node_positions[sub_cluster.graph_label]
             cluster_centroid_pos *= ClusterNode.scale
 
+            # Add nodes from sub-clusters to this cluster and center them around their sub-cluster's centroid
             for graph_label, pos in sub_cluster.node_positions.items():
                 pos += cluster_centroid_pos
                 self.node_positions[graph_label] = pos
