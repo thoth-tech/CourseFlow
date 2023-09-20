@@ -93,7 +93,7 @@ class LeafNode(Node):
 
 class ClusterNode(Node):
     # Hyperparameters
-    base_epsilon = 2
+    base_epsilon = 0.55
     min_samples_in_epsilon_neighborhood = 3
     scale = 2
     max_depth = 10
@@ -114,7 +114,7 @@ class ClusterNode(Node):
 
     def epsilon_decay_by_depth(self):
         """Returns an increasingly lower epsilon value as the cluster node's depth increases"""
-        return ClusterNode.base_epsilon / (2 ** self.depth)
+        return ClusterNode.base_epsilon - 0.05 * self.depth
 
     def identify_and_break_into_sub_clusters(self):
         # Convert remaining nodes to leaf nodes and return if condition met
