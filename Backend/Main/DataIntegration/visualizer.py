@@ -93,7 +93,7 @@ class LeafNode(Node):
 
 class ClusterNode(Node):
     # Hyperparameters
-    epsilon = 0.25
+    base_epsilon = 2
     min_samples_in_epsilon_neighborhood = 3
     scale = 2
     max_depth = 10
@@ -111,6 +111,10 @@ class ClusterNode(Node):
         self.layouts_applied = False
         self.node_positions = {}
         self.graph_label_unit_code_map = {}
+
+    def epsilon_decay_by_depth(self):
+        """Returns an increasingly lower epsilon value as the cluster node's depth increases"""
+        return ClusterNode.base_epsilon / (2 ** self.depth)
 
     def identify_and_break_into_sub_clusters(self):
         # Convert remaining nodes to leaf nodes and return if condition met
@@ -139,7 +143,7 @@ class ClusterNode(Node):
                 distance_matrix[from_index, to_index] = self.network.unit_distances[edge]
 
         # Identify which cluster each unit belongs to based on their distance to each other
-        db = DBSCAN(eps=ClusterNode.epsilon,
+        db = DBSCAN(eps=self.epsilon_decay_by_depth(),
                     min_samples=ClusterNode.min_samples_in_epsilon_neighborhood,
                     metric='precomputed').fit(distance_matrix)
         labels = db.labels_
