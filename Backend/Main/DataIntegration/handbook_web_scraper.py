@@ -1,6 +1,14 @@
 import requests
 from bs4 import BeautifulSoup
 import pathlib
+import datetime
+
+
+class UnitSearchQuery:
+    def __init__(self, unit_code: str=None, keyword: str=None, year: int=datetime.date.today().year):
+        self.entunit = unit_code
+        self.entkeyword = keyword
+        self.year = year
 
 
 def download_unit_lists():
