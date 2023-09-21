@@ -38,6 +38,34 @@ def search_and_download_faculty_list(faculty_code: str, year: int=datetime.date.
     return webpage_contents
 
 
+def search_and_download_unit(unit_code: str, year: int=datetime.date.today().year, session: requests.Session=None) -> str:
+    """
+    Downloads the handbook webpage for the specified unit
+
+    :param unit_code: The full unit code of the unit to search for
+    :param year: The year to search the unit in
+    :param session: An existing Session to Deakin University's website. If None, creates a new Session.
+    :return: Contents of the downloaded webpage
+    """
+
+    base_url = "https://www.deakin.edu.au"
+    resource = "/courses-search/unit.php"
+
+    # Download unit from university website
+    if session is None:
+        session = requests.Session()
+    response = session.get(base_url + resource, params={
+        "unit": unit_code,
+        "year": year
+    })
+
+    # Parse webpage document
+    soup = BeautifulSoup(response.text, "html.parser")
+    webpage_contents = soup.prettify()
+
+    return webpage_contents
+
+
 def download_unit_lists():
     """Downloads and saves the unit list webpages for all known faculties"""
     session = requests.Session()
