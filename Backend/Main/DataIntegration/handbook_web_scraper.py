@@ -4,24 +4,18 @@ import pathlib
 import datetime
 
 
-class UnitSearchQuery:
-    def __init__(self, unit_code: str=None, keyword: str=None, year: int=datetime.date.today().year):
-        self.entunit = unit_code
-        self.entkeyword = keyword
-        self.year = year
-
-
 def save_webpage(webpage_contents: str, cache_filepath: pathlib.Path, filename: pathlib.Path):
     """Saves webpage to cache directory as a new file"""
     with open(cache_filepath / filename, "w") as fp:
         fp.write(webpage_contents)
 
 
-def search_and_download_faculty_list(faculty_code: str, session: requests.Session=None) -> str:
+def search_and_download_faculty_list(faculty_code: str, year: int=datetime.date.today().year, session: requests.Session=None) -> str:
     """
     Downloads the resulting webpage when searching for all units with the faculty code.
 
     :param faculty_code: Single character representing a faculty. At Deakin University this is the first letter of a unit code.
+    :param year: The year to search the faculty in
     :param session: An existing Session to Deakin University's website. If None, creates a new Session.
     :returns: Contents of the downloaded webpage
     """
@@ -32,7 +26,10 @@ def search_and_download_faculty_list(faculty_code: str, session: requests.Sessio
     # Download unit list from university website
     if session is None:
         session = requests.Session()
-    response = session.get(base_url + resource, params=UnitSearchQuery(unit_code=faculty_code).__dict__)
+    response = session.get(base_url + resource, params={
+        "entunit": faculty_code,
+        "year": year
+    })
 
     # Parse webpage document
     soup = BeautifulSoup(response.text, "html.parser")
