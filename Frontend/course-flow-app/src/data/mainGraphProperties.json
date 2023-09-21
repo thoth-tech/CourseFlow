@@ -1,0 +1,22 @@
+{
+    "width": 1000,
+    "height": 1000,
+    "canvasColor": "#ececec",
+    "canvasBorderRadius": "20px",
+    "iniitialCanvasTranslationOffsetX": 0,
+    "iniitialCanvasTranslationOffsetY": 0,
+    "initialZoomScale": 250,
+    "forceManyBodyStrength": -100,
+    "linkStrength": 1,
+    "linkDistance": 100,
+    "linkColor": "rgba(1, 0, 0, 1)",
+    "linkWidth": 0.2,
+    "linkOpacity": 1,
+    "nodeRadius": 5,
+    "nodeColor": "rgba(1, 0, 0, 1)",
+    "textColor": "rgba(0, 0, 0, 1)",
+    "textFontSize": 5,
+    "textFontWieight": 1,
+    "textXOffset": 5,
+    "textYOffset": 2
+}    
