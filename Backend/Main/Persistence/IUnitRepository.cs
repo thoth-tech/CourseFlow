@@ -6,7 +6,10 @@ public interface IUnitRepository
 {
     void AddUnit(IUnit unit);
     void AddMultipleUnits(IEnumerable<IUnit> units);
-    IUnit GetUnitByCode(string unitCode);
+    IUnit? GetUnitByCode(string unitCode);
+    IEnumerable<IUnit> GetAllUnits();
+    IEnumerable<IUnit> SearchUnitsByCode(string unitCode);
+    IEnumerable<IUnit> SearchUnits(UnitSearchQuery query);
     void UpdateUnit(string unitCode, IUnit updatedUnit);
     void DeleteUnit(string unitCode);
 }

@@ -35,6 +35,7 @@ Used to describe a course/major/minor/specialization etc.
 ```js
 {
     code: String,
+    title: String,
     level: Integer,
     credit_points: Float,
     description: String,
@@ -46,6 +47,7 @@ Used to describe a course/major/minor/specialization etc.
 | Field         | Type                | Description   | Options   |
 |:--------------|:--------------------|:--------------|:----------|
 | code          | String              |               |           |
+| title         | String              |               |           |
 | level         | Integer             |               |           |
 | credit_points | Float               |               |           |
 | description   | String              |Description of the unit from the handbook|           |

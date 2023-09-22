@@ -3,6 +3,7 @@ using CourseFlow.Backend.Models.Constraints;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
+using System.Linq;
 
 namespace CourseFlow.Backend.Persistence;
 
@@ -33,14 +34,62 @@ public class UnitRepository : IUnitRepository
         unitsCollection.DeleteOne(filter);
     }
 
-    public IUnit GetUnitByCode(string unitCode)
+    public IEnumerable<IUnit> GetAllUnits()
+    {
+        List<IUnit> units = new List<IUnit>();
+        foreach (BsonDocument unitDocument in unitsCollection.Find(_ => true).ToEnumerable()) 
+        {
+            units.Add(BsonSerializer.Deserialize<Unit>(unitDocument));
+        }
+
+        return units;
+    }
+
+    public IUnit? GetUnitByCode(string unitCode)
     {
         // todo: Security: Fix possible query injection exploit. Need to validate unitCode before use.
         FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("code", unitCode);
-        // todo: Handle possible nullref if FirstOrDefault defaults
         BsonDocument unitDocument = unitsCollection.Find(filter).FirstOrDefault();
 
+        if (unitDocument == null)
+        {
+            return null;
+        }
+
         return BsonSerializer.Deserialize<Unit>(unitDocument);
+    }
+
+    public IEnumerable<IUnit> SearchUnits(UnitSearchQuery query)
+    {
+        // todo: Security: Fix possible query injection exploit. Need to validate query parameters before use.
+        FilterDefinitionBuilder<BsonDocument> builder = Builders<BsonDocument>.Filter;
+        FilterDefinition<BsonDocument> filter = builder.And(
+            builder.Regex("code", query.Code),
+            builder.Regex("title", query.Title),
+            builder.Regex("description", string.Join("|", query.Keywords)),
+            builder.Eq("level", query.Level));
+
+        List<IUnit> units = new List<IUnit>();
+        foreach (BsonDocument unitDocument in unitsCollection.Find(filter).ToEnumerable())
+        {
+            units.Add(BsonSerializer.Deserialize<Unit>(unitDocument));
+        }
+
+        return units;
+    }
+
+    public IEnumerable<IUnit> SearchUnitsByCode(string unitCode)
+    {
+        // todo: Security: Fix possible query injection exploit. Need to validate unitCode before use.
+        FilterDefinition<BsonDocument> filter = Builders<BsonDocument>.Filter.Eq("code", unitCode);
+
+        List<IUnit> units = new List<IUnit>();
+        foreach (BsonDocument unitDocument in unitsCollection.Find(filter).ToEnumerable())
+        {
+            units.Add(BsonSerializer.Deserialize<Unit>(unitDocument));
+        }
+
+        return units;
     }
 
     public void UpdateUnit(string unitCode, IUnit updatedUnit)
