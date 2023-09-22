@@ -4,9 +4,9 @@ from typing import Dict
 
 from PyPDF2 import PdfReader
 
-from Backend.Models.constraint import PrerequisitesFulfilledConstraint, CorequisitesFulfilledConstraint, \
+from Backend.Main.Models.constraint import PrerequisitesFulfilledConstraint, CorequisitesFulfilledConstraint, \
     MutualExclusiveUnitsConstraint
-from Backend.Models.unit import Unit
+from Backend.Main.Models.unit import Unit
 
 module_path = os.path.dirname(__file__)
 unit_listings = os.path.join(module_path, "./handbooks/DeakinUniversity2019_Units-v4-accessible.pdf")
