@@ -1,0 +1,13 @@
+.discovery-detail-dialog-contaienr {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.close-button{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 1;
+}
