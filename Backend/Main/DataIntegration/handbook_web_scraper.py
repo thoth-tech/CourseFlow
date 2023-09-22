@@ -73,7 +73,7 @@ def download_unit_lists():
 
     for faculty_code in faculty_codes:
         # Search for all units with the matching faculty code and download the search webpage
-        webpage_contents = search_and_download_faculty_list(faculty_code, session)
+        webpage_contents = search_and_download_faculty_list(faculty_code, session=session)
 
         # Saves the downloaded unit list webpage to the cache
         webpage_file_name = pathlib.Path(f"faculty_{faculty_code}_unit_list.html")
