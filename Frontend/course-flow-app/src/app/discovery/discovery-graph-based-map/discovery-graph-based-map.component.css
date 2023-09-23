@@ -1,0 +1,40 @@
+.graph-based-map-container {
+    padding: 5em;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2em;
+}
+
+.graph-based-map-container button {
+    padding: 1em;
+    font-size: 20pt;
+}
+
+.detailed-panel-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.detailed-panel {
+    margin-top: 2em;
+    margin-bottom: 2em;
+    width: 350px;
+}
+
+.detailed-panel-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100%;
+}
+
+.detailed-panel-section button {
+    position: sticky;
+    bottom: 10px;
+    margin: 2em;
+}

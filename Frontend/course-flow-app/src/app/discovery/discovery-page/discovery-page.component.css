@@ -1,0 +1,27 @@
+.discovery-container {
+    height: 100%;
+}
+
+.discovery-sidenav-title {
+    margin: 1em;
+    font-size: xx-large;
+}
+
+.discovery-sidenav-section {
+    margin: 1em;
+}
+
+.discovery-selection-radio-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.discovery-section-title {
+    font-size: large;
+}
+
+.discovery-page-content {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}

@@ -1,0 +1,10 @@
+.connection-selectables-container button {
+    margin-top: 1em;
+    padding: 1em;
+    width: 80%;
+    height: 100px;
+}
+
+.connection-selectables-container h3 {
+    text-decoration: underline;
+}
