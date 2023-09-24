@@ -1,0 +1,17 @@
+<div class="text-based-list-container">
+
+    <!-- The current "root" data/node that we are on will have information displayed in this section. -->
+    <h2 class="text-based-list-title"> {{ currentRootNode.label }} </h2>
+
+    <mat-divider/>
+
+    <p class="text-based-list-description">{{ currentRootNode.description }}</p>
+
+    <mat-divider/>
+
+    <!-- All the connections will be listed here. -->
+    <app-discovery-card-selectable [connections]="currentRootNode.inConnections"/>
+    <app-discovery-card-selectable [connections]="currentRootNode.outConnections" />
+    <app-discovery-card-selectable [connections]="currentRootNode.coConnections"/>
+
+</div>

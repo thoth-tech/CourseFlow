@@ -1,0 +1,15 @@
+.text-based-list-container{
+    margin-top: 5em;
+    padding: 2em;
+    display: flex;
+    flex-direction: column;
+    gap: 5em;
+}
+
+.text-based-list-title {
+    font-size: 30pt;
+}
+
+.text-based-list-description {
+    font-size: 15pt;
+}

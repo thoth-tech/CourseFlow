@@ -1,0 +1,26 @@
+<mat-sidenav-container class="detailed-panel-container">
+
+    <mat-sidenav class="detailed-panel" mode="side" [(opened)]="detailedMenuOpen">
+
+        <div class="detailed-panel-section">
+
+            <app-discovery-detailed-content [detailedData]="currentSelectedNode"/>
+
+            <button mat-raised-button color="primary" (click)="closeDetailsPanel()"> Close </button>
+
+        </div>
+        
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+
+        <div class="graph-based-map-container">
+
+            <!-- Component will be driven by the associated TypeScript class. -->
+            <div id="graphBasedMap"></div>
+        
+        </div>
+
+    </mat-sidenav-content>
+
+</mat-sidenav-container>

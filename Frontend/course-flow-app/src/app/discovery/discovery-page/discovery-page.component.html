@@ -1,0 +1,74 @@
+<mat-sidenav-container class="discovery-container">
+
+    <!-- Side nav bar -->
+    <mat-sidenav class="discovery-page-sidenav" mode="side" opened>
+
+        <h3 class="discovery-sidenav-title">Discovery Display Settings</h3>
+
+        <mat-divider/>
+
+        <section class="discovery-sidenav-section">
+
+            <!-- Selection settings -->
+            <mat-accordion multi="true">
+                
+                <!-- Group units by -->
+                <mat-expansion-panel expanded="true">
+                    
+                    <mat-expansion-panel-header>
+                        
+                        <mat-panel-title class="discovery-section-title"> Group Units By </mat-panel-title>
+    
+                    </mat-expansion-panel-header>
+                    
+                    <!-- Radio buttons for selecting type of unit clustering/groups -->
+                    <mat-radio-group class="discovery-selection-radio-group" [(ngModel)]="groupBySelection">
+
+                        <mat-radio-button [value]="discoveryGroupUnitsBy.faculty">Faculty</mat-radio-button>
+
+                        <mat-radio-button [value]="discoveryGroupUnitsBy.specialization">Specialization</mat-radio-button>
+                        
+                    </mat-radio-group>
+
+                </mat-expansion-panel>
+
+                <!--Change display type -->
+                <mat-expansion-panel expanded="true">
+    
+                    <mat-expansion-panel-header>
+                        
+                        <mat-panel-title class="discovery-section-title"> Display Type </mat-panel-title>
+    
+                    </mat-expansion-panel-header>
+                    
+                    <!-- Radio buttons for selecting display type -->
+                    <mat-radio-group class="discovery-selection-radio-group" [(ngModel)]="displayTypeSelection">
+
+                        <mat-radio-button [value]="discoveryDisplayTypes.node_based_graph">Node Based Graph</mat-radio-button>
+                        <mat-radio-button [value]="discoveryDisplayTypes.text_based_lists">Text Based Lists</mat-radio-button>
+
+                    </mat-radio-group>
+
+                </mat-expansion-panel>
+
+            </mat-accordion>
+
+        </section>
+
+
+    </mat-sidenav>
+
+    <!-- Discovery content -->
+    <mat-sidenav-content class="discovery-page-content" [ngSwitch]="displayTypeSelection">
+
+        <div>
+            <app-discovery-graph-based-map *ngSwitchCase="discoveryDisplayTypes.node_based_graph" [groupUnitsBy]="groupBySelection"/>
+            <app-discovery-text-based-lists *ngSwitchCase="discoveryDisplayTypes.text_based_lists" [groupUnitsBy]="groupBySelection"/>
+        </div>
+
+
+
+    </mat-sidenav-content>
+
+</mat-sidenav-container>
+

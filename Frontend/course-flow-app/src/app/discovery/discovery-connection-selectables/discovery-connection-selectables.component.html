@@ -1,0 +1,14 @@
+<div class="connection-selectables-container" *ngFor="let connectionData of connectionsData">
+
+    <h3> {{ connectionData.label }} </h3>
+
+    <button  
+        *ngFor="let id of connectionData.connectionIds"
+        mat-raised-button
+        (click)="onConnectionButtonClicked(id)"
+    >
+        {{ getNodeLabel(id) }}
+
+    </button>
+
+</div>
