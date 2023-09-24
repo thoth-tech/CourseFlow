@@ -52,6 +52,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDialogModule } from '@angular/material/dialog';
+import { CourseMapComponent } from './course-map/course-map.component';
 
 
 
@@ -69,13 +70,14 @@ import { MatDialogModule } from '@angular/material/dialog';
     EditComponent, 
     NotificationsComponent, 
     CourseUpdatesComponent, 
-    NotFoundComponent
+    NotFoundComponent,
     DiscoveryPageComponent,
     DiscoveryGraphBasedMapComponent,
     DiscoveryTextBasedListsComponent,
     DiscoveryDetailedContentComponent,
     DiscoveryConnectionSelectablesComponent,
     DiscoveryCardSelectableComponent,
+    CourseMapComponent,
   ],
   imports: [
     BrowserModule,
@@ -88,7 +90,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatSidenavModule,
     MatButtonModule,
     MatIconModule,
-    MatDividerModule
+    MatDividerModule,
     FormsModule,
     MatExpansionModule, 
     MatChipsModule, 
