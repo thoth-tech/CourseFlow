@@ -1,13 +1,24 @@
+from typing import Iterable
+
 import requests
 from bs4 import BeautifulSoup
 import pathlib
 import datetime
 
+webpage_cache_filepath = pathlib.Path("webpage_cache")
+webpage_search_list_filepath = webpage_cache_filepath / "unit_search_lists"
 
-def save_webpage(webpage_contents: str, cache_filepath: pathlib.Path, filename: pathlib.Path):
+
+def save_webpage(webpage_contents: str, cache_filepath: pathlib.Path, filename: str):
     """Saves webpage to cache directory as a new file"""
     with open(cache_filepath / filename, "w") as fp:
         fp.write(webpage_contents)
+
+
+def load_webpage(cache_filepath: pathlib.Path, filename: str) -> BeautifulSoup:
+    with open(cache_filepath / filename, "r") as fp:
+        contents = fp.read()
+    return BeautifulSoup(contents, "html.parser")
 
 
 def search_and_download_faculty_list(faculty_code: str, year: int=datetime.date.today().year, session: requests.Session=None) -> str:
@@ -77,10 +88,15 @@ def download_unit_lists():
 
         # Saves the downloaded unit list webpage to the cache
         webpage_file_name = pathlib.Path(f"faculty_{faculty_code}_unit_list.html")
-        webpage_cache_filepath = pathlib.Path("webpage_cache")
-        webpage_search_list_filepath = webpage_cache_filepath / "unit_search_lists"
         save_webpage(webpage_contents, webpage_search_list_filepath, webpage_file_name)
 
 
+def extract_unit_codes_from_list_webpage(webpage_name: str) -> Iterable[str]:
+    contents = load_webpage(webpage_search_list_filepath, webpage_name)
+    pass
+
+
 if __name__ == "__main__":
-    download_unit_lists()
+    extract_unit_codes_from_list_webpage("faculty_A_unit_list.html")
+    # download_unit_lists()
+
