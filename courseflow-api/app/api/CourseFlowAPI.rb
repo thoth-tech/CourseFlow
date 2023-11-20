@@ -167,6 +167,65 @@ class CourseFlowAPI < Grape::API
       Unit.find(params[:id]).destroy
     end
   end
-    
+  
+  # User API
+  resource :users do
+
+    desc "Return all users."
+    get do
+      User.all
+    end
+
+    desc "Return user by username"
+    params do
+      requires :username, type: String, desc: "Username of the user."
+    end
+    get :username do
+        User.where("username" == params[:username])
+    end
+
+    desc "Create a user."
+    params do
+      requires :username, type: String, desc: "User's username"
+      requires :password, type: String, desc: "User's hashed password"
+      requires :name, type: String, desc: "User's fullname"
+      requires :course_map, type: Array[JSON], desc: "User's coursemap"
+    end
+    post do
+      User.create!({
+        username: params[:username],
+        password: params[:password],
+        name: params[:name],
+        course_map: params[:course_map]
+      })
+    end
+
+    desc "Update a user by id."
+    params do
+      requires :id, type: Integer, desc: "User Id."
+      optional :username, type: String, desc: "User's username"
+      optional :password, type: String, desc: "User's hashed password"
+      optional :name, type: String, desc: "User's fullname"
+      optional :course_map, type: Array[JSON], desc: "User's coursemap"
+    end
+    put ":id" do
+      user = User.find(params[:id])
+      user.update({
+        username: params[:username] ? params[:username] : user.username,
+        password: params[:password] ? params[:password] : user.password,
+        name: params[:name] ? params[:name] : user.name,
+        course_map: params[:course_map] ? params[:course_map] : user.course_map,
+      })
+    end
+
+    desc "Delete a user by id."
+    params do
+      requires :id, type: String, desc: "User Id."
+    end
+    delete ':id' do
+      User.find(params[:id]).destroy
+    end
+
+  end
 
 end
