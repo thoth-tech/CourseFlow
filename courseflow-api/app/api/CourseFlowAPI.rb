@@ -46,7 +46,6 @@ class CourseFlowAPI < Grape::API
       requires :requirements, type: Array[JSON], desc: "List of requirements."
     end
     post do
-      print "test"
       Course.create!({
         name: params[:name],
         description: params[:description],
@@ -85,5 +84,89 @@ class CourseFlowAPI < Grape::API
     end
     
   end
+
+  # Units API
+  resource :units do
+
+    desc "Return all units."
+    get do
+      Unit.all
+    end
+
+    desc "Return unit by interest area."
+    params do
+      requires :interest, type: String, desc: "Interest area param."
+    end
+    get :interests do
+        units = Unit.all
+        filtered_units = Array.new
+
+        units.each do |unit|
+          interest_present = unit.interests.include? params[:interest]
+          if interest_present
+            filtered_units.push(unit)
+          end
+        end
+
+        filtered_units
+    end
+
+    desc "Return unit by id."
+    params do
+      requires :id, type: Integer, desc: "Unit Id."
+    end
+    route_param :id do
+      get do
+        Unit.find(params[:id])
+      end
+    end
+
+    desc "Create a unit."
+    params do
+      requires :name, type: String, desc: "Name of the unit."
+      requires :description, type: String, desc: "Description of the unit."
+      requires :year, type: Integer, desc: "Year of unit."
+      requires :interests, type: Array[String], desc: "List of interest categories associated with the unit."
+      requires :requirements, type: Array[JSON], desc: "List of requirements."
+    end
+    post do
+      Unit.create!({
+        name: params[:name],
+        description: params[:description],
+        year: params[:year],
+        interests: params[:interests],
+        requirements: params[:requirements]
+      })
+    end
+
+    desc "Update a unit by id."
+    params do
+      requires :id, type: Integer, desc: "Unit Id."
+      optional :name, type: String, desc: "Name of the unit."
+      optional :description, type: String, desc: "Description of the unit."
+      optional :year, type: Integer, desc: "Year of unit."
+      optional :interests, type: Array[String], desc: "List of interest categories associated with the unit."
+      optional :requirements, type: Array[JSON], desc: "List of requirements."
+    end
+    put ":id" do
+      unit = Unit.find(params[:id])
+      unit.update({
+        name: params[:name] ? params[:name] : unit.name,
+        description: params[:description] ? params[:description] : unit.description,
+        year: params[:year] ? params[:year] : unit.year,
+        interests: params[:interests] ? params[:interests] : unit.interests,
+        requirements: params[:requirements] ? params[:requirements] : unit.requirements,
+      })
+    end
+
+    desc "Delete a unit by id."
+    params do
+      requires :id, type: String, desc: "Unit Id."
+    end
+    delete ':id' do
+      Unit.find(params[:id]).destroy
+    end
+  end
+    
 
 end

@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyString
+  year: 1
+  interests: MyText
+  requirements: MyText
+
+two:
+  name: MyString
+  description: MyString
+  year: 1
+  interests: MyText
+  requirements: MyText
