@@ -4,7 +4,7 @@ class CreateCourses < ActiveRecord::Migration[7.1]
       t.string :name
       t.text :description
       t.integer :year
-      t.text :categories
+      t.text :interests
       t.text :requirements
 
       t.timestamps
